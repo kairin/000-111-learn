@@ -1,0 +1,15 @@
+{"source": "Fortran Video Breakdown.md", "moments": {
+ "01": {"t": "00:06", "note": "The video names Backus, IBM and the IBM 704, then says that the first optimizing compiler made code as fast as hand code."},
+ "02": {"t": "00:45", "note": "The video shows punch cards and says that old keywords used capitals. It does not give the column layout."},
+ "03": {"t": "00:58", "note": "The code part of the video starts here with the compiler and the first file."},
+ "04": {"t": "01:00", "note": "The video says to use a file that ends in f or f95. It says wrongly that the suffix selects the version."},
+ "05": {"t": "01:19", "note": "The video gives the I to N rule and tells you to use implicit none."},
+ "06": {"t": "01:29", "note": "The video shows a character string with a fixed length and print star."},
+ "07": {"t": "01:37", "note": "The video shows the dimension keyword, then says that modern versions use pointers to allocate memory."},
+ "08": {"t": "01:56", "note": "The video shows do and do while loops, then functions and subroutines."},
+ "09": {"t": "00:37", "note": "The video says only that the language has many versions. It does not compare old and new standards."},
+ "10": {"t": "00:40", "note": "The video says that Fortran is used for number crunching. It does not discuss aliasing, BLAS or column-major order."},
+ "11": {"note": "This part judges the whole video. The video does not cover this idea."},
+ "12": {"note": "The video does not cover this idea."},
+ "13": {"note": "The video does not cover this idea. The list of sources never cites the video."}
+}}

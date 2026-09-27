@@ -1,0 +1,8 @@
+{"source": "assembly_language_architectural_explorer.html", "moments": {
+"01": {"t": "00:11", "note": "The video names Kathleen Booth, but it does not cover the ABI or W XOR X."},
+"02": {"t": "00:46", "note": "The video names ARM and x86 but gives no chart or scores."},
+"03": {"t": "00:58", "note": "The video divides the program into three sections, but it calls data constants."},
+"04": {"t": "01:47", "note": "The video explains the registers for the write and exit calls."},
+"05": {"t": "02:28", "note": "The video names the assembler and the linker but shows no hexdump."},
+"06": {"t": "00:33", "note": "The video names drivers, embedded systems and WebAssembly, but not security or trading."}
+}}

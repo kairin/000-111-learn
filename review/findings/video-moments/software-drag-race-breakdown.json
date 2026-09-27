@@ -1,0 +1,8 @@
+{"source": "software_drag_race_breakdown.html", "moments": {
+ "01": {"t": "13:03", "note": "The video names the one-million limit for the race here."},
+ "02": {"t": "13:51", "note": "The video gives Fortran 1163, COBOL 1118 and C++ 1936 passes, not the numbers on the page."},
+ "03": {"note": "The video does not cover this idea."},
+ "04": {"t": "04:32", "note": "The COBOL and Fortran code tour starts here."},
+ "05": {"t": "05:30", "note": "The video says that the COBOL program is not faithful to the rules."},
+ "06": {"t": "00:19", "note": "The video asks if COBOL for business or Fortran for science is faster."}
+}}

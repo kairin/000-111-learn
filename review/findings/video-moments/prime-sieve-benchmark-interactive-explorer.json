@@ -1,0 +1,8 @@
+{"source": "prime_sieve_benchmark_interactive_explorer.html", "moments": {
+ "01": {"t": "01:24", "note": "Dave says that people wrote the sieve in about 45 languages."},
+ "02": {"t": "04:52", "note": "Dave explains the sieve to one million and the score in passes per second."},
+ "03": {"t": "20:38", "note": "The video gives only the top and bottom scores, not the numbers in the chart."},
+ "04": {"t": "08:14", "note": "Dave names Pascal, Delphi and Ada as the first group."},
+ "05": {"t": "11:11", "note": "Dave shows that Pascal packs the flags into bits to save memory."},
+ "06": {"t": "20:17", "note": "Dave says the Ada result probably comes from the code, not the language."}
+}}

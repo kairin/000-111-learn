@@ -1,0 +1,11 @@
+{"source": "YouTube Video Content Analysis.md", "moments": {
+ "01": {"t": "00:48", "note": "Dave tells how the first episode grew into a project with about 45 languages."},
+ "02": {"t": "04:52", "note": "Dave explains the sieve to one million and the score in passes per second."},
+ "03": {"t": "08:14", "note": "Dave names Pascal, Delphi and Ada as the first group."},
+ "04": {"t": "17:14", "note": "Dave describes Ada and its safety features."},
+ "05": {"t": "10:56", "note": "Dave shows the Pascal bit array and later the Delphi ByteBool array."},
+ "06": {"t": "05:09", "note": "Dave says that compiled languages are faster than interpreted ones, but he gives no bands."},
+ "07": {"t": "20:17", "note": "Dave says the Ada result probably comes from the code, not the language."},
+ "08": {"t": "20:03", "note": "Pascal beats Ada in the only race of the video."},
+ "09": {"note": "The video does not cover this idea."}
+}}

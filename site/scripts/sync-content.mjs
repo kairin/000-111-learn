@@ -30,7 +30,7 @@ const rel = (p) => path.relative(REPO, p).split(path.sep).join('/');
 const readJson = (p, fallback) => (fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : fallback);
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const routeUrl = (slug) => `${BASE}/${slug ? slug + '/' : ''}`;
-const githubUrl = (p, kind = 'blob') => `${REPO_URL}/${kind}/main/${rel(p)}`;
+const githubUrl = (p, kind = 'blob') => encodeURI(`${REPO_URL}/${kind}/main/${rel(p)}`); // file names can contain spaces
 const warnings = [];
 
 // ------------------------------------------------------------ route table
@@ -57,7 +57,7 @@ for (const f of listFiles(path.join(REVIEW, 'plan/sessions'), '.md')) {
 for (const f of listFiles(path.join(REVIEW, 'adversarial-review-pass1'), '.md')) {
 	const n = path.basename(f).slice(0, 2);
 	add(f, `reviews/${slugify(path.basename(f, '.md').replace(/\.review$/, ''))}`, {
-		label: n === '00' ? '00 Summary' : `${n} ${shortName(path.basename(f)) ?? path.basename(f)}`,
+		label: n === '00' ? (/video/i.test(f) ? '00 Summary: video guides' : '00 Summary: first four guides') : `${n} ${shortName(path.basename(f)) ?? path.basename(f)}`,
 	});
 }
 add(path.join(REVIEW, 'segments/README.md'), 'segments');
@@ -149,6 +149,14 @@ function metaTable(meta, fromFile) {
 const yamlStr = (s) => JSON.stringify(String(s));
 
 const learnSegments = readJson(path.join(LEARN, 'segments.json'), []);
+// The YouTube video behind each reviewed document (the prompt of the owner).
+const videos = readJson(path.join(REVIEW, 'findings/videos.json'), {});
+const videoNote = (file) => {
+	const v = videos[file];
+	return v
+		? `:::tip[Source video]\n[${v.title}](https://www.youtube.com/watch?v=${v.id}) by ${v.channel} (${v.duration}). The owner gave this video in the prompt for this document.\n:::\n\n`
+		: '';
+};
 
 // ------------------------------------------------------------ write pages
 fs.rmSync(DOCS, { recursive: true, force: true });
@@ -190,7 +198,8 @@ for (const [src, r] of routes) {
 			.map((sg) => `- [${sg.title}](${BASE}/${r.side}/${sg.id}/): ${sg.question}`)
 			.join('\n') + '\n';
 	}
-	const out = `---\n${fm.join('\n')}\n---\n\n${note}${metaTable(meta, src)}${rewriteLinks(body, src, r.out)}${tail}`;
+	const vnote = path.dirname(src) === SEG_DIR ? videoNote(path.basename(src)) : '';
+	const out = `---\n${fm.join('\n')}\n---\n\n${note}${vnote}${metaTable(meta, src)}${rewriteLinks(body, src, r.out)}${tail}`;
 	fs.mkdirSync(path.dirname(r.out), { recursive: true });
 	fs.writeFileSync(r.out, out);
 }
@@ -199,7 +208,7 @@ for (const [src, r] of routes) {
 const manifest = readJson(path.join(SEG_DIR, 'manifest.json'), { documents: [] });
 const overrides = readJson(path.join(REVIEW, 'findings/status.json'), {});
 const findings = [];
-for (const f of listFiles(path.join(REVIEW, 'findings'), '.json').filter((f) => /\/pass\d+\.json$/.test(f))) {
+for (const f of listFiles(path.join(REVIEW, 'findings'), '.json').filter((f) => /\/pass\d+[^/]*\.json$/.test(f))) {
 	findings.push(...readJson(f, []));
 }
 const segOf = {};
@@ -284,7 +293,7 @@ for (const f of htmlSources) {
 	const title = doc ? `${doc.short} (${path.basename(f)})` : path.basename(f);
 	const seg = manifest.documents.find((d) => d.source === path.basename(f));
 	const segHref = seg ? routeUrl(routes.get(path.join(SEG_DIR, seg.segments[0].file))?.slug) : routeUrl('segments');
-	const body = `${doc ? `**Question it answers:** ${doc.question}\n\n` : ''}Gemini wrote this interactive page. The project keeps it **unchanged** as evidence for the review. The review examines its quiz and its charts too.
+	const body = `${videoNote(path.basename(f))}${doc ? `**Question it answers:** ${doc.question}\n\n` : ''}Gemini wrote this interactive page. The project keeps it **unchanged** as evidence for the review. The review examines its quiz and its charts too.
 
 <a class="sl-link-button" href="${BASE}/sources/${path.basename(f)}" target="_blank" rel="noopener">Open the original page ↗</a>
 

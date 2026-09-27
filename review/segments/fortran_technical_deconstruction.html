@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortran Technical Deconstruction & Interactive Analysis</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chosen Palette: Warm Neutral Harmonious Palette -->
+  <!-- Application Structure Plan:
+    1. Hero Header & Key Statistics: Overview of the video analysis, key historical milestones, and instant data metrics.
+    2. Section Navigation Bar: Sticky, clean tab bar to navigate through core technical dimensions.
+    3. Historical Genesis & Compiler Breakthrough: Explores John Backus, IBM 704 economics, and includes an interactive performance comparative benchmark chart (Chart.js).
+    4. Hollerith Punch Card Anatomy: Interactive visual card deck simulator allowing users to click through columns 1-5, 6, 7-72, and 73-80 to understand physical hardware constraints.
+    5. Video Syntax Audit & Interactive Virtual Compiler: Real-time interactive compiler simulator that demonstrates the fatal `implicit none` defect in Fireship's snippet and allows users to toggle variable declarations to view simulated gfortran output.
+    6. Classical vs. Modern Architectural Evolution: Interactive filterable matrix detailing the transformation from FORTRAN 66/77 to Fortran 2018+ (Arrays, Memory, Syntax, Coarrays).
+    7. Mechanics of HPC Supremacy & Non-Aliasing Engine: Explores why Fortran dominates supercomputing, with an interactive Memory Aliasing and Column-Major storage visualizer.
+    8. Pedagogical Assessment & Conclusion: Summary trade-off matrix evaluating short-form micro-pedagogy vs deep computational reality.
+    
+    RATIONALE: This structure decouples dense compiler theory into hands-on interactive tools (Compiler Simulator, Punch Card Visualizer, Memory Inspector), allowing users to directly experience software mechanics rather than passively reading raw text.
+  -->
+  <!-- Visualization & Content Choices:
+    1. Historical Compiler Overhead -> Chart.js Bar Chart -> Visualizes human development time vs machine run-time optimization across Assembly, FORTRAN I, and modern C/Fortran. (Goal: Compare)
+    2. Punch Card Constraints -> Custom HTML/CSS Segmented Punch Card Widget -> Click columns to highlight & view historical limits. (Goal: Organize & Interact)
+    3. Code Defect in Video -> Interactive Vanilla JS Virtual Compiler -> Toggle `implicit none` and dynamic variable declarations to see compiler diagnostics. (Goal: Inform & Explore)
+    4. Language Evolution -> Interactive Data Matrix -> Filter by domain (Memory, Syntax, Parallelism). (Goal: Compare & Filter)
+    5. Pointer Aliasing -> Interactive HTML Block Memory Simulator -> Toggle C vs Fortran pointer rules to show dynamic register caching & SIMD vectorization. (Goal: Inform/Relationships)
+    Libraries/Methods: Chart.js (Canvas), HTML5/CSS Tailwind, Vanilla JS State Logic. NO SVG graphics used. NO Mermaid JS used.
+  -->
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #fbf9f5;
+      color: #1e293b;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 320px;
+      max-height: 400px;
+    }
+    @media (min-width: 768px) {
+      .chart-container {
+        height: 360px;
+      }
+    }
+    .tab-active {
+      border-bottom: 3px solid #c2410c;
+      color: #c2410c;
+      font-weight: 600;
+    }
+    .code-font {
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800 bg-[#fbf9f5]">
+
+  <!-- TOP HEADER & HERO SECTION -->
+  <header class="bg-stone-900 text-stone-100 py-10 px-4 sm:px-8 border-b-4 border-amber-600">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-amber-600 text-stone-950 font-bold px-2.5 py-0.5 rounded text-xs tracking-wide uppercase">Technical Analysis</span>
+            <span class="text-stone-400 text-sm">Fireship "FORTRAN in 100s" Deconstruction</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Fortran: Mechanics, History & HPC Supremacy
+          </h1>
+          <p class="mt-2 text-stone-300 max-w-2xl text-sm sm:text-base leading-relaxed">
+            An interactive exploration into John Backus’s optimizing compiler, 80-column punch card mechanics, code syntax traps, and the architectural reasons Fortran dominates modern supercomputing.
+          </p>
+        </div>
+        
+        <!-- Summary Stats Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-stone-800 p-4 rounded-xl border border-stone-700 text-center">
+          <div class="p-2">
+            <div class="text-2xl font-bold text-amber-500">1957</div>
+            <div class="text-xs text-stone-400 uppercase tracking-wider mt-1">First Release</div>
+          </div>
+          <div class="p-2">
+            <div class="text-2xl font-bold text-amber-500">80 Col</div>
+            <div class="text-xs text-stone-400 uppercase tracking-wider mt-1">Hollerith Limit</div>
+          </div>
+          <div class="p-2">
+            <div class="text-2xl font-bold text-amber-500">0%</div>
+            <div class="text-xs text-stone-400 uppercase tracking-wider mt-1">Aliasing Overhead</div>
+          </div>
+          <div class="p-2">
+            <div class="text-2xl font-bold text-amber-500">BLAS</div>
+            <div class="text-xs text-stone-400 uppercase tracking-wider mt-1">HPC Core Stack</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="bg-stone-100 border-b border-stone-300 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex space-x-2 sm:space-x-8 overflow-x-auto text-xs sm:text-sm font-medium">
+      <button onclick="switchTab('genesis')" id="tab-genesis" class="py-4 px-2 whitespace-nowrap tab-active hover:text-amber-700 transition">
+        1. Historical Genesis
+      </button>
+      <button onclick="switchTab('punchcard')" id="tab-punchcard" class="py-4 px-2 whitespace-nowrap text-stone-600 hover:text-amber-700 transition">
+        2. Punch Card Hardware
+      </button>
+      <button onclick="switchTab('compiler')" id="tab-compiler" class="py-4 px-2 whitespace-nowrap text-stone-600 hover:text-amber-700 transition">
+        3. Virtual Compiler & Bug Audit
+      </button>
+      <button onclick="switchTab('evolution')" id="tab-evolution" class="py-4 px-2 whitespace-nowrap text-stone-600 hover:text-amber-700 transition">
+        4. Architectural Evolution
+      </button>
+      <button onclick="switchTab('hpc')" id="tab-hpc" class="py-4 px-2 whitespace-nowrap text-stone-600 hover:text-amber-700 transition">
+        5. HPC & Memory Aliasing
+      </button>
+      <button onclick="switchTab('pedagogy')" id="tab-pedagogy" class="py-4 px-2 whitespace-nowrap text-stone-600 hover:text-amber-700 transition">
+        6. Video Critique
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-grow w-full">
+
+    <!-- SECTION 1: HISTORICAL GENESIS -->
+    <section id="sec-genesis" class="space-y-8">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-stone-200">
+        <h2 class="text-2xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+          <span>📜</span> Section 1: Historical Genesis & The Optimizing Compiler Paradigm
+        </h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          This section explores the economic and engineering context of the 1950s that birthed Fortran (Formula Translation). Designed by John Backus's team at IBM for the IBM 704, Fortran revolutionized computing by proving that high-level code compiled automatically could match or exceed the execution speed of hand-written assembly language.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- Text Explanation -->
+          <div class="space-y-4">
+            <div class="bg-amber-50 border-l-4 border-amber-600 p-4 rounded-r-lg">
+              <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wide">The Economics of 1950s Computing</h3>
+              <p class="text-stone-700 text-sm mt-1 leading-relaxed">
+                Operating time on vacuum-tube mainframes like the IBM 704 cost hundreds of dollars per hour. Manual assembly translation was slow, error-prone, and limited human productivity. High-level algebraic notation was deemed necessary to unlock floating-point hardware.
+              </p>
+            </div>
+
+            <div class="space-y-3 text-stone-700 text-sm">
+              <p>
+                <strong>The Machine Code Skepticism:</strong> In 1954, computer scientists widely believed compilers would produce unacceptably bloated and slow machine code.
+              </p>
+              <p>
+                <strong>The IBM Breakthrough:</strong> Backus and engineers such as Lois Haibt developed pioneering parsing techniques, loop unrolling heuristics, register allocation, and control-flow analysis from scratch.
+              </p>
+              <p>
+                <strong>Paradigm Shift:</strong> The compiler produced assembly-grade object code, permanently shifting software development from hardware-centric assembly to problem-oriented algorithm design.
+              </p>
+            </div>
+          </div>
+
+          <!-- Chart Container -->
+          <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+            <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 text-center">
+              Historical Execution & Development Efficiency Dynamics (1950s)
+            </div>
+            <div class="chart-container">
+              <canvas id="compilerBenchmarkChart"></canvas>
+            </div>
+            <p class="text-xs text-stone-500 text-center mt-3 italic">
+              Comparison showing how Fortran drastically reduced programming time while achieving near-assembly execution speed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PUNCH CARD HARDWARE -->
+    <section id="sec-punchcard" class="hidden space-y-8">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-stone-200">
+        <h2 class="text-2xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+          <span>⚙</span> Section 2: Electromechanical Constraints & Fixed Source Form
+        </h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          Early Fortran syntax was heavily governed by the physical substrate of the 80-column Hollerith punch card fed into IBM card readers. Modern free-form Fortran (introduced in Fortran 90) eliminated these bounds, but legacy fixed-form formatting dictated programming for nearly four decades.
+        </p>
+
+        <!-- Interactive Punchcard Simulator -->
+        <div class="bg-amber-100/60 p-6 rounded-2xl border border-amber-200 shadow-inner">
+          <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-900">Interactive Hollerith Card Inspector (80-Column Layout)</span>
+            <span class="text-xs text-amber-800 italic">Click on a card section below to inspect its functional significance</span>
+          </div>
+
+          <!-- Card Graphic Blocks -->
+          <div class="grid grid-cols-12 gap-1 bg-stone-800 p-2 rounded-lg text-center text-xs code-font font-bold text-white select-none">
+            <div onclick="selectCardSegment('label')" id="card-seg-label" class="col-span-2 sm:col-span-1 bg-rose-600 hover:bg-rose-500 cursor-pointer p-3 rounded transition flex flex-col justify-center">
+              <span>Cols 1-5</span>
+              <span class="text-[10px] font-normal opacity-80">Label/C</span>
+            </div>
+            <div onclick="selectCardSegment('cont')" id="card-seg-cont" class="col-span-2 sm:col-span-1 bg-amber-600 hover:bg-amber-500 cursor-pointer p-3 rounded transition flex flex-col justify-center">
+              <span>Col 6</span>
+              <span class="text-[10px] font-normal opacity-80">Cont</span>
+            </div>
+            <div onclick="selectCardSegment('body')" id="card-seg-body" class="col-span-5 sm:col-span-8 bg-emerald-600 hover:bg-emerald-500 cursor-pointer p-3 rounded transition flex flex-col justify-center">
+              <span>Columns 7 through 72</span>
+              <span class="text-[10px] font-normal opacity-80">Executable Code Field (Statements & Expressions)</span>
+            </div>
+            <div onclick="selectCardSegment('id')" id="card-seg-id" class="col-span-3 sm:col-span-2 bg-sky-600 hover:bg-sky-500 cursor-pointer p-3 rounded transition flex flex-col justify-center">
+              <span>Cols 73-80</span>
+              <span class="text-[10px] font-normal opacity-80">Card ID</span>
+            </div>
+          </div>
+
+          <!-- Segment Info Display Box -->
+          <div id="punchcard-info-box" class="mt-5 bg-white p-5 rounded-xl border border-stone-200">
+            <h3 id="punchcard-info-title" class="text-lg font-bold text-stone-900 flex items-center gap-2">
+              Select a column field above
+            </h3>
+            <p id="punchcard-info-desc" class="text-sm text-stone-600 mt-2 leading-relaxed">
+              Click any of the highlighted column regions on the physical punch card above to inspect how mid-century electromechanical card readers enforced structural constraints on FORTRAN 66/77 programs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Additional Typography Notes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+            <h4 class="font-bold text-stone-900 text-sm mb-2">Uppercase Typography Origin</h4>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Keypunches such as the IBM 026 and 029 lacked lowercase character sets and shift keys entirely. Uppercase coding was a strict hardware constraint, not a stylistic decision. Modern Fortran is fully case-insensitive.
+            </p>
+          </div>
+          <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+            <h4 class="font-bold text-stone-900 text-sm mb-2">Free Source Form (Fortran 90+)</h4>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Fortran 90 discarded physical card layout constraints entirely. Modern code allows up to 132 characters per line, dynamic inline comments using exclamation marks (<code class="bg-stone-200 px-1 rounded">!</code>), and free indentation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: VIRTUAL COMPILER & BUG AUDIT -->
+    <section id="sec-compiler" class="hidden space-y-8">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-stone-200">
+        <h2 class="text-2xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+          <span>💻</span> Section 3: Video Code Deconstruction & Interactive Compiler Simulator
+        </h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          In Fireship’s "FORTRAN in 100 Seconds," a rapid overview introduces key concepts but introduces a fatal code flaw regarding implicit typing. Use the interactive compiler below to audit Fireship's snippet and test dynamic fixes.
+        </p>
+
+        <!-- Compiler Workbench -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Code Editor Controls & Snippet -->
+          <div class="lg:col-span-7 bg-stone-900 rounded-xl p-5 text-stone-200 flex flex-col justify-between shadow-md">
+            <div>
+              <div class="flex justify-between items-center pb-3 mb-4 border-b border-stone-700">
+                <span class="text-xs font-mono font-bold text-amber-400">myApp.f90 — Source Editor</span>
+                <span class="text-[11px] text-stone-400 bg-stone-800 px-2 py-0.5 rounded">Fortran 95/2003 Free Form</span>
+              </div>
+
+              <!-- Interactive Switches -->
+              <div class="bg-stone-800 p-3 rounded-lg mb-4 space-y-2 text-xs">
+                <div class="flex items-center justify-between">
+                  <label for="toggle-implicit-none" class="cursor-pointer text-stone-300 font-medium">
+                    Include <code class="text-amber-300">implicit none</code> directive:
+                  </label>
+                  <input type="checkbox" id="toggle-implicit-none" checked onchange="updateCompilerCode()" class="accent-amber-600 w-4 h-4 rounded cursor-pointer">
+                </div>
+                <div class="flex items-center justify-between">
+                  <label for="toggle-declarations" class="cursor-pointer text-stone-300 font-medium">
+                    Explicitly declare variables (<code class="text-emerald-300">integer :: n, doubled</code>):
+                  </label>
+                  <input type="checkbox" id="toggle-declarations" onchange="updateCompilerCode()" class="accent-amber-600 w-4 h-4 rounded cursor-pointer">
+                </div>
+              </div>
+
+              <!-- Interactive Code Display -->
+              <pre id="fortran-code-display" class="code-font text-xs sm:text-sm bg-stone-950 p-4 rounded-lg overflow-x-auto text-amber-100 leading-relaxed border border-stone-800"></pre>
+            </div>
+
+            <div class="mt-5 flex gap-3">
+              <button onclick="runVirtualCompiler()" class="flex-1 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-2.5 px-4 rounded-lg text-xs uppercase tracking-wider transition shadow">
+                ⚡ Execute Compiler (`gfortran -O2`)
+              </button>
+            </div>
+          </div>
+
+          <!-- Compiler Output Console & Analysis -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <!-- Simulated Console -->
+            <div class="bg-stone-950 rounded-xl p-5 border border-stone-800 text-stone-300 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="text-xs font-mono font-bold text-stone-400 uppercase tracking-wider pb-2 border-b border-stone-800 flex justify-between">
+                  <span>Compilation Output Terminal</span>
+                  <span id="compiler-status-tag" class="text-rose-400 font-bold">ERROR</span>
+                </div>
+                <div id="compiler-terminal-output" class="code-font text-xs mt-3 leading-relaxed text-rose-300 whitespace-pre-wrap">
+                  Click 'Execute Compiler' to evaluate code safety...
+                </div>
+              </div>
+            </div>
+
+            <!-- Contextual Explanation -->
+            <div class="bg-stone-100 p-4 rounded-xl border border-stone-300 text-xs text-stone-700 leading-relaxed">
+              <h4 class="font-bold text-stone-900 mb-1">Technical Insight: The Video Error</h4>
+              <p>
+                Classical Fortran defaulted variables starting with <code>I-N</code> to <code>INTEGER</code> and others to <code>REAL</code>. Modern practice mandates <code>implicit none</code> to prevent typo bugs. However, adding <code>implicit none</code> without explicit type declarations triggers immediate compiler errors!
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ARCHITECTURAL EVOLUTION -->
+    <section id="sec-evolution" class="hidden space-y-8">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-stone-200">
+        <h2 class="text-2xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+          <span>📊</span> Section 4: Comparative Architectural Evolution
+        </h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          Fortran has undergone continuous transformation across six decades. Explore how legacy specifications (FORTRAN 66/77) compare with modern HPC standards (Fortran 90 through Fortran 2018+).
+        </p>
+
+        <!-- Filter Controls -->
+        <div class="flex gap-2 mb-4 overflow-x-auto pb-2 text-xs font-semibold">
+          <button onclick="filterEvolution('all')" id="filter-btn-all" class="px-3 py-1.5 rounded-full bg-amber-700 text-white">All Domains</button>
+          <button onclick="filterEvolution('memory')" id="filter-btn-memory" class="px-3 py-1.5 rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300">Memory & Arrays</button>
+          <button onclick="filterEvolution('syntax')" id="filter-btn-syntax" class="px-3 py-1.5 rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300">Syntax & Formatting</button>
+          <button onclick="filterEvolution('control')" id="filter-btn-control" class="px-3 py-1.5 rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300">Control & Parallelism</button>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="overflow-x-auto border border-stone-200 rounded-xl">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-stone-900 text-stone-200 font-bold uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="p-3.5 sm:p-4">Architectural Domain</th>
+                <th class="p-3.5 sm:p-4">Classical FORTRAN (66 / 77)</th>
+                <th class="p-3.5 sm:p-4">Modern Fortran (90 through 2018+)</th>
+              </tr>
+            </thead>
+            <tbody id="evolution-table-body" class="divide-y divide-stone-200 bg-white">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: HPC & MEMORY ALIASING -->
+    <section id="sec-hpc" class="hidden space-y-8">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-stone-200">
+        <h2 class="text-2xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+          <span>⚡</span> Section 5: High-Performance Computing & Memory Aliasing Supremacy
+        </h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          Why does a 70-year-old language remain dominant in modern supercomputing, numerical modeling, and climate simulations? The answer lies in pointer aliasing semantics, column-major matrix storage, and the foundational BLAS/LAPACK ecosystem.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Interactive Pointer Aliasing Engine -->
+          <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wide">The Compiler Non-Aliasing Advantage</h3>
+                <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Compiler Optimization</span>
+              </div>
+              <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                In C/C++, distinct pointers passed into functions can point to overlapping memory. The compiler must conservatively re-read memory repeatedly. In Fortran, dummy arguments are guaranteed disjoint by specification, enabling aggressive hardware register caching and SIMD vectorization.
+              </p>
+
+              <!-- Interactive Memory Demo Toggle -->
+              <div class="bg-white p-4 rounded-xl border border-stone-300 space-y-3">
+                <div class="flex gap-2">
+                  <button onclick="setAliasingMode('c')" id="alias-btn-c" class="flex-1 py-1.5 px-3 rounded text-xs font-bold bg-stone-200 text-stone-700">C/C++ Semantics (Aliasing Possible)</button>
+                  <button onclick="setAliasingMode('fortran')" id="alias-btn-fortran" class="flex-1 py-1.5 px-3 rounded text-xs font-bold bg-amber-600 text-white">Fortran Standard (Strict Non-Aliasing)</button>
+                </div>
+
+                <div id="aliasing-visual-box" class="p-3 bg-stone-900 text-stone-200 rounded-lg text-xs code-font leading-relaxed">
+                  <!-- Visualized memory behavior -->
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-stone-200 text-xs text-stone-500 italic">
+              Result: Fortran loop execution operates near theoretical hardware throughput limits without requiring manual compiler hints like C's <code class="bg-stone-200 px-1 rounded text-stone-800">restrict</code> keyword.
+            </div>
+          </div>
+
+          <!-- Column Major & Software Stack Diagram -->
+          <div class="space-y-4">
+            <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
+              <h3 class="font-bold text-stone-900 text-sm mb-2">Column-Major Memory Layout</h3>
+              <p class="text-xs text-stone-600 leading-relaxed mb-3">
+                Fortran stores 2D matrix elements sequentially down columns in memory (<code class="bg-stone-100 px-1">A(1,1), A(2,1)...</code>), whereas C uses row-major order (<code class="bg-stone-100 px-1">A[0][0], A[0][1]...</code>). Decades of hardware cache optimizations align specifically with this layout.
+              </p>
+              
+              <!-- Memory Block Visualization -->
+              <div class="grid grid-cols-4 gap-1.5 text-center text-xs code-font font-bold">
+                <div class="bg-amber-100 text-amber-900 p-2 rounded border border-amber-300">Col 1, Row 1</div>
+                <div class="bg-amber-100 text-amber-900 p-2 rounded border border-amber-300">Col 1, Row 2</div>
+                <div class="bg-amber-200 text-amber-950 p-2 rounded border border-amber-400">Col 2, Row 1</div>
+                <div class="bg-amber-200 text-amber-950 p-2 rounded border border-amber-400">Col 2, Row 2</div>
+              </div>
+            </div>
+
+            <!-- Modern HPC Stack Visualization -->
+            <div class="bg-stone-900 text-stone-100 p-5 rounded-2xl border border-stone-800">
+              <h3 class="font-bold text-amber-400 text-sm mb-2">The Scientific Computing Dependency Stack</h3>
+              <div class="space-y-1.5 text-xs">
+                <div class="bg-stone-800 p-2 rounded text-stone-300 font-semibold border border-stone-700 flex justify-between">
+                  <span>High-Level Interfaces</span>
+                  <span class="text-stone-400 font-normal">NumPy, SciPy, MATLAB, R, Julia</span>
+                </div>
+                <div class="text-center text-amber-500 font-bold text-xs py-0.5">↓ Delegated Compute Operations ↓</div>
+                <div class="bg-amber-700 p-2.5 rounded text-white font-bold border border-amber-600 text-center shadow-sm">
+                  BLAS & LAPACK (Optimized Fortran Libraries)
+                </div>
+                <div class="text-center text-amber-500 font-bold text-xs py-0.5">↓ Execution on Raw Silicon ↓</div>
+                <div class="bg-stone-800 p-2 rounded text-stone-400 text-center text-[11px]">
+                  Massively Parallel HPC Clusters & Supercomputing Hardware
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: PEDAGOGICAL CRITIQUE -->
+    <section id="sec-pedagogy" class="hidden space-y-8">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-stone-200">
+        <h2 class="text-2xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+          <span>🔍</span> Section 6: Evaluation of Rapid Micro-Pedagogy
+        </h2>
+        <p class="text-stone-600 leading-relaxed mb-6">
+          Analyzing the pedagogical tradeoffs of condensing 70 years of computational history into Fireship's 100-second format. While highly effective at engaging modern viewers, extreme brevity creates specific educational blind spots.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Positive Contributions -->
+          <div class="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-200">
+            <h3 class="font-bold text-emerald-900 text-sm uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span>✓</span> Educational Strengths
+            </h3>
+            <ul class="space-y-2.5 text-xs text-stone-700 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">•</span>
+                <span><strong>Historical Context:</strong> Effectively highlights John Backus, the IBM 704, and the groundbreaking advent of the optimizing compiler.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">•</span>
+                <span><strong>Hardware Connections:</strong> Clear connection between physical punch cards, lack of shift keys, and legacy uppercase syntax.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">•</span>
+                <span><strong>Engagement & Accessibility:</strong> Demystifies a legacy language for web developers using rapid, digestible visual hooks.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Omissions & Flaws -->
+          <div class="bg-rose-50/60 p-5 rounded-2xl border border-rose-200">
+            <h3 class="font-bold text-rose-900 text-sm uppercase tracking-wide mb-3 flex items-center gap-2">
+              <span>✕</span> Pedagogical Trade-Offs & Blind Spots
+            </h3>
+            <ul class="space-y-2.5 text-xs text-stone-700 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">•</span>
+                <span><strong>Syntactic Flaw in Code Example:</strong> Prominently featured code combining <code class="bg-rose-100 px-1 rounded">implicit none</code> with un-declared loop variables breaks standard compiler validation.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">•</span>
+                <span><strong>Over-emphasis on Quirks:</strong> Concentrates heavily on obsolete constraints (punch cards, uppercase) rather than modern computational features.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 font-bold">•</span>
+                <span><strong>Omission of Modern Ecosystem:</strong> Omits native matrix operations, Coarray parallel syntax, object orientation, and the modern Fortran Package Manager (<code class="bg-rose-100 px-1 rounded">fpm</code>).</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 text-stone-400 py-6 px-4 text-center text-xs border-t border-stone-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div>Fortran Technical Deconstruction & Interactive Learning Environment</div>
+      <div class="text-stone-500">Based on technical report on Fireship's "FORTRAN in 100 Seconds"</div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Tab Switching Logic
+    function switchTab(tabId) {
+      const sections = ['genesis', 'punchcard', 'compiler', 'evolution', 'hpc', 'pedagogy'];
+      sections.forEach(s => {
+        const secEl = document.getElementById(`sec-${s}`);
+        const tabEl = document.getElementById(`tab-${s}`);
+        if (s === tabId) {
+          secEl.classList.remove('hidden');
+          tabEl.classList.add('tab-active');
+          tabEl.classList.remove('text-stone-600');
+        } else {
+          secEl.classList.add('hidden');
+          tabEl.classList.remove('tab-active');
+          tabEl.classList.add('text-stone-600');
+        }
+      });
+    }
+
+    // SECTION 1: Chart.js Implementation
+    document.addEventListener('DOMContentLoaded', () => {
+      const ctx = document.getElementById('compilerBenchmarkChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Hand Assembly', 'Unoptimized Compiler', '1957 Fortran I Compiler', 'Modern Fortran / C (-O3)'],
+          datasets: [
+            {
+              label: 'Developer Effort / Time (Hours)',
+              data: [100, 15, 12, 5],
+              backgroundColor: 'rgba(217, 119, 6, 0.7)',
+              borderColor: 'rgba(217, 119, 6, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Execution Overhead vs Raw Machine Limit (%)',
+              data: [0, 400, 10, 2],
+              backgroundColor: 'rgba(30, 41, 59, 0.7)',
+              borderColor: 'rgba(30, 41, 59, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: '#e7e5e4' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: {
+                callback: function(value, index, values) {
+                  const label = this.getLabelForValue(value);
+                  return label.length > 16 ? label.substring(0, 14) + '..' : label;
+                }
+              }
+            }
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: (items) => items[0].label
+              }
+            }
+          }
+        }
+      });
+
+      // Initializations
+      selectCardSegment('body');
+      updateCompilerCode();
+      populateEvolutionTable('all');
+      setAliasingMode('fortran');
+    });
+
+    // SECTION 2: Punchcard Segment Selector
+    const cardData = {
+      label: {
+        title: "Columns 1–5: Statement Label / Comment Marker",
+        desc: "Reserved strictly for numeric statement labels referenced by GOTO or FORMAT statements. Placed in Column 1, an 'C' or '*' marked the entire punch card as a non-executable comment."
+      },
+      cont: {
+        title: "Column 6: Continuation Indicator",
+        desc: "Any non-blank, non-zero punched character in column 6 signaled to the IBM card reader that this card was a direct continuation of the statement on the preceding card."
+      },
+      body: {
+        title: "Columns 7–72: Executable Statement Body",
+        desc: "The core field where variable declarations, math expressions, DO loops, and function calls were typed. Modern Fortran free source form expands this up to 132 characters and removes column alignment rules."
+      },
+      id: {
+        title: "Columns 73–80: Card Sequence Identifier",
+        desc: "Ignored by the compiler parser. Used by physical card sorting machinery to assign line numbers to decks, ensuring cards could be re-ordered if a physical deck was accidentally dropped."
+      }
+    };
+
+    function selectCardSegment(seg) {
+      document.getElementById('punchcard-info-title').innerText = cardData[seg].title;
+      document.getElementById('punchcard-info-desc').innerText = cardData[seg].desc;
+    }
+
+    // SECTION 3: Compiler Simulator Logic
+    function updateCompilerCode() {
+      const hasImplicitNone = document.getElementById('toggle-implicit-none').checked;
+      const hasDeclarations = document.getElementById('toggle-declarations').checked;
+
+      let code = `program myApp\n`;
+      if (hasImplicitNone) {
+        code += `  implicit none\n`;
+      }
+      if (hasDeclarations) {
+        code += `  integer :: n, doubled\n`;
+      }
+      code += `  do n = 1, 5\n`;
+      code += `    doubled = n * 2\n`;
+      code += `    print *, doubled\n`;
+      code += `  end do\n`;
+      code += `end program myApp`;
+
+      document.getElementById('fortran-code-display').innerText = code;
+    }
+
+    function runVirtualCompiler() {
+      const hasImplicitNone = document.getElementById('toggle-implicit-none').checked;
+      const hasDeclarations = document.getElementById('toggle-declarations').checked;
+      const outEl = document.getElementById('compiler-terminal-output');
+      const tagEl = document.getElementById('compiler-status-tag');
+
+      if (hasImplicitNone && !hasDeclarations) {
+        tagEl.innerText = "COMPILATION ERROR";
+        tagEl.className = "text-rose-400 font-bold";
+        outEl.className = "code-font text-xs mt-3 leading-relaxed text-rose-300 whitespace-pre-wrap";
+        outEl.innerText = `myApp.f90:4:6:
+
+    4 |   do n = 1, 5
+      |      1
+Error: Symbol 'n' at (1) has no IMPLICIT type;
+myApp.f90:5:5:
+
+    5 |     doubled = n * 2
+      |     1
+Error: Symbol 'doubled' at (1) has no IMPLICIT type
+Fatal Error: Termination due to compilation errors.`;
+      } else if (!hasImplicitNone && !hasDeclarations) {
+        tagEl.innerText = "SUCCESS (IMPLICIT WARNING)";
+        tagEl.className = "text-amber-400 font-bold";
+        outEl.className = "code-font text-xs mt-3 leading-relaxed text-amber-200 whitespace-pre-wrap";
+        outEl.innerText = `[Compilation Successful]
+Warning: Variable 'n' implicitly typed as INTEGER.
+Warning: Variable 'doubled' implicitly typed as REAL/INTEGER.
+
+Execution Output:
+ 2
+ 4
+ 6
+ 8
+ 10`;
+      } else {
+        tagEl.innerText = "SUCCESS (CLEAN)";
+        tagEl.className = "text-emerald-400 font-bold";
+        outEl.className = "code-font text-xs mt-3 leading-relaxed text-emerald-200 whitespace-pre-wrap";
+        outEl.innerText = `[gfortran -O2 myApp.f90 -o myApp]
+Compilation finished with 0 errors, 0 warnings.
+
+Execution Output:
+ 2
+ 4
+ 6
+ 8
+ 10`;
+      }
+    }
+
+    // SECTION 4: Comparative Evolution Matrix Data
+    const evolutionData = [
+      {
+        domain: "syntax",
+        domainName: "Source Formatting",
+        legacy: "Strict 80-column fixed format; punch-card layout constraints.",
+        modern: "Free source form; up to 132 chars/line; case-insensitive; inline '!' comments."
+      },
+      {
+        domain: "memory",
+        domainName: "Typing Discipline",
+        legacy: "Implicit type mapping based on initial letters (I–N = Integer convention).",
+        modern: "Strict type checking enforced via explicit declarations and mandatory 'implicit none'."
+      },
+      {
+        domain: "memory",
+        domainName: "Memory Management",
+        legacy: "Static partitions; no dynamic heap support; shared global COMMON blocks.",
+        modern: "Dynamic heap management via allocatable arrays and type-safe pointers (=>)."
+      },
+      {
+        domain: "memory",
+        domainName: "Array Processing",
+        legacy: "Element-by-element iterative loops (DO loops).",
+        modern: "Native matrix slicing, vectorization, and whole-array algebraic operators."
+      },
+      {
+        domain: "control",
+        domainName: "Control Flow",
+        legacy: "Reliance on line numbers, computed GOTO, and arithmetic IF.",
+        modern: "Structured blocks (do ... end do, select case, if ... then ... else)."
+      },
+      {
+        domain: "control",
+        domainName: "Parallel Computing",
+        legacy: "External hardware pragmas or platform-dependent libraries.",
+        modern: "Native Single Program, Multiple Data (SPMD) parallelism via built-in Coarrays."
+      }
+    ];
+
+    function populateEvolutionTable(filter) {
+      const tbody = document.getElementById('evolution-table-body');
+      tbody.innerHTML = '';
+
+      evolutionData.forEach(row => {
+        if (filter === 'all' || row.domain === filter) {
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-stone-50 transition";
+          tr.innerHTML = `
+            <td class="p-3.5 sm:p-4 font-bold text-stone-900 border-r border-stone-100">${row.domainName}</td>
+            <td class="p-3.5 sm:p-4 text-stone-600 border-r border-stone-100 bg-amber-50/20">${row.legacy}</td>
+            <td class="p-3.5 sm:p-4 text-stone-800 font-medium">${row.modern}</td>
+          `;
+          tbody.appendChild(tr);
+        }
+      });
+    }
+
+    function filterEvolution(type) {
+      ['all', 'memory', 'syntax', 'control'].forEach(t => {
+        const btn = document.getElementById(`filter-btn-${t}`);
+        if (t === type) {
+          btn.className = "px-3 py-1.5 rounded-full bg-amber-700 text-white font-semibold";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 font-semibold";
+        }
+      });
+      populateEvolutionTable(type);
+    }
+
+    // SECTION 5: Aliasing Mode Simulator
+    function setAliasingMode(mode) {
+      const btnC = document.getElementById('alias-btn-c');
+      const btnF = document.getElementById('alias-btn-fortran');
+      const box = document.getElementById('aliasing-visual-box');
+
+      if (mode === 'c') {
+        btnC.className = "flex-1 py-1.5 px-3 rounded text-xs font-bold bg-amber-600 text-white";
+        btnF.className = "flex-1 py-1.5 px-3 rounded text-xs font-bold bg-stone-200 text-stone-700";
+        box.innerHTML = `<span class="text-rose-400">// C Pointer Semantics:</span>
+void add(float* a, float* b, int n) {
+  for(int i=0; i&lt;n; i++) {
+    // Compiler MUST assume 'a' and 'b' could alias!
+    // Cannot hold values in hardware registers across iterations.
+    // Forces repeated L1/L2 cache re-loads.
+    a[i] += b[i];
+  }
+}`;
+      } else {
+        btnF.className = "flex-1 py-1.5 px-3 rounded text-xs font-bold bg-amber-600 text-white";
+        btnC.className = "flex-1 py-1.5 px-3 rounded text-xs font-bold bg-stone-200 text-stone-700";
+        box.innerHTML = `<span class="text-emerald-400">! Fortran Non-Aliasing Standard:</span>
+subroutine add(a, b, n)
+  real, intent(inout) :: a(n)
+  real, intent(in) :: b(n)
+  ! Compiler GUARANTEES 'a' and 'b' do not overlap!
+  ! Enables automatic SIMD vectorization & aggressive register caching.
+  a = a + b
+end subroutine add`;
+      }
+    }
+  </script>
+</body>
+</html>

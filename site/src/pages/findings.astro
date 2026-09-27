@@ -38,7 +38,7 @@ const docs = [...new Set(findings.map((f) => f.doc))].sort();
 		<div class="filters" id="filters">
 			<label>Document <select data-f="doc"><option value="">All</option>{docs.map((d) => <option>{d}</option>)}</select></label>
 			<label>Severity <select data-f="severity"><option value="">All</option>{SEVERITIES.map((s) => <option>{s}</option>)}</select></label>
-			<label>Evidence <select data-f="tag"><option value="">All</option><option>DOC</option><option>KNOW</option><option>VERIFY</option></select></label>
+			<label>Evidence <select data-f="tag"><option value="">All</option><option>DOC</option><option>KNOW</option><option>VERIFY</option><option>VIDEO</option></select></label>
 			<label>Status <select data-f="status"><option value="">All</option>{STATUSES.map((s) => <option>{s}</option>)}</select></label>
 			<label class="grow">Search <input type="search" data-f="q" placeholder="ID, text, location…" /></label>
 		</div>

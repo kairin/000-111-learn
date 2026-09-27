@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ vs Fortran vs COBOL: Performance & Architecture Breakdown</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .tab-active {
+            border-bottom: 3px solid #2563eb;
+            color: #1e40af;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<!-- Chosen Palette: Warm Sand & Slate Harmony (Background: #fdfbf7, Surface: #ffffff, Text: #1e293b, Accent Primary: #2563eb, Accent Secondary: #d97706, Muted: #64748b) -->
+<!-- Application Structure Plan: Designed as an interactive engineering dashboard. Top hero section summarizes protocol. First main section focuses on quantitative drag race results with interactive charts (throughput breakdown and compiler version comparisons). Second section explores memory hierarchy mechanics with a live 1-bit vs 8-bit cache saturation simulator. Third section provides architectural comparison cards for C++, Fortran, and COBOL. Concludes with benchmark rules and domain engineering tradeoffs. This structure allows both high-level executive understanding and deep technical exploration without linear reading fatigue. -->
+<!-- Visualization & Content Choices: 
+    1. Throughput Comparison -> Chart.js Bar Chart -> Dynamic bar rendering comparing language performance ranges -> Clear visual delta between C++/Fortran vs COBOL.
+    2. Fortran Compiler Breakdown -> Chart.js Horizontal Bar Chart -> Dynamic toggles for GCC versions and Intel/LLVM compilers -> Highlights the 39.4% optimization gain from gfortran-7 to gfortran-11.
+    3. Cache Saturation Simulator -> Interactive HTML/CSS + JS state visualizer -> Dynamic toggle between 1-bit and 8-bit modes updating memory footprint gauge and cache level fit -> Teaches physical CPU memory hierarchy mechanics visually without SVG.
+    4. Architectural Language Matrix -> Dynamic Tabbed UI -> Click to inspect C++, Fortran, and COBOL compiler traits, bitwise handling, and memory models.
+    Confirming NO SVG graphics or Mermaid JS used. All visuals rendered via Chart.js Canvas or HTML/Tailwind CSS styling. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<body class="bg-[#fdfbf7] text-slate-800 font-sans antialiased min-h-screen">
+
+    <header class="border-b border-stone-200 bg-white/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🏎️</span>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-900 leading-tight">Software Drag Race: C++ vs Fortran vs COBOL</h1>
+                    <p class="text-xs text-slate-500">Dave's Garage Episode 04 • Systems Engineering Analysis</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="#overview" class="hover:text-blue-600 transition">Overview</a>
+                <a href="#results" class="hover:text-blue-600 transition">Benchmark Data</a>
+                <a href="#cache-simulator" class="hover:text-blue-600 transition">Cache Simulator</a>
+                <a href="#architecture" class="hover:text-blue-600 transition">Architectures</a>
+                <a href="#integrity" class="hover:text-blue-600 transition">Methodology</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <section id="overview" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200">
+            <div class="max-w-3xl mb-6">
+                <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full uppercase tracking-wider">Executive Summary</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Evaluating Compiled Execution Efficiency</h2>
+                <p class="text-slate-600 mt-3 leading-relaxed">
+                    This interactive breakdown analyzes retired Microsoft systems engineer Dave Plummer's single-threaded Sieve of Eratosthenes benchmark. The test evaluates how compiler optimization backends, memory abstraction layers, and instruction set primitives impact raw computational throughput across three foundational compiled languages.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-stone-100">
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                    <span class="text-xs font-medium text-slate-500 uppercase block">Prime Limit ($N$)</span>
+                    <span class="text-2xl font-bold text-slate-900 mt-1 block">1,000,000</span>
+                    <span class="text-xs text-slate-500">78,498 Expected Primes</span>
+                </div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                    <span class="text-xs font-medium text-slate-500 uppercase block">Test Window</span>
+                    <span class="text-2xl font-bold text-slate-900 mt-1 block">5.0 Seconds</span>
+                    <span class="text-xs text-slate-500">Fixed Non-Extendable</span>
+                </div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                    <span class="text-xs font-medium text-slate-500 uppercase block">Peak Throughput</span>
+                    <span class="text-2xl font-bold text-blue-600 mt-1 block">13,500 <span class="text-xs font-normal">P/s</span></span>
+                    <span class="text-xs text-slate-500">C++ Bitwise Engine</span>
+                </div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                    <span class="text-xs font-medium text-slate-500 uppercase block">Performance Delta</span>
+                    <span class="text-2xl font-bold text-amber-600 mt-1 block">~50x</span>
+                    <span class="text-xs text-slate-500">C++ / Fortran vs COBOL</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="results" class="space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200">
+                <div class="max-w-3xl mb-6">
+                    <h3 class="text-xl font-bold text-slate-900">Quantitative Results & Compiler Sensitivity</h3>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        The benchmark splits contenders into two performance tiers: systems-oriented languages operating near hardware limits (C++ and Fortran) and record-oriented domain languages (COBOL). Explore overall throughput and notice how Fortran's output changes radically based on compiler versions and optimization flags.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-bold text-slate-800 text-sm">Overall Throughput Comparison (Passes/sec)</h4>
+                            <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Higher is Better</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="languageThroughputChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 text-center">C++ and Fortran deliver comparable peak execution speeds, whereas COBOL lags by ~98% due to runtime indexing overhead.</p>
+                    </div>
+
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-bold text-slate-800 text-sm">Fortran Toolchain Sensitivity Breakdown</h4>
+                            <div class="space-x-1">
+                                <button onclick="filterFortranChart('all')" id="btn-all" class="text-xs px-2.5 py-1 rounded bg-blue-600 text-white font-medium">All</button>
+                                <button onclick="filterFortranChart('gcc')" id="btn-gcc" class="text-xs px-2.5 py-1 rounded bg-white text-slate-600 border border-stone-300">GCC</button>
+                                <button onclick="filterFortranChart('vendor')" id="btn-vendor" class="text-xs px-2.5 py-1 rounded bg-white text-slate-600 border border-stone-300">Intel/LLVM</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="fortranCompilerChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 text-center">GCC evolution yielded a +39.4% throughput boost from gfortran-7 to 11 on unchanged source code.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cache-simulator" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200">
+            <div class="max-w-3xl mb-6">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full uppercase tracking-wider">Interactive Mechanics</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-2">Memory Hierarchy & Cache Locality Simulator</h3>
+                <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                    Why does a 1-bit storage representation drastically outperform an 8-bit byte array despite requiring CPU instructions for bit-shifting and masking? Toggle between the two storage modes below to simulate CPU cache saturation and footprint dynamics for $N = 1,000,000$.
+                </p>
+            </div>
+
+            <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6 pb-6 border-b border-stone-200 gap-4">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-semibold text-slate-700">Select Storage Strategy:</span>
+                        <div class="inline-flex rounded-lg p-1 bg-stone-200">
+                            <button id="sim-btn-1bit" onclick="updateSimulator('1bit')" class="px-4 py-2 text-xs font-bold rounded-md bg-white text-blue-700 shadow-sm transition">1-Bit Packed Field</button>
+                            <button id="sim-btn-8bit" onclick="updateSimulator('8bit')" class="px-4 py-2 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900 transition">8-Bit Byte Array</button>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-500 block">Calculated Data Footprint</span>
+                        <span id="sim-footprint" class="text-2xl font-black text-slate-900">61.0 KB</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-600">L1 Data Cache (32 KB)</span>
+                            <span id="l1-status" class="text-amber-600 font-bold">Partial Fit (190%)</span>
+                        </div>
+                        <div class="w-full bg-stone-200 h-3 rounded-full overflow-hidden">
+                            <div id="l1-bar" class="bg-amber-500 h-full transition-all duration-500" style="width: 100%"></div>
+                        </div>
+                        <p class="text-xs text-slate-500" id="l1-desc">Primary working set spills out of L1 cache.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-600">L2 Data Cache (512 KB)</span>
+                            <span id="l2-status" class="text-emerald-600 font-bold">100% Residency (12%)</span>
+                        </div>
+                        <div class="w-full bg-stone-200 h-3 rounded-full overflow-hidden">
+                            <div id="l2-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 11.9%"></div>
+                        </div>
+                        <p class="text-xs text-slate-500" id="l2-desc">Entire dataset fits comfortably within high-speed L2 cache.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-600">Execution Penalty</span>
+                            <span id="penalty-status" class="text-blue-600 font-bold">0% (Optimal)</span>
+                        </div>
+                        <div class="w-full bg-stone-200 h-3 rounded-full overflow-hidden">
+                            <div id="penalty-bar" class="bg-blue-600 h-full transition-all duration-500" style="width: 5%"></div>
+                        </div>
+                        <p class="text-xs text-slate-500" id="penalty-desc">Bitfield math is executed in single-cycle ALU operations.</p>
+                    </div>
+                </div>
+
+                <div id="sim-explanation" class="mt-6 p-4 bg-white rounded-lg border border-stone-200 text-xs text-slate-700 leading-relaxed">
+                    <strong>Architectural Takeaway:</strong> Modern CPUs possess hyper-fast ALUs that can perform bit-shifting (`>>`), masking (`&`), and bitwise OR (`|`) operations in 1 clock cycle. The memory stall latency of fetching byte arrays from lower cache tiers or RAM costs up to 100x more cycles than doing the extra bitwise math.
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200">
+                <div class="max-w-3xl mb-6">
+                    <h3 class="text-xl font-bold text-slate-900">Language Paradigm & Architectural Foundations</h3>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        Select a language tab below to explore its historical focus, memory abstraction capabilities, hardware instruction mapping, and key bottlenecks during prime sieve computations.
+                    </p>
+                </div>
+
+                <div class="flex border-b border-stone-200 space-x-8 mb-6">
+                    <button onclick="switchLangTab('cpp')" id="tab-cpp" class="pb-3 text-sm font-medium text-slate-500 hover:text-slate-800 transition tab-active">C++ Architecture</button>
+                    <button onclick="switchLangTab('fortran')" id="tab-fortran" class="pb-3 text-sm font-medium text-slate-500 hover:text-slate-800 transition">Fortran Architecture</button>
+                    <button onclick="switchLangTab('cobol')" id="tab-cobol" class="pb-3 text-sm font-medium text-slate-500 hover:text-slate-800 transition">COBOL Architecture</button>
+                </div>
+
+                <div id="content-cpp" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-slate-900 text-sm mb-3">Core Paradigms & Strengths</h4>
+                        <ul class="text-xs text-slate-600 space-y-2.5">
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Zero-Overhead Abstraction:</strong> Language constructs map directly to physical machine instructions without mandatory runtime checks.</span></li>
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Native Bit Primitives:</strong> Full support for single-cycle bitwise operators (`&`, `|`, `~`, `^`, `<<`, `>>`).</span></li>
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Inlined Memory Allocation:</strong> Minimal class encapsulation overhead with direct heap/stack pointer control.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-slate-900 text-sm mb-3">Execution Mechanics in Sieve Benchmark</h4>
+                        <ul class="text-xs text-slate-600 space-y-2.5">
+                            <li class="flex items-start"><span class="text-blue-500 font-bold mr-2">ℹ</span><span><strong>Pointer Aliasing Risk:</strong> Requires careful compiler flags or explicit restrict keywords to match Fortran's vectorization assumptions.</span></li>
+                            <li class="flex items-start"><span class="text-blue-500 font-bold mr-2">ℹ</span><span><strong>Cache Residency:</strong> Packed bitfield fits 100% inside CPU L2 cache, preventing pipeline stalls.</span></li>
+                            <li class="flex items-start"><span class="text-blue-500 font-bold mr-2">ℹ</span><span><strong>Throughput Range:</strong> 10,000 – 13,500 Passes/sec.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="content-fortran" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden">
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-slate-900 text-sm mb-3">Core Paradigms & Strengths</h4>
+                        <ul class="text-xs text-slate-600 space-y-2.5">
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Strict Non-Aliasing Arrays:</strong> Standard Fortran guarantees array arguments do not overlap, enabling aggressive compiler vectorization and loop reordering.</span></li>
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Numerical Math Pipeline:</strong> Unrivaled performance in contiguous matrix operations and numerical tensors.</span></li>
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Bit Manipulation:</strong> Modern Fortran can store primality in 64-bit integer bitfields yielding ~50% gains over byte arrays.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-slate-900 text-sm mb-3">Execution Bottlenecks in Benchmark</h4>
+                        <ul class="text-xs text-amber-600 space-y-2.5">
+                            <li class="flex items-start"><span class="text-amber-500 font-bold mr-2">⚠️</span><span><strong>Object Encapsulation Penalty:</strong> Wrapping memory allocations inside OO types introduces a 30%–50% throughput penalty vs raw procedural Fortran.</span></li>
+                            <li class="flex items-start"><span class="text-amber-500 font-bold mr-2">⚠️</span><span><strong>Dynamic Allocation Latency:</strong> Fortran runtime libraries are optimized for startup dynamic tensors, not cycling heap allocations thousands of times per second.</span></li>
+                            <li class="flex items-start"><span class="text-slate-600 font-bold mr-2">ℹ</span><span><strong>Throughput Range:</strong> 6,000 – 12,417 Passes/sec (highly backend dependent).</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="content-cobol" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden">
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-slate-900 text-sm mb-3">Core Paradigms & Strengths</h4>
+                        <ul class="text-xs text-slate-600 space-y-2.5">
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Commercial Business Domain:</strong> Standardized for record-oriented accounting, banking transactions, and fixed-point decimal arithmetic (`COMP-3`).</span></li>
+                            <li class="flex items-start"><span class="text-emerald-500 font-bold mr-2">✓</span><span><strong>Packed Decimal Hardware Integration:</strong> Direct mapping to mainframe hardware instruction sets for BCD financial calculations without rounding error.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-slate-900 text-sm mb-3">Execution Bottlenecks in Benchmark</h4>
+                        <ul class="text-xs text-rose-600 space-y-2.5">
+                            <li class="flex items-start"><span class="text-rose-500 font-bold mr-2">❌</span><span><strong>No Native Bitwise Operations:</strong> Lacks bitwise AND/OR/SHIFT instructions; bit tracking requires complex modulo division arithmetic.</span></li>
+                            <li class="flex items-start"><span class="text-rose-500 font-bold mr-2">❌</span><span><strong>Table Index Offset Overhead:</strong> `OCCURS` record table traversal forces runtime scaled multiplications and additions on every array read/write.</span></li>
+                            <li class="flex items-start"><span class="text-rose-500 font-bold mr-2">❌</span><span><strong>Control Flow Overhead:</strong> `PERFORM ... VARYING` bounds checking resists loop-unrolling and register reuse.</span></li>
+                            <li class="flex items-start"><span class="text-slate-600 font-bold mr-2">ℹ</span><span><strong>Throughput Range:</strong> ~250 Passes/sec (~50x slower).</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="integrity" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200">
+            <div class="max-w-3xl mb-6">
+                <span class="px-3 py-1 bg-stone-100 text-slate-700 text-xs font-semibold rounded-full uppercase tracking-wider">Methodology</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-2">Benchmark Rules & Faithful Implementation Criteria</h3>
+                <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                    To maintain strict parity and prevent compiler optimization shortcuts (such as static array caching or precomputed prime tables), all submissions in the Dave's Garage Software Drag Race must adhere to standard rules.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-4 border border-stone-200 rounded-xl bg-stone-50">
+                    <div class="text-blue-600 font-bold text-lg mb-1">01</div>
+                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Encapsulation Boundary</h4>
+                    <p class="text-xs text-slate-600 mt-1">Algorithm must be encapsulated within a class, module, or object structure, preventing global scope pollution.</p>
+                </div>
+                <div class="p-4 border border-stone-200 rounded-xl bg-stone-50">
+                    <div class="text-blue-600 font-bold text-lg mb-1">02</div>
+                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Dynamic Allocation</h4>
+                    <p class="text-xs text-slate-600 mt-1">Working memory buffer must be re-allocated or re-initialized on every single pass rather than reusing static memory.</p>
+                </div>
+                <div class="p-4 border border-stone-200 rounded-xl bg-stone-50">
+                    <div class="text-blue-600 font-bold text-lg mb-1">03</div>
+                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Truth Validation</h4>
+                    <p class="text-xs text-slate-600 mt-1">Pass count and results must be verified against reference truth table (78,498 primes for $N=10^6$) upon completion.</p>
+                </div>
+                <div class="p-4 border border-stone-200 rounded-xl bg-stone-50">
+                    <div class="text-blue-600 font-bold text-lg mb-1">04</div>
+                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Fixed Time Constraint</h4>
+                    <p class="text-xs text-slate-600 mt-1">Executes for exactly 5.0 non-extendable seconds. Metric is total validated Passes per Second ($P/s$).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-amber-400">Engineering Takeaways: Microbenchmarks vs Reality</h3>
+            <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                While microbenchmarks like the Sieve of Eratosthenes offer deep insight into integer ALU arithmetic, cache locality, and register allocation, they do not reflect complete language domain utility:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 text-xs text-slate-300">
+                <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700">
+                    <h4 class="font-bold text-white mb-2">Scientific & Tensor Computing (Fortran)</h4>
+                    <p class="leading-relaxed">In high-performance computational fluid dynamics or matrix algebra, Fortran's non-aliasing memory contracts allow vector compilers to achieve instruction pipelining and SIMD throughput that frequently surpasses C++.</p>
+                </div>
+                <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700">
+                    <h4 class="font-bold text-white mb-2">Enterprise Transaction Processing (COBOL)</h4>
+                    <p class="leading-relaxed">COBOL was designed to process streams of fixed-point financial records where IEEE floating-point binary rounding errors are illegal. Its syntax maps directly to hardware decimal arithmetic on modern enterprise mainframes.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-xs text-slate-500 border-t border-stone-200 mt-12">
+        <p>Based on Dave's Garage Episode 04 Software Drag Race • Single-Page Interactive Analysis</p>
+    </footer>
+
+    <script>
+        let throughputChartInstance = null;
+        let fortranChartInstance = null;
+
+        const fortranData = [
+            { compiler: 'gfortran-7', throughput: 8905, type: 'gcc' },
+            { compiler: 'gfortran-8', throughput: 11210, type: 'gcc' },
+            { compiler: 'gfortran-9', throughput: 11211, type: 'gcc' },
+            { compiler: 'gfortran-10', throughput: 11323, type: 'gcc' },
+            { compiler: 'gfortran-11', throughput: 12417, type: 'gcc' },
+            { compiler: 'ifort 2021.4', throughput: 6097, type: 'vendor' },
+            { compiler: 'ifx 2021.4', throughput: 7283, type: 'vendor' },
+            { compiler: 'flang-12', throughput: 6659, type: 'vendor' }
+        ];
+
+        function initCharts() {
+            const ctx1 = document.getElementById('languageThroughputChart').getContext('2d');
+            throughputChartInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['C++ (Inlined Bitwise)', 'Fortran (gfortran-11)', 'COBOL (Record Byte)'],
+                    datasets: [{
+                        label: 'Passes / Second (P/s)',
+                        data: [13500, 12417, 252],
+                        backgroundColor: ['#2563eb', '#059669', '#d97706'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw.toLocaleString() + ' Passes/sec';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e2e8f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            renderFortranChart('all');
+        }
+
+        function renderFortranChart(filter) {
+            const filtered = fortranData.filter(item => {
+                if (filter === 'gcc') return item.type === 'gcc';
+                if (filter === 'vendor') return item.type === 'vendor';
+                return true;
+            });
+
+            const labels = filtered.map(d => d.compiler);
+            const values = filtered.map(d => d.throughput);
+            const colors = filtered.map(d => d.type === 'gcc' ? '#059669' : '#d97706');
+
+            if (fortranChartInstance) {
+                fortranChartInstance.destroy();
+            }
+
+            const ctx2 = document.getElementById('fortranCompilerChart').getContext('2d');
+            fortranChartInstance = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Throughput (P/s)',
+                        data: values,
+                        backgroundColor: colors,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { color: '#e2e8f0' }
+                        },
+                        y: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function filterFortranChart(type) {
+            document.getElementById('btn-all').className = type === 'all' ? 'text-xs px-2.5 py-1 rounded bg-blue-600 text-white font-medium' : 'text-xs px-2.5 py-1 rounded bg-white text-slate-600 border border-stone-300';
+            document.getElementById('btn-gcc').className = type === 'gcc' ? 'text-xs px-2.5 py-1 rounded bg-blue-600 text-white font-medium' : 'text-xs px-2.5 py-1 rounded bg-white text-slate-600 border border-stone-300';
+            document.getElementById('btn-vendor').className = type === 'vendor' ? 'text-xs px-2.5 py-1 rounded bg-blue-600 text-white font-medium' : 'text-xs px-2.5 py-1 rounded bg-white text-slate-600 border border-stone-300';
+            renderFortranChart(type);
+        }
+
+        function updateSimulator(mode) {
+            const btn1 = document.getElementById('sim-btn-1bit');
+            const btn8 = document.getElementById('sim-btn-8bit');
+            const footprint = document.getElementById('sim-footprint');
+            const l1Status = document.getElementById('l1-status');
+            const l1Bar = document.getElementById('l1-bar');
+            const l1Desc = document.getElementById('l1-desc');
+            const l2Status = document.getElementById('l2-status');
+            const l2Bar = document.getElementById('l2-bar');
+            const l2Desc = document.getElementById('l2-desc');
+            const penaltyStatus = document.getElementById('penalty-status');
+            const penaltyBar = document.getElementById('penalty-bar');
+            const penaltyDesc = document.getElementById('penalty-desc');
+            const explanation = document.getElementById('sim-explanation');
+
+            if (mode === '1bit') {
+                btn1.className = 'px-4 py-2 text-xs font-bold rounded-md bg-white text-blue-700 shadow-sm transition';
+                btn8.className = 'px-4 py-2 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900 transition';
+                
+                footprint.innerText = '61.0 KB';
+                l1Status.innerText = 'Partial Fit (190%)';
+                l1Status.className = 'text-amber-600 font-bold';
+                l1Bar.style.width = '100%';
+                l1Bar.className = 'bg-amber-500 h-full transition-all duration-500';
+                l1Desc.innerText = 'Primary working set spills out of L1 data cache.';
+
+                l2Status.innerText = '100% Residency (12%)';
+                l2Status.className = 'text-emerald-600 font-bold';
+                l2Bar.style.width = '12%';
+                l2Bar.className = 'bg-emerald-500 h-full transition-all duration-500';
+                l2Desc.innerText = 'Entire dataset fits comfortably inside fast L2 cache.';
+
+                penaltyStatus.innerText = '0% (Optimal)';
+                penaltyStatus.className = 'text-blue-600 font-bold';
+                penaltyBar.style.width = '5%';
+                penaltyBar.className = 'bg-blue-600 h-full transition-all duration-500';
+                penaltyDesc.innerText = 'Bitfield math is executed in single-cycle ALU operations.';
+
+                explanation.innerHTML = '<strong>Architectural Takeaway:</strong> Modern CPUs possess hyper-fast ALUs that perform bit-shifting (`>>`), masking (`&`), and bitwise OR (`|`) operations in 1 clock cycle. The memory stall latency of fetching byte arrays from lower cache tiers or RAM costs up to 100x more cycles than doing the extra bitwise math.';
+            } else {
+                btn8.className = 'px-4 py-2 text-xs font-bold rounded-md bg-white text-blue-700 shadow-sm transition';
+                btn1.className = 'px-4 py-2 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900 transition';
+
+                footprint.innerText = '488.3 KB';
+                l1Status.innerText = 'Overflow (1525%)';
+                l1Status.className = 'text-rose-600 font-bold';
+                l1Bar.style.width = '100%';
+                l1Bar.className = 'bg-rose-500 h-full transition-all duration-500';
+                l1Desc.innerText = 'Severe L1 cache line thrashing and evictions.';
+
+                l2Status.innerText = 'Near Capacity (95%)';
+                l2Status.className = 'text-amber-600 font-bold';
+                l2Bar.style.width = '95%';
+                l2Bar.className = 'bg-amber-500 h-full transition-all duration-500';
+                l2Desc.innerText = 'Ejects other data structures, forcing L3 cache fetches.';
+
+                penaltyStatus.innerText = '~50% Throughput Penalty';
+                penaltyStatus.className = 'text-rose-600 font-bold';
+                penaltyBar.style.width = '85%';
+                penaltyBar.className = 'bg-rose-500 h-full transition-all duration-500';
+                penaltyDesc.innerText = 'Frequent cache line misses stall CPU execution pipeline.';
+
+                explanation.innerHTML = '<strong>Architectural Takeaway:</strong> Storing flags in 8-bit bytes eliminates bitwise arithmetic, but expands the working memory set by 800%. The resulting cache thrashing and higher-tier cache latency severely degrade execution speed.';
+            }
+        }
+
+        function switchLangTab(lang) {
+            document.getElementById('tab-cpp').className = 'pb-3 text-sm font-medium text-slate-500 hover:text-slate-800 transition ' + (lang === 'cpp' ? 'tab-active' : '');
+            document.getElementById('tab-fortran').className = 'pb-3 text-sm font-medium text-slate-500 hover:text-slate-800 transition ' + (lang === 'fortran' ? 'tab-active' : '');
+            document.getElementById('tab-cobol').className = 'pb-3 text-sm font-medium text-slate-500 hover:text-slate-800 transition ' + (lang === 'cobol' ? 'tab-active' : '');
+
+            document.getElementById('content-cpp').classList.add('hidden');
+            document.getElementById('content-fortran').classList.add('hidden');
+            document.getElementById('content-cobol').classList.add('hidden');
+
+            document.getElementById('content-' + lang).classList.remove('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+        });
+    </script>
+</body>
+</html>

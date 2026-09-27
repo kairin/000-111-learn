@@ -32,6 +32,8 @@ None at this time. The next choices come with the game design (see [PLAN.md](PLA
 | **D19** | **The game uses split roles** (was O7). The game is 8086 Assembly in js-dos. Modern Fortran is the laboratory: it makes tables, checks the A-side answers, and later runs a physics page. | Decided by the owner | The first test works: the two sides agree on 256 of 256 values. See `game/README.md`. |
 | **D20** | **The game is a small lander game** (was O8). An 8086 or 386 PC, VGA Mode 13h, then Mode X. 70 or 35 frames each second. | Decided by the owner | The rules of the game come in phase 5. |
 
+| **D21** | **Review the eight video guides** in the same way as the first four. Each document part shows its source video, and the moment of its idea when the video covers it. The new evidence tag [VIDEO] marks a claim that the reviewer checked against the captions. | Decided by the owner, done | The captions stay on the computer of the owner. The reviews quote no more than 10 words from a video. See `adversarial-review-pass1/00-SUMMARY-video-guides.md`. |
+
 ## Why some decisions changed
 
 - **D6 to D12:** the custom builder worked. Astro with Starlight gives menus, search and themes without custom code.
