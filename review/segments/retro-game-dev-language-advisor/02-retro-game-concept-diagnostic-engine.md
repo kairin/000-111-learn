@@ -222,20 +222,20 @@ The recommendation logic / numbers below are claims too; review them.
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D04-C1 | critical | DOC KNOW | open | Quiz logic L499–541 | It has the same defects as page 03: `answeredCount` is unused, so one click gives a 100% verdict, and option A is always Assembly. The Assembly result says "**Assembly is mandatory** for your retro action/arcade title" (L530), which is false: plenty of retro action games were written in C with small amounts of assembly. |
+| D04-C1 | critical | DOC KNOW | open | Quiz logic L499–541 | The quiz has the same defects as page 03. The code does not use `answeredCount`, thus one click gives a 100% verdict. Option A is always Assembly. The Assembly result says "**Assembly is mandatory** for your retro action/arcade title" (L530). This is false. Developers wrote plenty of retro action games in C with small amounts of assembly. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

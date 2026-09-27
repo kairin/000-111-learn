@@ -20,7 +20,7 @@
    ]
   ],
   "claim": "US salary ranges",
-  "problem": "The salary figures are embedded images. Two of the \"ranges\" render only as **\"$112,000 –\"** and **\"$105,000 –\"**, with no upper bound. A raw generation artifact **`[cite: 42, 46]`** is left in the table. The figures come from single job postings (Dice, BeBee, Rippling, Indeed search pages), not salary surveys.",
+  "problem": "The salary figures are images inside the document. Two of the \"ranges\" show only as **\"$112,000 –\"** and **\"$105,000 –\"**, with no upper bound. The table also keeps a raw generation artifact, **`[cite: 42, 46]`**. The figures come from single job postings (Dice, BeBee, Rippling, Indeed search pages), not from salary surveys.",
   "tags": [
    "DOC"
   ],
@@ -41,7 +41,7 @@
    ]
   ],
   "claim": "\"A 2023 evaluation by Los Alamos National Laboratory … driving sustained institutional demand\"",
-  "problem": "The claim is cited to **[13] a Freelancer.com \"hire Fortran developers\" page**, not to the LANL report. The coverage is in the uncited [48] (Route Fifty, \"Can Fortran survive another 15 years?\"). As generally reported, the LANL study framed Fortran as a *risk to be managed* (shrinking talent pool, lagging GPU/ecosystem support), not as a growth market. The document inverts its tone.",
+  "problem": "The citation is wrong. The document cites the claim to **[13] a Freelancer.com \"hire Fortran developers\" page**, not to the LANL report. Source [48] covers the report, but the text never cites it (Route Fifty, \"Can Fortran survive another 15 years?\"). Most reports say that the LANL study framed Fortran as *a risk to manage*, not as a growth market. The reasons were a shrinking talent pool and lagging GPU/ecosystem support. The document reverses that tone.",
   "tags": [
    "DOC",
    "VERIFY"
@@ -71,7 +71,7 @@
    ]
   ],
   "claim": "90-day milestones",
-  "problem": "The comparison is not like-for-like. The Fortran milestone is *authoring* a parallel PDE solver \"from scratch\", \"production-ready\". The Assembly milestone is only *reading* disassembly. That framing builds the conclusion (\"Fortran ships software\") into the premise. Assembly learners routinely *author* working programs in 90 days (e.g. [1], \"OS in 1,000 Lines\", which the document itself cites).",
+  "problem": "The comparison is not like-for-like. The Fortran milestone is *authoring* a parallel PDE (partial differential equation) solver \"from scratch\", \"production-ready\". The Assembly milestone is only *reading* disassembly. That framing builds the conclusion (\"Fortran ships software\") into the premise. Assembly learners often *author* working programs in 90 days, for example with [1], \"OS in 1,000 Lines\". The document itself cites [1].",
   "tags": [
    "DOC"
   ],
@@ -92,7 +92,7 @@
    ]
   ],
   "claim": "\"production-level coding capability within three to four weeks\"",
-  "problem": "Cited only to the fortran-lang.org homepage [4]. There is no evidence for this, and \"production-level\" is undefined.",
+  "problem": "The only citation is the fortran-lang.org homepage [4]. No evidence supports this, and the text does not define \"production-level\".",
   "tags": [
    "DOC"
   ],
@@ -113,7 +113,7 @@
    ]
   ],
   "claim": "Aliasing \"inhibits **out-of-order execution**\" in C",
-  "problem": "Wrong layer. Out-of-order execution is done by the CPU hardware, which disambiguates memory at runtime. Aliasing inhibits *compiler* reordering and vectorization.",
+  "problem": "This names the wrong layer. The CPU hardware does out-of-order execution, and the hardware disambiguates memory at runtime. Aliasing (two names for the same memory) limits *compiler* reordering and vectorization.",
   "tags": [
    "KNOW"
   ],
@@ -134,7 +134,7 @@
    ]
   ],
   "claim": "C needs \"non-standard keywords\" to declare non-aliasing",
-  "problem": "`restrict` has been standard in **C99**. Only C++ lacks a standard equivalent (`__restrict__` is an extension).",
+  "problem": "**C99** made `restrict` a standard keyword. Only C++ has no standard equivalent (`__restrict__` is an extension).",
   "tags": [
    "KNOW"
   ],
@@ -155,7 +155,7 @@
    ]
   ],
   "claim": "Dummy arguments are non-aliasing, \"absolute certainty\"",
-  "problem": "Overstated. The standard puts the rule on the **programmer**; compilers don't check it. `POINTER`/`TARGET` arguments may alias. Violations cause silent wrong results, which is itself a pedagogical hazard.",
+  "problem": "The claim is too strong. The standard gives the rule to the **programmer**, and compilers do not check it. `POINTER`/`TARGET` arguments can alias. A violation gives silent wrong results, and that is itself a pedagogical hazard.",
   "tags": [
    "KNOW"
   ],
@@ -184,7 +184,7 @@
    ]
   ],
   "claim": "Coarrays give SPMD \"without relying on third-party message-passing\"",
-  "problem": "In practice, GFortran coarrays need **OpenCoarrays, built on MPI**, and Intel's implementation uses Intel MPI. Production HPC is dominated by MPI+OpenMP, so coarrays are niche. Putting \"distributed memory scaling via coarrays\" in weeks 9–12 is aspirational.",
+  "problem": "In practice this is false. GFortran coarrays need **OpenCoarrays, built on MPI** (a third-party message-passing library). The Intel implementation uses Intel MPI. MPI+OpenMP dominates production HPC (high-performance computing), so coarrays are niche. The plan puts \"distributed memory scaling via coarrays\" in weeks 9 to 12, and that goal is aspirational.",
   "tags": [
    "KNOW",
    "VERIFY"
@@ -206,7 +206,7 @@
    ]
   ],
   "claim": "Assembly has \"no cross-platform semantic LSP\"",
-  "problem": "Assembly language servers do exist (e.g. `asm-lsp`), though they are less mature.",
+  "problem": "Assembly language servers (editor helper tools) do exist, for example `asm-lsp`. But they are less mature.",
   "tags": [
    "VERIFY"
   ],
@@ -231,7 +231,7 @@
    ]
   ],
   "claim": "LFortran REPL/Jupyter offered as a beginner workflow",
-  "problem": "LFortran was still pre-1.0 (alpha/beta) as of the cited sources. Recommending it to a 90-day learner as equivalent to Python/Julia interactivity overstates its maturity.",
+  "problem": "LFortran was still pre-1.0 (alpha/beta) at the date of the cited sources. The document recommends it to a 90-day learner as equal to Python/Julia interactivity. That overstates its maturity.",
   "tags": [
    "VERIFY"
   ],
@@ -252,7 +252,7 @@
    ]
   ],
   "claim": "Assembly ten-year outlook \"high stability\"",
-  "problem": "Cited to [2], a course-listing page. No labor data.",
+  "problem": "The only citation is [2], a course-listing page. That source has no labor data.",
   "tags": [
    "DOC"
   ],
@@ -277,7 +277,7 @@
    ]
   ],
   "claim": "Salary comparison",
-  "problem": "The comparison is asymmetric. The Fortran upper bound is explicitly for **advanced-degree, security-cleared national-lab** roles; the Assembly figure is a \"baseline\". Security and RE roles also often need clearance. The pay belongs to the *role*, not the *language*.",
+  "problem": "The comparison is asymmetric. The Fortran upper bound is explicitly for **advanced-degree, security-cleared national-lab** roles. But the Assembly figure is a \"baseline\". Security and RE (reverse engineering) roles also often need clearance. The pay belongs to the *role*, not the *language*.",
   "tags": [
    "DOC"
   ],
@@ -298,7 +298,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"replacement of integer division with **modular multiplication** invariants\": the usual term is multiplication by a fixed-point reciprocal (the \"magic number\").",
+  "problem": "\"replacement of integer division with **modular multiplication** invariants\". The usual term is multiplication by a fixed-point reciprocal (the \"magic number\").",
   "tags": [
    "KNOW"
   ],
@@ -319,7 +319,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"Column-major storage **ensures** contiguous sweeps\": only if the loop order matches (innermost loop on the first index). Beginners commonly get this wrong.",
+  "problem": "\"Column-major storage **ensures** contiguous sweeps\". This is true only if the loop order matches (the innermost loop runs on the first index). Beginners often get this wrong.",
   "tags": [
    "KNOW"
   ],
@@ -340,7 +340,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"fixed 32-bit words\": true for the base ISA, but the common RV64GC profile includes 16-bit compressed instructions.",
+  "problem": "\"fixed 32-bit words\". This is true for the base ISA. But the common RV64GC profile includes 16-bit compressed instructions.",
   "tags": [
    "KNOW"
   ],
@@ -361,7 +361,7 @@
    ]
   ],
   "claim": "",
-  "problem": "AArch64 on Apple = \"bare-metal\" experimentation: macOS user space is not bare metal, and Apple's syscall interface is not a stable public ABI.",
+  "problem": "AArch64 on Apple = \"bare-metal\" experimentation. User space on macOS is not bare metal. Also, the Apple syscall interface is not a stable public ABI.",
   "tags": [
    "KNOW"
   ],
@@ -382,7 +382,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"more than 1,500 instructions\" (cited to a Reddit thread [20]) and \"40–50 instructions in 6–8 weeks\" (cited to SendOwl, a course storefront [22]): the counts depend on the counting method. They are plausible but unsourced.",
+  "problem": "\"more than 1,500 instructions\" cites a Reddit thread [20]. \"40–50 instructions in 6–8 weeks\" cites SendOwl, a course storefront [22]. The counts depend on the counting method. They are plausible but unsourced.",
   "tags": [
    "DOC"
   ],
@@ -435,8 +435,8 @@
     173
    ]
   ],
-  "claim": "Fortran wins through \"anti-aliasing optimizations\", \"array syntax\" and an \"auto-vectorizing execution model\"",
-  "problem": "**FORTRAN 77 has no array syntax.** Whole-array expressions and slicing arrived in Fortran 90. **8086–486 CPUs have no SIMD**, so there is nothing to auto-vectorize (MMX came in 1997; x87 is scalar). The document's main Fortran advantages don't exist on its own target.",
+  "claim": "The document says that Fortran wins because of \"anti-aliasing optimizations\", \"array syntax\" and an \"auto-vectorizing execution model\".",
+  "problem": "**FORTRAN 77 has no array syntax.** Whole-array expressions and slices came in Fortran 90. **8086 to 486 CPUs have no SIMD**, thus the compiler has nothing to auto-vectorize. MMX came in 1997, and x87 is scalar. The primary Fortran advantages in the document do not exist on its own target.",
   "tags": [
    "KNOW"
   ],
@@ -460,8 +460,8 @@
     63
    ]
   ],
-  "claim": "FPUs \"were rare\"… yet Fortran offers \"native floating-point\"",
-  "problem": "Internal contradiction. Without an FPU, Fortran `REAL` arithmetic runs on **software emulation**, the very latency the document praises Assembly for avoiding (L41). A float-heavy Fortran simulation on a 1980s machine would be *slow*.",
+  "claim": "The document says that FPUs \"were rare\". But it also says that Fortran gives \"native floating-point\".",
+  "problem": "The document contradicts itself. Without an FPU, Fortran `REAL` arithmetic runs on **software emulation**. The document praises Assembly because it prevents this latency (L41). A Fortran simulation with much float math on a 1980s computer is *slow*.",
   "tags": [
    "DOC"
   ],
@@ -489,8 +489,8 @@
     158
    ]
   ],
-  "claim": "Deep simulation / procedural universes → Fortran",
-  "problem": "History contradicts this. **Elite** (1984, procedural galaxies in ~22 KB), **Frontier: Elite II** (1993, Newtonian orbital flight, procedural galaxy) and **M.U.L.E.** (the document's own example, L170) were written in **assembly**. The claim \"Fortran can fit a galaxy in 200 KB\" (L118) is weaker than what assembly actually did in 1984.",
+  "claim": "Deep simulation and procedural universes go to Fortran.",
+  "problem": "History does not agree. The developers wrote **Elite** (1984, procedural galaxies in ~22 KB), **Frontier: Elite II** (1993, Newtonian orbital flight, procedural galaxy) and **M.U.L.E.** (the example in the document, L170) in **assembly**. The claim \"Fortran can fit a galaxy in 200 KB\" (L118) is weaker than the result that assembly got in 1984.",
   "tags": [
    "KNOW",
    "VERIFY"
@@ -523,8 +523,8 @@
     166
    ]
   ],
-  "claim": "\"Locked 60/70 FPS\", V-Sync \"completely eliminating tearing\" in Mode 13h",
-  "problem": "(a) Mode 13h runs at **70 Hz**, so a vsync-locked game gets 70 or 35 fps, not a locked 60. (b) Mode 13h has **one page**, so there is no page flipping. Copying 64,000 bytes during the ~1–1.5 ms vertical blank is not possible over ISA, so tearing is *reduced*, not eliminated. Tear-free flipping needs Mode X (which L11 mentions but the roadmap never uses). (c) The document's own figure (L70), 3.84 MB/s, exceeds what many 8/16-bit ISA VGA cards could sustain.",
+  "claim": "The document promises \"Locked 60/70 FPS\" and V-Sync \"completely eliminating tearing\" in Mode 13h.",
+  "problem": "(a) Mode 13h runs at **70 Hz**. Thus a game locked to vsync gets 70 or 35 fps, not a locked 60. (b) Mode 13h has **one page**, thus page flipping is not possible. A copy of 64,000 bytes in the ~1 to 1.5 ms vertical blank is not possible over ISA. As a result, tearing becomes *less*, but it does not stop. Flipping without tears needs Mode X (L11 mentions it, but the roadmap does not use it). (c) The figure in the document (L70), 3.84 MB/s, is more than many 8/16-bit ISA VGA cards can supply.",
   "tags": [
    "KNOW",
    "DOC"
@@ -545,8 +545,8 @@
     33
    ]
   ],
-  "claim": "90-day milestone: \"fully functional, smooth 60/70 FPS … raycaster written bare-metal\"",
-  "problem": "This is unrealistic for someone learning assembly from scratch. Commercial teams using C plus assembly shipped raycasters that ran well below 60 fps on period hardware. There is no evidence for the timeline.",
+  "claim": "The 90-day milestone is a \"fully functional, smooth 60/70 FPS … raycaster written bare-metal\".",
+  "problem": "This is not realistic for a person who learns assembly from zero. Commercial teams with C plus assembly shipped raycasters that ran much slower than 60 fps on the hardware of that time. No evidence supports the timeline.",
   "tags": [
    "KNOW"
   ],
@@ -566,8 +566,8 @@
     37
    ]
   ],
-  "claim": "Early-1990s commercial titles authored \"almost exclusively in assembly\"",
-  "problem": "True for 8-bit systems in the 1980s. **False for early-1990s PC**, where C with assembly inner loops was the norm (id Software titles, for example). Source: a Reddit thread [1].",
+  "claim": "The document says that developers wrote commercial titles of the early 1990s \"almost exclusively in assembly\".",
+  "problem": "This is true for 8-bit systems in the 1980s. It is **false for the PC in the early 1990s**. At that time, C with assembly inner loops was the norm (for example, id Software titles). The source is a Reddit thread [1].",
   "tags": [
    "KNOW"
   ],
@@ -587,8 +587,8 @@
     9
    ]
   ],
-  "claim": "\"64 KB (Commodore 64, NES)\"",
-  "problem": "The NES has **2 KB** of work RAM (plus cartridge ROM/RAM). Only the C64 figure is right.",
+  "claim": "The document gives \"64 KB (Commodore 64, NES)\".",
+  "problem": "The NES has **2 KB** of work RAM (plus cartridge ROM/RAM). Only the C64 figure is correct.",
   "tags": [
    "KNOW"
   ],
@@ -612,8 +612,8 @@
     37
    ]
   ],
-  "claim": "Era clock range \"1–33 MHz\", and 30–60 fps from a \"4.77 MHz\" CPU",
-  "problem": "The document claims \"1990s\" but stops at 33 MHz (486DX2-66 in 1992; Pentiums by the mid-1990s). VGA Mode 13h games at 60 fps on a 4.77 MHz 8088 is not credible. The scope is inconsistent.",
+  "claim": "The clock range of the era is \"1–33 MHz\", and a \"4.77 MHz\" CPU gives 30 to 60 fps.",
+  "problem": "The document claims the \"1990s\", but it stops at 33 MHz. The 486DX2-66 came in 1992, and Pentiums came by the mid-1990s. VGA Mode 13h games at 60 fps on a 4.77 MHz 8088 are not credible. The scope is not consistent.",
   "tags": [
    "KNOW"
   ],
@@ -637,8 +637,8 @@
     31
    ]
   ],
-  "claim": "16.16 fixed point \"using AX, BX, CX, DX\"",
-  "problem": "These are **16-bit** registers. 16.16 math needs 32-bit registers (EAX…, 386+) or register pairs on 8086. `REP MOVSD` (L31) is also 386+. The document mixes 8086 and 386 targets without saying so.",
+  "claim": "The document does 16.16 fixed point \"using AX, BX, CX, DX\".",
+  "problem": "These are **16-bit** registers. 16.16 math needs 32-bit registers (EAX and the others, 386 and later) or register pairs on the 8086. `REP MOVSD` (L31) also needs a 386 or later. The document mixes 8086 and 386 targets and does not say so.",
   "tags": [
    "KNOW"
   ],
@@ -670,8 +670,8 @@
     165
    ]
   ],
-  "claim": "Fortran has \"zero native support\" for display and input; a \"pure Fortran game must be ASCII\"",
-  "problem": "Overstated. Period vendor compilers shipped **graphics libraries callable from Fortran** (Microsoft FORTRAN 5.x's graphics library, for example). Calling a vendor or assembly library is normal practice, and the Assembly path relies on BIOS calls too.",
+  "claim": "The document says that Fortran has \"zero native support\" for display and input, and that a \"pure Fortran game must be ASCII\".",
+  "problem": "This is too strong. Compilers from vendors of that time shipped **graphics libraries that Fortran can call**. An example is the graphics library of Microsoft FORTRAN 5.x. A call to a vendor or assembly library was normal practice. The Assembly path also depends on BIOS calls.",
   "tags": [
    "VERIFY"
   ],
@@ -695,8 +695,8 @@
     174
    ]
   ],
-  "claim": "\"Recommended Strategy\": Assembly is \"the essential foundation\"",
-  "problem": "This contradicts the document's own decision tree (sim → Fortran). The final section silently turns a conditional recommendation into an unconditional one.",
+  "claim": "The \"Recommended Strategy\" says that Assembly is \"the essential foundation\".",
+  "problem": "This contradicts the decision tree of the document (sim goes to Fortran). The final section changes a conditional recommendation into an unconditional one and does not say so.",
   "tags": [
    "DOC"
   ],
@@ -716,8 +716,8 @@
     65
    ]
   ],
-  "claim": "Assembly gives \"cycle-exact … fully predictable frame budgets\"",
-  "problem": "On real PCs, DRAM refresh, ISA wait states, the 8088 prefetch queue and 486 caches make exact cycle counting impractical. It is true on C64 and NES, not on the DOS target the roadmap uses.",
+  "claim": "The document says that Assembly gives \"cycle-exact … fully predictable frame budgets\".",
+  "problem": "On real PCs, DRAM refresh, ISA wait states, the 8088 prefetch queue and 486 caches make exact cycle counts not practical. The claim is true on the C64 and NES. It is not true on the DOS target that the roadmap uses.",
   "tags": [
    "KNOW"
   ],
@@ -737,8 +737,8 @@
     130
    ]
   ],
-  "claim": "DOSBox-X / 86Box \"highly accurate cycle-by-cycle emulation\"",
-  "problem": "86Box aims for cycle accuracy; **DOSBox-X does not** (it uses approximate \"cycles\"). This matters because performance tuning in DOSBox-X won't match real hardware.",
+  "claim": "The document says that DOSBox-X and 86Box give \"highly accurate cycle-by-cycle emulation\".",
+  "problem": "86Box tries to be cycle-accurate. **DOSBox-X does not** (it uses approximate \"cycles\"). This is important because performance tuning in DOSBox-X will not match real hardware.",
   "tags": [
    "KNOW"
   ],
@@ -758,8 +758,8 @@
     138
    ]
   ],
-  "claim": "\"Modern GFortran with retro constraints … SDL2 framebuffer\"",
-  "problem": "This defines away the premise: a modern OS with SDL2 is not 80s/90s hardware. If this path is allowed, the whole comparison changes (C or C++ plus SDL is the obvious rival).",
+  "claim": "The document gives a path with \"Modern GFortran with retro constraints … SDL2 framebuffer\".",
+  "problem": "This path removes the premise. A modern operating system with SDL2 is not 80s/90s hardware. If the document permits this path, the full comparison changes. Then C or C++ plus SDL is the clear rival.",
   "tags": [
    "DOC"
   ],
@@ -774,8 +774,8 @@
   "severity": "major",
   "location": "whole doc",
   "lines": [],
-  "claim": "Modern players",
-  "problem": "**Distribution is missing.** Modern players will run the game in DOSBox or in a browser build. Emulator input and frame latency and host-display refresh (60 Hz, not 70 Hz) undercut the \"zero-latency, locked 70 fps\" promises.",
+  "claim": "The document makes promises to modern players.",
+  "problem": "**The document does not discuss distribution.** Modern players will run the game in DOSBox or in a browser build. Emulator input latency, frame latency and host-display refresh (60 Hz, not 70 Hz) weaken the \"zero-latency, locked 70 fps\" promises.",
   "tags": [
    "KNOW"
   ],
@@ -796,7 +796,7 @@
    ]
   ],
   "claim": "",
-  "problem": "*Shovel Knight* / *Celeste* cited as 60 Hz references: these are modern-engine games, so they don't show anything about vintage techniques.",
+  "problem": "The document uses *Shovel Knight* and *Celeste* as 60 Hz references. These are modern-engine games, thus they do not show anything about vintage techniques.",
   "tags": [
    "DOC"
   ],
@@ -817,7 +817,7 @@
    ]
   ],
   "claim": "",
-  "problem": "`wfl386` is OpenWatcom's 32-bit driver; 16-bit real mode uses `wfl`.",
+  "problem": "`wfl386` is the 32-bit driver of OpenWatcom. For 16-bit real mode, use `wfl`.",
   "tags": [
    "KNOW"
   ],
@@ -838,7 +838,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"TASM / WASM (OpenWatcom Assembler)\": TASM is Borland's, not OpenWatcom's. The line is ambiguous.",
+  "problem": "The line says \"TASM / WASM (OpenWatcom Assembler)\". TASM comes from Borland, not OpenWatcom. The line is not clear.",
   "tags": [
    "KNOW"
   ],
@@ -859,7 +859,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"Modern Fortran compiled with retro toolchains\": the document names no DOS toolchain that supports modern Fortran. A DJGPP gfortran port may exist, but the document never mentions one.",
+  "problem": "The document says \"Modern Fortran compiled with retro toolchains\". But it names no DOS toolchain that supports modern Fortran. A DJGPP gfortran port can possibly exist, but the document does not mention one.",
   "tags": [
    "VERIFY"
   ],
@@ -884,7 +884,7 @@
    ]
   ],
   "claim": "",
-  "problem": "`![][image1]` stands for \"320×200\" as an image, which breaks when you copy the text or view it without images.",
+  "problem": "`![][image1]` shows \"320×200\" as an image. The text is lost when you copy it or show it without images.",
   "tags": [
    "DOC"
   ],
@@ -909,7 +909,7 @@
    ]
   ],
   "claim": "",
-  "problem": "**The quiz is tautological.** All four questions ask the same thing (\"Assembly-flavoured or Fortran-flavoured?\"). Option **A is always Assembly, B always Fortran**, so answer-position bias pushes toward Assembly. No question measures anything independent, such as prior languages, available time per week, owned hardware, or career stage. The output is an \"affinity score\" that just restates the user's choices.",
+  "problem": "**The quiz is tautological.** All four questions ask the same thing (\"Assembly-flavoured or Fortran-flavoured?\"). Option **A is always Assembly, B always Fortran**. As a result, answer-position bias pushes the user toward Assembly. No question measures an independent factor, such as prior languages, available time per week, owned hardware, or career stage. The output is an \"affinity score\" that only repeats the choices of the user.",
   "tags": [
    "DOC"
   ],
@@ -930,7 +930,7 @@
    ]
   ],
   "claim": "",
-  "problem": "`answeredCount` is computed but **never used**. After **one** click the result panel appears with *\"Recommended Choice: Assembly Language — 100%\"*, even though the placeholder says \"Select all options above\".",
+  "problem": "The code calculates `answeredCount` but **never uses it**. After **one** click, the result panel shows `\"Recommended Choice: Assembly Language — 100%\"`. But the placeholder says \"Select all options above\".",
   "tags": [
    "DOC"
   ],
@@ -951,7 +951,7 @@
    ]
   ],
   "claim": "",
-  "problem": "**The salary chart contradicts its source.** The Assembly maximum is plotted as **$180k**, while report 01 says senior defense positions exceed **$200k** (image5). The Fortran maximum ($245k) is kept. The chart therefore *visually* favours Fortran more than the source does. The minimums (112k, 105k) come from the broken, truncated ranges in report 01 (review 01, C1).",
+  "problem": "**The salary chart contradicts its source.** The chart shows the Assembly maximum as **$180k**. But report 01 says that senior defense positions go above **$200k** (image5). The chart keeps the Fortran maximum ($245k). Thus the chart *visually* favours Fortran more than the source does. The minimums (112k, 105k) come from the broken, truncated ranges in report 01 (review 01, C1).",
   "tags": [
    "DOC"
   ],
@@ -972,7 +972,7 @@
    ]
   ],
   "claim": "",
-  "problem": "The **\"Developer Experience & Toolchain Friction Score\"** radar chart uses invented numbers (Assembly 20/40/15/10/10/30 vs Fortran 85/80/75/90/85/80). There is no method and no source, yet the section is titled \"**Quantitative analysis**\".",
+  "problem": "The **\"Developer Experience & Toolchain Friction Score\"** radar chart uses invented numbers (Assembly 20/40/15/10/10/30 vs Fortran 85/80/75/90/85/80). The chart has no method and no source. But the section title is \"**Quantitative analysis**\".",
   "tags": [
    "DOC"
   ],
@@ -993,7 +993,7 @@
    ]
   ],
   "claim": "",
-  "problem": "Roadmap weeks 9–12 adds \"**Deploying parallel PDE solvers on HPC clusters**\", which is not in the source report. This goes further than the report's already optimistic milestone: cluster access, schedulers and MPI are not covered.",
+  "problem": "The roadmap for weeks 9 to 12 adds \"**Deploying parallel PDE solvers on HPC clusters**\". This item is not in the source report. It goes past the milestone of the report, which is already optimistic. The page does not cover cluster access, schedulers, or MPI.",
   "tags": [
    "DOC"
   ],
@@ -1014,7 +1014,7 @@
    ]
   ],
   "claim": "",
-  "problem": "Roadmap adds \"control-flow hijacking concepts\" (exploit development), which is not in the source. This is a scope change: exploitation is a separate discipline.",
+  "problem": "The roadmap adds \"control-flow hijacking concepts\" (exploit development), which is not in the source. This is a change of scope, because exploitation is a separate discipline.",
   "tags": [
    "DOC"
   ],
@@ -1035,7 +1035,7 @@
    ]
   ],
   "claim": "",
-  "problem": "The tie-break text brings in new criteria (\"Assembly if your main language is C/Rust, Fortran if in STEM\") that the quiz never asked about. They are the *right* questions, and they should be quiz questions.",
+  "problem": "The tie-break text adds new criteria (\"Assembly if your main language is C/Rust, Fortran if in STEM\"). The quiz never asks about these criteria. They are the *right* questions, and the quiz must include them.",
   "tags": [
    "DOC"
   ],
@@ -1051,7 +1051,7 @@
   "location": "whole page",
   "lines": [],
   "claim": "",
-  "problem": "**No citations or data provenance.** The footer says \"Based on the Comparative Strategic Analysis\", but a reader can't trace any number.",
+  "problem": "**No citations or data provenance.** The footer says \"Based on the Comparative Strategic Analysis\". But a reader cannot trace any number to a source.",
   "tags": [
    "DOC"
   ],
@@ -1072,7 +1072,7 @@
    ]
   ],
   "claim": "",
-  "problem": "`cdn.tailwindcss.com` is Tailwind's **development-only** Play CDN, which is not meant for production. It requires a network connection and won't work offline.",
+  "problem": "`cdn.tailwindcss.com` is the Tailwind **development-only** Play CDN, which is not for production. It needs a network connection and does not work offline.",
   "tags": [],
   "status": "open",
   "pass": 1,
@@ -1091,7 +1091,7 @@
    ]
   ],
   "claim": "",
-  "problem": "`cdn.jsdelivr.net/npm/chart.js` is **unpinned** (always the latest version), so a future major release could break the charts.",
+  "problem": "`cdn.jsdelivr.net/npm/chart.js` is **unpinned** (always the latest version). Thus a future major release can break the charts.",
   "tags": [],
   "status": "open",
   "pass": 1,
@@ -1110,7 +1110,7 @@
    ]
   ],
   "claim": "",
-  "problem": "`setAnswer` uses the implicit global `event`, which is deprecated. Pass the event explicitly.",
+  "problem": "`setAnswer` uses the implicit global `event`, which is deprecated. Give the event to the function explicitly.",
   "tags": [],
   "status": "open",
   "pass": 1,
@@ -1129,7 +1129,7 @@
    ]
   ],
   "claim": "",
-  "problem": "Grammar: \"Strict load/store model require adjusting\" should be \"requires\".",
+  "problem": "Grammar: \"Strict load/store model require adjusting\" must be \"requires\".",
   "tags": [],
   "status": "open",
   "pass": 1,
@@ -1148,7 +1148,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"Min/Max US base\" for a *language* makes no sense; salary belongs to the *role* (review 01, M9).",
+  "problem": "\"Min/Max US base\" for a *language* makes no sense. Salary belongs to the *role* (review 01, M9).",
   "tags": [],
   "status": "open",
   "pass": 1,
@@ -1167,7 +1167,7 @@
    ]
   ],
   "claim": "",
-  "problem": "It has the same defects as page 03: `answeredCount` is unused, so one click gives a 100% verdict, and option A is always Assembly. The Assembly result says \"**Assembly is mandatory** for your retro action/arcade title\" (L530), which is false: plenty of retro action games were written in C with small amounts of assembly.",
+  "problem": "The quiz has the same defects as page 03. The code does not use `answeredCount`, thus one click gives a 100% verdict. Option A is always Assembly. The Assembly result says \"**Assembly is mandatory** for your retro action/arcade title\" (L530). This is false. Developers wrote plenty of retro action games in C with small amounts of assembly.",
   "tags": [
    "DOC",
    "KNOW"
@@ -1189,7 +1189,7 @@
    ]
   ],
   "claim": "",
-  "problem": "The Fortran track is headed **\"OpenWatcom FORTRAN 77\"**, but week 1 teaches \"**FORTRAN 77 / Modern Fortran free-form syntax**\". FORTRAN 77 is **fixed-form**; free-form arrived in Fortran 90. Week 3's \"array non-aliasing execution\" and loop-unrolling optimisation don't matter on SIMD-less DOS targets.",
+  "problem": "The heading of the Fortran track is **\"OpenWatcom FORTRAN 77\"**. But week 1 teaches \"**FORTRAN 77 / Modern Fortran free-form syntax**\". FORTRAN 77 is **fixed-form**. Free-form syntax started in Fortran 90. Week 3 teaches \"array non-aliasing execution\" and loop-unrolling optimization. These do not matter on DOS targets without SIMD.",
   "tags": [
    "KNOW"
   ],
@@ -1214,7 +1214,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"Locked **60/70 FPS**\", \"guaranteeing locked 60 or 70 FPS without tearing\", \"smooth **60 FPS** DOS executable\". VGA Mode 13h refreshes at 70 Hz, so V-Sync locking gives 70 or 35 fps, and 60 fps on a 70 Hz display judders. Mode 13h has no page flipping, so \"guaranteed\" tear-free is wrong (review 02, C4).",
+  "problem": "The page says \"Locked **60/70 FPS**\", \"guaranteeing locked 60 or 70 FPS without tearing\", and \"smooth **60 FPS** DOS executable\". VGA Mode 13h refreshes at 70 Hz. Thus V-Sync locking gives 70 or 35 fps. On a 70 Hz display, 60 fps judders. Mode 13h has no page flipping. Thus the \"guaranteed\" tear-free claim is wrong (review 02, C4).",
   "tags": [
    "KNOW"
   ],
@@ -1235,7 +1235,7 @@
    ]
   ],
   "claim": "",
-  "problem": "Invented scores (Assembly: Orbital Flight Sim **40**, Procedural Universe **45**; Fortran: **95/95**). History says otherwise: *Elite* and *Frontier: Elite II*, the landmark procedural universe and orbital flight sims, were assembly. Fortran is given 20–30 for arcade and raycaster, yet the same page's tie-break suggests Fortran plus assembly rendering, which would score higher.",
+  "problem": "The page invents the scores. Assembly gets Orbital Flight Sim **40** and Procedural Universe **45**. Fortran gets **95/95**. History says otherwise. Developers wrote *Elite* and *Frontier: Elite II* in assembly. These games are the landmark procedural universe and orbital flight sims. Fortran gets 20 to 30 for arcade and raycaster. But the tie-break on the same page suggests Fortran plus assembly rendering. That combination would score higher.",
   "tags": [
    "KNOW",
    "VERIFY"
@@ -1257,7 +1257,7 @@
    ]
   ],
   "claim": "",
-  "problem": "Labelled \"**Estimated** frame budget\". These are invented percentages with no measurement. The chart also mixes up **genre workload with language**: an \"Assembly action loop\" and a \"Fortran simulation loop\" are different *games*, so the chart can't compare the languages.",
+  "problem": "The chart label is \"**Estimated** frame budget\". The page invents these percentages and gives no measurement. The chart also confuses **genre workload with language**. An \"Assembly action loop\" and a \"Fortran simulation loop\" are different *games*. Thus the chart cannot compare the languages.",
   "tags": [
    "DOC"
   ],
@@ -1278,7 +1278,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"4.77–33 MHz CPUs … direct VGA framebuffer (0xA000)\": VGA and Mode 13h on a 4.77 MHz 8088 was a rare combination, and the upper bound leaves out most of the 1990s.",
+  "problem": "The page says \"4.77–33 MHz CPUs … direct VGA framebuffer (0xA000)\". VGA and Mode 13h on a 4.77 MHz 8088 was a rare combination. The upper bound also excludes most of the 1990s.",
   "tags": [
    "KNOW"
   ],
@@ -1299,7 +1299,7 @@
    ]
   ],
   "claim": "",
-  "problem": "Table row \"**NASM / WASM** — Netwide Assembler…\": NASM and WASM (the Watcom assembler) are different tools, and the description covers only NASM.",
+  "problem": "The table row says \"**NASM / WASM** — Netwide Assembler…\". NASM and WASM (the Watcom assembler) are different tools. The description covers only NASM.",
   "tags": [
    "KNOW"
   ],
@@ -1320,7 +1320,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"DOSBox-X / 86Box — **Cycle-exact**\": true for neither in the strict sense, and DOSBox-X is clearly approximate.",
+  "problem": "The page says \"DOSBox-X / 86Box — **Cycle-exact**\". This is not true for either tool in the strict sense. DOSBox-X is clearly approximate.",
   "tags": [
    "KNOW"
   ],
@@ -1341,7 +1341,7 @@
    ]
   ],
   "claim": "",
-  "problem": "\"Fortran: OS/Library Dependent\" for V-Sync is presented as a weakness. But polling port 0x3DA needs only one I/O routine, which is trivial to link. The page overstates how hard hybrid development is, even though its own tie-break recommends a hybrid.",
+  "problem": "The page shows \"Fortran: OS/Library Dependent\" for V-Sync as a weakness. But polling port 0x3DA needs only one I/O routine. This routine is trivial to link. The page overstates how hard hybrid development is. But its own tie-break recommends a hybrid.",
   "tags": [
    "DOC"
   ],
@@ -1357,7 +1357,7 @@
   "location": "whole page",
   "lines": [],
   "claim": "",
-  "problem": "No citations, and no mention of **C**, the historically dominant choice (review 02, §5).",
+  "problem": "The page has no citations. It also does not mention **C**, the historically dominant choice (review 02, §5).",
   "tags": [
    "DOC"
   ],

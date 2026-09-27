@@ -19,20 +19,20 @@ If the objective is to demystify physical hardware execution, inspect compiler l
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-C3 | critical | DOC | open | L14, L21–24, L183–187 | _Claim:_ 90-day milestones — The comparison is not like-for-like. The Fortran milestone is *authoring* a parallel PDE solver "from scratch", "production-ready". The Assembly milestone is only *reading* disassembly. That framing builds the conclusion ("Fortran ships software") into the premise. Assembly learners routinely *author* working programs in 90 days (e.g. [1], "OS in 1,000 Lines", which the document itself cites). |
+| D01-C3 | critical | DOC | open | L14, L21–24, L183–187 | _Claim:_ 90-day milestones. _Problem:_ The comparison is not like-for-like. The Fortran milestone is *authoring* a parallel PDE (partial differential equation) solver "from scratch", "production-ready". The Assembly milestone is only *reading* disassembly. That framing builds the conclusion ("Fortran ships software") into the premise. Assembly learners often *author* working programs in 90 days, for example with [1], "OS in 1,000 Lines". The document itself cites [1]. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

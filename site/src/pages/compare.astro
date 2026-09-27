@@ -1,0 +1,84 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { SIDES, segments, parts, wordsOf, type Side } from '../lib/learn';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sides: Side[] = ['a', 'b'];
+const maxPart = Math.max(...parts.flatMap((p) => sides.map((s) => wordsOf(s).filter((w) => w.pos === p.id).length)));
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Compare the two sides',
+		description: 'The A side (Assembly) and the B side (Fortran) side by side: dictionary sizes, parts of speech, and strengths per segment.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page">
+		<p class="lead">
+			The A side has a small dictionary. Each word does a small job, so one idea needs many words. The B side has a large
+			dictionary. Its idioms do a full job, so one idea often fits in one line.
+		</p>
+
+		<h2>Size of each full language</h2>
+		<div class="size-cols">
+			{sides.map((s) => (
+				<div class={`size-col side-${s}`}>
+					<h3><span class="side-letter">{SIDES[s].letter}</span> {SIDES[s].name}</h3>
+					<p class="muted small">{SIDES[s].vocab.dialect}</p>
+					<ul class="size-list">
+						{SIDES[s].vocab.size.map((f) => (
+							<li>
+								<span class="n">{f.value}</span> {f.label}
+								<div class="muted small">
+									{f.detail} Source: {f.url ? <a href={f.url}>{f.source}</a> : f.source}.
+									{f.tag === 'estimate' && ' This number is an estimate, not a count.'}
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+
+		<h2>Our first words, by part of speech</h2>
+		<p class="muted small">The bars count the words in this site's dictionary, not the full languages.</p>
+		<div class="bars">
+			{parts.map((p) => (
+				<div class="bar-row">
+					<div class="bar-label">{p.name}</div>
+					{sides.map((s) => {
+						const n = wordsOf(s).filter((w) => w.pos === p.id).length;
+						return (
+							<div class={`bar side-${s}`} title={`${SIDES[s].name}: ${n} ${p.name.toLowerCase()} words`}>
+								<span style={`width:${(100 * n) / maxPart}%`}></span><b>{n}</b>
+							</div>
+						);
+					})}
+				</div>
+			))}
+			<div class="bar-legend small"><span class="pill side-a">A: {SIDES.a.name}</span> <span class="pill side-b">B: {SIDES.b.name}</span></div>
+		</div>
+
+		<h2>Strengths, segment by segment</h2>
+		<div class="table-wrap">
+			<table class="compare">
+				<thead><tr><th>Segment</th><th class="col-a">A side: {SIDES.a.name}</th><th class="col-b">B side: {SIDES.b.name}</th></tr></thead>
+				<tbody>
+					{segments.map((sg) => (
+						<tr>
+							<td><strong>{sg.title}</strong><div class="muted small">{sg.question}</div></td>
+							{sides.map((s) => (
+								<td class={`col-${s}`}>
+									<ul>{sg[s].strengths.map((x: string) => <li>{x}</li>)}</ul>
+									<a href={`${base}/${s}/${sg.id}/`}>{wordsOf(s, sg.id).length} words →</a>
+								</td>
+							))}
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</StarlightPage>

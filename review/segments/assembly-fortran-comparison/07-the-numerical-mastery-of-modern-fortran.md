@@ -20,24 +20,24 @@ Through coarray syntax, Fortran introduces SPMD distributed-memory programming d
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-M2 | major | KNOW | open | L56 | _Claim:_ Aliasing "inhibits **out-of-order execution**" in C — Wrong layer. Out-of-order execution is done by the CPU hardware, which disambiguates memory at runtime. Aliasing inhibits *compiler* reordering and vectorization. |
-| D01-M3 | major | KNOW | open | L56 | _Claim:_ C needs "non-standard keywords" to declare non-aliasing — `restrict` has been standard in **C99**. Only C++ lacks a standard equivalent (`__restrict__` is an extension). |
-| D01-M4 | major | KNOW | open | L57 | _Claim:_ Dummy arguments are non-aliasing, "absolute certainty" — Overstated. The standard puts the rule on the **programmer**; compilers don't check it. `POINTER`/`TARGET` arguments may alias. Violations cause silent wrong results, which is itself a pedagogical hazard. |
-| D01-M5 | major | KNOW VERIFY | verify | L24, L59, L13 | _Claim:_ Coarrays give SPMD "without relying on third-party message-passing" — In practice, GFortran coarrays need **OpenCoarrays, built on MPI**, and Intel's implementation uses Intel MPI. Production HPC is dominated by MPI+OpenMP, so coarrays are niche. Putting "distributed memory scaling via coarrays" in weeks 9–12 is aspirational. |
-| D01-m2 | minor | KNOW | open | L58 | "Column-major storage **ensures** contiguous sweeps": only if the loop order matches (innermost loop on the first index). Beginners commonly get this wrong. |
+| D01-M2 | major | KNOW | open | L56 | _Claim:_ Aliasing "inhibits **out-of-order execution**" in C. _Problem:_ This names the wrong layer. The CPU hardware does out-of-order execution, and the hardware disambiguates memory at runtime. Aliasing (two names for the same memory) limits *compiler* reordering and vectorization. |
+| D01-M3 | major | KNOW | open | L56 | _Claim:_ C needs "non-standard keywords" to declare non-aliasing. _Problem:_ **C99** made `restrict` a standard keyword. Only C++ has no standard equivalent (`__restrict__` is an extension). |
+| D01-M4 | major | KNOW | open | L57 | _Claim:_ Dummy arguments are non-aliasing, "absolute certainty". _Problem:_ The claim is too strong. The standard gives the rule to the **programmer**, and compilers do not check it. `POINTER`/`TARGET` arguments can alias. A violation gives silent wrong results, and that is itself a pedagogical hazard. |
+| D01-M5 | major | KNOW VERIFY | verify | L24, L59, L13 | _Claim:_ Coarrays give SPMD "without relying on third-party message-passing". _Problem:_ In practice this is false. GFortran coarrays need **OpenCoarrays, built on MPI** (a third-party message-passing library). The Intel implementation uses Intel MPI. MPI+OpenMP dominates production HPC (high-performance computing), so coarrays are niche. The plan puts "distributed memory scaling via coarrays" in weeks 9 to 12, and that goal is aspirational. |
+| D01-m2 | minor | KNOW | open | L58 | "Column-major storage **ensures** contiguous sweeps". This is true only if the loop order matches (the innermost loop runs on the first index). Beginners often get this wrong. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

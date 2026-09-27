@@ -22,20 +22,20 @@ Assembly addresses this through microarchitectural techniques:
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-m5 | minor | DOC | open | L11, L70 | `![][image1]` stands for "320×200" as an image, which breaks when you copy the text or view it without images. |
+| D02-m5 | minor | DOC | open | L11, L70 | `![][image1]` shows "320×200" as an image. The text is lost when you copy it or show it without images. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

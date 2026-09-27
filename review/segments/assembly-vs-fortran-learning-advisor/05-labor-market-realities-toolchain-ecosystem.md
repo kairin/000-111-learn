@@ -208,22 +208,22 @@ The recommendation logic / numbers below are claims too; review them.
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D03-C3 | critical | DOC | open | L684–696 vs report L144 | **The salary chart contradicts its source.** The Assembly maximum is plotted as **$180k**, while report 01 says senior defense positions exceed **$200k** (image5). The Fortran maximum ($245k) is kept. The chart therefore *visually* favours Fortran more than the source does. The minimums (112k, 105k) come from the broken, truncated ranges in report 01 (review 01, C1). |
-| D03-C4 | critical | DOC | open | L730–756 | The **"Developer Experience & Toolchain Friction Score"** radar chart uses invented numbers (Assembly 20/40/15/10/10/30 vs Fortran 85/80/75/90/85/80). There is no method and no source, yet the section is titled "**Quantitative analysis**". |
-| D03-m5 | minor | — | open | salary chart | "Min/Max US base" for a *language* makes no sense; salary belongs to the *role* (review 01, M9). |
+| D03-C3 | critical | DOC | open | L684–696 vs report L144 | **The salary chart contradicts its source.** The chart shows the Assembly maximum as **$180k**. But report 01 says that senior defense positions go above **$200k** (image5). The chart keeps the Fortran maximum ($245k). Thus the chart *visually* favours Fortran more than the source does. The minimums (112k, 105k) come from the broken, truncated ranges in report 01 (review 01, C1). |
+| D03-C4 | critical | DOC | open | L730–756 | The **"Developer Experience & Toolchain Friction Score"** radar chart uses invented numbers (Assembly 20/40/15/10/10/30 vs Fortran 85/80/75/90/85/80). The chart has no method and no source. But the section title is "**Quantitative analysis**". |
+| D03-m5 | minor | none | open | salary chart | "Min/Max US base" for a *language* makes no sense. Salary belongs to the *role* (review 01, M9). |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

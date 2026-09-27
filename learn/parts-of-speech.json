@@ -1,0 +1,23 @@
+[
+ { "id": "verb", "name": "Verb", "idea": "An action word.",
+   "a": "An instruction: one step that the processor does, for example MOV or ADD.",
+   "b": "A statement that does something, for example PRINT, CALL or ALLOCATE." },
+ { "id": "noun", "name": "Noun", "idea": "A thing with a name.",
+   "a": "A register, a flag, a port or a place in memory, for example AX.",
+   "b": "A kind of value (a type), for example INTEGER or REAL." },
+ { "id": "adjective", "name": "Adjective", "idea": "A word that describes a noun.",
+   "a": "A size word, for example BYTE (8 bits) or WORD (16 bits).",
+   "b": "An attribute, for example ALLOCATABLE or PARAMETER." },
+ { "id": "adverb", "name": "Adverb", "idea": "A word that changes how a verb acts.",
+   "a": "A prefix, for example REP: do the next verb again, CX times.",
+   "b": "A word that changes a loop, for example CONCURRENT in DO CONCURRENT." },
+ { "id": "idiom", "name": "Idiom", "idea": "A ready-made phrase with a fixed meaning.",
+   "a": "A BIOS or DOS service call, for example INT 21h with AH=09h: show a line of text.",
+   "b": "A built-in function or subroutine, for example SQRT or MATMUL." },
+ { "id": "grammar", "name": "Grammar mark", "idea": "Punctuation and signs that join words into a sentence.",
+   "a": "Commas between operands, [square brackets] for memory, a colon after a label.",
+   "b": "Maths signs (+ - * / **), the = sign, and (:) for part of an array." },
+ { "id": "note", "name": "Note to the translator", "idea": "A word for the translator only. The processor never sees it.",
+   "a": "An assembler directive, for example ORG, DB or %macro.",
+   "b": "A structure word, for example PROGRAM, MODULE or CONTAINS." }
+]

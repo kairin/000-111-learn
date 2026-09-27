@@ -1,39 +1,39 @@
 # Decision log
 
-**Status values:** **Decided** · **Adopted as recommended** (open to change) · **Superseded** (replaced by a later decision) · **Open** (waiting on the user). Dates are 2026-09-27 unless stated.
+**Status values:** Decided · Adopted (the recommendation, open to change) · Replaced (a later decision took its place) · Open (waits for the owner). All dates are 2026-09-27.
 
-## Open decisions: what is left
+## Open decisions
 
 | ID | Decision | Options | Recommendation | Why it matters |
 |---|---|---|---|---|
-| **O7** | **How the two languages share the game** | A: authentic DOS, FORTRAN 77 and x86 in one program · B: all-browser, modern Fortran to Wasm plus WebAssembly text · **C: split roles**: the game in x86 assembly (js-dos), with modern Fortran as the engineering lab (table generation, a reference model for checking the assembly, a Wasm physics lab page) | **C** | Decides the toolchain spike (Phase 4) and what you actually learn in each language. Details in [PLAN.md](PLAN.md). |
-| **O8** | Game concept and constraint spec | Orbital lander/docking · falling-sand sandbox · tiny *Elite*-style trader; plus target CPU, video mode, memory and size limits | Orbital lander; a 386 with VGA Mode 13h, then Mode X; an honest 70 or 35 Hz | Sets the scope of the 12-week track |
+| **O7** | How the two languages share the game | A: all in DOS (FORTRAN 77 and 8086). B: all in the browser (Fortran as Wasm, WebAssembly text). C: split roles. | **C.** The game is 8086 Assembly in js-dos. Modern Fortran is the laboratory: tables, checks, a physics page. | It sets the first toolchain test and the real words that you learn on each side. |
+| **O8** | The game concept and its limits | A lander game, a falling-sand game, or a small space trader. Also the processor, the graphics mode and the size limits. | A lander game. An 8086 or 386 PC with VGA Mode 13h, then Mode X. 70 or 35 frames each second. | It sets the size of the 12-week course. |
 
 ## Decided
 
 | ID | Decision | Status | Notes |
 |---|---|---|---|
-| D1 | Split documents at every heading (Markdown) and per `<section>` (HTML), and attach the JavaScript each section uses | Decided | 56 segments |
-| D2 | Adversarial review with evidence tags [DOC] / [KNOW] / [VERIFY] and severities Critical / Major / Minor | Decided | Pass 1 fetched no sources, so its findings are provisional |
-| D3 | Findings are data: `review/findings/pass*.json` is the source of truth, and `status.json` holds status overrides | Decided | Mapped onto segments by line range |
-| D4 | Source documents live in `review/segments/` | Decided (by user) | |
-| D5 | Build output goes to `serve/` | Decided (by user) | Now uncommitted build output (was O6) |
-| D6 | Custom Python site builder (`site/build.py`) | **Superseded by D12** | Replaced by Astro + Starlight |
-| D7 | Public GitHub repo `kairin/000-111-learn`, created with `gh` | Decided, done | No extra `gh` permissions were needed |
-| D8 | Deploy with a GitHub Actions workflow (first version) | **Superseded by D9** | |
-| D9 | Build locally in git hooks; publish `serve/` to the `gh-pages` branch | **Superseded by D10** | Hooks and `gh-pages` removed |
-| D10 | The repository is public, so **GitHub Actions** builds and deploys the site | **Decided, done** | Pages source: GitHub Actions |
-| D11 | **Learning goal: learn both Assembly and Fortran**, for usefulness and fun, through a small constrained game **playable on the GitHub Pages site** (was O1) | **Decided (by user)** | Report 01's career framing and report 02's retro framing both become input, not the goal |
-| D12 | **Site tool: Astro + Starlight** (was O2) | **Decided (by user), done** | `site/`; content synced from `review/` |
-| D13 | **Order: move the site to GitHub Actions first**, then add demos into it (was O3) | **Decided (by user), done** | |
-| D14 | Status tracking: an "Edit on GitHub" link to `review/findings/status.json`, plus browser drafts with "Copy status.json" (was O4) | **Adopted as recommended** | Say so if you'd prefer GitHub Issues instead |
-| D15 | Run Assembly and Fortran in the browser with WebAssembly and emulators (js-dos, Wasm), compiled in GitHub Actions | Decided (as plan) | The routes and limits are in [PLAN.md](PLAN.md) |
-| — | Demo toolchains (was O5) | Folded into **O7** | The toolchain follows from the chosen architecture |
+| D1 | Split each AI-written document into parts, at each heading or HTML section | Decided | 56 document parts |
+| D2 | Review each part with evidence tags (DOC, KNOW, VERIFY) and three levels (Critical, Major, Minor) | Decided | The first pass read no sources. Its results are temporary. |
+| D3 | Keep the findings as data: `review/findings/pass*.json`, with changes in `status.json` | Decided | 61 findings |
+| D4 | Keep the four source documents in `review/segments/` | Decided by the owner | |
+| D5 | The site build goes to `serve/` | Decided by the owner | GitHub Actions makes it. It is not in the repository. |
+| D6 | A custom Python site builder | Replaced by D12 | |
+| D7 | A public GitHub repository, made with `gh` | Done | No new `gh` permission was necessary. |
+| D8 | Publish with GitHub Actions (first form) | Replaced by D9 | |
+| D9 | Build on this computer with git hooks, publish from a `gh-pages` branch | Replaced by D10 | The hooks and the branch are gone. |
+| D10 | GitHub Actions builds and publishes the site | Done | Free for a public repository |
+| D11 | The goal: learn **both** languages for fun and usefulness, with a small retro game that runs in the browser | Decided by the owner | |
+| D12 | The site tool: Astro with Starlight | Decided by the owner, done | |
+| D13 | Put the site on GitHub Actions first, then add the programs | Decided by the owner, done | |
+| D14 | Record finding status with an "Edit on GitHub" link to `status.json` | Adopted | Tell us if you want GitHub Issues instead. |
+| D15 | Run code from the two sides in the browser with WebAssembly and a PC copy (js-dos) | Decided as a plan | See [PLAN.md](PLAN.md), phase 4. |
+| **D16** | **The lens:** treat Assembly and Fortran as real languages, with parts of speech. The site has an A side (Assembly) and a B side (Fortran). Seven segments are common to the two sides. | Decided by the owner, done | Assembly is the first language of the machine. Fortran speaks maths. Each segment page shows strengths and words. |
+| **D17** | **The writing standard:** write all documents in ASD-STE100 Simplified Technical English, for a reader who is not a developer | Decided by the owner, done | The source is `/home/kkk/Apps/ASD-STE100`. A global skill, a global rule and a global hook apply it in every Claude Code session. |
+| **D18** | **The review is background research.** The four AI-written guides only helped start the idea. The review shows areas that are easy to miss. | Decided by the owner, done | The review pages are in the "Background research" part of the menu. Relevant findings show as "Watch out" notes on the segment pages. |
 
-## Why decisions were reversed
+## Why some decisions changed
 
-- **D6 → D12:** the custom builder worked, but Astro + Starlight provides navigation, search and themes out of the box, plus a clean way to add interactive components and game pages. That leaves less custom code to maintain.
-- **D8 → D9 → D10:**
-  - You first asked not to rely on remote Actions, so D9 built the site locally.
-  - You then pointed out the repository is public, and GitHub's own Actions runners are currently free for public repositories.
-  - Building on GitHub removes the local hooks, the `gh-pages` branch and the committed build output. It also allows in-browser status edits and compiling the game in CI.
+- **D6 to D12:** the custom builder worked. Astro with Starlight gives menus, search and themes without custom code.
+- **D8 to D9 to D10:** first, the owner asked for no build on GitHub, so D9 built the site on this computer. Then the owner saw that GitHub Actions is free for a public repository. D10 removed the hooks and the extra branch.
+- **D16 and D18:** the owner said that the AI-written guides and the review are not the main objective. The learning of the two languages is the main objective. The site changed to match.

@@ -181,21 +181,21 @@ The recommendation logic / numbers below are claims too; review them.
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D04-C4 | critical | KNOW VERIFY | verify | Genre radar L630–656 | Invented scores (Assembly: Orbital Flight Sim **40**, Procedural Universe **45**; Fortran: **95/95**). History says otherwise: *Elite* and *Frontier: Elite II*, the landmark procedural universe and orbital flight sims, were assembly. Fortran is given 20–30 for arcade and raycaster, yet the same page's tie-break suggests Fortran plus assembly rendering, which would score higher. |
-| D04-C5 | critical | DOC | open | CPU cycle chart L676–715 | Labelled "**Estimated** frame budget". These are invented percentages with no measurement. The chart also mixes up **genre workload with language**: an "Assembly action loop" and a "Fortran simulation loop" are different *games*, so the chart can't compare the languages. |
+| D04-C4 | critical | KNOW VERIFY | verify | Genre radar L630–656 | The page invents the scores. Assembly gets Orbital Flight Sim **40** and Procedural Universe **45**. Fortran gets **95/95**. History says otherwise. Developers wrote *Elite* and *Frontier: Elite II* in assembly. These games are the landmark procedural universe and orbital flight sims. Fortran gets 20 to 30 for arcade and raycaster. But the tie-break on the same page suggests Fortran plus assembly rendering. That combination would score higher. |
+| D04-C5 | critical | DOC | open | CPU cycle chart L676–715 | The chart label is "**Estimated** frame budget". The page invents these percentages and gives no measurement. The chart also confuses **genre workload with language**. An "Assembly action loop" and a "Fortran simulation loop" are different *games*. Thus the chart cannot compare the languages. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

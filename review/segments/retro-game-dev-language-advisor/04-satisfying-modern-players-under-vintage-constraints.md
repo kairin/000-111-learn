@@ -98,21 +98,21 @@ Assembly: Tedious Integer Math
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D04-C3 | critical | KNOW | open | L353, L577, summary card | "Locked **60/70 FPS**", "guaranteeing locked 60 or 70 FPS without tearing", "smooth **60 FPS** DOS executable". VGA Mode 13h refreshes at 70 Hz, so V-Sync locking gives 70 or 35 fps, and 60 fps on a 70 Hz display judders. Mode 13h has no page flipping, so "guaranteed" tear-free is wrong (review 02, C4). |
-| D04-M4 | major | DOC | open | UX cards | "Fortran: OS/Library Dependent" for V-Sync is presented as a weakness. But polling port 0x3DA needs only one I/O routine, which is trivial to link. The page overstates how hard hybrid development is, even though its own tie-break recommends a hybrid. |
+| D04-C3 | critical | KNOW | open | L353, L577, summary card | The page says "Locked **60/70 FPS**", "guaranteeing locked 60 or 70 FPS without tearing", and "smooth **60 FPS** DOS executable". VGA Mode 13h refreshes at 70 Hz. Thus V-Sync locking gives 70 or 35 fps. On a 70 Hz display, 60 fps judders. Mode 13h has no page flipping. Thus the "guaranteed" tear-free claim is wrong (review 02, C4). |
+| D04-M4 | major | DOC | open | UX cards | The page shows "Fortran: OS/Library Dependent" for V-Sync as a weakness. But polling port 0x3DA needs only one I/O routine. This routine is trivial to link. The page overstates how hard hybrid development is. But its own tie-break recommends a hybrid. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

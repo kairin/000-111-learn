@@ -20,22 +20,22 @@ You want to build an **action-oriented, real-time game** (e.g., a fast 2D platfo
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-C4 | critical | KNOW DOC | open | L33, L42, L112, L166 | _Claim:_ "Locked 60/70 FPS", V-Sync "completely eliminating tearing" in Mode 13h — (a) Mode 13h runs at **70 Hz**, so a vsync-locked game gets 70 or 35 fps, not a locked 60. (b) Mode 13h has **one page**, so there is no page flipping. Copying 64,000 bytes during the ~1–1.5 ms vertical blank is not possible over ISA, so tearing is *reduced*, not eliminated. Tear-free flipping needs Mode X (which L11 mentions but the roadmap never uses). (c) The document's own figure (L70), 3.84 MB/s, exceeds what many 8/16-bit ISA VGA cards could sustain. |
-| D02-M5 | major | VERIFY | verify | L54, L62, L106, L165 | _Claim:_ Fortran has "zero native support" for display and input; a "pure Fortran game must be ASCII" — Overstated. Period vendor compilers shipped **graphics libraries callable from Fortran** (Microsoft FORTRAN 5.x's graphics library, for example). Calling a vendor or assembly library is normal practice, and the Assembly path relies on BIOS calls too. |
-| D02-M6 | major | DOC | open | L176–178 vs L144–174 | _Claim:_ "Recommended Strategy": Assembly is "the essential foundation" — This contradicts the document's own decision tree (sim → Fortran). The final section silently turns a conditional recommendation into an unconditional one. |
+| D02-C4 | critical | KNOW DOC | open | L33, L42, L112, L166 | _Claim:_ The document promises "Locked 60/70 FPS" and V-Sync "completely eliminating tearing" in Mode 13h.. _Problem:_ (a) Mode 13h runs at **70 Hz**. Thus a game locked to vsync gets 70 or 35 fps, not a locked 60. (b) Mode 13h has **one page**, thus page flipping is not possible. A copy of 64,000 bytes in the ~1 to 1.5 ms vertical blank is not possible over ISA. As a result, tearing becomes *less*, but it does not stop. Flipping without tears needs Mode X (L11 mentions it, but the roadmap does not use it). (c) The figure in the document (L70), 3.84 MB/s, is more than many 8/16-bit ISA VGA cards can supply. |
+| D02-M5 | major | VERIFY | verify | L54, L62, L106, L165 | _Claim:_ The document says that Fortran has "zero native support" for display and input, and that a "pure Fortran game must be ASCII".. _Problem:_ This is too strong. Compilers from vendors of that time shipped **graphics libraries that Fortran can call**. An example is the graphics library of Microsoft FORTRAN 5.x. A call to a vendor or assembly library was normal practice. The Assembly path also depends on BIOS calls. |
+| D02-M6 | major | DOC | open | L176–178 vs L144–174 | _Claim:_ The "Recommended Strategy" says that Assembly is "the essential foundation".. _Problem:_ This contradicts the decision tree of the document (sim goes to Fortran). The final section changes a conditional recommendation into an unconditional one and does not say so. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

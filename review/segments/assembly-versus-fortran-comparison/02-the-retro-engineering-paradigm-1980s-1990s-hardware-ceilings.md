@@ -28,23 +28,23 @@ Creating software within the technological envelope of the 1980s and 1990s requi
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-C2 | critical | DOC | open | L10 vs L63 | _Claim:_ FPUs "were rare"… yet Fortran offers "native floating-point" — Internal contradiction. Without an FPU, Fortran `REAL` arithmetic runs on **software emulation**, the very latency the document praises Assembly for avoiding (L41). A float-heavy Fortran simulation on a 1980s machine would be *slow*. |
-| D02-M2 | major | KNOW | open | L9 | _Claim:_ "64 KB (Commodore 64, NES)" — The NES has **2 KB** of work RAM (plus cartridge ROM/RAM). Only the C64 figure is right. |
-| D02-M3 | major | KNOW | open | L10, L37 | _Claim:_ Era clock range "1–33 MHz", and 30–60 fps from a "4.77 MHz" CPU — The document claims "1990s" but stops at 33 MHz (486DX2-66 in 1992; Pentiums by the mid-1990s). VGA Mode 13h games at 60 fps on a 4.77 MHz 8088 is not credible. The scope is inconsistent. |
-| D02-m5 | minor | DOC | open | L11, L70 | `![][image1]` stands for "320×200" as an image, which breaks when you copy the text or view it without images. |
+| D02-C2 | critical | DOC | open | L10 vs L63 | _Claim:_ The document says that FPUs "were rare". But it also says that Fortran gives "native floating-point".. _Problem:_ The document contradicts itself. Without an FPU, Fortran `REAL` arithmetic runs on **software emulation**. The document praises Assembly because it prevents this latency (L41). A Fortran simulation with much float math on a 1980s computer is *slow*. |
+| D02-M2 | major | KNOW | open | L9 | _Claim:_ The document gives "64 KB (Commodore 64, NES)".. _Problem:_ The NES has **2 KB** of work RAM (plus cartridge ROM/RAM). Only the C64 figure is correct. |
+| D02-M3 | major | KNOW | open | L10, L37 | _Claim:_ The clock range of the era is "1–33 MHz", and a "4.77 MHz" CPU gives 30 to 60 fps.. _Problem:_ The document claims the "1990s", but it stops at 33 MHz. The 486DX2-66 came in 1992, and Pentiums came by the mid-1990s. VGA Mode 13h games at 60 fps on a 4.77 MHz 8088 are not credible. The scope is not consistent. |
+| D02-m5 | minor | DOC | open | L11, L70 | `![][image1]` shows "320×200" as an image. The text is lost when you copy it or show it without images. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

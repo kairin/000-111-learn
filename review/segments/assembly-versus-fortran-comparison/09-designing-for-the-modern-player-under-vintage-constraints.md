@@ -23,16 +23,16 @@ Modern players evaluating a retro game expect authentic 80s/90s aesthetics, but 
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-_No findings in pass 1. That means **not yet challenged**, not verified correct._
+_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

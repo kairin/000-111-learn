@@ -1,0 +1,11 @@
+---
+import SideSegment from '../../components/SideSegment.astro';
+import { segments } from '../../lib/learn';
+
+export function getStaticPaths() {
+	return segments.map((s) => ({ params: { segment: s.id } }));
+}
+const { segment } = Astro.params;
+---
+
+<SideSegment side="b" segmentId={segment} />

@@ -212,23 +212,23 @@ The recommendation logic / numbers below are claims too; review them.
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D03-C1 | critical | DOC | open | Quiz, L176–268; logic L551–593 | **The quiz is tautological.** All four questions ask the same thing ("Assembly-flavoured or Fortran-flavoured?"). Option **A is always Assembly, B always Fortran**, so answer-position bias pushes toward Assembly. No question measures anything independent, such as prior languages, available time per week, owned hardware, or career stage. The output is an "affinity score" that just restates the user's choices. |
-| D03-C2 | critical | DOC | open | L553 | `answeredCount` is computed but **never used**. After **one** click the result panel appears with *"Recommended Choice: Assembly Language — 100%"*, even though the placeholder says "Select all options above". |
-| D03-M3 | major | DOC | open | L590 | The tie-break text brings in new criteria ("Assembly if your main language is C/Rust, Fortran if in STEM") that the quiz never asked about. They are the *right* questions, and they should be quiz questions. |
-| D03-m3 | minor | — | open | L540–547 | `setAnswer` uses the implicit global `event`, which is deprecated. Pass the event explicitly. |
+| D03-C1 | critical | DOC | open | Quiz, L176–268; logic L551–593 | **The quiz is tautological.** All four questions ask the same thing ("Assembly-flavoured or Fortran-flavoured?"). Option **A is always Assembly, B always Fortran**. As a result, answer-position bias pushes the user toward Assembly. No question measures an independent factor, such as prior languages, available time per week, owned hardware, or career stage. The output is an "affinity score" that only repeats the choices of the user. |
+| D03-C2 | critical | DOC | open | L553 | The code calculates `answeredCount` but **never uses it**. After **one** click, the result panel shows `"Recommended Choice: Assembly Language — 100%"`. But the placeholder says "Select all options above". |
+| D03-M3 | major | DOC | open | L590 | The tie-break text adds new criteria ("Assembly if your main language is C/Rust, Fortran if in STEM"). The quiz never asks about these criteria. They are the *right* questions, and the quiz must include them. |
+| D03-m3 | minor | none | open | L540–547 | `setAnswer` uses the implicit global `event`, which is deprecated. Give the event to the function explicitly. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

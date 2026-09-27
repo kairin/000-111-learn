@@ -19,20 +19,20 @@ This architectural literacy alters how software is authored in any compiled lang
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-m1 | minor | KNOW | open | L50 | "replacement of integer division with **modular multiplication** invariants": the usual term is multiplication by a fixed-point reciprocal (the "magic number"). |
+| D01-m1 | minor | KNOW | open | L50 | "replacement of integer division with **modular multiplication** invariants". The usual term is multiplication by a fixed-point reciprocal (the "magic number"). |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

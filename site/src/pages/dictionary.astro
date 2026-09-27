@@ -1,0 +1,97 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { SIDES, segments, parts, wordsOf } from '../lib/learn';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rows = (['a', 'b'] as const).flatMap((side) =>
+	wordsOf(side).map((w) => ({ ...w, side, segmentTitle: segments.find((s) => s.id === w.segment)?.title ?? w.segment })),
+);
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Dictionary',
+		description: 'Every word of the A side (Assembly) and the B side (Fortran), by part of speech and segment.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page">
+		<p class="lead">
+			Look up a word. Filter by side, by part of speech or by segment. This dictionary holds {wordsOf('a').length} A-side
+			words and {wordsOf('b').length} B-side words: the words we learn first, not the full languages.
+		</p>
+
+		<div class="filters" id="dict-filters">
+			<label>Side
+				<select data-f="side">
+					<option value="">Both</option>
+					<option value="a">A side: {SIDES.a.name}</option>
+					<option value="b">B side: {SIDES.b.name}</option>
+				</select>
+			</label>
+			<label>Part of speech
+				<select data-f="pos"><option value="">All</option>{parts.map((p) => <option value={p.id}>{p.name}</option>)}</select>
+			</label>
+			<label>Segment
+				<select data-f="segment"><option value="">All</option>{segments.map((s) => <option value={s.id}>{s.title}</option>)}</select>
+			</label>
+			<label class="grow">Search <input type="search" data-f="q" placeholder="A word or a meaning, for example: multiply" /></label>
+		</div>
+		<p class="muted small" id="dict-count"></p>
+
+		<div class="table-wrap">
+			<table class="vocab" id="dict">
+				<thead><tr><th>Side</th><th>Word</th><th>Part of speech</th><th>Segment</th><th>Meaning</th><th>Example</th></tr></thead>
+				<tbody>
+					{rows.map((w) => (
+						<tr data-side={w.side} data-pos={w.pos} data-segment={w.segment} data-text={`${w.word} ${w.meaning} ${w.example}`.toLowerCase()}>
+							<td><span class={`pill side-${w.side}`}>{SIDES[w.side].letter}</span></td>
+							<td class="mono">{w.word}</td>
+							<td>{parts.find((p) => p.id === w.pos)?.name}</td>
+							<td><a href={`${base}/${w.side}/${w.segment}/`}>{w.segmentTitle}</a></td>
+							<td>{w.meaning}</td>
+							<td>{w.example && <code>{w.example}</code>}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</StarlightPage>
+
+<script>
+	const filters: Record<string, string> = { side: '', pos: '', segment: '', q: '' };
+	const rows = [...document.querySelectorAll<HTMLTableRowElement>('#dict tbody tr')];
+	const count = document.getElementById('dict-count')!;
+
+	function apply() {
+		const q = filters.q.toLowerCase().trim();
+		let n = 0;
+		for (const r of rows) {
+			const d = r.dataset;
+			const show =
+				(!filters.side || d.side === filters.side) &&
+				(!filters.pos || d.pos === filters.pos) &&
+				(!filters.segment || d.segment === filters.segment) &&
+				(!q || q.split(/\s+/).every((t) => d.text!.includes(t)));
+			r.hidden = !show;
+			if (show) n++;
+		}
+		count.textContent = `${n} of ${rows.length} words`;
+		const h = Object.entries(filters).filter(([, v]) => v).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+		history.replaceState(null, '', h ? `#${h}` : location.pathname);
+	}
+	for (const kv of location.hash.slice(1).split('&')) {
+		const [k, v] = kv.split('=');
+		if (k in filters) filters[k] = decodeURIComponent(v || '');
+	}
+	document.querySelectorAll<HTMLInputElement>('#dict-filters [data-f]').forEach((el) => {
+		el.value = filters[el.dataset.f!];
+		el.addEventListener('input', () => {
+			filters[el.dataset.f!] = el.value;
+			apply();
+		});
+	});
+	apply();
+</script>

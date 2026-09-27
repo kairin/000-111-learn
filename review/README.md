@@ -1,213 +1,239 @@
 # Review workspace: Assembly vs. Fortran documents
 
-This folder holds four AI-generated (Google Gemini) documents that compare learning **Assembly** and **Fortran** within a 90-day window (the rest of 2026). It also holds the material for reviewing them adversarially: checking whether each document achieves its goals and whether its claims hold up.
+## What this folder is
+
+This folder is **background research**. The learning content is not here.
+
+Four guides that an AI (Google Gemini) wrote helped to start the idea. The four guides compare two programming languages, **Assembly** and **Fortran**. Each guide asks which language to learn in 90 days (the rest of 2026). The review in this folder examines each guide. It asks two questions: does the guide do what it says, and are its claims true? The review also shows areas that the owner did not think about.
+
+The learning content is in [`../learn/`](../learn/). It has two sides: the **A side** (Assembly) and the **B side** (Fortran). This learning content is the center of the website.
 
 ## Documents under review
 
-The four documents live in `segments/`.
+The four documents are in `segments/`.
 
-| # | File | Format | Question it answers | Derived from |
+| # | File | Format | Question it answers | Made from |
 |---|---|---|---|---|
 | 01 | `Assembly-Fortran-Comparison.md` | Report | Which language to learn in 90 days for **career and skills**? | none |
 | 02 | `Assembly-Versus-Fortran-Comparison.md` | Report | Which language to learn in 90 days to **build an 80s/90s-constrained game**? | none |
 | 03 | `assembly_vs_fortran_learning_advisor.html` | Interactive page | Same as 01, as a quiz, roadmap and charts | 01 |
 | 04 | `retro_game_dev_language_advisor.html` | Interactive page | Same as 02, as a quiz, roadmap and charts | 02 |
 
-**Do not edit the source documents.** Every review finding points to line numbers in these files.
+**Do not edit the source documents.** Each review finding points to line numbers in these files. A **finding** is one problem that the review found in a document.
+
+## Words used in this README
+
+- A **document part** is one small unit of a source document. Each part makes one claim or has one goal. The website also uses the name "document parts".
+- The folder `segments/` and the script `split_documents.py` use the older word "segment". This README keeps those names because the scripts use them.
+- On the website, the word **segment** has a different meaning. It is one of seven learning segments. A learning segment is a job that a language must be able to say, for example "Doing arithmetic".
 
 ## Folder layout
 
 ```
 000-111-learn/
-├── review/                          ← everything you edit lives here
+├── learn/                           ← the learning content: A side, B side, segments, dictionaries
+├── review/                          ← the background research (this folder)
 │   ├── README.md                    ← this file: process, status, how to continue
 │   ├── segments/
 │   │   ├── <the 4 source documents>
-│   │   ├── split_documents.py       ← splits the documents + maps findings onto segments
-│   │   ├── README.md                ← (generated) index of all 56 segments with finding counts
-│   │   ├── manifest.json            ← (generated) segment → line ranges → finding IDs
-│   │   └── <doc-slug>/NN-*.md       ← (generated) 22 + 20 + 7 + 7 segment files
+│   │   ├── split_documents.py       ← divides the documents into parts + maps findings onto parts
+│   │   ├── README.md                ← (generated) index of all 56 document parts with finding counts
+│   │   ├── manifest.json            ← (generated) document part → line ranges → finding IDs
+│   │   └── <doc-slug>/NN-*.md       ← (generated) 22 + 20 + 7 + 7 document-part files
 │   ├── findings/
 │   │   ├── pass1.json               ← SOURCE OF TRUTH: the 61 pass-1 findings
-│   │   ├── status.json              ← status/note overrides per finding (edit on GitHub)
-│   │   ├── documents.json           ← per-document verdicts per pass
-│   │   └── segment-map.md           ← (generated) segments vs. findings comparison
+│   │   ├── status.json              ← status/note changes per finding (edit on GitHub)
+│   │   ├── documents.json           ← result for each document in each pass
+│   │   └── segment-map.md           ← (generated) document parts vs. findings comparison
 │   └── adversarial-review-pass1/    ← the pass-1 write-ups (narrative)
 │       ├── 00-SUMMARY.md
 │       └── 01-…review.md … 04-…review.md
-├── site/                            ← Astro + Starlight website (reads review/)
+├── site/                            ← Astro + Starlight website (reads learn/ and review/)
 ├── serve/                           ← (generated, not committed) build output
 └── .github/workflows/pages.yml      ← GitHub Actions: build site/ → serve/ → GitHub Pages
 ```
 
-Files marked **(generated)** are overwritten on every run, so don't hand-edit them.
+A script writes the files marked **(generated)** again on each run. Thus, do not edit them by hand.
 
-## Step 1: Segmentation (`segments/`)
+## Step 1: Divide the documents into parts (`segments/`)
 
-`segments/split_documents.py` splits each source document into the smallest units that each make a claim or serve a goal of their own.
+The script `segments/split_documents.py` divides each source document into document parts. Each part is the smallest unit that makes a claim or has a goal of its own.
 
-- **Markdown reports** are split at every heading:
+- The script divides **Markdown reports** at each heading:
   - the title and opening paragraph,
-  - each `##` section's introductory text before its first subsection,
+  - the introduction text of each `##` section, before its first subsection,
   - each `###` subsection,
   - the "Works cited" list.
-- **HTML pages** are split per `<section>`. Each segment holds:
+- The script divides **HTML pages** at each `<section>`. Each document part holds:
   - the readable text,
-  - the page code the section depends on (quiz scoring, roadmap data, chart numbers),
+  - the page code that the section uses (quiz scores, roadmap data, chart numbers),
   - the original HTML, in a collapsed block.
 
-Every segment file has:
+Each document-part file has:
 - a front-matter header: `source`, `kind`, `lines`, and `findings` (the IDs mapped to it),
-- a **"Review findings mapped to this segment"** table,
+- a **"Review findings for this part"** table,
 - a blank review worksheet (goal, key claims, adversarial review, evaluation).
 
-The Markdown splits cover every source line exactly once.
+The Markdown parts include each source line exactly one time.
 
-**Regenerate:** `python3 review/segments/split_documents.py`. This overwrites the segment files. Record review judgements in `findings/*.json`, not in the segment worksheets, or copy a filled worksheet somewhere else first.
+**Make the parts again:** `python3 review/segments/split_documents.py`. This command writes over the document-part files. Record review decisions in `findings/*.json`, not in the worksheets. If you filled in a worksheet, copy it to a different location first.
 
 ## Step 2: Adversarial review, pass 1 (`adversarial-review-pass1/`)
 
-**Method.** Each document was read in full, including the salary figures embedded as images in report 01 (decoded) and the page code in both HTML files. Then:
-1. Goals and objectives were written down and each judged **Met / Partly / No**.
-2. Claims were attacked on four fronts: internal consistency, arithmetic, technical and historical accuracy, and whether the cited source supports them.
-3. Findings were ranked **Critical / Major / Minor**, with a source line location and an evidence tag.
+An **adversarial review** tries to prove each claim wrong.
+
+**Method.** The reviewer read each document in full. This included the salary figures that report 01 shows as images (decoded) and the page code in the two HTML files. Then the reviewer did these steps:
+1. Wrote down the goals of each document and gave each goal a result: **Met / Partly / No**.
+2. Examined each claim in four areas: internal consistency, arithmetic, technical and historical accuracy, and support from the cited source.
+3. Gave each finding a level (**Critical / Major / Minor**), a source line location and an evidence tag.
 
 | Tag | Meaning |
 |---|---|
-| **[DOC]** | Provable from the document itself (contradiction, arithmetic, missing data, code behaviour) |
-| **[KNOW]** | Reviewer domain knowledge, high confidence, not yet checked against a primary source |
-| **[VERIFY]** | Plausible problem; must be confirmed against a source in pass 2 |
+| **[DOC]** | The document itself proves it (contradiction, arithmetic, missing data, code behavior) |
+| **[KNOW]** | Knowledge of the reviewer, high confidence, not yet compared with a primary source |
+| **[VERIFY]** | A possible problem. Pass 2 must compare it with a source |
 
-**Not done in pass 1:** no cited source was fetched. The [KNOW] and [VERIFY] findings are provisional.
+**Not done in pass 1:** the reviewer did not get any cited source. Thus, the [KNOW] and [VERIFY] findings are provisional.
 
 | Document | Goal met? | Critical | Major | Headline |
 |---|---|---|---|---|
-| 01 Career report | Partly | 3 | 9 | Broken salary data; LANL claim cited to a Freelancer page; milestones not like-for-like |
-| 02 Retro game report | No | 5 | 10 | Its Fortran advantages don't exist on its 80s/90s target; history contradicts its genre mapping |
-| 03 Career advisor page | No / Partly | 4 | 4 | Quiz only restates answers and gives a verdict after one click; salary chart changes its source's numbers |
-| 04 Retro advisor page | No | 5 | 5 | FORTRAN 77 fixed-/free-form contradiction; impossible "locked 60 fps"; invented charts |
+| 01 Career report | Partly | 3 | 9 | Broken salary data. LANL claim cited to a Freelancer page. Milestones not like-for-like |
+| 02 Retro game report | No | 5 | 10 | Its Fortran advantages do not exist on its 80s/90s target. History contradicts its genre mapping |
+| 03 Career advisor page | No / Partly | 4 | 4 | The quiz only repeats answers and gives a verdict after one click. The salary chart changes the numbers of its source |
+| 04 Retro advisor page | No | 5 | 5 | FORTRAN 77 fixed-/free-form contradiction. Impossible "locked 60 fps". Invented charts |
 
-## Step 3: Findings as data, mapped onto segments
+## Step 3: Findings as data, mapped onto document parts
 
-The 61 findings in the pass-1 write-ups were extracted into `findings/pass1.json`, one record each:
-- `id`: e.g. `D02-C3` = document 02, Critical #3,
+The pass-1 write-ups contain 61 findings. Each finding is one record in `findings/pass1.json`:
+- `id`: for example, `D02-C3` = document 02, Critical #3,
 - severity, evidence tags, location, source line ranges, claim, problem,
 - `status`: `open`, `verify`, `confirmed`, `disputed`, `fixed`, or `wont-fix`.
 
-**From now on this JSON is the source of truth for findings.** The pass-1 Markdown write-ups stay as the narrative record.
+**This JSON file is the source of truth for findings.** The pass-1 Markdown write-ups stay as the narrative record.
 
-`split_documents.py` maps each finding onto every segment whose line range it overlaps. For HTML segments, this includes the linked script lines. The comparison is written to `findings/segment-map.md`. Pass-1 results:
+`split_documents.py` maps each finding onto each document part whose line range it overlaps. For HTML parts, this includes the linked script lines. The script writes the comparison to `findings/segment-map.md`. Pass-1 results:
 
-| Document | Segments | With findings | Not yet challenged | Document-level | Outside every segment |
+| Document | Document parts | With findings | Not yet challenged | Document-level | Outside all parts |
 |---|---|---|---|---|---|
-| 01 | 22 | 15 | 7 (01, 09, 12, 18, 19, 20, 22) | — | — |
-| 02 | 20 | 16 | 4 (01, 09, 13, 20) | D02-M10 | — |
+| 01 | 22 | 15 | 7 (01, 09, 12, 18, 19, 20, 22) | none | none |
+| 02 | 20 | 16 | 4 (01, 09, 13, 20) | D02-M10 | none |
 | 03 | 7 | 4 | 3 (01, 04, 07) | D03-M4 | D03-m1, D03-m2 (`<head>` scripts) |
-| 04 | 7 | 6 | 1 (07) | D04-M5 | — |
+| 04 | 7 | 6 | 1 (07) | D04-M5 | none |
 
 What the comparison shows:
-- The segmentation holds up: **no finding falls across a boundary badly**. The only findings outside every segment are the two about `<head>` script tags, which are page scaffolding rather than content.
-- **Findings cluster** on:
-  - the Fortran-technical segment of doc 01 (seg 07: 5 findings),
-  - the labour-market segments of doc 01 (segs 15–17),
-  - the verdict segments of doc 02 (segs 16–18),
-  - the chart and quiz segments of the HTML pages.
-- **Spanning findings**: several findings attack a claim repeated across segments. The largest is D02-C4 ("locked 60/70 fps"), which spans 4 segments. That reflects how often the documents repeat the claim, not a segmentation problem.
-- **"Not yet challenged" is not "verified correct".** Those segments (mostly introductions, decision tables and works-cited lists) are the targets for pass 2.
+- The division into parts is correct: **no finding crosses a boundary badly**. Only two findings are outside all parts. They are about `<head>` script tags, which are page structure, not content.
+- **Findings collect** on:
+  - the Fortran-technical part of doc 01 (part 07: 5 findings),
+  - the labor-market parts of doc 01 (parts 15 to 17),
+  - the verdict parts of doc 02 (parts 16 to 18),
+  - the chart and quiz parts of the HTML pages.
+- **Findings across parts**: some findings attack a claim that occurs in more than one part. The largest is D02-C4 ("locked 60/70 fps"), in 4 parts. This shows how often the documents repeat the claim. It is not a problem with the division.
+- **"Not yet challenged" does not mean "correct".** These parts are mostly introductions, decision tables and works-cited lists. Pass 2 must examine them.
 
-## Step 4: Review-tracker website (`site/`, Astro + Starlight)
+## Step 4: The website (`site/`, Astro + Starlight)
 
-`site/` is an [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) project. It reads `review/` and produces a static site, so GitHub Pages can host it for free.
+`site/` is an [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) project. Astro and Starlight are tools that make a website from text files. The site is static (fixed files), so GitHub Pages can host it at no cost.
 
-`site/scripts/sync-content.mjs` runs automatically before every build. It:
-- turns each `review/**.md` file into a Starlight page, rewriting the links between them,
-- copies the two original Gemini HTML pages unchanged (their quizzes and charts still work),
-- writes the data the dashboard and findings explorer use, from `findings/*.json`, `segments/manifest.json`, and this README's status list and log.
+The script `site/scripts/sync-content.mjs` runs automatically before each build. It reads `learn/` and `review/`. It does these jobs:
+- It makes a Starlight page from each `review/**.md` file and changes the links between them.
+- It copies the two original Gemini HTML pages with no changes. Their quizzes and charts still work.
+- It writes the data for the website pages. This data comes from `learn/`, `findings/*.json`, `segments/manifest.json`, and the status list and log of this README.
 
-The generated folders (`site/src/content/docs`, `site/src/data`, `site/public/sources`) are git-ignored.
+Git ignores the generated folders (`site/src/content/docs`, `site/src/data`, `site/public/sources`).
 
-**Build locally** (optional): `cd site && npm ci && npm run build` writes to `serve/`. Then `npx astro preview` serves it at `http://localhost:4321/000-111-learn/`. For live editing, use `npm run dev`. You need Node 22.12 or later.
+**Build on your computer** (optional): `cd site && npm ci && npm run build` writes to `serve/`. Then `npx astro preview` shows the site at `http://localhost:4321/000-111-learn/`. To see changes while you edit, use `npm run dev`. You must have Node 22.12 or later.
 
 What the site has:
-- **Dashboard** (`/`): progress cards, the resolved-findings bar, the document scorecard, a clickable **segment heatmap**, and this README's status checklist and log.
+- **Home page** (`/`): the two sides (A side and B side) and the parts-of-speech lens.
+- **Learning segment pages**: each learning segment has an A page and a B page. Each page shows:
+  - strengths and limits,
+  - one example sentence,
+  - the words, in groups by part of speech,
+  - "Watch out" notes from the review.
+- **Dictionary page**: all words, with filters and search.
+- **Compare page**: the A side and the B side together.
+- **Review dashboard** (`/review/`): progress cards, the resolved-findings bar, the document scorecard, a clickable **heatmap of document parts**, and the status checklist and log of this README.
 - **Findings explorer** (`/findings/`):
-  - filters by document, severity, evidence and status, plus free-text search,
-  - sortable columns and shareable filter URLs (e.g. `#doc=02&severity=critical`),
-  - links to the affected segments,
-  - status and note drafts saved in your browser.
-- **Every page from `review/`**: plan, decisions, session records, reviews, sources and all 56 segments, in a sidebar. Each page has an "Edit page" link that opens its source file in `review/` on GitHub.
-- Built-in full-text search (Pagefind), light/dark/auto themes, and a mobile layout.
-- **Link previews** (Facebook, LinkedIn, X, chat apps): every page has Open Graph tags, and `site/scripts/og-image.mjs` redraws the 1200×630 preview image (stats and heatmap) on every build. On every deploy:
-  - The image link changes (`og-image.png?v=<commit>`), so Facebook fetches the new image instead of reusing a cached one.
-  - The workflow's `refresh-link-previews` job asks Facebook to re-scrape the homepage, findings and plan pages. It needs the repository secret `FACEBOOK_APP_TOKEN`. Without it, the job skips with a notice.
-  - **One-time setup:**
-    1. Create a Facebook app at [developers.facebook.com](https://developers.facebook.com/apps/) (type "Business" or "None"; no review is needed for scraping).
+  - filters by document, severity, evidence and status, and a text search,
+  - columns that you can sort, and filter URLs that you can share (for example, `#doc=02&severity=critical`),
+  - links to the related document parts,
+  - status and note drafts that your browser keeps.
+- **Each page from `review/`**: plan, decisions, session records, reviews, sources and all 56 document parts, in a sidebar. Each page has an "Edit page" link. It opens the source file in `review/` on GitHub.
+- Full-text search (Pagefind), light, dark and auto themes, and a layout for phones.
+- **Link previews** (Facebook, LinkedIn, X, chat apps): each page has Open Graph tags. The script `site/scripts/og-image.mjs` makes the 1200×630 preview image (numbers and heatmap) again on each build. On each deploy:
+  - The image link changes (`og-image.png?v=<commit>`). Thus, Facebook gets the new image and does not use an old copy.
+  - The `refresh-link-previews` job of the workflow asks Facebook to read the homepage, findings and plan pages again. This job needs the repository secret `FACEBOOK_APP_TOKEN`. If the secret is not there, the job stops and shows a notice.
+  - **Setup (one time only):**
+    1. Make a Facebook app at [developers.facebook.com](https://developers.facebook.com/apps/). Use the type "Business" or "None". Facebook does not need to review the app for this job.
     2. Copy its **App ID** and **App Secret**.
-    3. Run `gh secret set FACEBOOK_APP_TOKEN` in this repository and paste `<app-id>|<app-secret>` when prompted. The value never appears in the command or logs.
-  - **Manual fallback:** paste the URL into Facebook's [Sharing Debugger](https://developers.facebook.com/tools/debug/) and click **Scrape Again**.
+    3. In this repository, run `gh secret set FACEBOOK_APP_TOKEN`. When the command asks, paste `<app-id>|<app-secret>`. The value does not show in the command or in the logs.
+  - **Manual method:** paste the URL into the Facebook [Sharing Debugger](https://developers.facebook.com/tools/debug/). Then click **Scrape Again**.
 
-**Tracking statuses on a static site:**
+**How to record finding statuses on a static site:**
 1. **Permanent:** on the findings page, click **edit `review/findings/status.json` on GitHub**. Add or change an entry, for example:
    ```json
    "D02-C3": {"status": "confirmed", "note": "…", "updated": "2026-10-01"}
    ```
-   Commit in the browser, and Actions rebuilds the site in about a minute.
-2. **Drafting:** change statuses in the table. Then click **Copy status.json** to get the complete file, ready to paste into the GitHub editor.
+   Commit the change in the browser. GitHub Actions then builds the site again in about one minute.
+2. **Drafts:** change the statuses in the table. Then click **Copy status.json** to get the full file. You can paste it into the GitHub editor.
 
 ## Publishing to GitHub Pages (GitHub Actions)
 
 - **Repository (public):** https://github.com/kairin/000-111-learn
 - **Live site:** https://kairin.github.io/000-111-learn/
 
-Every push to `main` runs `.github/workflows/pages.yml` on GitHub. It:
-1. re-splits the segments (`review/segments/split_documents.py`),
-2. builds the site (`site/`, `npm ci && npm run build`),
-3. deploys `serve/` to GitHub Pages (Settings → Pages → Source: **GitHub Actions**).
+Each push to `main` starts `.github/workflows/pages.yml` on GitHub. This workflow does these steps:
+1. It divides the documents into parts again (`review/segments/split_documents.py`).
+2. It builds the site (`site/`, `npm ci && npm run build`).
+3. It puts `serve/` on GitHub Pages (Settings → Pages → Source: **GitHub Actions**).
 
-Actions is free for public repositories. **Daily use:** edit `review/…` (locally or in the GitHub web editor), then commit and push. Nothing needs building locally.
+GitHub Actions is free for public repositories. **Daily use:** edit files in `learn/` or `review/` (on your computer or in the GitHub web editor). Then commit and push. You do not need to build anything on your computer.
 
-**Note:** the workflow regenerates the segment files for the site only; it doesn't commit them back. If you change `findings/*.json` locally and want the repository's segment files to match, run `python3 review/segments/split_documents.py` before committing.
+**Note:** the workflow makes the document-part files again for the site only. It does not commit them back. If you change `findings/*.json` on your computer, run `python3 review/segments/split_documents.py` before you commit. Then the document-part files in the repository agree with the findings.
 
-(Earlier on 2026-09-27 the site was built by local git hooks and served from a `gh-pages` branch. That setup was replaced by this one. See [plan/DECISIONS.md](plan/DECISIONS.md), D9 and D10.)
+(Before this, on 2026-09-27, local git hooks built the site, and a `gh-pages` branch served it. The current setup replaced that method. See [plan/DECISIONS.md](plan/DECISIONS.md), D9 and D10.)
 
 ## Plan and decisions
 
-- **[plan/PLAN.md](plan/PLAN.md):** the roadmap, including Assembly and Fortran running in the browser (WebAssembly and emulators) and the 90-day learning track.
-- **[plan/DECISIONS.md](plan/DECISIONS.md):** decided, superseded and **open** decisions.
-- **[plan/sessions/2026-09-27.md](plan/sessions/2026-09-27.md):** the record of the first working session.
+- **[plan/PLAN.md](plan/PLAN.md):** the roadmap. It includes Assembly and Fortran that run in the browser (WebAssembly and emulators) and the 90-day learning track.
+- **[plan/DECISIONS.md](plan/DECISIONS.md):** decisions that are made, replaced or **open**.
+- **[plan/sessions/2026-09-27.md](plan/sessions/2026-09-27.md):** the record of the first work session.
 
 ## Status and next steps
 
-- [x] Split the documents into segments (56)
+- [x] Divide the documents into document parts (56)
 - [x] Adversarial review, pass 1 (desk review)
-- [x] Extract findings to JSON and map them onto segments (61 findings)
+- [x] Put the findings into JSON and map them onto document parts (61 findings)
 - [x] Build the review-tracker website into `serve/`
-- [x] Create the public GitHub repository and enable Pages
+- [x] Make the public GitHub repository and start Pages
 - [x] Replace the Actions deployment with local hooks and a `gh-pages` branch
-- [x] Decide the primary goal: **learn both**, for usefulness and fun, through a constrained game playable on this site (D11)
-- [ ] **Choose how the two languages share the game** (decision O7), then the game concept and constraints (O8)
+- [x] Decide the primary goal: **learn both**, for use and for fun, through a constrained game that you can play on this site (D11)
+- [ ] **Choose how the two languages share the game** (decision O7), then the game concept and limits (O8)
 - [x] Move the site to Astro + Starlight, built and deployed by GitHub Actions (D10, D12)
+- [x] Make the language lens the center of the site (D16)
+- [x] Write all documents in ASD-STE100 (D17)
 - [ ] Browser-run Assembly and Fortran demos (PLAN.md, Phase 4)
-- [ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):
+- [ ] Pass 2: get and examine the high-risk citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
-  - OpenCoarrays' dependency on MPI,
-  - LFortran's release status,
+  - the dependency of OpenCoarrays on MPI,
+  - the release status of LFortran,
   - the Microsoft FORTRAN 5.x graphics library,
-  - the implementation language of Elite, Frontier: Elite II and M.U.L.E.
-- [ ] Pass 2: challenge the 15 "not yet challenged" segments
-- [ ] Revise the surviving document(s) against the chosen goal
+  - the programming language of Elite, Frontier: Elite II and M.U.L.E.
+- [ ] Pass 2: challenge the 15 "not yet challenged" document parts
+- [ ] Change the remaining document(s) to agree with the chosen goal
 
 ## Log
 
 | Date | Step | Output |
 |---|---|---|
-| 2026-09-27 | Segmented 4 documents into 56 units with review worksheets | `segments/` |
-| 2026-09-27 | Moved documents and segments into `review/`, then documents into `review/segments/` (by user) | — |
+| 2026-09-27 | Divided 4 documents into 56 units with review worksheets | `segments/` |
+| 2026-09-27 | Moved documents and document parts into `review/`, then documents into `review/segments/` (by user) | none |
 | 2026-09-27 | Adversarial review, pass 1 (no sources fetched) | `adversarial-review-pass1/` |
-| 2026-09-27 | Documented process and status | `README.md` |
-| 2026-09-27 | Extracted 61 findings to JSON; mapped onto segments; comparison report | `findings/` |
+| 2026-09-27 | Wrote the process and status | `README.md` |
+| 2026-09-27 | Put 61 findings into JSON. Mapped them onto document parts. Wrote a comparison report | `findings/` |
 | 2026-09-27 | Built the review-tracker static site and GitHub Pages workflow | `site/`, `serve/`, `.github/` |
-| 2026-09-27 | Published public repo and enabled GitHub Pages (Actions) | https://kairin.github.io/000-111-learn/ |
-| 2026-09-27 | Removed the Actions workflow; the site is now built locally by git hooks and served from `gh-pages` | `.githooks/`, `site/regenerate.sh` |
-| 2026-09-27 | Wrote the plan (including in-browser Assembly/Fortran), the decision log, and the session record | `plan/` |
-| 2026-09-27 | Goal decided: learn both via a constrained browser-playable game. Site moved to Astro + Starlight on GitHub Actions; hooks and `gh-pages` removed | `site/`, `.github/`, `plan/` |
+| 2026-09-27 | Published public repo and started GitHub Pages (Actions) | https://kairin.github.io/000-111-learn/ |
+| 2026-09-27 | Removed the Actions workflow. Local git hooks built the site, and `gh-pages` served it | `.githooks/`, `site/regenerate.sh` |
+| 2026-09-27 | Wrote the plan (with in-browser Assembly/Fortran), the decision log, and the session record | `plan/` |
+| 2026-09-27 | Goal decided: learn both through a constrained game that you can play in the browser. Site moved to Astro + Starlight on GitHub Actions. Hooks and `gh-pages` removed | `site/`, `.github/`, `plan/` |
+| 2026-09-27 | Language lens (A side, B side), dictionaries, STE writing standard. Review moved to background research | `learn/`, `site/` |

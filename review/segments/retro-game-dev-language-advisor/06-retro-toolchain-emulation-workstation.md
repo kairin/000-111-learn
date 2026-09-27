@@ -79,21 +79,21 @@ Cross-compilation, assembly, and cycle-exact emulation setups for modern worksta
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D04-M2 | major | KNOW | open | L432 | Table row "**NASM / WASM** — Netwide Assembler…": NASM and WASM (the Watcom assembler) are different tools, and the description covers only NASM. |
-| D04-M3 | major | KNOW | open | L445 | "DOSBox-X / 86Box — **Cycle-exact**": true for neither in the strict sense, and DOSBox-X is clearly approximate. |
+| D04-M2 | major | KNOW | open | L432 | The table row says "**NASM / WASM** — Netwide Assembler…". NASM and WASM (the Watcom assembler) are different tools. The description covers only NASM. |
+| D04-M3 | major | KNOW | open | L445 | The page says "DOSBox-X / 86Box — **Cycle-exact**". This is not true for either tool in the strict sense. DOSBox-X is clearly approximate. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

@@ -16,20 +16,20 @@ If your objective is to experience true 1980s–1990s optimization and build gam
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-M6 | major | DOC | open | L176–178 vs L144–174 | _Claim:_ "Recommended Strategy": Assembly is "the essential foundation" — This contradicts the document's own decision tree (sim → Fortran). The final section silently turns a conditional recommendation into an unconditional one. |
+| D02-M6 | major | DOC | open | L176–178 vs L144–174 | _Claim:_ The "Recommended Strategy" says that Assembly is "the essential foundation".. _Problem:_ This contradicts the decision tree of the document (sim goes to Fortran). The final section changes a conditional recommendation into an unconditional one and does not say so. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

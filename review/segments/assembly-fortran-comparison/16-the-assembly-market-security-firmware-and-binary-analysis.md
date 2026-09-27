@@ -20,20 +20,20 @@ Assembly language literacy is rarely hired as an isolated, single-skill job titl
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-C1 | critical | DOC | open | L136, L144, L155; segments 15–17 | _Claim:_ US salary ranges — The salary figures are embedded images. Two of the "ranges" render only as **"$112,000 –"** and **"$105,000 –"**, with no upper bound. A raw generation artifact **`[cite: 42, 46]`** is left in the table. The figures come from single job postings (Dice, BeBee, Rippling, Indeed search pages), not salary surveys. |
+| D01-C1 | critical | DOC | open | L136, L144, L155; segments 15–17 | _Claim:_ US salary ranges. _Problem:_ The salary figures are images inside the document. Two of the "ranges" show only as **"$112,000 –"** and **"$105,000 –"**, with no upper bound. The table also keeps a raw generation artifact, **`[cite: 42, 46]`**. The figures come from single job postings (Dice, BeBee, Rippling, Indeed search pages), not from salary surveys. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

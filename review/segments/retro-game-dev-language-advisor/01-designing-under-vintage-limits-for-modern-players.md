@@ -79,20 +79,20 @@ You want to build deeply systemic games like orbital space flight simulators, ta
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D04-M1 | major | KNOW | open | L125 | "4.77–33 MHz CPUs … direct VGA framebuffer (0xA000)": VGA and Mode 13h on a 4.77 MHz 8088 was a rare combination, and the upper bound leaves out most of the 1990s. |
+| D04-M1 | major | KNOW | open | L125 | The page says "4.77–33 MHz CPUs … direct VGA framebuffer (0xA000)". VGA and Mode 13h on a 4.77 MHz 8088 was a rare combination. The upper bound also excludes most of the 1990s. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

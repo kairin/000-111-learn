@@ -20,23 +20,23 @@ The three-month acquisition trajectory differs markedly depending on whether the
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-C4 | critical | KNOW DOC | open | L33, L42, L112, L166 | _Claim:_ "Locked 60/70 FPS", V-Sync "completely eliminating tearing" in Mode 13h — (a) Mode 13h runs at **70 Hz**, so a vsync-locked game gets 70 or 35 fps, not a locked 60. (b) Mode 13h has **one page**, so there is no page flipping. Copying 64,000 bytes during the ~1–1.5 ms vertical blank is not possible over ISA, so tearing is *reduced*, not eliminated. Tear-free flipping needs Mode X (which L11 mentions but the roadmap never uses). (c) The document's own figure (L70), 3.84 MB/s, exceeds what many 8/16-bit ISA VGA cards could sustain. |
-| D02-C5 | critical | KNOW | open | L33 | _Claim:_ 90-day milestone: "fully functional, smooth 60/70 FPS … raycaster written bare-metal" — This is unrealistic for someone learning assembly from scratch. Commercial teams using C plus assembly shipped raycasters that ran well below 60 fps on period hardware. There is no evidence for the timeline. |
-| D02-M4 | major | KNOW | open | L41, L30–31 | _Claim:_ 16.16 fixed point "using AX, BX, CX, DX" — These are **16-bit** registers. 16.16 math needs 32-bit registers (EAX…, 386+) or register pairs on 8086. `REP MOVSD` (L31) is also 386+. The document mixes 8086 and 386 targets without saying so. |
-| D02-m4 | minor | VERIFY | verify | L26 | "Modern Fortran compiled with retro toolchains": the document names no DOS toolchain that supports modern Fortran. A DJGPP gfortran port may exist, but the document never mentions one. |
+| D02-C4 | critical | KNOW DOC | open | L33, L42, L112, L166 | _Claim:_ The document promises "Locked 60/70 FPS" and V-Sync "completely eliminating tearing" in Mode 13h.. _Problem:_ (a) Mode 13h runs at **70 Hz**. Thus a game locked to vsync gets 70 or 35 fps, not a locked 60. (b) Mode 13h has **one page**, thus page flipping is not possible. A copy of 64,000 bytes in the ~1 to 1.5 ms vertical blank is not possible over ISA. As a result, tearing becomes *less*, but it does not stop. Flipping without tears needs Mode X (L11 mentions it, but the roadmap does not use it). (c) The figure in the document (L70), 3.84 MB/s, is more than many 8/16-bit ISA VGA cards can supply. |
+| D02-C5 | critical | KNOW | open | L33 | _Claim:_ The 90-day milestone is a "fully functional, smooth 60/70 FPS … raycaster written bare-metal".. _Problem:_ This is not realistic for a person who learns assembly from zero. Commercial teams with C plus assembly shipped raycasters that ran much slower than 60 fps on the hardware of that time. No evidence supports the timeline. |
+| D02-M4 | major | KNOW | open | L41, L30–31 | _Claim:_ The document does 16.16 fixed point "using AX, BX, CX, DX".. _Problem:_ These are **16-bit** registers. 16.16 math needs 32-bit registers (EAX and the others, 386 and later) or register pairs on the 8086. `REP MOVSD` (L31) also needs a 386 or later. The document mixes 8086 and 386 targets and does not say so. |
+| D02-m4 | minor | VERIFY | verify | L26 | The document says "Modern Fortran compiled with retro toolchains". But it names no DOS toolchain that supports modern Fortran. A DJGPP gfortran port can possibly exist, but the document does not mention one. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

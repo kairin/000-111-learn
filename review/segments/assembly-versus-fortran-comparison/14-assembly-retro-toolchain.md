@@ -21,21 +21,21 @@ findings: [D02-M8, D02-m3]
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-M8 | major | KNOW | open | L130 | _Claim:_ DOSBox-X / 86Box "highly accurate cycle-by-cycle emulation" — 86Box aims for cycle accuracy; **DOSBox-X does not** (it uses approximate "cycles"). This matters because performance tuning in DOSBox-X won't match real hardware. |
-| D02-m3 | minor | KNOW | open | L128 | "TASM / WASM (OpenWatcom Assembler)": TASM is Borland's, not OpenWatcom's. The line is ambiguous. |
+| D02-M8 | major | KNOW | open | L130 | _Claim:_ The document says that DOSBox-X and 86Box give "highly accurate cycle-by-cycle emulation".. _Problem:_ 86Box tries to be cycle-accurate. **DOSBox-X does not** (it uses approximate "cycles"). This is important because performance tuning in DOSBox-X will not match real hardware. |
+| D02-m3 | minor | KNOW | open | L128 | The line says "TASM / WASM (OpenWatcom Assembler)". TASM comes from Borland, not OpenWatcom. The line is not clear. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

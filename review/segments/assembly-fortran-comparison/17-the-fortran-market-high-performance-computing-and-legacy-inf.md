@@ -21,22 +21,22 @@ Fortran occupies a specialized niche focused on massive numerical scale and long
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-C1 | critical | DOC | open | L136, L144, L155; segments 15–17 | _Claim:_ US salary ranges — The salary figures are embedded images. Two of the "ranges" render only as **"$112,000 –"** and **"$105,000 –"**, with no upper bound. A raw generation artifact **`[cite: 42, 46]`** is left in the table. The figures come from single job postings (Dice, BeBee, Rippling, Indeed search pages), not salary surveys. |
-| D01-C2 | critical | DOC VERIFY | verify | L154, seg 17 | _Claim:_ "A 2023 evaluation by Los Alamos National Laboratory … driving sustained institutional demand" — The claim is cited to **[13] a Freelancer.com "hire Fortran developers" page**, not to the LANL report. The coverage is in the uncited [48] (Route Fifty, "Can Fortran survive another 15 years?"). As generally reported, the LANL study framed Fortran as a *risk to be managed* (shrinking talent pool, lagging GPU/ecosystem support), not as a growth market. The document inverts its tone. |
-| D01-M9 | major | DOC | open | L134–137 vs L155 | _Claim:_ Salary comparison — The comparison is asymmetric. The Fortran upper bound is explicitly for **advanced-degree, security-cleared national-lab** roles; the Assembly figure is a "baseline". Security and RE roles also often need clearance. The pay belongs to the *role*, not the *language*. |
+| D01-C1 | critical | DOC | open | L136, L144, L155; segments 15–17 | _Claim:_ US salary ranges. _Problem:_ The salary figures are images inside the document. Two of the "ranges" show only as **"$112,000 –"** and **"$105,000 –"**, with no upper bound. The table also keeps a raw generation artifact, **`[cite: 42, 46]`**. The figures come from single job postings (Dice, BeBee, Rippling, Indeed search pages), not from salary surveys. |
+| D01-C2 | critical | DOC VERIFY | verify | L154, seg 17 | _Claim:_ "A 2023 evaluation by Los Alamos National Laboratory … driving sustained institutional demand". _Problem:_ The citation is wrong. The document cites the claim to **[13] a Freelancer.com "hire Fortran developers" page**, not to the LANL report. Source [48] covers the report, but the text never cites it (Route Fifty, "Can Fortran survive another 15 years?"). Most reports say that the LANL study framed Fortran as *a risk to manage*, not as a growth market. The reasons were a shrinking talent pool and lagging GPU/ecosystem support. The document reverses that tone. |
+| D01-M9 | major | DOC | open | L134–137 vs L155 | _Claim:_ Salary comparison. _Problem:_ The comparison is asymmetric. The Fortran upper bound is explicitly for **advanced-degree, security-cleared national-lab** roles. But the Assembly figure is a "baseline". Security and RE (reverse engineering) roles also often need clearance. The pay belongs to the *role*, not the *language*. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

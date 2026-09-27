@@ -19,21 +19,21 @@ findings: [D02-M9, D02-m2]
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-M9 | major | DOC | open | L138 | _Claim:_ "Modern GFortran with retro constraints … SDL2 framebuffer" — This defines away the premise: a modern OS with SDL2 is not 80s/90s hardware. If this path is allowed, the whole comparison changes (C or C++ plus SDL is the obvious rival). |
-| D02-m2 | minor | KNOW | open | L136 | `wfl386` is OpenWatcom's 32-bit driver; 16-bit real mode uses `wfl`. |
+| D02-M9 | major | DOC | open | L138 | _Claim:_ The document gives a path with "Modern GFortran with retro constraints … SDL2 framebuffer".. _Problem:_ This path removes the premise. A modern operating system with SDL2 is not 80s/90s hardware. If the document permits this path, the full comparison changes. Then C or C++ plus SDL is the clear rival. |
+| D02-m2 | minor | KNOW | open | L136 | `wfl386` is the 32-bit driver of OpenWatcom. For 16-bit real mode, use `wfl`. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

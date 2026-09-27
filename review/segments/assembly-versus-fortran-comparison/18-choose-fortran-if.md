@@ -20,22 +20,22 @@ You want to build a **deep simulation, procedural universe, or tactical wargame*
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-C1 | critical | KNOW | open | L50, L84, L173 | _Claim:_ Fortran wins through "anti-aliasing optimizations", "array syntax" and an "auto-vectorizing execution model" — **FORTRAN 77 has no array syntax.** Whole-array expressions and slicing arrived in Fortran 90. **8086–486 CPUs have no SIMD**, so there is nothing to auto-vectorize (MMX came in 1997; x87 is scalar). The document's main Fortran advantages don't exist on its own target. |
-| D02-C3 | critical | KNOW VERIFY | verify | L114–118, L170, Sim branch of L144–158 | _Claim:_ Deep simulation / procedural universes → Fortran — History contradicts this. **Elite** (1984, procedural galaxies in ~22 KB), **Frontier: Elite II** (1993, Newtonian orbital flight, procedural galaxy) and **M.U.L.E.** (the document's own example, L170) were written in **assembly**. The claim "Fortran can fit a galaxy in 200 KB" (L118) is weaker than what assembly actually did in 1984. |
-| D02-M6 | major | DOC | open | L176–178 vs L144–174 | _Claim:_ "Recommended Strategy": Assembly is "the essential foundation" — This contradicts the document's own decision tree (sim → Fortran). The final section silently turns a conditional recommendation into an unconditional one. |
+| D02-C1 | critical | KNOW | open | L50, L84, L173 | _Claim:_ The document says that Fortran wins because of "anti-aliasing optimizations", "array syntax" and an "auto-vectorizing execution model".. _Problem:_ **FORTRAN 77 has no array syntax.** Whole-array expressions and slices came in Fortran 90. **8086 to 486 CPUs have no SIMD**, thus the compiler has nothing to auto-vectorize. MMX came in 1997, and x87 is scalar. The primary Fortran advantages in the document do not exist on its own target. |
+| D02-C3 | critical | KNOW VERIFY | verify | L114–118, L170, Sim branch of L144–158 | _Claim:_ Deep simulation and procedural universes go to Fortran.. _Problem:_ History does not agree. The developers wrote **Elite** (1984, procedural galaxies in ~22 KB), **Frontier: Elite II** (1993, Newtonian orbital flight, procedural galaxy) and **M.U.L.E.** (the example in the document, L170) in **assembly**. The claim "Fortran can fit a galaxy in 200 KB" (L118) is weaker than the result that assembly got in 1984. |
+| D02-M6 | major | DOC | open | L176–178 vs L144–174 | _Claim:_ The "Recommended Strategy" says that Assembly is "the essential foundation".. _Problem:_ This contradicts the decision tree of the document (sim goes to Fortran). The final section changes a conditional recommendation into an unconditional one and does not say so. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

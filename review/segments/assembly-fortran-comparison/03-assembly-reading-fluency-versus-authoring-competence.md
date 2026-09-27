@@ -17,20 +17,20 @@ By the end of a three-month intensive track, the learner develops the capacity t
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-m5 | minor | DOC | open | L18 | "more than 1,500 instructions" (cited to a Reddit thread [20]) and "40–50 instructions in 6–8 weeks" (cited to SendOwl, a course storefront [22]): the counts depend on the counting method. They are plausible but unsourced. |
+| D01-m5 | minor | DOC | open | L18 | "more than 1,500 instructions" cites a Reddit thread [20]. "40–50 instructions in 6–8 weeks" cites SendOwl, a course storefront [22]. The counts depend on the counting method. They are plausible but unsourced. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

@@ -1,144 +1,113 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import findings from '../data/findings.json';
-import documents from '../data/documents.json';
-import heatmap from '../data/heatmap.json';
-import progress from '../data/progress.json';
-import { inline, SEVERITIES, RESOLVED } from '../lib/inline';
+import { Code } from '@astrojs/starlight/components';
+import { SIDES, segments, parts, wordsOf, type Side } from '../lib/learn';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const nSeg = heatmap.reduce((n, d) => n + d.segments.length, 0);
-const nHit = heatmap.reduce((n, d) => n + d.segments.filter((s) => s.count).length, 0);
-const bySev = Object.fromEntries(SEVERITIES.map((s) => [s, findings.filter((f) => f.severity === s).length]));
-const verify = findings.filter((f) => f.status === 'verify').length;
-const resolved = findings.filter((f) => RESOLVED.includes(f.status)).length;
-const pct = findings.length ? Math.round((100 * resolved) / findings.length) : 0;
-const verdictClass = (v: string) => (/^no\b/i.test(v) ? (/partly/i.test(v) ? 'partly' : 'no') : /partly/i.test(v) ? 'partly' : 'yes');
-
-const cards = [
-	['Documents', documents.length, 'Gemini-generated guides under review'],
-	['Segments', nSeg, `${nSeg - nHit} not yet challenged`],
-	['Findings', findings.length, `${bySev.critical} critical · ${bySev.major} major · ${bySev.minor} minor`],
-	['Awaiting source check', verify, 'status: verify'],
-	['Resolved', resolved, `of ${findings.length} findings`],
-];
+const sides: Side[] = ['a', 'b'];
+const examples: Record<Side, { code: string; note: string }> = {
+	a: { code: 'mov ax, [speed]\nadd ax, [boost]\nmov [speed], ax', note: 'Small dictionary, long sentences: three words of work.' },
+	b: { code: 'speed = speed + boost', note: 'Large dictionary, short sentences: one line.' },
+};
+const headline: Record<Side, { value: string; label: string }> = {
+	a: { value: SIDES.a.vocab.size[0].value, label: SIDES.a.vocab.size[0].label },
+	b: { value: SIDES.b.vocab.size[0].value, label: SIDES.b.vocab.size[0].label },
+};
 ---
 
 <StarlightPage
 	frontmatter={{
-		title: 'Review dashboard',
-		description: 'Progress of the adversarial review and the plan to learn Assembly and Fortran.',
-		// Nicer link preview for the homepage (overrides Starlight's per-page defaults).
+		title: 'Two languages, one alphabet',
+		description: 'Learn Assembly and Fortran as two real languages, with words, grammar and sentences.',
+		tableOfContents: false,
+		editUrl: false,
 		head: [
-			{ tag: 'title', content: 'Learning Assembly & Fortran — review tracker' },
-			{ tag: 'meta', attrs: { property: 'og:title', content: 'Learning Assembly & Fortran, the hard way' } },
+			{ tag: 'title', content: 'Assembly and Fortran: two languages, one alphabet' },
+			{ tag: 'meta', attrs: { property: 'og:title', content: 'Assembly and Fortran: two languages, one alphabet' } },
 			{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
 			{
 				tag: 'meta',
 				attrs: {
 					property: 'og:description',
-					content: `Adversarial review of 4 AI-generated guides (${findings.length} findings), then a tiny retro-constrained game you can play in the browser.`,
+					content: 'A side: Assembly, the first language of the machine. B side: Fortran, the language that speaks maths. Learned as real languages, with a small retro game at the end.',
 				},
 			},
 		],
-		tableOfContents: false,
-		editUrl: false,
 	}}
 >
-	<div class="wide-page">
+	<div class="wide-page home">
 		<p class="lead">
-			We're reviewing four Gemini-generated guides to learning Assembly and Fortran before relying on them. The next
-			step is to learn <strong>both</strong> by building a small, deliberately constrained game that you can play on
-			this site. See the <a href={`${base}/plan/`}>plan</a> and <a href={`${base}/plan/decisions/`}>decisions</a>.
+			You can read English. That is enough to start. This site teaches <strong>Assembly</strong>{' and '}
+			<strong>Fortran</strong>{' '}as two real languages, with words, grammar and sentences. A small retro game, playable
+			in this browser, is the goal at the end.
 		</p>
+		<p><a class="sl-link-button" href={`${base}/start-here/`}>Start here →</a></p>
 
-		<div class="cards">
-			{cards.map(([k, v, s]) => (
-				<div class="card">
-					<div class="k">{k}</div>
-					<div class="v">{v}</div>
-					<div class="s">{s}</div>
+		<div class="sides">
+			{sides.map((s) => (
+				<a class={`side-card side-${s}`} href={`${base}/${s}/`}>
+					<div class="side-head"><span class="side-letter">{SIDES[s].letter}</span> {SIDES[s].label}</div>
+					<div class="side-name">{SIDES[s].name}</div>
+					<div class="side-tag">{SIDES[s].tagline}</div>
+					<div class="side-stat"><span class="n">{headline[s].value}</span> {headline[s].label}</div>
+					<div class="side-note">{examples[s].note}</div>
+				</a>
+			))}
+		</div>
+		<div class="side-examples">
+			{sides.map((s) => (
+				<div class={`side-${s}`}>
+					<Code code={examples[s].code} lang={s === 'a' ? 'nasm' : 'fortran-free-form'} title={`${SIDES[s].label}: speed = speed + boost`} />
 				</div>
 			))}
 		</div>
-		<div class="progress" role="img" aria-label={`${pct}% of findings resolved`}><div style={`width:${pct}%`}></div></div>
-		<p class="muted small">
-			{pct}% of findings resolved (confirmed, disputed, fixed or won't fix). Update them in the
-			<a href={`${base}/findings/`}>findings explorer</a>.
-		</p>
 
-		<h2>Document scorecard</h2>
+		<h2>The lens: parts of speech</h2>
+		<p>
+			Each language has verbs, nouns, adjectives and idioms, as English has. The numbers show how many words of each part
+			are in our A-side and B-side dictionaries.
+		</p>
 		<div class="table-wrap">
-			<table>
-				<thead><tr><th>#</th><th>Document</th><th>Goal met?</th><th>Confidence</th><th>Findings</th><th>Headline</th><th>Review</th></tr></thead>
+			<table class="lens">
+				<thead>
+					<tr><th>Part of speech</th><th class="col-a">A side: Assembly</th><th class="col-b">B side: Fortran</th></tr>
+				</thead>
 				<tbody>
-					{documents.map((d) => {
-						const last = d.passes.at(-1)!;
-						const mine = findings.filter((f) => f.doc === d.doc);
-						return (
-							<tr>
-								<td>{d.doc}</td>
-								<td>
-									<a href={d.sourceHref}>{d.short}</a>
-									{d.originalHref && <> · <a href={d.originalHref} target="_blank" rel="noopener">original ↗</a></>}
-									<div class="muted small">{d.question}</div>
-								</td>
-								<td><span class={`verdict v-${verdictClass(last.goal_met)}`}>{last.goal_met}</span></td>
-								<td>{last.confidence}</td>
-								<td><a href={`${base}/findings/#doc=${d.doc}`}>{mine.length}</a> ({mine.filter((f) => f.severity === 'critical').length} critical)</td>
-								<td>{last.headline}</td>
-								<td><a href={d.reviewHref}>Pass {last.pass}</a></td>
-							</tr>
-						);
-					})}
+					{parts.map((p) => (
+						<tr>
+							<td><strong>{p.name}</strong><div class="muted small">{p.idea}</div></td>
+							<td class="col-a">{p.a} <span class="count">{wordsOf('a').filter((w) => w.pos === p.id).length} words</span></td>
+							<td class="col-b">{p.b} <span class="count">{wordsOf('b').filter((w) => w.pos === p.id).length} words</span></td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>
 
-		<h2>Segment heatmap</h2>
-		<p class="legend small">
-			<span class="tile t-critical"></span>critical <span class="tile t-major"></span>major
-			<span class="tile t-minor"></span>minor <span class="tile t-none"></span>not yet challenged
-			<span class="muted">(colour = worst finding, number = finding count)</span>
-		</p>
-		{heatmap.map((d) => (
-			<div class="heat-row">
-				<h3>
-					<a href={d.href}>{d.source}</a>
-					<span class="muted small">
-						{d.segments.length} segments{d.documentFindings.length ? ` · document-level: ${d.documentFindings.join(', ')}` : ''}
-					</span>
-				</h3>
-				<div class="tiles">
-					{d.segments.map((s) => (
-						<a class={`tile t-${s.worst}`} href={s.href} title={`${s.n} ${s.title} — ${s.count} finding(s)`}>
-							<b>{s.n}</b><span>{s.count || ''}</span>
-						</a>
-					))}
+		<h2>The segments</h2>
+		<p>A segment is one job that a language must be able to say. Each segment has an A page and a B page.</p>
+		<div class="seg-grid">
+			{segments.map((sg) => (
+				<div class="seg-card">
+					<div class="seg-title">{sg.title}</div>
+					<div class="muted small">{sg.question}</div>
+					<div class="seg-links">
+						<a class="pill side-a" href={`${base}/a/${sg.id}/`}>A · {wordsOf('a', sg.id).length} words</a>
+						<a class="pill side-b" href={`${base}/b/${sg.id}/`}>B · {wordsOf('b', sg.id).length} words</a>
+					</div>
 				</div>
-			</div>
-		))}
-
-		<h2>Status</h2>
-		<ul class="checklist">
-			{progress.checklist.map((c) => (
-				<li class={c.done ? 'done' : ''}>
-					<Fragment set:html={inline(c.text)} />
-					{c.sub.length > 0 && <ul>{c.sub.map((s) => <li set:html={inline(s)} />)}</ul>}
-				</li>
 			))}
+		</div>
+
+		<h2>More</h2>
+		<ul>
+			<li><a href={`${base}/dictionary/`}>Dictionary</a>: look up each word of the two languages.</li>
+			<li><a href={`${base}/compare/`}>Compare the two sides</a>: strengths and dictionary sizes in one view.</li>
+			<li><a href={`${base}/plan/`}>Plan</a> and <a href={`${base}/plan/decisions/`}>decisions</a>: where the project goes next.</li>
+			<li>
+				<a href={`${base}/review/`}>Background research</a>: the review of four AI-written guides. It shows areas that are
+				easy to miss.
+			</li>
 		</ul>
-
-		<h2>Log</h2>
-		<div class="table-wrap">
-			<table>
-				<thead><tr><th>Date</th><th>Step</th><th>Output</th></tr></thead>
-				<tbody>
-					{progress.log.map((l) => (
-						<tr><td class="nowrap">{l.date}</td><td set:html={inline(l.step)} /><td set:html={inline(l.output)} /></tr>
-					))}
-				</tbody>
-			</table>
-		</div>
 	</div>
 </StarlightPage>

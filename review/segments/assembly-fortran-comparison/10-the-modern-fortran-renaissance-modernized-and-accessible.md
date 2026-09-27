@@ -25,20 +25,20 @@ Historically, Fortran development was plagued by fragmented build environments, 
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-M7 | major | VERIFY | verify | L70, L94 | _Claim:_ LFortran REPL/Jupyter offered as a beginner workflow — LFortran was still pre-1.0 (alpha/beta) as of the cited sources. Recommending it to a 90-day learner as equivalent to Python/Julia interactivity overstates its maturity. |
+| D01-M7 | major | VERIFY | verify | L70, L94 | _Claim:_ LFortran REPL/Jupyter offered as a beginner workflow. _Problem:_ LFortran was still pre-1.0 (alpha/beta) at the date of the cited sources. The document recommends it to a 90-day learner as equal to Python/Julia interactivity. That overstates its maturity. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

@@ -1,0 +1,182 @@
+[
+ {
+  "id": "store",
+  "title": "Keeping values",
+  "question": "How do you tell the machine to remember a number?",
+  "a": {
+   "strengths": [
+    "You choose the exact place for each value: a register inside the processor, or an address in memory.",
+    "You control every byte. A complete DOS program can be smaller than 1 KB."
+   ],
+   "limits": [
+    "The 8086 has only eight general registers. You must remember what each one holds.",
+    "A value has no type. A byte is only a number until your code gives it a meaning."
+   ],
+   "example": { "code": "mov ax, 100", "says": "Put the number 100 in register AX." }
+  },
+  "b": {
+   "strengths": [
+    "Each name has a type, for example INTEGER or REAL. The compiler stops many mistakes before the program runs.",
+    "A list or a table of values (an array) is one noun, with a name and a shape."
+   ],
+   "limits": [
+    "You do not choose where the values go in memory. The compiler chooses for you."
+   ],
+   "example": { "code": "integer :: lives = 3", "says": "Make a whole-number name, lives, with the value 3." }
+  },
+  "findings": ["D02-M4"]
+ },
+ {
+  "id": "calculate",
+  "title": "Doing arithmetic",
+  "question": "How do you tell the machine to calculate?",
+  "a": {
+   "strengths": [
+    "Each verb is one exact processor step. You know the cost of each step.",
+    "Whole-number and fixed-point arithmetic is very fast."
+   ],
+   "limits": [
+    "One formula needs many verbs and many registers.",
+    "The 8086 has no verbs for decimal-point numbers. It needs an extra maths chip (the 8087) or slow software."
+   ],
+   "example": { "code": "mov ax, [speed]\nadd ax, [boost]\nmov [speed], ax", "says": "Make speed equal to speed plus boost. This takes three verbs." }
+  },
+  "b": {
+   "strengths": [
+    "You write the formula as maths: v = v + a*dt.",
+    "Fortran has many ready-made maths idioms, for example SQRT, SIN and ATAN2."
+   ],
+   "limits": [
+    "On old hardware without a maths chip, decimal-point arithmetic is slow."
+   ],
+   "example": { "code": "speed = speed + boost", "says": "The same idea in one sentence." }
+  },
+  "findings": ["D02-C2", "D01-M2", "D01-m1"]
+ },
+ {
+  "id": "decide",
+  "title": "Making choices and repeating",
+  "question": "How do you say \"if\" and \"again\"?",
+  "a": {
+   "strengths": [
+    "The grammar is small and clear: compare two values, then jump to a label.",
+    "You see each branch that the processor takes."
+   ],
+   "limits": [
+    "There is no IF ... ELSE block. A jump to the wrong label is an easy mistake."
+   ],
+   "example": { "code": "cmp word [fuel], 0\nje  no_fuel", "says": "Compare fuel with 0. If they are equal, go to the label no_fuel." }
+  },
+  "b": {
+   "strengths": [
+    "Choices and loops are blocks: IF ... END IF, SELECT CASE, DO ... END DO. The shape of the text shows the logic."
+   ],
+   "limits": [
+    "You do not see the separate steps that the processor does."
+   ],
+   "example": { "code": "if (fuel == 0) then\n   call no_fuel()\nend if", "says": "If fuel is 0, run the subroutine no_fuel." }
+  },
+  "findings": ["D02-M7"]
+ },
+ {
+  "id": "many",
+  "title": "Working with many values",
+  "question": "How do you do one thing to a long list of values?",
+  "a": {
+   "strengths": [
+    "String verbs with the REP adverb copy or fill memory very fast: one sentence, done CX times.",
+    "This is the best tool to move screen pixels in a retro game."
+   ],
+   "limits": [
+    "You write each loop yourself. There is no ready-made word for sum or average."
+   ],
+   "example": { "code": "mov ax, 0A000h\nmov es, ax\nxor di, di\nmov al, 1\nmov cx, 64000\nrep stosb", "says": "Fill all 64,000 screen pixels with color 1." }
+  },
+  "b": {
+   "strengths": [
+    "One line does arithmetic on a full array: x = x + v*dt.",
+    "Idioms such as SUM, MAXVAL and MATMUL do a full job in one word."
+   ],
+   "limits": [
+    "FORTRAN 77, the old dialect of DOS compilers, does not have full-array arithmetic."
+   ],
+   "example": { "code": "screen = 1", "says": "Make every value in the array screen equal to 1." }
+  },
+  "findings": ["D02-C1", "D01-M4", "D01-m2"]
+ },
+ {
+  "id": "organize",
+  "title": "Organizing a program",
+  "question": "How do you divide a long text into parts with names?",
+  "a": {
+   "strengths": [
+    "Labels and macros give names to groups of instructions."
+   ],
+   "limits": [
+    "The program is one long list. The language does not enforce a structure. You must keep the order yourself."
+   ],
+   "example": { "code": "%macro wait_key 0\n    mov ah, 0\n    int 16h\n%endmacro", "says": "Give the name wait_key to two instructions that wait for a key." }
+  },
+  "b": {
+   "strengths": [
+    "Modules, subroutines, functions and INTENT keep large programs clear.",
+    "The compiler makes sure that each call matches the procedure."
+   ],
+   "limits": [
+    "You write more words before the first result."
+   ],
+   "example": { "code": "module physics\n  implicit none\ncontains\n  pure function next_speed(v, a, dt)\n    real, intent(in) :: v, a, dt\n    real :: next_speed\n    next_speed = v + a*dt\n  end function\nend module", "says": "A module named physics with one function that calculates the next speed." }
+  },
+  "findings": ["D01-M5", "D01-M7"]
+ },
+ {
+  "id": "talk",
+  "title": "Showing text and reading keys",
+  "question": "How does the program talk to the person at the keyboard?",
+  "a": {
+   "strengths": [
+    "You call BIOS and DOS services directly: show text, read a key, change the screen mode."
+   ],
+   "limits": [
+    "No number formatting. To show a number, you change it to text, one digit at a time."
+   ],
+   "example": { "code": "mov ah, 09h\nmov dx, msg\nint 21h\n...\nmsg db 'Hello$'", "says": "Ask DOS to show the text at msg. The $ marks the end of the text." }
+  },
+  "b": {
+   "strengths": [
+    "PRINT and WRITE format numbers for you.",
+    "The same text works on Linux, macOS and Windows."
+   ],
+   "limits": [
+    "Standard Fortran has no words for graphics, sound, or one key press without Enter."
+   ],
+   "example": { "code": "print *, \"Hello\"", "says": "Show the word Hello on the screen." }
+  },
+  "findings": ["D02-M5", "D02-M10"]
+ },
+ {
+  "id": "hardware",
+  "title": "Controlling the hardware",
+  "question": "How do you talk to the screen, the keyboard chip and the clock directly?",
+  "a": {
+   "strengths": [
+    "This is the native tongue of the processor. Ports, interrupts and screen memory are all in reach.",
+    "It is the best tool to make a retro game fast and responsive."
+   ],
+   "limits": [
+    "Each processor family speaks a different dialect. 8086 words do not work on an ARM processor."
+   ],
+   "example": { "code": "mov dx, 3DAh\nvsync: in al, dx\ntest al, 8\njz vsync", "says": "Wait until the screen beam starts its return to the top (vertical retrace)." }
+  },
+  "b": {
+   "strengths": [
+    "Fortran does not depend on one machine. The same text works on many processors."
+   ],
+   "limits": [
+    "Fortran cannot talk to the hardware directly. It needs help from C or from assembly (through ISO_C_BINDING)."
+   ],
+   "example": { "code": "! Standard Fortran has no word for this.\nuse iso_c_binding", "says": "Fortran asks a C or assembly routine to do the hardware work." }
+  },
+  "findings": ["D02-C4", "D02-M8", "D02-M1"]
+ }
+]

@@ -21,22 +21,22 @@ The core engineering tradeoff between Assembly and Fortran centers on whether th
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D02-C2 | critical | DOC | open | L10 vs L63 | _Claim:_ FPUs "were rare"… yet Fortran offers "native floating-point" — Internal contradiction. Without an FPU, Fortran `REAL` arithmetic runs on **software emulation**, the very latency the document praises Assembly for avoiding (L41). A float-heavy Fortran simulation on a 1980s machine would be *slow*. |
-| D02-M5 | major | VERIFY | verify | L54, L62, L106, L165 | _Claim:_ Fortran has "zero native support" for display and input; a "pure Fortran game must be ASCII" — Overstated. Period vendor compilers shipped **graphics libraries callable from Fortran** (Microsoft FORTRAN 5.x's graphics library, for example). Calling a vendor or assembly library is normal practice, and the Assembly path relies on BIOS calls too. |
-| D02-M7 | major | KNOW | open | L65 | _Claim:_ Assembly gives "cycle-exact … fully predictable frame budgets" — On real PCs, DRAM refresh, ISA wait states, the 8088 prefetch queue and 486 caches make exact cycle counting impractical. It is true on C64 and NES, not on the DOS target the roadmap uses. |
+| D02-C2 | critical | DOC | open | L10 vs L63 | _Claim:_ The document says that FPUs "were rare". But it also says that Fortran gives "native floating-point".. _Problem:_ The document contradicts itself. Without an FPU, Fortran `REAL` arithmetic runs on **software emulation**. The document praises Assembly because it prevents this latency (L41). A Fortran simulation with much float math on a 1980s computer is *slow*. |
+| D02-M5 | major | VERIFY | verify | L54, L62, L106, L165 | _Claim:_ The document says that Fortran has "zero native support" for display and input, and that a "pure Fortran game must be ASCII".. _Problem:_ This is too strong. Compilers from vendors of that time shipped **graphics libraries that Fortran can call**. An example is the graphics library of Microsoft FORTRAN 5.x. A call to a vendor or assembly library was normal practice. The Assembly path also depends on BIOS calls. |
+| D02-M7 | major | KNOW | open | L65 | _Claim:_ The document says that Assembly gives "cycle-exact … fully predictable frame budgets".. _Problem:_ On real PCs, DRAM refresh, ISA wait states, the 8088 prefetch queue and 486 caches make exact cycle counts not practical. The claim is true on the C64 and NES. It is not true on the DOS target that the roadmap uses. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

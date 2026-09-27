@@ -172,21 +172,21 @@ The recommendation logic / numbers below are claims too; review them.
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D03-M1 | major | DOC | open | L635 | Roadmap weeks 9–12 adds "**Deploying parallel PDE solvers on HPC clusters**", which is not in the source report. This goes further than the report's already optimistic milestone: cluster access, schedulers and MPI are not covered. |
-| D03-M2 | major | DOC | open | L627 | Roadmap adds "control-flow hijacking concepts" (exploit development), which is not in the source. This is a scope change: exploitation is a separate discipline. |
+| D03-M1 | major | DOC | open | L635 | The roadmap for weeks 9 to 12 adds "**Deploying parallel PDE solvers on HPC clusters**". This item is not in the source report. It goes past the milestone of the report, which is already optimistic. The page does not cover cluster access, schedulers, or MPI. |
+| D03-M2 | major | DOC | open | L627 | The roadmap adds "control-flow hijacking concepts" (exploit development), which is not in the source. This is a change of scope, because exploitation is a separate discipline. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

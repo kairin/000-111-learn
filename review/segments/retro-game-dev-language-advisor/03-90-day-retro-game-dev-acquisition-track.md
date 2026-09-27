@@ -172,21 +172,21 @@ The recommendation logic / numbers below are claims too; review them.
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D04-C2 | critical | KNOW | open | L552 vs track title | The Fortran track is headed **"OpenWatcom FORTRAN 77"**, but week 1 teaches "**FORTRAN 77 / Modern Fortran free-form syntax**". FORTRAN 77 is **fixed-form**; free-form arrived in Fortran 90. Week 3's "array non-aliasing execution" and loop-unrolling optimisation don't matter on SIMD-less DOS targets. |
-| D04-C3 | critical | KNOW | open | L353, L577, summary card | "Locked **60/70 FPS**", "guaranteeing locked 60 or 70 FPS without tearing", "smooth **60 FPS** DOS executable". VGA Mode 13h refreshes at 70 Hz, so V-Sync locking gives 70 or 35 fps, and 60 fps on a 70 Hz display judders. Mode 13h has no page flipping, so "guaranteed" tear-free is wrong (review 02, C4). |
+| D04-C2 | critical | KNOW | open | L552 vs track title | The heading of the Fortran track is **"OpenWatcom FORTRAN 77"**. But week 1 teaches "**FORTRAN 77 / Modern Fortran free-form syntax**". FORTRAN 77 is **fixed-form**. Free-form syntax started in Fortran 90. Week 3 teaches "array non-aliasing execution" and loop-unrolling optimization. These do not matter on DOS targets without SIMD. |
+| D04-C3 | critical | KNOW | open | L353, L577, summary card | The page says "Locked **60/70 FPS**", "guaranteeing locked 60 or 70 FPS without tearing", and "smooth **60 FPS** DOS executable". VGA Mode 13h refreshes at 70 Hz. Thus V-Sync locking gives 70 or 35 fps. On a 70 Hz display, 60 fps judders. Mode 13h has no page flipping. Thus the "guaranteed" tear-free claim is wrong (review 02, C4). |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |

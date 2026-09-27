@@ -1,0 +1,109 @@
+---
+/** One segment on one side: strengths, limits, an example sentence, and the words it uses. */
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Code } from '@astrojs/starlight/components';
+import findings from '../data/findings.json';
+import { SIDES, other, codeLang, segments, wordsOf, byPart, type Side } from '../lib/learn';
+import { inline } from '../lib/inline';
+
+interface Props {
+	side: Side;
+	segmentId: string;
+}
+const { side, segmentId } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const i = segments.findIndex((s) => s.id === segmentId);
+const seg = segments[i];
+const me = SIDES[side];
+const them = SIDES[other(side)];
+const mine = seg[side];
+const words = wordsOf(side, segmentId);
+const theirCount = wordsOf(other(side), segmentId).length;
+const groups = byPart(words);
+const watch = (seg.findings as string[])
+	.map((id) => findings.find((f) => f.id === id))
+	.filter((f): f is (typeof findings)[number] => Boolean(f));
+const prev = segments[i - 1];
+const next = segments[i + 1];
+---
+
+<StarlightPage
+	frontmatter={{
+		title: `${me.label}: ${seg.title}`,
+		description: `${seg.question} The ${me.name} answer, its strengths, and the ${words.length} words it uses.`,
+		tableOfContents: false,
+		editUrl: `https://github.com/kairin/000-111-learn/edit/main/learn/segments.json`,
+	}}
+>
+	<div class={`side-page side-${side}`}>
+		<p class="side-badge"><span class="side-letter">{me.letter}</span> {me.label} · {me.name} · {me.tagline}</p>
+		<p class="lead">{seg.question}</p>
+
+		<div class="flip">
+			<a href={`${base}/${other(side)}/${seg.id}/`}>
+				Flip to the {them.label} ({them.name}): {seg.title} →
+			</a>
+		</div>
+
+		<div class="word-count">
+			<div><span class="n">{words.length}</span> {me.name} words in this segment</div>
+			<div class="muted"><span class="n small-n">{theirCount}</span> {them.name} words for the same job</div>
+		</div>
+
+		<h2>What {me.name} says well here</h2>
+		<ul class="strengths">{mine.strengths.map((s: string) => <li>{s}</li>)}</ul>
+
+		<h2>What is hard to say</h2>
+		<ul class="limits">{mine.limits.map((s: string) => <li>{s}</li>)}</ul>
+
+		<h2>One sentence in {me.name}</h2>
+		<Code code={mine.example.code} lang={codeLang(side)} />
+		<p class="says"><strong>It says:</strong> {mine.example.says}</p>
+
+		<h2>The words, by part of speech</h2>
+		{groups.map((g) => (
+			<section class="pos-group">
+				<h3>
+					{g.part.name}s <span class="muted small">({g.words.length}) · {side === 'a' ? g.part.a : g.part.b}</span>
+				</h3>
+				<div class="table-wrap">
+					<table class="vocab">
+						<thead><tr><th>Word</th><th>Meaning</th><th>Example</th></tr></thead>
+						<tbody>
+							{g.words.map((w) => (
+								<tr>
+									<td class="mono">{w.word}</td>
+									<td>{w.meaning}</td>
+									<td>{w.example ? <code>{w.example}</code> : ""}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</section>
+		))}
+
+		{watch.length > 0 && (
+			<>
+				<h2>Watch out: what the review found</h2>
+				<p class="muted small">
+					These notes come from the review of the AI-written guides. They show traps that are easy to miss.
+				</p>
+				<ul class="watch">
+					{watch.map((f) => (
+						<li>
+							<a class="mono" href={`${base}/findings/#q=${f.id}`}>{f.id}</a>{' '}
+							<span class={`sev sev-${f.severity}`}>{f.severity}</span>{' '}
+							<Fragment set:html={inline(f.problem)} />
+						</li>
+					))}
+				</ul>
+			</>
+		)}
+
+		<nav class="seg-nav">
+			{prev ? <a href={`${base}/${side}/${prev.id}/`}>← {prev.title}</a> : <a href={`${base}/${side}/`}>← {me.label} overview</a>}
+			{next ? <a href={`${base}/${side}/${next.id}/`}>{next.title} →</a> : <a href={`${base}/compare/`}>Compare the two sides →</a>}
+		</nav>
+	</div>
+</StarlightPage>

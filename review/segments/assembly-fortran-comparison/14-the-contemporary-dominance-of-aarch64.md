@@ -18,20 +18,20 @@ For a developer operating on modern Apple hardware, AArch64 provides the smoothe
 
 ---
 
-## Review findings mapped to this segment
+## Review findings for this part
 
-Source of truth: `../../findings/` (pass 1). Mapped by source line range.
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
 
 | ID | Severity | Evidence | Status | Location | Problem |
 |---|---|---|---|---|---|
-| D01-m4 | minor | KNOW | open | L126 | AArch64 on Apple = "bare-metal" experimentation: macOS user space is not bare metal, and Apple's syscall interface is not a stable public ABI. |
+| D01-m4 | minor | KNOW | open | L126 | AArch64 on Apple = "bare-metal" experimentation. User space on macOS is not bare metal. Also, the Apple syscall interface is not a stable public ABI. |
 
 ---
 
 ## Review worksheet
 
-### 1. Goal / objective of this segment
-_What is this segment trying to establish or help the reader decide?_
+### 1. Goal of this part
+_What does this part try to show, or help the reader decide?_
 
 ### 2. Key claims to test
 | # | Claim | Evidence given (citation / data) | Verifiable? |
