@@ -57,16 +57,13 @@ if (fs.existsSync(path.join(BUILD, 'game.json'))) {
 	// A fingerprint of the game files. The page adds it to their addresses (?v=...), so a browser
 	// never plays an older copy that it keeps in its cache or in the js-dos local storage.
 	const hash = crypto.createHash('sha256');
-	for (const f of ['spike.jsdos', 'sine.bin']) hash.update(fs.readFileSync(path.join(BUILD, f)));
+	for (const f of ['spike.jsdos', 'dot3d.jsdos', 'wrong3d.jsdos', 'sine.bin', 'P3DW.BIN']) hash.update(fs.readFileSync(path.join(BUILD, f)));
 	info.version = hash.digest('hex').slice(0, 12);
 }
 
-// A small page that holds only the player. The game page shows it in an iframe,
+// A small page that holds only the player, one for each program. The game pages show it in an iframe,
 // so the styles of js-dos cannot change the styles of the site.
-if (info) {
-	fs.writeFileSync(
-		path.join(GAME_OUT, 'player.html'),
-		`<!doctype html>
+const playerPage = (bundle) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -80,7 +77,7 @@ if (info) {
 <script src="${BASE}/js-dos/js-dos.js"></script>
 <script>
 Dos(document.getElementById("dos"), {
-  url: "${BASE}/game/spike.jsdos?v=${info.version}",
+  url: "${BASE}/game/${bundle}?v=${info.version}",
   pathPrefix: "${BASE}/js-dos/emulators/",
   autoStart: true,
   kiosk: true,
@@ -94,8 +91,11 @@ Dos(document.getElementById("dos"), {
 </script>
 </body>
 </html>
-`,
-	);
+`;
+if (info) {
+	fs.writeFileSync(path.join(GAME_OUT, 'player.html'), playerPage('spike.jsdos')); // test 1
+	fs.writeFileSync(path.join(GAME_OUT, 'player-3d.html'), playerPage('dot3d.jsdos')); // test 2a
+	fs.writeFileSync(path.join(GAME_OUT, 'player-3d-wrong.html'), playerPage('wrong3d.jsdos')); // test 2b: the wrong program
 }
 
 // ------------------------------------------------------------ the words of each program (the lens)
@@ -166,13 +166,20 @@ function analyzeFortran(file) {
 	return { matched: matched.map((w) => ({ word: w.word, pos: w.pos, segment: w.segment })), fresh, lines: raw.split('\n').length };
 }
 
+// The number is the test: 1 is the dot on a flat plane, 2 is the dot in 3D (tests 2a and 2b).
 const programs = [
-	['src/spike.asm', 'a', 'The game (first test): draws the curve and moves the dot'],
-	['src/sine_y.inc', 'a', 'The shared routine: one angle in, one screen row out'],
-	['test/check.asm', 'a', 'The test: runs sine_y for 256 angles and writes the rows to a file'],
-	['lab/sine_table.f90', 'b', 'The laboratory: makes the sine table'],
-	['lab/check_y.f90', 'b', 'The checker: compares the A-side rows with its own answers'],
-].map(([rel, side, role]) => ({
+	[1, 'src/spike.asm', 'a', 'The game (test 1): draws the curve and moves the dot'],
+	[1, 'src/sine_y.inc', 'a', 'The shared routine: one angle in, one screen row out'],
+	[1, 'test/check.asm', 'a', 'The test: runs sine_y for 256 angles and writes the rows to a file'],
+	[1, 'lab/sine_table.f90', 'b', 'The laboratory: makes the sine table'],
+	[1, 'lab/check_y.f90', 'b', 'The checker: compares the A-side rows with its own answers'],
+	[2, 'src/dot3d.asm', 'a', 'The game (test 2a): draws the floor and the path, and moves the dot in 3D'],
+	[2, 'src/path3d.inc', 'a', 'The shared routines: one angle in, one 3D point out, then one screen position'],
+	[2, 'test/check3d.asm', 'a', 'The test: runs the routines for 256 angles and writes the positions to a file'],
+	[2, 'lab/sine_table.f90', 'b', 'The laboratory: makes the sine table (the same table as test 1)'],
+	[2, 'lab/check_3d.f90', 'b', 'The checker: compares the A-side positions with its own answers'],
+].map(([test, rel, side, role]) => ({
+	test,
 	file: rel,
 	side,
 	role,

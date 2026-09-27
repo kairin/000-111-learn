@@ -1,0 +1,354 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import game from '../../data/game.json';
+import { SIDES, segmentTitle } from '../../lib/learn';
+import partsData from '../../data/parts-of-speech.json';
+import { Image } from 'astro:assets';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const info = game.info as (typeof game.info & { dot3d_com_bytes?: number; check3d?: { values: number; agree: number; max_error_px: number } }) | null;
+const partName = (id: string) => partsData.find((p) => p.id === id)?.name ?? id;
+// The path of the dot, seen from above (X, Z) and from the side (Z, Y), for the two drawings of the B side.
+const N = 256;
+const path = Array.from({ length: N }, (_, i) => {
+	const t = (2 * Math.PI * i) / N;
+	return { x: 1.5 * (i - 128), y: 64 * Math.sin(t), z: 128 - i };
+});
+const topPath = path.map((p) => `${p.x.toFixed(1)},${(-p.z).toFixed(1)}`).join(' ');
+const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(' ');
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Test 2a: the dot in 3D',
+		description: 'The dot of test 1 gets depth. It moves from the back to the front. Fortran makes the same table, 8086 Assembly adds a third direction and a perspective division, and a check proves that the two sides agree.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page game-page">
+		<p class="lead">
+			In <a href={`${base}/game/test1/`}>test 1</a>, the dot moved on a flat plane: left to right, and up and down.
+			This test gives the world a third direction: <strong>depth</strong>. The dot still goes up and down with the sine.
+			It now also moves from the back to the front. The curve starts far away and ends near you. Its middle point is
+			the center of the 3D space. A near dot is larger, and a far dot comes nearer to the center of the screen.
+		</p>
+
+		{game.built && info?.check3d ? (
+			<>
+				<div class="duet" data-version={info?.version ?? ''}>
+					<section class="duet-panel side-a" aria-labelledby="a-title">
+						<header>
+							{SIDES.a.image && <Image class="duet-photo" src={SIDES.a.image.src} alt={SIDES.a.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="a-title"><span class="side-letter">A</span> What the machine does</h3>
+							<p class="muted small">The routines <code>path_point</code> and <code>project</code>, for the dot on the screen now.</p>
+						</header>
+						<ol class="duet-steps" id="a-steps"></ol>
+						<p class="small" id="a-bytes"></p>
+					</section>
+
+					<div class="duet-screen">
+						<iframe
+							class="dos-screen"
+							src={`${base}/game/player-3d.html?v=${info?.version ?? ''}`}
+							title="A copy of a 1980s PC that runs the A-side program in 3D"
+							allow="fullscreen; autoplay"
+						></iframe>
+						<p class="duet-now" id="duet-now" aria-live="off">Waiting for the copy of the PC to start…</p>
+						<div class="duet-controls" role="group" aria-label="Speed of the dot">
+							<span class="small muted">Speed:</span>
+							<button type="button" data-key="49" title="Key 1">Fastest</button>
+							<button type="button" data-key="50" title="Key 2">Fast</button>
+							<button type="button" data-key="51" title="Key 3">Medium</button>
+							<button type="button" data-key="52" title="Key 4" aria-pressed="true">Slow</button>
+							<button type="button" data-key="53" title="Key 5">Slowest</button>
+							<span class="spacer"></span>
+							<button type="button" data-key="32" title="Space" id="btn-pause">Pause</button>
+							<button type="button" data-key="78" title="Key N">One step</button>
+							<button type="button" id="btn-restart" class="ghost">Restart</button>
+						</div>
+						<p class="muted small">
+							Blue: the floor. Gray: the path in the air, from the back to the front. Cyan: the footprint of the path on
+							the floor, a straight line through the center. The light-gray
+							pole goes from the dot down to its shadow (red), so you can see where the dot is in the depth.
+						</p>
+					</div>
+
+					<section class="duet-panel side-b" aria-labelledby="b-title">
+						<header>
+							{SIDES.b.image && <Image class="duet-photo" src={SIDES.b.image.src} alt={SIDES.b.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="b-title"><span class="side-letter">B</span> The maths behind it</h3>
+							<p class="muted small">The same point with decimal-point numbers, and two drawings of the world.</p>
+						</header>
+						<figure class="view3d">
+							<figcaption class="small muted">From above: the eye, the screen and the dot</figcaption>
+							<svg viewBox="-280 -150 560 620" role="img" aria-label="The world from above. The line of sight from the eye to the dot crosses the screen at the screen x of the dot.">
+								<rect x="-224" y="-128" width="448" height="256" class="v-floor" />
+								<polyline points={topPath} class="v-foot" />
+								<line x1="-160" y1="248" x2="160" y2="248" class="v-screen" />
+								<text x="170" y="254" class="v-label">screen</text>
+								<circle cx="0" cy="448" r="8" class="v-eye" />
+								<text x="14" y="454" class="v-label">eye</text>
+								<line id="top-sight" x1="0" y1="448" x2="0" y2="0" class="v-sight" />
+								<circle id="top-hit" cx="0" cy="248" r="7" class="v-hit" />
+								<circle id="top-dot" cx="0" cy="0" r="10" class="v-dot" />
+								<text x="-270" y="-132" class="v-label">far</text>
+								<text x="-270" y="140" class="v-label">near</text>
+							</svg>
+						</figure>
+						<figure class="view3d">
+							<figcaption class="small muted">From the side: the height and the depth</figcaption>
+							<svg viewBox="-470 -190 630 330" role="img" aria-label="The world from the side. The path is the sine curve, from far to near. The line of sight from the eye to the dot crosses the screen at the screen y of the dot.">
+								<line x1="-128" y1="96" x2="128" y2="96" class="v-floor-line" />
+								<polyline points={sidePath} class="v-path" />
+								<line x1="-248" y1="-170" x2="-248" y2="29" class="v-screen" />
+								<circle cx="-448" cy="-120" r="8" class="v-eye" />
+								<text x="-462" y="-138" class="v-label">eye</text>
+								<line id="side-pole" x1="0" y1="0" x2="0" y2="96" class="v-pole" />
+								<line id="side-sight" x1="-448" y1="-120" x2="0" y2="0" class="v-sight" />
+								<circle id="side-hit" cx="-248" cy="0" r="7" class="v-hit" />
+								<circle id="side-dot" cx="0" cy="0" r="10" class="v-dot" />
+								<text x="-236" y="-174" class="v-label">screen</text>
+								<text x="-120" y="124" class="v-label">floor: near … far</text>
+							</svg>
+						</figure>
+						<ol class="duet-steps" id="b-steps"></ol>
+					</section>
+				</div>
+			</>
+		) : (
+			<p class="notice">
+				The game build is missing on this computer. Run <code>game/dev.sh</code>, or read the published site. GitHub
+				Actions makes the build for each push.
+			</p>
+		)}
+
+		<h2>What is new in test 2a</h2>
+		<ol class="steps-list">
+			<li>
+				<span class="pill side-b">B</span> <strong>The same table.</strong> The laboratory (<code>lab/sine_table.f90</code>)
+				makes no new file. The height of the dot is the sine, as in test 1.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <strong>A third direction.</strong> The routine <code>path_point</code>
+				(<code>src/path3d.inc</code>) gives three numbers for each angle: X (left and right), Y (up and down, the sine),
+				and Z (the depth: 128 at the back, down to -127 at the front). At the middle angle, 128, the point is X = 0,
+				Y = 0, Z = 0: the center of the 3D space. Seen from above, the path is a straight line from the back left to the
+				front right. Seen from the side, it is the sine curve.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <strong>The perspective.</strong> The routine <code>project</code> divides by
+				the distance from the eye, with the 8086 word <code>IDIV</code>. A far point has a large distance, so it becomes
+				small and goes to the center of the screen. The drawing "From above" shows why: the line from the eye to the dot
+				crosses the screen at the screen x.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <strong>Signs of depth.</strong> The program (<code>src/dot3d.asm</code>)
+				draws a floor, the footprint of the path, a pole from the dot to its shadow, and a larger dot when it is near. To
+				remove the old dot, it keeps a list of the old colors of each pixel, and puts them back in reverse order.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <span class="pill side-b">B</span> <strong>The check.</strong> The test
+				(<code>test/check3d.asm</code>) runs the two routines for all 256 angles in DOSBox and writes three numbers for
+				each: the screen x and y of the dot, and the screen y of its shadow. The checker (<code>lab/check_3d.f90</code>)
+				calculates them again and compares them. If one number is different, GitHub Actions stops and does not publish
+				the site.
+			</li>
+		</ol>
+
+		{info?.check3d && (
+			<div class="cards">
+				<div class="card"><div class="k">The two sides agree</div><div class="v">{info.check3d.agree} / {info.check3d.values}</div><div class="s">points from the check (3 numbers each)</div></div>
+				<div class="card"><div class="k">Error from exact maths</div><div class="v">{info.check3d.max_error_px} px</div><div class="s">the cost of whole-number arithmetic</div></div>
+				<div class="card"><div class="k">Size of the game</div><div class="v">{info.dot3d_com_bytes} bytes</div><div class="s">DOT3D.COM, 8086 instructions only</div></div>
+				<div class="card"><div class="k">Size of the table</div><div class="v">{info.sine_bin_bytes} bytes</div><div class="s">the same sine.bin as test 1</div></div>
+			</div>
+		)}
+
+		<h2>The words that each program uses</h2>
+		<p>
+			The pills show the words that the <a href={`${base}/dictionary/`}>dictionary</a> already has. "New words" are real
+			words of the language that the dictionary does not have yet.
+		</p>
+		{game.programs.filter((p) => p.test === 2).map((p) => (
+			<section class={`program side-${p.side}`}>
+				<h3>
+					<span class="side-letter">{SIDES[p.side as 'a' | 'b'].letter}</span> <a href={p.url}><code>{p.file}</code></a>
+					<span class="muted small">· {p.lines} lines · {p.role}</span>
+				</h3>
+				<p class="small">
+					<strong>{p.matched.length} dictionary words:</strong>{' '}
+					{p.matched.map((w) => (
+						<a class="pill word-pill" href={`${base}/dictionary/#side=${p.side}&q=${encodeURIComponent(w.word.split(' ')[0].toLowerCase())}`} title={`${partName(w.pos)} · ${segmentTitle(w.segment)}`}>
+							{w.word}
+						</a>
+					))}
+				</p>
+				{p.fresh.length > 0 && (
+					<p class="small"><strong>New words ({p.fresh.length}):</strong> {p.fresh.map((w) => <code class="new-word">{w}</code>)}</p>
+				)}
+			</section>
+		))}
+
+		<p class="small">
+			<strong>Next:</strong> <a href={`${base}/game/test2b/`}>test 2b</a> runs this program with one wrong word, and
+			shows how the check finds the error. The copy of the PC is js-dos {game.jsdosVersion}, the same as on the
+			<a href={`${base}/game/test1/`}>test 1</a> page.
+		</p>
+	</div>
+</StarlightPage>
+
+<script>
+	/*
+	 * Follow the yellow dot. The page reads the screen of the emulator (js-dos: ci.screenshot()) and finds the
+	 * top-left pixel of the yellow square. It calculates the screen position of all 256 angles with the same
+	 * whole-number steps as path_point and project, and takes the angle at that position. Far angles can share
+	 * one position; then it takes the angle nearest to the next angle after the last one.
+	 */
+	const base = document.querySelector<HTMLAnchorElement>('a.site-title')?.getAttribute('href')?.replace(/\/$/, '') ?? '';
+	const frame = document.querySelector<HTMLIFrameElement>('iframe.dos-screen');
+	const aSteps = document.getElementById('a-steps');
+	const aBytes = document.getElementById('a-bytes');
+	const bSteps = document.getElementById('b-steps');
+	const now = document.getElementById('duet-now');
+	const EYE_DISTANCE = 448, SCREEN_DISTANCE = 200, EYE_HEIGHT = 120, HORIZON_ROW = 50, FLOOR = -96;
+
+	if (frame && aSteps && aBytes && bSteps && now) {
+		const hex = (v: number, w = 4) => ((v & (w === 2 ? 0xff : 0xffff)) >>> 0).toString(16).toUpperCase().padStart(w, '0');
+		let table: DataView | null = null;
+		let points: ReturnType<typeof aSide>[] = [];
+		const version = document.querySelector<HTMLElement>('.duet')?.dataset.version ?? '';
+		fetch(`${base}/game/sine.bin?v=${version}`)
+			.then((r) => r.arrayBuffer())
+			.then((b) => {
+				table = new DataView(b);
+				points = Array.from({ length: 256 }, (_, i) => aSide(i));
+			});
+
+		function project(x: number, y: number, z: number) {
+			const distance = z + EYE_DISTANCE; // add cx, 448
+			const sx = 160 + Math.trunc((x * SCREEN_DISTANCE) / distance); // imul, idiv (rounds toward zero), add 160
+			const sy = HORIZON_ROW - Math.trunc(((y - EYE_HEIGHT) * SCREEN_DISTANCE) / distance); // sub, imul, idiv, neg, add
+			return { distance, sx, sy };
+		}
+
+		function aSide(i: number) {
+			const sine = table!.getInt16(i * 2, true);
+			const y = (sine * 64) >> 8; // imul cx, then keep the middle two bytes of DX:AX
+			const z = 128 - i; // mov cx, 128 · sub cx, si
+			const x = (i - 128) + ((i - 128) >> 1); // sub ax, 128 · mov dx, ax · sar dx, 1 · add ax, dx
+			const dot = project(x, y, z);
+			const shadow = project(x, FLOOR, z);
+			const size = z >= 43 ? 2 : z >= -43 ? 3 : 4;
+			return { i, sine, x, y, z, ...dot, shadowY: shadow.sy, size, di: dot.sy * 320 + dot.sx };
+		}
+
+		function row(code: string, result: string, note = '') {
+			return `<li><code>${code}</code><span class="val">${result}</span>${note ? `<span class="note">${note}</span>` : ''}</li>`;
+		}
+		const set = (id: string, attrs: Record<string, number>) => {
+			const el = document.getElementById(id);
+			for (const [k, v] of Object.entries(attrs)) el?.setAttribute(k, v.toFixed(1));
+		};
+
+		function render(i: number) {
+			const a = points[i];
+			const theta = (2 * Math.PI * i) / 256;
+			const ex = { x: 1.5 * (i - 128), y: 64 * Math.sin(theta), z: 128 - i };
+			const d = ex.z + EYE_DISTANCE;
+			const exX = 160 + (ex.x * SCREEN_DISTANCE) / d;
+			const exY = HORIZON_ROW - ((ex.y - EYE_HEIGHT) * SCREEN_DISTANCE) / d;
+			const depth = a.size === 4 ? 'near' : a.size === 3 ? 'middle' : 'far';
+			now!.textContent = `Angle ${i} of 256 · X ${a.x}, Y ${a.y}, Z ${a.z} · screen x = ${a.sx}, y = ${a.sy}`;
+			aSteps!.innerHTML = [
+				row('mov ax, [sine_table + bx]', `AX = ${a.sine}`, `the sine, at angle ${i}`),
+				row('imul cx (64)', `DX:AX = ${a.sine * 64}`, ''),
+				row('mov al, ah · mov ah, dl', `Y = ${a.y}`, 'divide by 256: keep the middle two bytes'),
+				row('mov cx, 128 · sub cx, si', `Z = ${a.z}`, 'the depth: from the back to the front'),
+				row('sub ax, 128', `AX = ${i - 128}`, ''),
+				row('mov dx, ax · sar dx, 1 · add ax, dx', `X = ${a.x}`, 'left and right: 1.5 times'),
+				row('add cx, 448', `CX = ${a.distance}`, 'the distance from the eye'),
+				row('imul dx (200)', `DX:AX = ${a.x * 200}`, ''),
+				row('idiv cx · add ax, 160', `x = ${a.sx}`, 'the screen column'),
+				row('sub ax, 120 · imul dx', `DX:AX = ${(a.y - 120) * 200}`, 'the height from the eye'),
+				row('idiv cx · neg ax · add ax, 50', `y = ${a.sy}`, 'the screen row'),
+				row('project, with Y = -96', `y = ${a.shadowY}`, 'the row of the shadow'),
+				row('call plot (DL = 14)', `A000:${hex(a.di)}`, `a yellow square, ${a.size} × ${a.size} (${depth})`),
+			].join('');
+			aBytes!.innerHTML = `Bytes ${i * 2} and ${i * 2 + 1} of <code>sine.bin</code>: <code>${hex(a.sine, 2)} ${hex(a.sine >> 8, 2)}</code> (the low byte comes first).`;
+			bSteps!.innerHTML = [
+				row('θ = 2π · i / 256', `${((360 * i) / 256).toFixed(2)}°`, 'the angle'),
+				row('X = 1.5 · (i − 128)', `${ex.x}`, `A side: ${a.x}`),
+				row('Y = 64 · sin(θ)', `${ex.y.toFixed(3)}`, `A side: ${a.y}`),
+				row('Z = 128 − i', `${ex.z}`, 'from the back (128) to the front'),
+				row('d = Z + 448', `${d.toFixed(3)}`, 'the distance from the eye'),
+				row('x = 160 + 200 · X / d', `${exX.toFixed(3)}`, `A side: ${a.sx}, difference ${Math.abs(a.sx - exX).toFixed(3)} pixel`),
+				row('y = 50 − 200 · (Y − 120) / d', `${exY.toFixed(3)}`, `A side: ${a.sy}, difference ${Math.abs(a.sy - exY).toFixed(3)} pixel`),
+			].join('');
+			// From above: X to the right, far (large Z) at the top. The screen is 200 from the eye.
+			set('top-dot', { cx: ex.x, cy: -ex.z });
+			set('top-sight', { x2: ex.x, y2: -ex.z });
+			set('top-hit', { cx: exX - 160 });
+			// From the side: near at the left, up at the top.
+			set('side-dot', { cx: ex.z, cy: -ex.y });
+			set('side-pole', { x1: ex.z, y1: -ex.y, x2: ex.z });
+			set('side-sight', { x2: ex.z, y2: -ex.y });
+			set('side-hit', { cy: -(170 - exY) });
+		}
+
+		// Find the top-left pixel of the yellow square (VGA color 14) in the 320 x 200 screen.
+		let lastI = -1, lastPos = -1, busy = false;
+		async function follow() {
+			const ci = (frame!.contentWindow as any)?.ci;
+			if (ci && !busy && points.length) {
+				busy = true;
+				try {
+					const img: ImageData = await ci.screenshot();
+					const d = img.data;
+					for (let p = 0; p < d.length; p += 4) {
+						if (d[p] > 200 && d[p + 1] > 200 && d[p + 2] < 120) {
+							const pos = p / 4;
+							if (pos === lastPos) break;
+							const x = pos % img.width, y = Math.floor(pos / img.width);
+							const want = (lastI + 1) & 255;
+							const dist = (i: number) => Math.min((i - want) & 255, (want - i) & 255);
+							const found = points.filter((q) => q.sx === x && q.sy === y).sort((q, r) => dist(q.i) - dist(r.i))[0];
+							if (found) { lastPos = pos; lastI = found.i; render(found.i); }
+							break;
+						}
+					}
+				} catch { /* the emulator is not ready yet */ }
+				busy = false;
+			}
+			setTimeout(follow, 30);
+		}
+		follow();
+
+		// The buttons press keys of the program.
+		document.querySelectorAll<HTMLButtonElement>('.duet-controls button[data-key]').forEach((btn) =>
+			btn.addEventListener('click', () => {
+				const ci = (frame.contentWindow as any)?.ci;
+				if (!ci) return;
+				const key = Number(btn.dataset.key);
+				ci.simulateKeyPress(key);
+				if (key >= 49 && key <= 53) {
+					document.querySelectorAll('.duet-controls button[data-key]').forEach((b) => {
+						const k = Number((b as HTMLElement).dataset.key);
+						if (k >= 49 && k <= 53) b.setAttribute('aria-pressed', String(b === btn));
+					});
+				}
+				if (key === 32) {
+					const pause = document.getElementById('btn-pause')!;
+					const on = pause.getAttribute('aria-pressed') === 'true';
+					pause.setAttribute('aria-pressed', String(!on));
+					pause.textContent = on ? 'Pause' : 'Continue';
+				}
+			}),
+		);
+		document.getElementById('btn-restart')?.addEventListener('click', () => {
+			lastI = -1;
+			lastPos = -1;
+			frame.src = frame.src;
+		});
+	}
+</script>

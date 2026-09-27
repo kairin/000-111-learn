@@ -34,6 +34,9 @@ None at this time. The next choices come with the game design (see [PLAN.md](PLA
 
 | **D21** | **Review the eight video guides** in the same way as the first four. Each document part shows its source video, and the moment of its idea when the video covers it. The new evidence tag [VIDEO] marks a claim that the reviewer checked against the captions. | Decided by the owner, done | The captions stay on the computer of the owner. The reviews quote no more than 10 words from a video. See `adversarial-review-pass1/00-SUMMARY-video-guides.md`. |
 
+| **D22** | **The second test puts the dot in 3D.** The same sine movement. The curve starts at the back and ends at the front, and its middle point is the center of the 3D space. The A side does a perspective division. The B side makes no new table. It checks the screen positions. | Decided by the owner, done | The two sides agree on 256 of 256 points. See `game/README.md` and the page `/game/test2a/`. |
+| **D23** | **Show a wrong program next to the right one (test 2b).** One wrong word (`SHR`, not `SAR`) makes half of the values wrong. The build requires the check to fail on it, so the check itself is tested. Each test has its own page under `/game/`. | Decided by the owner, done | 128 of 256 points wrong. See the page `/game/test2b/`. |
+
 ## Why some decisions changed
 
 - **D6 to D12:** the custom builder worked. Astro with Starlight gives menus, search and themes without custom code.

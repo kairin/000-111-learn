@@ -1,0 +1,259 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import game from '../../data/game.json';
+import { SIDES } from '../../lib/learn';
+import { Image } from 'astro:assets';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+type Check = { values: number; agree: number; max_error_px: number; passed: boolean; wrong: number[] };
+const info = game.info as (Record<string, unknown> & { version?: string; check3d?: Check; check3d_wrong?: Check }) | null;
+const wrong = new Set(info?.check3d_wrong?.wrong ?? []);
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Test 2b: wrong values, and the check',
+		description: 'The 3D program of test 2a with one wrong word. See what wrong values look like on the screen, and how the Fortran check finds every wrong point.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page game-page">
+		<p class="lead">
+			This is the program of <a href={`${base}/game/test2a/`}>test 2a</a> with <strong>one wrong word</strong>. The
+			assembler accepts it, and the program runs. But half of the values are wrong. The front half of the path looks
+			correct. The back half is gone: its dots are all over the screen. This is why each test has a check.
+		</p>
+
+		{game.built && info?.check3d_wrong ? (
+			<>
+				<div class="duet" data-version={info?.version ?? ''}>
+					<section class="duet-panel side-a" aria-labelledby="a-title">
+						<header>
+							{SIDES.a.image && <Image class="duet-photo" src={SIDES.a.image.src} alt={SIDES.a.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="a-title"><span class="side-letter">A</span> The wrong word</h3>
+							<p class="muted small">In <code>path_point</code>, the program halves (angle − 128) to make X = 1.5 × (angle − 128).</p>
+						</header>
+						<ul class="diff">
+							<li class="del"><code>sar dx, 1</code> <span class="small">right: SAR keeps the sign</span></li>
+							<li class="add"><code>shr dx, 1</code> <span class="small">wrong: SHR puts a 0 in the top bit</span></li>
+						</ul>
+						<p class="small">
+							The top bit of a 16-bit number is its sign. For a negative number, SHR clears it. Thus, a small negative
+							number becomes a very large positive number.
+						</p>
+						<ol class="duet-steps" id="a-steps"></ol>
+					</section>
+
+					<div class="duet-screen">
+						<iframe
+							class="dos-screen"
+							src={`${base}/game/player-3d-wrong.html?v=${info?.version ?? ''}`}
+							title="A copy of a 1980s PC that runs the wrong A-side program"
+							allow="fullscreen; autoplay"
+						></iframe>
+						<p class="duet-now" id="duet-now" aria-live="off">Waiting for the copy of the PC to start…</p>
+						<div class="duet-controls" role="group" aria-label="Speed of the dot">
+							<span class="small muted">Speed:</span>
+							<button type="button" data-key="49" title="Key 1">Fastest</button>
+							<button type="button" data-key="50" title="Key 2">Fast</button>
+							<button type="button" data-key="51" title="Key 3">Medium</button>
+							<button type="button" data-key="52" title="Key 4" aria-pressed="true">Slow</button>
+							<button type="button" data-key="53" title="Key 5">Slowest</button>
+							<span class="spacer"></span>
+							<button type="button" data-key="32" title="Space" id="btn-pause">Pause</button>
+							<button type="button" data-key="78" title="Key N">One step</button>
+							<button type="button" id="btn-restart" class="ghost">Restart</button>
+						</div>
+						<p class="muted small">
+							Compare with the correct picture in <a href={`${base}/game/test2a/`}>test 2a</a>. The floor is correct,
+							because it does not use <code>path_point</code>.
+						</p>
+					</div>
+
+					<section class="duet-panel side-b" aria-labelledby="b-title">
+						<header>
+							{SIDES.b.image && <Image class="duet-photo" src={SIDES.b.image.src} alt={SIDES.b.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="b-title"><span class="side-letter">B</span> What the check sees</h3>
+							<p class="muted small">The correct answer from the laboratory, and the answer of the wrong program, for the dot now.</p>
+						</header>
+						<ol class="duet-steps" id="b-steps"></ol>
+						<p class="small" id="b-verdict"></p>
+					</section>
+				</div>
+
+				<h2>The check report</h2>
+				<p>
+					The test program runs the wrong routines for all 256 angles and writes the answers to <code>P3DW.BIN</code>. The
+					checker (<code>lab/check_3d.f90</code>) compares them with its own answers. This is its output:
+				</p>
+				<pre class="check-output"><code>File: P3DW.BIN
+A side and B side agree on {info.check3d_wrong.agree} of {info.check3d_wrong.values} points
+Largest difference from the exact maths: {info.check3d_wrong.max_error_px} pixel(s)
+ERROR STOP The A side and the B side disagree.</code></pre>
+				<p class="small">
+					Each square is one angle, from 0 (the back) to 255 (the front). Red: the check found a wrong answer. Green: the
+					answer is correct. The outlined square is the dot on the screen now.
+				</p>
+				<div class="angle-strip" role="img" aria-label={`${wrong.size} of 256 angles are wrong: the angles 0 to 127, the back half of the path.`}>
+					{Array.from({ length: 256 }, (_, i) => (
+						<span class={wrong.has(i) ? 'bad' : 'ok'} data-angle={i} title={`Angle ${i}: ${wrong.has(i) ? 'wrong' : 'correct'}`}></span>
+					))}
+				</div>
+			</>
+		) : (
+			<p class="notice">
+				The game build is missing on this computer. Run <code>game/dev.sh</code>, or read the published site. GitHub
+				Actions makes the build for each push.
+			</p>
+		)}
+
+		<h2>Why the build needs the check</h2>
+		<ol class="steps-list">
+			<li>
+				<strong>The assembler does not know what you mean.</strong> <code>SHR</code> and <code>SAR</code> are both
+				correct 8086 words. NASM makes a program from each, with no warning.
+			</li>
+			<li>
+				<strong>A picture can hide an error.</strong> Here the error is easy to see. A difference of one pixel is not
+				easy to see. In test 2a, a change of one number by one pixel made the check fail. The check sees each number, not
+				the picture.
+			</li>
+			<li>
+				<strong>The check names the wrong points.</strong> The list of wrong angles (0 to 127) shows where to look: only
+				the negative numbers are wrong. That points to the sign, and to <code>SHR</code>.
+			</li>
+			<li>
+				<strong>The check guards the site.</strong> GitHub Actions runs <code>game/build.sh</code> for each change. If
+				the check of a real test fails, the build stops, and the site does not change. For this page, the build does the
+				opposite: it requires the check to <em>fail</em> on the wrong program. If the check does not find the error, the
+				check itself is broken, and the build stops.
+			</li>
+		</ol>
+		<p class="small">
+			The wrong program comes from the same files as test 2a. NASM builds it with the switch <code>-dWRONG_SIGN</code>,
+			which changes only the one word (see <a href="https://github.com/kairin/000-111-learn/blob/main/game/src/path3d.inc"><code>src/path3d.inc</code></a>).
+		</p>
+	</div>
+</StarlightPage>
+
+<script>
+	/*
+	 * Follow the yellow dot of the wrong program. The page reads the screen of the emulator and finds the top-left
+	 * pixel of the yellow square. The answers of the wrong program come from P3DW.BIN (the file that its test wrote
+	 * in DOSBox). A wrong screen x can be larger than 319; the 8086 then writes the pixel at (y * 320 + x) modulo
+	 * 65536, so the page compares that address. The correct answers come from the same steps as test 2a.
+	 */
+	const base = document.querySelector<HTMLAnchorElement>('a.site-title')?.getAttribute('href')?.replace(/\/$/, '') ?? '';
+	const frame = document.querySelector<HTMLIFrameElement>('iframe.dos-screen');
+	const aSteps = document.getElementById('a-steps');
+	const bSteps = document.getElementById('b-steps');
+	const verdict = document.getElementById('b-verdict');
+	const now = document.getElementById('duet-now');
+
+	if (frame && aSteps && bSteps && verdict && now) {
+		const version = document.querySelector<HTMLElement>('.duet')?.dataset.version ?? '';
+		const bin16 = (v: number) => ((v & 0xffff) >>> 0).toString(2).padStart(16, '0').replace(/(.{4})(?!$)/g, '$1 ');
+		const s16 = (v: number) => ((v & 0xffff) << 16) >> 16;
+		type Pt = { i: number; x: number; y: number; shadow: number };
+		let right: Pt[] = [], got: Pt[] = [];
+
+		function project(x: number, y: number, z: number) {
+			const d = z + 448;
+			return { sx: 160 + Math.trunc((x * 200) / d), sy: 50 - Math.trunc(((y - 120) * 200) / d) };
+		}
+		Promise.all([
+			fetch(`${base}/game/sine.bin?v=${version}`).then((r) => r.arrayBuffer()),
+			fetch(`${base}/game/P3DW.BIN?v=${version}`).then((r) => r.arrayBuffer()),
+		]).then(([sine, wrongFile]) => {
+			const t = new DataView(sine), w = new DataView(wrongFile);
+			for (let i = 0; i < 256; i++) {
+				const a = i - 128, y = (t.getInt16(i * 2, true) * 64) >> 8, z = 128 - i;
+				const x = a + (a >> 1);
+				const p = project(x, y, z);
+				right.push({ i, x: p.sx, y: p.sy, shadow: project(x, -96, z).sy });
+				got.push({ i, x: w.getInt16(i * 6, true), y: w.getInt16(i * 6 + 2, true), shadow: w.getInt16(i * 6 + 4, true) });
+			}
+		});
+
+		function row(code: string, result: string, note = '', cls = '') {
+			return `<li class="${cls}"><code>${code}</code><span class="val">${result}</span>${note ? `<span class="note">${note}</span>` : ''}</li>`;
+		}
+
+		function render(i: number) {
+			const a = i - 128;
+			const sar = a >> 1, shr = (a & 0xffff) >>> 1;
+			const xRight = a + sar, xWrong = s16(a + shr);
+			const r = right[i], g = got[i];
+			const ok = r.x === g.x && r.y === g.y && r.shadow === g.shadow;
+			now!.textContent = `Angle ${i} of 256 · the wrong program: screen x = ${g.x}, y = ${g.y}`;
+			aSteps!.innerHTML = [
+				row('sub ax, 128', `AX = ${a}`, `bits: ${bin16(a)}`),
+				row('mov dx, ax', `DX = ${a}`, ''),
+				row('sar dx, 1 (right)', `DX = ${sar}`, `bits: ${bin16(sar)}`),
+				row('shr dx, 1 (wrong)', `DX = ${shr}`, `bits: ${bin16(shr)}`, sar === shr ? '' : 'is-bad'),
+				row('add ax, dx', `X = ${xWrong}`, xRight === xWrong ? 'the same as the right X' : `the right X is ${xRight}`, xRight === xWrong ? '' : 'is-bad'),
+			].join('');
+			const cmp = (name: string, want: number, have: number) =>
+				row(name, `${have}`, want === have ? `correct (${want})` : `wrong: the right value is ${want}, difference ${Math.abs(have - want)}`, want === have ? 'is-ok' : 'is-bad');
+			bSteps!.innerHTML = [cmp('screen x of the dot', r.x, g.x), cmp('screen y of the dot', r.y, g.y), cmp('screen y of the shadow', r.shadow, g.shadow)].join('');
+			verdict!.innerHTML = ok
+				? '<span class="ok">✓ The check accepts this angle.</span> The number is not negative, so SHR and SAR give the same result.'
+				: '<span class="bad">✗ The check rejects this angle.</span> One wrong angle is enough to stop the build.';
+			document.querySelectorAll('.angle-strip span.now').forEach((s) => s.classList.remove('now'));
+			document.querySelector(`.angle-strip span[data-angle="${i}"]`)?.classList.add('now');
+		}
+
+		let lastI = -1, lastPos = -1, busy = false;
+		async function follow() {
+			const ci = (frame!.contentWindow as any)?.ci;
+			if (ci && !busy && got.length) {
+				busy = true;
+				try {
+					const img: ImageData = await ci.screenshot();
+					const d = img.data;
+					for (let p = 0; p < d.length; p += 4) {
+						if (d[p] > 200 && d[p + 1] > 200 && d[p + 2] < 120) {
+							const pos = p / 4;
+							if (pos === lastPos) break;
+							const want = (lastI + 1) & 255;
+							const dist = (i: number) => Math.min((i - want) & 255, (want - i) & 255);
+							const found = got.filter((q) => ((q.y * 320 + q.x) & 0xffff) === pos).sort((q, r) => dist(q.i) - dist(r.i))[0];
+							if (found) { lastPos = pos; lastI = found.i; render(found.i); }
+							break;
+						}
+					}
+				} catch { /* the emulator is not ready yet */ }
+				busy = false;
+			}
+			setTimeout(follow, 30);
+		}
+		follow();
+
+		document.querySelectorAll<HTMLButtonElement>('.duet-controls button[data-key]').forEach((btn) =>
+			btn.addEventListener('click', () => {
+				const ci = (frame.contentWindow as any)?.ci;
+				if (!ci) return;
+				const key = Number(btn.dataset.key);
+				ci.simulateKeyPress(key);
+				if (key >= 49 && key <= 53) {
+					document.querySelectorAll('.duet-controls button[data-key]').forEach((b) => {
+						const k = Number((b as HTMLElement).dataset.key);
+						if (k >= 49 && k <= 53) b.setAttribute('aria-pressed', String(b === btn));
+					});
+				}
+				if (key === 32) {
+					const pause = document.getElementById('btn-pause')!;
+					const on = pause.getAttribute('aria-pressed') === 'true';
+					pause.setAttribute('aria-pressed', String(!on));
+					pause.textContent = on ? 'Pause' : 'Continue';
+				}
+			}),
+		);
+		document.getElementById('btn-restart')?.addEventListener('click', () => {
+			lastI = -1;
+			lastPos = -1;
+			frame.src = frame.src;
+		});
+	}
+</script>
