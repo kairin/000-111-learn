@@ -200,4 +200,4 @@ table.compare td { font-size: var(--sl-text-sm); vertical-align: top; }
 .side-photo-link { float: right; margin: 0 0 1rem 1.25rem; }
 .side-photo-small { display: block; width: 240px; height: auto; border-radius: 0.4rem; box-shadow: 0 4px 14px rgb(0 0 0 / 0.3); }
 @media (max-width: 40rem) { .side-photo-link { float: none; margin: 0 0 1rem; } .side-photo-small { width: 100%; } }
-.sl-markdown-content img[src*='a-side-cassette'] { max-width: 36rem; width: 100%; border-radius: 0.5rem; box-shadow: 0 4px 16px rgb(0 0 0 / 0.3); }
+.sl-markdown-content img[src*='-side-cassette'] { max-width: 36rem; width: 100%; border-radius: 0.5rem; box-shadow: 0 4px 16px rgb(0 0 0 / 0.3); }

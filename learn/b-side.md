@@ -1,5 +1,7 @@
 # B side: Fortran, the language that speaks maths
 
+![A cassette tape with a handwritten label: "B Side. Fortran, the language that speaks maths."](images/b-side-cassette.jpg)
+
 Fortran lets you write maths in a form that a machine can run. The name comes from FORmula TRANslation. A program called the compiler translates your formulas into the machine tongue.
 
 ## A long history, one language

@@ -240,3 +240,4 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 | 2026-09-27 | Language lens (A side, B side), dictionaries, STE writing standard. Review moved to background research | `learn/`, `site/` |
 | 2026-09-27 | Decisions D19 and D20. First test of the game: Fortran table, 8086 program in js-dos, check in DOSBox | `game/`, `site/` |
 | 2026-09-27 | The A-side cassette photo on all A-side pages and in the link preview. Pull requests now run the build and the game check | `learn/images/`, `site/`, `.github/` |
+| 2026-09-27 | The B-side cassette photo on all B-side pages. The link preview shows the two cassettes | `learn/images/`, `site/` |

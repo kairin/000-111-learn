@@ -10,7 +10,7 @@ const LEARN_SEGMENTS = JSON.parse(fs.readFileSync(new URL('../learn/segments.jso
 const OG_VERSION = (process.env.GITHUB_SHA || 'dev').slice(0, 7);
 const OG_IMAGE = `${SITE}${BASE}/og-image.png?v=${OG_VERSION}`;
 const OG_ALT =
-	'Left: a cassette labeled A Side, Assembly, the first language of the machine, 81 instructions. Right: B side, Fortran, the language that speaks maths, 598 keywords.';
+	'Two cassettes. Left: A Side, Assembly, the first language of the machine, 81 instructions. Right: B Side, Fortran, the language that speaks maths, 598 keywords.';
 
 // Content under src/content/docs, src/data and public/sources is GENERATED from ../review
 // by scripts/sync-content.mjs (runs automatically before `dev` and `build`).
