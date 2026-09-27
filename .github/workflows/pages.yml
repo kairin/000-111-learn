@@ -59,3 +59,36 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Ask Facebook to re-scrape the pages so shared links show the new title, description and image.
+  # Needs the repository secret FACEBOOK_APP_TOKEN ("<app-id>|<app-secret>" from a Facebook developer app).
+  # Without it, the job logs a notice and succeeds, so deploys never fail because of Facebook.
+  refresh-link-previews:
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      FACEBOOK_APP_TOKEN: ${{ secrets.FACEBOOK_APP_TOKEN }}
+      PAGES: >-
+        https://kairin.github.io/000-111-learn/
+        https://kairin.github.io/000-111-learn/findings/
+        https://kairin.github.io/000-111-learn/plan/
+    steps:
+      - name: Re-scrape on Facebook
+        run: |
+          if [ -z "$FACEBOOK_APP_TOKEN" ]; then
+            echo "::notice::FACEBOOK_APP_TOKEN not set; skipping the Facebook re-scrape. See review/README.md (Link previews)."
+            exit 0
+          fi
+          sleep 30   # give the Pages CDN time to serve the new build
+          for url in $PAGES; do
+            # The token goes in the POST body via stdin, never on the command line or in the URL.
+            resp=$(printf '%s' "$FACEBOOK_APP_TOKEN" | curl -sS -X POST https://graph.facebook.com/ \
+              --data-urlencode "id=$url" -d scrape=true --data-urlencode "access_token@-")
+            if echo "$resp" | grep -q '"error"'; then
+              echo "::warning::Facebook re-scrape failed for $url: $(echo "$resp" | head -c 300)"
+            else
+              echo "Re-scraped $url: $(echo "$resp" | grep -o '"title":"[^"]*"' | head -1)"
+            fi
+          done
+          # A Facebook failure is reported as a warning but doesn't fail the deploy.
+          exit 0

@@ -3,7 +3,9 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { BASE, REPO_URL, SITE } from './site.config.mjs';
 
-const OG_IMAGE = `${SITE}${BASE}/og-image.png`;
+// ?v=<commit> changes on every deploy, so Facebook and others fetch the new image instead of a cached one.
+const OG_VERSION = (process.env.GITHUB_SHA || 'dev').slice(0, 7);
+const OG_IMAGE = `${SITE}${BASE}/og-image.png?v=${OG_VERSION}`;
 const OG_ALT =
 	'Learning Assembly and Fortran the hard way: review stats and a heatmap of findings across 56 segments of 4 AI-generated guides.';
 

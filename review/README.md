@@ -137,7 +137,14 @@ What the site has:
   - status and note drafts saved in your browser.
 - **Every page from `review/`**: plan, decisions, session records, reviews, sources and all 56 segments, in a sidebar. Each page has an "Edit page" link that opens its source file in `review/` on GitHub.
 - Built-in full-text search (Pagefind), light/dark/auto themes, and a mobile layout.
-- **Link previews** (Facebook, LinkedIn, X, chat apps): every page has Open Graph tags, and `site/scripts/og-image.mjs` redraws the 1200×630 preview image (stats and heatmap) on every build. After a deploy, run the URL through Facebook's [Sharing Debugger](https://developers.facebook.com/tools/debug/) and click **Scrape Again** to refresh Facebook's cached preview.
+- **Link previews** (Facebook, LinkedIn, X, chat apps): every page has Open Graph tags, and `site/scripts/og-image.mjs` redraws the 1200×630 preview image (stats and heatmap) on every build. On every deploy:
+  - The image link changes (`og-image.png?v=<commit>`), so Facebook fetches the new image instead of reusing a cached one.
+  - The workflow's `refresh-link-previews` job asks Facebook to re-scrape the homepage, findings and plan pages. It needs the repository secret `FACEBOOK_APP_TOKEN`. Without it, the job skips with a notice.
+  - **One-time setup:**
+    1. Create a Facebook app at [developers.facebook.com](https://developers.facebook.com/apps/) (type "Business" or "None"; no review is needed for scraping).
+    2. Copy its **App ID** and **App Secret**.
+    3. Run `gh secret set FACEBOOK_APP_TOKEN` in this repository and paste `<app-id>|<app-secret>` when prompted. The value never appears in the command or logs.
+  - **Manual fallback:** paste the URL into Facebook's [Sharing Debugger](https://developers.facebook.com/tools/debug/) and click **Scrape Again**.
 
 **Tracking statuses on a static site:**
 1. **Permanent:** on the findings page, click **edit `review/findings/status.json` on GitHub**. Add or change an entry, for example:
