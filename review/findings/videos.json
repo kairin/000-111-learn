@@ -1,0 +1,11 @@
+{
+ "_about": "The YouTube video that the owner gave in the prompt for each document. Titles and channels come from the YouTube oEmbed service (checked 2026-09-27). Durations come from the captions.",
+ "Assembly Language Video Breakdown.md": { "id": "4gwYkEK0gOk", "title": "Assembly Language in 100 Seconds", "channel": "Fireship", "duration": "2:43" },
+ "assembly_language_architectural_explorer.html": { "id": "4gwYkEK0gOk", "title": "Assembly Language in 100 Seconds", "channel": "Fireship", "duration": "2:43" },
+ "Fortran Video Breakdown.md": { "id": "NMWzgy8FsKs", "title": "FORTRAN in 100 Seconds", "channel": "Fireship", "duration": "2:38" },
+ "fortran_technical_deconstruction.html": { "id": "NMWzgy8FsKs", "title": "FORTRAN in 100 Seconds", "channel": "Fireship", "duration": "2:38" },
+ "YouTube Video Breakdown.md": { "id": "yYcHWGxtRQo", "title": "What's the FASTEST Computer Language? C++ vs Fortran vs Cobol: E04", "channel": "Dave's Garage", "duration": "15:17" },
+ "software_drag_race_breakdown.html": { "id": "yYcHWGxtRQo", "title": "What's the FASTEST Computer Language? C++ vs Fortran vs Cobol: E04", "channel": "Dave's Garage", "duration": "15:17" },
+ "YouTube Video Content Analysis.md": { "id": "tQtFdsEcK_s", "title": "E01: What is the FASTEST Computer Language? 45 Languages Tested!", "channel": "Dave's Garage", "duration": "22:26" },
+ "prime_sieve_benchmark_interactive_explorer.html": { "id": "tQtFdsEcK_s", "title": "E01: What is the FASTEST Computer Language? 45 Languages Tested!", "channel": "Dave's Garage", "duration": "22:26" }
+}

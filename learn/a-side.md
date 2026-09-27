@@ -1,6 +1,6 @@
 # A side: Assembly, the first language of the machine
 
-![A cassette tape with a handwritten label: "A Side. Assembly, the first language of the machine."](images/a-side-cassette.jpg)
+![A cassette tape with a handwritten label: "A Side. Assembly - the first language of the machine."](images/a-side-cassette.jpg)
 
 Assembly speaks directly to the processor. The processor is the part of a computer that does the work. Each Assembly word is the name of one step that the processor can do.
 

@@ -1,0 +1,17 @@
+{"source": "YouTube Video Breakdown.md", "moments": {
+ "01": {"t": "10:25", "note": "The video shows the 5-second loop here and names the one-million limit at 13:03."},
+ "02": {"t": "01:35", "note": "The video gives the history of Fortran and COBOL here."},
+ "03": {"t": "04:32", "note": "The COBOL code tour starts here."},
+ "04": {"t": "02:00", "note": "The video explains that Fortran means formula translation. It does not discuss aliasing."},
+ "05": {"t": "14:03", "note": "The video gives only the C++ result of Dave as a comparison."},
+ "06": {"t": "13:51", "note": "The video gives Fortran 1163 and COBOL 1118 passes, not the numbers in this part."},
+ "07": {"note": "The video does not cover this idea. It names no Fortran compiler or flag."},
+ "08": {"note": "The video does not cover this idea."},
+ "09": {"t": "10:05", "note": "The video says only that the Fortran array holds bits. It does not compare bit and byte speed."},
+ "10": {"t": "10:47", "note": "The video shows the Fortran program free and allocate its array in each pass. It gives no cost."},
+ "11": {"t": "05:30", "note": "The video says that the COBOL program keeps a preset copy of the array, which is not faithful."},
+ "12": {"t": "14:15", "note": "The video says that the leader is not C, C++ or Assembly."},
+ "13": {"note": "The video does not cover this idea."},
+ "14": {"t": "00:19", "note": "The video asks if old languages can approach modern C++ on new hardware."},
+ "15": {"note": "The video does not cover this idea."}
+}}

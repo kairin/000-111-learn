@@ -1,0 +1,8 @@
+{"source": "fortran_technical_deconstruction.html", "moments": {
+ "01": {"t": "00:06", "note": "The video names Backus and the IBM 704 and the first optimizing compiler. The chart numbers are not from the video."},
+ "02": {"t": "00:45", "note": "The video shows punch cards and capital keywords. It does not give the column layout."},
+ "03": {"t": "01:25", "note": "The video tells you to use implicit none. The simulator is not from the video."},
+ "04": {"t": "00:37", "note": "The video says only that the language has many versions. It does not compare old and new standards."},
+ "05": {"t": "00:40", "note": "The video says that Fortran is used for number crunching. It does not discuss aliasing."},
+ "06": {"note": "This part judges the whole video. The video does not cover this idea."}
+}}

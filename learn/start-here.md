@@ -8,7 +8,7 @@ A cassette tape has two sides. This site has two sides too.
 
 - **A side: Assembly.** This is the first language of the machine. It speaks directly to the processor.
 
-  ![A cassette tape with a handwritten label: "A Side. Assembly, the first language of the machine."](images/a-side-cassette.jpg)
+  ![A cassette tape with a handwritten label: "A Side. Assembly - the first language of the machine."](images/a-side-cassette.jpg)
 
 - **B side: Fortran.** This language speaks maths. It lets you write formulas that a machine can run.
 

@@ -1,0 +1,12 @@
+{"source": "Assembly Language Video Breakdown.md", "moments": {
+"01": {"t": "00:00", "note": "The video defines assembly at 00:00 and names Kathleen Booth at 00:11."},
+"02": {"t": "00:46", "note": "The video says that each assembly language works on one CPU architecture."},
+"03": {"t": "00:58", "note": "The video divides the program into three sections, but it calls data constants."},
+"04": {"t": "01:18", "note": "The video starts the Hello World example here."},
+"05": {"t": "01:20", "note": "The video shows db and the length calculation with the dollar sign."},
+"06": {"t": "01:47", "note": "The video explains registers and the mov instruction for the write call."},
+"07": {"t": "02:17", "note": "The video calls the kernel, warns about a segmentation fault, and adds exit 60."},
+"08": {"t": "02:28", "note": "The video names the assembler and the linker but gives no commands."},
+"09": {"t": "00:33", "note": "The video names drivers, embedded systems and WebAssembly, but not security or trading."},
+"10": {"note": "The video does not cover this idea. It has no source list."}
+}}

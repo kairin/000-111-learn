@@ -1,22 +1,196 @@
 [
- {"doc": "01", "source": "Assembly-Fortran-Comparison.md", "short": "Career report",
+ {
+  "doc": "01",
+  "source": "Assembly-Fortran-Comparison.md",
+  "short": "Career report",
   "question": "Which language to learn in 90 days for career and skills?",
   "review": "adversarial-review-pass1/01-Assembly-Fortran-Comparison.review.md",
-  "passes": [{"pass": 1, "goal_met": "Partly", "confidence": "Medium-low",
-              "headline": "Broken salary data; LANL claim cited to a Freelancer page; milestones not like-for-like"}]},
- {"doc": "02", "source": "Assembly-Versus-Fortran-Comparison.md", "short": "Retro game report",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Medium-low",
+    "headline": "Broken salary data; LANL claim cited to a Freelancer page; milestones not like-for-like"
+   }
+  ]
+ },
+ {
+  "doc": "02",
+  "source": "Assembly-Versus-Fortran-Comparison.md",
+  "short": "Retro game report",
   "question": "Which language to learn in 90 days to build an 80s/90s-constrained game?",
   "review": "adversarial-review-pass1/02-Assembly-Versus-Fortran-Comparison.review.md",
-  "passes": [{"pass": 1, "goal_met": "No", "confidence": "Low",
-              "headline": "Its Fortran advantages don't exist on 80s/90s DOS; history contradicts its genre mapping"}]},
- {"doc": "03", "source": "assembly_vs_fortran_learning_advisor.html", "short": "Career advisor page", "derived_from": "01",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "Its Fortran advantages don't exist on 80s/90s DOS; history contradicts its genre mapping"
+   }
+  ]
+ },
+ {
+  "doc": "03",
+  "source": "assembly_vs_fortran_learning_advisor.html",
+  "short": "Career advisor page",
+  "derived_from": "01",
   "question": "Same as 01, as a quiz, roadmap and charts",
   "review": "adversarial-review-pass1/03-assembly_vs_fortran_learning_advisor.review.md",
-  "passes": [{"pass": 1, "goal_met": "No / Partly", "confidence": "Low",
-              "headline": "Quiz only restates answers and gives a verdict after one click; salary chart changes its source's numbers"}]},
- {"doc": "04", "source": "retro_game_dev_language_advisor.html", "short": "Retro advisor page", "derived_from": "02",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No / Partly",
+    "confidence": "Low",
+    "headline": "Quiz only restates answers and gives a verdict after one click; salary chart changes its source's numbers"
+   }
+  ]
+ },
+ {
+  "doc": "04",
+  "source": "retro_game_dev_language_advisor.html",
+  "short": "Retro advisor page",
+  "derived_from": "02",
   "question": "Same as 02, as a quiz, roadmap and charts",
   "review": "adversarial-review-pass1/04-retro_game_dev_language_advisor.review.md",
-  "passes": [{"pass": 1, "goal_met": "No", "confidence": "Low",
-              "headline": "FORTRAN 77 fixed-/free-form contradiction; impossible 'locked 60 fps'; invented charts"}]}
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "FORTRAN 77 fixed-/free-form contradiction; impossible 'locked 60 fps'; invented charts"
+   }
+  ]
+ },
+ {
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "short": "Assembly video report",
+  "question": "What does the video \"Assembly Language in 100 Seconds\" (Fireship) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/05-Assembly-Language-Video-Breakdown.review.md",
+  "video": "4gwYkEK0gOk",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Medium",
+    "headline": "The code walk-through is correct, but the report cites the video for many claims that the video does not make."
+   }
+  ]
+ },
+ {
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "short": "Assembly video page",
+  "question": "What does the video \"Assembly Language in 100 Seconds\" (Fireship) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/06-assembly_language_architectural_explorer.review.md",
+  "video": "4gwYkEK0gOk",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Low",
+    "headline": "The simulator is a useful start. But the page invents the chart and the hexdump, and the chart does not draw on load."
+   }
+  ],
+  "derived_from": "05"
+ },
+ {
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "short": "Fortran video report",
+  "question": "What does the video \"FORTRAN in 100 Seconds\" (Fireship) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/07-Fortran-Video-Breakdown.review.md",
+  "video": "NMWzgy8FsKs",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Medium-low",
+    "headline": "The Fortran advice is mostly good, but the citations do not support the text, and the report misses most errors of the video."
+   }
+  ]
+ },
+ {
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "short": "Fortran video page",
+  "question": "What does the video \"FORTRAN in 100 Seconds\" (Fireship) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/08-fortran_technical_deconstruction.review.md",
+  "video": "NMWzgy8FsKs",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Low",
+    "headline": "The page shows invented chart numbers, and its fake compiler prints the wrong output."
+   }
+  ],
+  "derived_from": "07"
+ },
+ {
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "short": "E04 benchmark report",
+  "question": "What does the video \"What's the FASTEST Computer Language? C++ vs Fortran vs Cobol: E04\" (Dave's Garage) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/09-YouTube-Video-Breakdown.review.md",
+  "video": "yYcHWGxtRQo",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "The report contradicts the results of the video and takes most numbers from a later forum test."
+   }
+  ]
+ },
+ {
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "short": "E04 benchmark page",
+  "question": "What does the video \"What's the FASTEST Computer Language? C++ vs Fortran vs Cobol: E04\" (Dave's Garage) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/10-software_drag_race_breakdown.review.md",
+  "video": "yYcHWGxtRQo",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "The page invents its headline numbers and shows COBOL 50 times slower, but the video shows COBOL equal to Fortran."
+   }
+  ],
+  "derived_from": "09"
+ },
+ {
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "short": "E01 benchmark report",
+  "question": "What does the video \"E01: What is the FASTEST Computer Language? 45 Languages Tested!\" (Dave's Garage) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/11-YouTube-Video-Content-Analysis.review.md",
+  "video": "tQtFdsEcK_s",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Low",
+    "headline": "The report names the right languages, but it invents results and reverses the Ada against Pascal outcome."
+   }
+  ]
+ },
+ {
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "short": "E01 benchmark page",
+  "question": "What does the video \"E01: What is the FASTEST Computer Language? 45 Languages Tested!\" (Dave's Garage) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/12-prime_sieve_benchmark_interactive_explorer.review.md",
+  "video": "tQtFdsEcK_s",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "The page shows invented speed data as real results, and its safety simulator computes nothing."
+   }
+  ],
+  "derived_from": "11"
+ }
 ]

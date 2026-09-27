@@ -5,6 +5,19 @@ import fs from 'node:fs';
 import { BASE, REPO_URL, SITE } from './site.config.mjs';
 
 const LEARN_SEGMENTS = JSON.parse(fs.readFileSync(new URL('../learn/segments.json', import.meta.url), 'utf8'));
+// One sidebar group for the parts of each reviewed document, in the order of documents.json.
+const readJson = (rel, fallback) => {
+	try {
+		return JSON.parse(fs.readFileSync(new URL(rel, import.meta.url), 'utf8'));
+	} catch {
+		return fallback;
+	}
+};
+const REVIEWED = readJson('../review/findings/documents.json', []);
+const MANIFEST = readJson('../review/segments/manifest.json', { documents: [] });
+const DOCUMENT_PART_GROUPS = REVIEWED.map((d) => ({ d, m: MANIFEST.documents.find((x) => x.source === d.source) }))
+	.filter(({ m }) => m)
+	.map(({ d, m }) => ({ label: `${d.doc} ${d.short}`, collapsed: true, items: [{ autogenerate: { directory: `segments/${m.slug}` } }] }));
 
 // ?v=<commit> changes on every deploy, so Facebook and others fetch the new image instead of a cached one.
 const OG_VERSION = (process.env.GITHUB_SHA || 'dev').slice(0, 7);
@@ -78,10 +91,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Index of document parts', slug: 'segments' },
 								{ label: 'Map: parts and findings', slug: 'segments/segment-map' },
-								{ label: '01 Career report', collapsed: true, items: [{ autogenerate: { directory: 'segments/assembly-fortran-comparison' } }] },
-								{ label: '02 Retro game report', collapsed: true, items: [{ autogenerate: { directory: 'segments/assembly-versus-fortran-comparison' } }] },
-								{ label: '03 Career advisor page', collapsed: true, items: [{ autogenerate: { directory: 'segments/assembly-vs-fortran-learning-advisor' } }] },
-								{ label: '04 Retro advisor page', collapsed: true, items: [{ autogenerate: { directory: 'segments/retro-game-dev-language-advisor' } }] },
+								...DOCUMENT_PART_GROUPS,
 							],
 						},
 					],

@@ -24,7 +24,7 @@ export const SIDES: Record<
 		vocab: vocabA,
 		image: {
 			src: aSideCassette,
-			alt: 'A cassette tape with a handwritten label: "A Side. Assembly, the first language of the machine."',
+			alt: 'A cassette tape with a handwritten label: "A Side. Assembly - the first language of the machine."',
 		},
 	},
 	b: {

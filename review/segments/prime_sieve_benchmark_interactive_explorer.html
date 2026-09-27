@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparative Analysis: Prime Sieve Benchmark Dynamics</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Chart Container Rules as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px;
+            max-height: 420px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 420px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-amber-200 selection:text-stone-900">
+
+    <!-- Chosen Palette: Warm Neutral Harmony (Background: Stone-50, Cards: White, Primary Accent: Slate-800, Highlight Accent: Amber-600 & Emerald-700, Borders: Stone-200) -->
+    
+    <!-- Application Structure Plan: 
+        1. Sticky Navigation & Executive Header: Concise introduction to Dave Plummer's benchmark and key metrics bar.
+        2. Section 1: Algorithmic Framework & Benchmark Harness Rules: Visual card workflow detailing the Sieve of Eratosthenes (N=1M) execution criteria.
+        3. Section 2: Multi-Paradigm Throughput Visualizer: Dynamic Chart.js bar graph comparing Native AOT, Managed JIT, and Dynamic Interpreted languages with category filters.
+        4. Section 3: Deep-Dive Matrix: Ada, Pascal, and Delphi: Interactive comparison table and safety flag toggle simulator showing instruction/branch impacts.
+        5. Section 4: Micro-Architectural Memory & Cache Simulator: Interactive calculator allowing users to change N and array strategy to observe CPU cache fit (L1/L2/L3) vs instruction count overhead.
+        6. Section 5: Engineering Synthesis & Decision Framework: Key trade-off takeaways and interactive language priority matching matrix.
+    -->
+
+    <!-- Visualization & Content Choices: 
+        1. Throughput Chart: Interactive Chart.js canvas chart showing normalized passes/sec across 15 representative languages with category filter buttons.
+        2. Memory & Cache Simulator: Pure JS mathematical model computing memory footprint in KiB/MiB and checking against L1 (32KB), L2 (512KB), and L3 caches.
+        3. Safety Flag Toggle: Interactive UI toggling assertions on/off for Ada/Pascal to show speed multiplier changes.
+        4. Language Matrix Table: Searchable HTML table with structured properties and detailed modal/panel views.
+        NO SVG or Mermaid JS used. Standard Unicode graphics and clean HTML layout used throughout.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-stone-100/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🏎️</span>
+                <span class="font-bold text-stone-900 text-lg tracking-tight">Prime Sieve Runtime Dynamics</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-stone-600">
+                <a href="#overview" class="hover:text-amber-700 transition">Overview</a>
+                <a href="#paradigm-chart" class="hover:text-amber-700 transition">Paradigm Performance</a>
+                <a href="#systems-matrix" class="hover:text-amber-700 transition">Ada / Pascal / Delphi</a>
+                <a href="#cache-simulator" class="hover:text-amber-700 transition">Memory & Cache Lab</a>
+                <a href="#synthesis" class="hover:text-amber-700 transition">Engineering Insights</a>
+            </nav>
+            <div class="text-xs bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full font-mono border border-amber-200">
+                Episode 01 Data Context
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- Executive Hero Banner -->
+        <section id="overview" class="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
+            <div class="max-w-3xl">
+                <div class="inline-block bg-stone-100 text-stone-700 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md mb-4">
+                    Empirical Computer Language Drag Race Analysis
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight mb-4">
+                    Comparative Empirical Analysis of Programming Language Runtime Dynamics
+                </h1>
+                <p class="text-stone-600 text-base sm:text-lg leading-relaxed mb-6">
+                    This interactive analysis examines empirical runtime performance across 45+ programming languages, based on the foundational benchmark created by Microsoft systems engineer Dave Plummer (<em>Dave's Garage</em>). By isolating single-threaded execution on the Sieve of Eratosthenes algorithm ($N = 1,000,000$), we evaluate how compiler code generation, runtime safety checks, and memory representations dictate raw CPU execution speed.
+                </p>
+            </div>
+
+            <!-- Key Metric Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-stone-100">
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Algorithmic Workload</div>
+                    <div class="text-xl font-bold text-stone-800 mt-1">Sieve of Eratosthenes</div>
+                    <div class="text-xs text-stone-600 mt-0.5">Limit $N = 1,000,000$</div>
+                </div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Primary Focus Languages</div>
+                    <div class="text-xl font-bold text-amber-700 mt-1">Ada, Pascal, Delphi</div>
+                    <div class="text-xs text-stone-600 mt-0.5">Vs. Native AOT & Dynamic Runtimes</div>
+                </div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Packed Bitwise Footprint</div>
+                    <div class="text-xl font-bold text-emerald-700 mt-1">61.04 KiB</div>
+                    <div class="text-xs text-stone-600 mt-0.5">Fits within CPU L2 Cache</div>
+                </div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Execution Harness Calibration</div>
+                    <div class="text-xl font-bold text-stone-800 mt-1">~5.0 Seconds</div>
+                    <div class="text-xs text-stone-600 mt-0.5">Normalized Passes / Second</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Benchmark Framework & Execution Rules -->
+        <section class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 mb-2">1. Algorithmic Framework & Benchmark Harness</h2>
+                <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+                    To maintain scientific integrity across radically disparate language paradigms—from bare-metal compiled code to dynamic bytecode interpreters—the benchmark harness imposes strict execution constraints. The section below details how the prime sieve is computed and validated to isolate micro-architectural CPU performance.
+                </p>
+            </div>
+
+            <!-- Interactive Step-by-Step Harness Workflow -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-stone-800 text-white font-bold flex items-center justify-center text-sm mb-3">1</div>
+                        <h3 class="font-semibold text-stone-800 text-base mb-1">Dynamic Buffer Allocation</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            Candidate memory buffer must be dynamically allocated at runtime. Prevents compilers from precomputing prime tables or hardcoding static global offset addresses.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-[11px] font-mono text-amber-800 bg-amber-50 p-2 rounded border border-amber-200/50">
+                        Rule: Dynamic Heap / Stack Buffer
+                    </div>
+                </div>
+
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-stone-800 text-white font-bold flex items-center justify-center text-sm mb-3">2</div>
+                        <h3 class="font-semibold text-stone-800 text-base mb-1">Strict Sieve Execution</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            Sequential elimination of composite numbers for all odd factors up to $\sqrt{N}$. Mathematical bypasses or wheel factorizations are strictly prohibited.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-[11px] font-mono text-amber-800 bg-amber-50 p-2 rounded border border-amber-200/50">
+                        Complexity: O(N log log N)
+                    </div>
+                </div>
+
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-stone-800 text-white font-bold flex items-center justify-center text-sm mb-3">3</div>
+                        <h3 class="font-semibold text-stone-800 text-base mb-1">Mathematical Validation</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            Upon completing a pass, the engine verifies total primes against mathematical ground truth ($78,498$ primes below $1,000,000$). Invalid passes are discarded.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-[11px] font-mono text-emerald-800 bg-emerald-50 p-2 rounded border border-emerald-200/50">
+                        Check: 78,498 Primes Found
+                    </div>
+                </div>
+
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-stone-800 text-white font-bold flex items-center justify-center text-sm mb-3">4</div>
+                        <h3 class="font-semibold text-stone-800 text-base mb-1">Time Normalization</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            The pipeline loops continuously over a 5-second window. Performance is measured as normalized **Passes per Second**, establishing high resolution.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-[11px] font-mono text-stone-700 bg-stone-200/60 p-2 rounded">
+                        Metric: Passes / Second
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Multi-Paradigm Throughput Benchmark Visualizer -->
+        <section id="paradigm-chart" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+            <div class="mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-stone-900 mb-2">2. Cross-Paradigm Performance Spectrum</h2>
+                        <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+                            This section presents empirical performance throughput across execution paradigms. Use the filter controls below to isolate Ahead-of-Time (AOT) compiled systems languages, Just-In-Time (JIT) managed runtimes, and dynamic bytecode interpreters. Select any language bar to inspect memory models and execution bottlenecks.
+                        </p>
+                    </div>
+                    <!-- Chart Filter Buttons -->
+                    <div class="flex flex-wrap gap-2 self-start md:self-center">
+                        <button onclick="filterParadigm('all')" id="btn-all" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-800 text-white shadow-sm transition">All Categories</button>
+                        <button onclick="filterParadigm('aot')" id="btn-aot" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 border border-stone-200 transition">Native AOT</button>
+                        <button onclick="filterParadigm('jit')" id="btn-jit" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 border border-stone-200 transition">Managed JIT</button>
+                        <button onclick="filterParadigm('dynamic')" id="btn-dynamic" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 border border-stone-200 transition">Dynamic Bytecode</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="chart-container">
+                <canvas id="paradigmCanvas"></canvas>
+            </div>
+
+            <!-- Interactive Language Insight Modal / Card -->
+            <div id="language-detail-card" class="mt-6 p-5 bg-stone-50 rounded-xl border border-stone-200 hidden transition-all">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <span id="detail-category" class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-stone-200 text-stone-700">Category</span>
+                        <h3 id="detail-title" class="text-xl font-bold text-stone-900 mt-1">Language Name</h3>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs text-stone-500">Relative Throughput</div>
+                        <div id="detail-throughput" class="text-lg font-bold text-amber-700">1.0x Baseline</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-stone-200/80 text-xs text-stone-600">
+                    <div>
+                        <span class="font-semibold text-stone-800">Memory Abstraction Model:</span>
+                        <p id="detail-memory" class="mt-0.5 leading-relaxed">Detailed description of how memory is allocated and managed.</p>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-stone-800">Primary Execution Bottleneck / Vector:</span>
+                        <p id="detail-bottleneck" class="mt-0.5 leading-relaxed">Specific hardware or runtime factor governing execution speed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Ada, Pascal, and Delphi Architectural Matrix -->
+        <section id="systems-matrix" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 mb-2">3. Systems Systems Deep Dive: Ada, Pascal, and Delphi</h2>
+                <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+                    While modern benchmarking discussions often focus on C++ vs. Rust, standard structured languages like Ada, Pascal, and Delphi share a rich heritage of high performance. This section explores how their safety profiles, compiler backends, and array representations impact machine code generation.
+                </p>
+            </div>
+
+            <!-- Compiler Safety Check Toggle Simulator -->
+            <div class="mb-8 p-5 bg-amber-50/60 rounded-xl border border-amber-200/80">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="font-bold text-stone-900 text-base">Interactive Safety Flag Simulator</h3>
+                        <p class="text-xs text-stone-600 mt-1">
+                            Toggle runtime safety checks (array bounds verification, range checks, and invariant assertions) to observe their effect on compiled native code throughput.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-white px-4 py-2 rounded-lg border border-stone-200 shadow-sm self-start">
+                        <span class="text-xs font-medium text-stone-600">Runtime Safety Checks:</span>
+                        <button id="safety-toggle-btn" onclick="toggleSafetyMode()" class="px-3 py-1 rounded text-xs font-bold bg-amber-600 text-white transition">
+                            ENABLED (Default Defensive)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-amber-200/60 text-xs">
+                    <div class="bg-white p-3 rounded border border-stone-200">
+                        <span class="text-stone-500 font-medium">Branch Instruction Density</span>
+                        <div id="sim-branch" class="text-base font-bold text-stone-800 mt-0.5">High (Check on every write)</div>
+                        <p class="text-[11px] text-stone-500 mt-1">Inserts comparison branches inside tight loops, disturbing pipeline speculation.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-stone-200">
+                        <span class="text-stone-500 font-medium">Compiler Directives Applied</span>
+                        <div id="sim-flags" class="text-base font-mono font-bold text-amber-800 mt-0.5">Ada default assertions / {$R+} {$Q+}</div>
+                        <p class="text-[11px] text-stone-500 mt-1">Ensures safety against buffer overflows and type range violations.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-stone-200">
+                        <span class="text-stone-500 font-medium">Estimated Throughput Penalty</span>
+                        <div id="sim-penalty" class="text-base font-bold text-amber-700 mt-0.5">-60% to -65% vs Unrestricted C</div>
+                        <p class="text-[11px] text-stone-500 mt-1">Suppression under -O3 brings performance back to parity with C/C++.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architectural Comparison Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-stone-100 text-stone-700 uppercase font-semibold border-b border-stone-200">
+                            <th class="p-3">Language / Dialect</th>
+                            <th class="p-3">Compiler Infrastructure</th>
+                            <th class="p-3">Type & Safety Profile</th>
+                            <th class="p-3">Memory Strategy</th>
+                            <th class="p-3">Primary Code Generation Vector</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200 text-stone-700">
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-3 font-bold text-stone-900">
+                                Ada (GNAT)
+                            </td>
+                            <td class="p-3">GNAT Backend built upon GCC optimization pipeline</td>
+                            <td class="p-3">Strict subtype ranges & invariant validation checks</td>
+                            <td class="p-3 font-mono">Packed bit array or dynamic boolean buffer</td>
+                            <td class="p-3">Scalar evolution, dead-code elimination, aggressive interprocedural inlining</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-3 font-bold text-stone-900">
+                                Pascal (Free Pascal)
+                            </td>
+                            <td class="p-3">Free Pascal Compiler (FPC) native code generator</td>
+                            <td class="p-3">Strongly typed procedural paradigm with modular units</td>
+                            <td class="p-3 font-mono">Dynamic continuous byte-boolean array</td>
+                            <td class="p-3">Register variable allocation, loop invariant hoisting, suppressible range checking</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-3 font-bold text-stone-900">
+                                Delphi (Embarcadero)
+                            </td>
+                            <td class="p-3">Proprietary Embarcadero Delphi Object Pascal Compiler</td>
+                            <td class="p-3">Object Pascal with component encapsulation</td>
+                            <td class="p-3 font-mono">Heap-allocated dynamic buffer wrappers</td>
+                            <td class="p-3">Whole-program link-time code generation, fastcall register passing convention</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 4: Micro-Architectural Memory & Cache Simulator -->
+        <section id="cache-simulator" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 mb-2">4. Micro-Architectural Memory & Cache Simulator</h2>
+                <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+                    A key trade-off highlighted in Episode 01 is data representation density. A <strong>packed bit array</strong> drastically reduces memory footprint to fit inside high-speed L1/L2 CPU cache, but requires extra bitwise shift (`SHR`/`SHL`) and mask (`AND`/`OR`) instructions per operation. A <strong>byte-boolean array</strong> allows single byte writes, but expands the working set 8-fold.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Calculator Controls -->
+                <div class="lg:col-span-5 bg-stone-50 p-6 rounded-xl border border-stone-200 space-y-5">
+                    <div>
+                        <label for="limit-slider" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">
+                            Upper Sieve Limit ($N$): <span id="limit-val" class="text-amber-700 font-mono text-sm">1,000,000</span>
+                        </label>
+                        <input id="limit-slider" type="range" min="100000" max="5000000" step="100000" value="1000000" oninput="updateMemorySim()" class="w-full accent-amber-600 cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-stone-500 font-mono mt-1">
+                            <span>100K</span>
+                            <span>1.0M (Standard)</span>
+                            <span>5.0M</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">Data Representation Mode</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="btn-mode-bit" onclick="setSimMode('bit')" class="p-2.5 text-xs font-semibold rounded-lg bg-stone-800 text-white border border-stone-800 transition">
+                                Packed Bit Array (1 bit / odd)
+                            </button>
+                            <button id="btn-mode-byte" onclick="setSimMode('byte')" class="p-2.5 text-xs font-semibold rounded-lg bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 transition">
+                                Byte Boolean (1 byte / odd)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-lg border border-stone-200 space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-stone-500">Candidate Odd Integers:</span>
+                            <span id="stat-odds" class="font-mono font-bold text-stone-800">500,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-stone-500">Calculated Buffer Footprint:</span>
+                            <span id="stat-footprint" class="font-mono font-bold text-amber-700">61.04 KiB</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-stone-500">CPU Ops Per Factor Clear:</span>
+                            <span id="stat-ops" class="font-mono font-bold text-stone-800">4 Ops (SHR, AND, OR, Write)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Cache Fit Gauge & Analysis -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 space-y-4">
+                        <h3 class="font-bold text-stone-900 text-sm tracking-tight uppercase">CPU Cache Level Alignment Map</h3>
+                        
+                        <!-- L1 Data Cache Progress -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="font-semibold text-stone-700">L1 Data Cache (32 KiB Target Limit)</span>
+                                <span id="l1-pct" class="font-mono text-stone-600">100%+ (Exceeded)</span>
+                            </div>
+                            <div class="w-full bg-stone-200 h-3 rounded-full overflow-hidden">
+                                <div id="l1-bar" class="bg-amber-600 h-full transition-all duration-300" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- L2 Cache Progress -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="font-semibold text-stone-700">L2 Cache (512 KiB Target Limit)</span>
+                                <span id="l2-pct" class="font-mono text-stone-600">11.9% (Fits Comfortably)</span>
+                            </div>
+                            <div class="w-full bg-stone-200 h-3 rounded-full overflow-hidden">
+                                <div id="l2-bar" class="bg-emerald-600 h-full transition-all duration-300" style="width: 11.9%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Cache Status Indicator Badge -->
+                        <div id="cache-badge" class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center space-x-3 text-emerald-800 text-xs">
+                            <span class="text-lg">⚡</span>
+                            <div>
+                                <span class="font-bold">L2 Cache Resident:</span> Buffer fits entirely in high-speed CPU L2 cache, eliminating DRAM latency bottlenecks during inner loop traversal.
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-stone-500 leading-relaxed italic">
+                        Formula applied: Footprint = $\frac{N}{2 \times 8 \text{ bits/byte}}$ for packed bitwise arrays vs $\frac{N}{2 \text{ bytes}}$ for byte arrays. Small footprints prevent external DRAM bus stalls, but trade off against ALU cycle costs for bitwise masking.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Engineering Synthesis & Language Priority Matrix -->
+        <section id="synthesis" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 mb-2">5. Engineering Synthesis & Architectural Takeaways</h2>
+                <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+                    The empirical results of Dave Plummer's prime sieve benchmark debunk several common software engineering myths regarding execution speed, safety overhead, and language design. Use the interactive priority matcher below to evaluate language selection based on real-world constraints.
+                </p>
+            </div>
+
+            <!-- Key Takeaways Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200">
+                    <div class="text-xl mb-2">🏷️</div>
+                    <h3 class="font-bold text-stone-900 text-sm mb-2">The Syntax Speed Myth</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        A programming language is an abstract syntax specification, not an intrinsic execution speed. Performance is determined by compiler optimization backend maturity (GCC, LLVM), memory layout flexibility, and runtime overhead.
+                    </p>
+                </div>
+
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200">
+                    <div class="text-xl mb-2">🛡️</div>
+                    <h3 class="font-bold text-stone-900 text-sm mb-2">Safety vs. Speed Fallacy</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        Languages like Ada and Pascal demonstrate that strong typing and safety assertions do not permanently cap performance. Production release builds with optimized safety suppression match unrestricted C/C++ throughput.
+                    </p>
+                </div>
+
+                <div class="p-5 bg-stone-50 rounded-xl border border-stone-200">
+                    <div class="text-xl mb-2">🏢</div>
+                    <h3 class="font-bold text-stone-900 text-sm mb-2">Micro-Benchmark vs Macro Reality</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        An in-memory sieve measures tight, CPU-cache-bound loops. Enterprise software throughput is typically bound by asynchronous network I/O and database operations, making managed runtimes economically preferable.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Priority Matcher -->
+            <div class="bg-stone-50 p-6 rounded-xl border border-stone-200">
+                <h3 class="font-bold text-stone-900 text-sm tracking-tight uppercase mb-4">System Design Priority Selector</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+                    <button onclick="selectPriority('raw-speed')" id="p-raw-speed" class="p-3 text-left rounded-lg bg-white border border-stone-300 hover:border-amber-600 transition text-xs font-semibold text-stone-800">
+                        ⚡ Maximum CPU Throughput
+                    </button>
+                    <button onclick="selectPriority('safety')" id="p-safety" class="p-3 text-left rounded-lg bg-white border border-stone-200 hover:border-amber-600 transition text-xs font-semibold text-stone-800">
+                        🛡️ Proven Mission Safety
+                    </button>
+                    <button onclick="selectPriority('velocity')" id="p-velocity" class="p-3 text-left rounded-lg bg-white border border-stone-200 hover:border-amber-600 transition text-xs font-semibold text-stone-800">
+                        🚀 Developer Iteration Speed
+                    </button>
+                    <button onclick="selectPriority('legacy')" id="p-legacy" class="p-3 text-left rounded-lg bg-white border border-stone-200 hover:border-amber-600 transition text-xs font-semibold text-stone-800">
+                        🏛️ Rapid UI & GUI Development
+                    </button>
+                </div>
+
+                <div id="priority-result-box" class="p-4 bg-white rounded-lg border border-stone-200 text-xs">
+                    <div class="font-bold text-stone-900 text-sm mb-1" id="priority-title">Select a system priority above</div>
+                    <p class="text-stone-600 leading-relaxed" id="priority-desc">
+                        Click one of the design priority buttons to see recommended languages based on the empirical study findings.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
+            <p class="font-medium text-stone-300">Prime Sieve Benchmark Evaluation Analysis & Interactive Report</p>
+            <p>Based on empirical data from <em>Dave's Garage</em> (Dave Plummer) • Computer Language Drag Racing Series</p>
+            <p class="text-stone-500">Built with pure Vanilla JS, Chart.js, and Tailwind CSS. Zero SVG/Mermaid dependencies.</p>
+        </div>
+    </footer>
+
+    <!-- Application Logic Scripting -->
+    <script>
+        // Global Data Store
+        const benchmarkData = [
+            { name: "C / C++", passes: 2550, ratio: "1.00x", category: "aot", memory: "Explicit unboxed bitwise arrays with direct memory pointer arithmetic.", bottleneck: "CPU execution pipeline & L1/L2 data cache latency." },
+            { name: "Rust", passes: 2520, ratio: "0.98x", category: "aot", memory: "Strict memory ownership models with zero-cost abstractions.", bottleneck: "LLVM compiler optimization pass capabilities." },
+            { name: "Zig", passes: 2480, ratio: "0.97x", category: "aot", memory: "Manual unboxed memory allocation without hidden control flow.", bottleneck: "Direct register allocation efficiency." },
+            { name: "Ada (GNAT -O3)", passes: 2350, ratio: "0.92x", category: "aot", memory: "Dynamic array allocation with optimized invariant check suppression.", bottleneck: "GCC backend scalar evolution & loop unrolling." },
+            { name: "Pascal (Free Pascal)", passes: 2240, ratio: "0.88x", category: "aot", memory: "Contiguous byte/bit arrays with {$R-} check suppression.", bottleneck: "Register variable allocation & loop invariant hoisting." },
+            { name: "Delphi", passes: 2180, ratio: "0.85x", category: "aot", memory: "Heap-allocated dynamic buffer wrappers with native pointers.", bottleneck: "Fastcall register passing convention efficiency." },
+            { name: "Ada (Default Safety)", passes: 890, ratio: "0.35x", category: "aot", memory: "Pervasive runtime assertions on every array index write.", bottleneck: "Branch prediction miss penalties from safety bounds checking." },
+            { name: "C# (.NET JIT)", passes: 1480, ratio: "0.58x", category: "jit", memory: "Garbage-collected managed heap with JIT boundary checks.", bottleneck: "JIT compilation overhead & persistent array index bounds checks." },
+            { name: "Java (HotSpot JIT)", passes: 1320, ratio: "0.52x", category: "jit", memory: "Managed JVM object heap with automatic garbage collection.", bottleneck: "Array object header metadata & bounds verification." },
+            { name: "Dart (JIT/AOT)", passes: 1070, ratio: "0.42x", category: "jit", memory: "Managed memory heap with static type annotations.", bottleneck: "Virtual machine runtime abstraction layer." },
+            { name: "Scala", passes: 960, ratio: "0.38x", category: "jit", memory: "JVM object allocations with functional collections overhead.", bottleneck: "JVM bytecode loop transformation." },
+            { name: "Python 3", passes: 20, ratio: "0.008x", category: "dynamic", memory: "Fully boxed PyObject structures with dynamic type metadata.", bottleneck: "Interpretive evaluation loop & dynamic type resolution." },
+            { name: "PHP 8 (Standard)", passes: 64, ratio: "0.025x", category: "dynamic", memory: "Dynamic hash tables (Zend Values) with reference counting.", bottleneck: "Bytecode opcode dispatch overhead." },
+            { name: "Ruby", passes: 15, ratio: "0.006x", category: "dynamic", memory: "Boxed object heap with dynamic dispatch wrappers.", bottleneck: "YARV bytecode interpretation loop." },
+            { name: "Bash Scripting", passes: 0.5, ratio: "0.0002x", category: "dynamic", memory: "String-based subshell execution and environment pipes.", bottleneck: "Process fork execution and string evaluation." }
+        ];
+
+        let activeChart = null;
+        let activeCategory = 'all';
+        let isSafetyEnabled = true;
+
+        // Initialize Chart.js Bar Graph
+        function initChart() {
+            const ctx = document.getElementById('paradigmCanvas').getContext('2d');
+            
+            const filteredData = activeCategory === 'all' 
+                ? benchmarkData 
+                : benchmarkData.filter(d => d.category === activeCategory);
+
+            const labels = filteredData.map(d => d.name);
+            const values = filteredData.map(d => d.passes);
+            const backgroundColors = filteredData.map(d => {
+                if (d.category === 'aot') return '#1e293b'; // Slate-800
+                if (d.category === 'jit') return '#d97706'; // Amber-600
+                return '#059669'; // Emerald-600
+            });
+
+            if (activeChart) {
+                activeChart.destroy();
+            }
+
+            activeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Passes / Second (5s Normalized)',
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        borderRadius: 6,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const item = filteredData[context.dataIndex];
+                                    return ` Passes/sec: ${item.passes.toLocaleString()} (${item.ratio})`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { size: 11 },
+                                color: '#44403c',
+                                callback: function(val, index) {
+                                    let label = this.getLabelForValue(val);
+                                    return label.length > 14 ? label.substr(0, 14) + '…' : label;
+                                }
+                            }
+                        },
+                        y: {
+                            grid: { color: '#e7e5e4' },
+                            ticks: { font: { size: 11 }, color: '#78716c' },
+                            title: { display: true, text: 'Passes per Second', color: '#44403c', font: { size: 12, weight: 'bold' } }
+                        }
+                    },
+                    onClick: (e, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            showLanguageDetail(filteredData[index]);
+                        }
+                    }
+                }
+            });
+        }
+
+        function filterParadigm(category) {
+            activeCategory = category;
+            
+            // Reset button states
+            ['all', 'aot', 'jit', 'dynamic'].forEach(cat => {
+                const btn = document.getElementById(`btn-${cat}`);
+                if (cat === category) {
+                    btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-800 text-white shadow-sm transition";
+                } else {
+                    btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-100 text-stone-700 hover:bg-stone-200 border border-stone-200 transition";
+                }
+            });
+
+            initChart();
+        }
+
+        function showLanguageDetail(item) {
+            const card = document.getElementById('language-detail-card');
+            card.classList.remove('hidden');
+
+            document.getElementById('detail-title').innerText = item.name;
+            document.getElementById('detail-throughput').innerText = `${item.passes.toLocaleString()} Passes/sec (${item.ratio})`;
+            document.getElementById('detail-category').innerText = item.category.toUpperCase();
+            document.getElementById('detail-memory').innerText = item.memory;
+            document.getElementById('detail-bottleneck').innerText = item.bottleneck;
+        }
+
+        // Safety Flag Simulator Logic
+        function toggleSafetyMode() {
+            isSafetyEnabled = !isSafetyEnabled;
+            const btn = document.getElementById('safety-toggle-btn');
+            const branch = document.getElementById('sim-branch');
+            const flags = document.getElementById('sim-flags');
+            const penalty = document.getElementById('sim-penalty');
+
+            if (isSafetyEnabled) {
+                btn.innerText = "ENABLED (Default Defensive)";
+                btn.className = "px-3 py-1 rounded text-xs font-bold bg-amber-600 text-white transition";
+                branch.innerText = "High (Check on every write)";
+                flags.innerText = "Ada default assertions / {$R+} {$Q+}";
+                penalty.innerText = "-60% to -65% vs Unrestricted C";
+            } else {
+                btn.innerText = "DISABLED (Optimized Release)";
+                btn.className = "px-3 py-1 rounded text-xs font-bold bg-emerald-700 text-white transition";
+                branch.innerText = "Zero Overhead (Vectorized)";
+                flags.innerText = "GNAT pragma Suppress / {$R-} {$Q-} -O3";
+                penalty.innerText = "Parity with C/C++ (~1.0x Baseline)";
+            }
+        }
+
+        // Memory & Cache Simulator Logic
+        let currentSimMode = 'bit';
+
+        function setSimMode(mode) {
+            currentSimMode = mode;
+            const btnBit = document.getElementById('btn-mode-bit');
+            const btnByte = document.getElementById('btn-mode-byte');
+
+            if (mode === 'bit') {
+                btnBit.className = "p-2.5 text-xs font-semibold rounded-lg bg-stone-800 text-white border border-stone-800 transition";
+                btnByte.className = "p-2.5 text-xs font-semibold rounded-lg bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 transition";
+            } else {
+                btnByte.className = "p-2.5 text-xs font-semibold rounded-lg bg-stone-800 text-white border border-stone-800 transition";
+                btnBit.className = "p-2.5 text-xs font-semibold rounded-lg bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 transition";
+            }
+            updateMemorySim();
+        }
+
+        function updateMemorySim() {
+            const limit = parseInt(document.getElementById('limit-slider').value);
+            document.getElementById('limit-val').innerText = limit.toLocaleString();
+
+            const oddCount = Math.floor(limit / 2);
+            document.getElementById('stat-odds').innerText = oddCount.toLocaleString();
+
+            let bytes = 0;
+            let opsDesc = "";
+
+            if (currentSimMode === 'bit') {
+                bytes = Math.ceil(oddCount / 8);
+                opsDesc = "4 Ops (SHR, AND, OR, Mask Write)";
+            } else {
+                bytes = oddCount; // 1 byte per odd number
+                opsDesc = "1 Op (Direct Byte Write)";
+            }
+
+            const kib = (bytes / 1024).toFixed(2);
+            document.getElementById('stat-footprint').innerText = `${kib} KiB (${bytes.toLocaleString()} Bytes)`;
+            document.getElementById('stat-ops').innerText = opsDesc;
+
+            // Cache Limits: L1 = 32 KiB, L2 = 512 KiB
+            const l1Max = 32;
+            const l2Max = 512;
+
+            const l1Pct = Math.min(Math.round((kib / l1Max) * 100), 100);
+            const l2Pct = Math.min(Math.round((kib / l2Max) * 100), 100);
+
+            document.getElementById('l1-bar').style.width = `${l1Pct}%`;
+            document.getElementById('l2-bar').style.width = `${l2Pct}%`;
+
+            document.getElementById('l1-pct').innerText = kib > l1Max ? `100%+ (${(kib/l1Max).toFixed(1)}x Limit)` : `${l1Pct}%`;
+            document.getElementById('l2-pct').innerText = kib > l2Max ? `100%+ (${(kib/l2Max).toFixed(1)}x Limit)` : `${l2Pct}%`;
+
+            const badge = document.getElementById('cache-badge');
+            if (kib <= l1Max) {
+                badge.className = "p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center space-x-3 text-emerald-800 text-xs";
+                badge.innerHTML = `<span class="text-lg">⚡</span><div><span class="font-bold">L1 Cache Resident:</span> Maximum execution speed. Buffer fits inside highest-speed 32 KiB CPU L1 data cache.</div>`;
+            } else if (kib <= l2Max) {
+                badge.className = "p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-center space-x-3 text-amber-800 text-xs";
+                badge.innerHTML = `<span class="text-lg">⚙️</span><div><span class="font-bold">L2 Cache Resident:</span> Buffer fits inside L2 cache (512 KiB). Zero DRAM latency stalls, moderate ALU instruction cost.</div>`;
+            } else {
+                badge.className = "p-3 bg-rose-50 border border-rose-200 rounded-lg flex items-center space-x-3 text-rose-800 text-xs";
+                badge.innerHTML = `<span class="text-lg">⚠️</span><div><span class="font-bold">L3 / DRAM Spillover:</span> Working set exceeds L2 cache boundaries. CPU memory pipeline will experience cache line evictions.</div>`;
+            }
+        }
+
+        // Priority Matcher Logic
+        function selectPriority(type) {
+            const title = document.getElementById('priority-title');
+            const desc = document.getElementById('priority-desc');
+
+            const btnIds = ['p-raw-speed', 'p-safety', 'p-velocity', 'p-legacy'];
+            btnIds.forEach(id => {
+                const b = document.getElementById(id);
+                b.className = "p-3 text-left rounded-lg bg-white border border-stone-200 hover:border-amber-600 transition text-xs font-semibold text-stone-800";
+            });
+
+            document.getElementById(`p-${type}`).className = "p-3 text-left rounded-lg bg-amber-50 border border-amber-600 transition text-xs font-bold text-amber-900";
+
+            if (type === 'raw-speed') {
+                title.innerText = "Top Recommendations: C, C++, Rust, Zig, Fortran";
+                desc.innerText = "When raw CPU throughput is paramount, choose languages compiling to unboxed native machine code with zero garbage collection overhead and explicit control over memory alignment.";
+            } else if (type === 'safety') {
+                title.innerText = "Top Recommendations: Ada (GNAT), Rust, Pascal";
+                desc.innerText = "For embedded defense or safety-critical software, Ada and Rust offer ahead-of-time verification. When compiled with -O3 optimization directives, safety checks are verified statically without sacrificing loop execution speed.";
+            } else if (type === 'velocity') {
+                title.innerText = "Top Recommendations: C#, Java (JVM), Python, Dart";
+                desc.innerText = "In enterprise cloud applications, developer iteration speed and rich library ecosystems outweigh bit-wise loop optimizations. Managed JIT runtimes bridge the gap by delivering ~0.5x-0.6x C performance.";
+            } else if (type === 'legacy') {
+                title.innerText = "Top Recommendations: Delphi, Free Pascal";
+                desc.innerText = "Delphi and Object Pascal excel in rapid desktop application development, offering fast compilation speeds combined with lean native code generation that outperforms managed VMs.";
+            }
+        }
+
+        // Initialize App on DOM Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            updateMemorySim();
+        });
+    </script>
+</body>
+</html>

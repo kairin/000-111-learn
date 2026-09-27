@@ -1,6 +1,177 @@
 {
  "documents": [
   {
+   "source": "Assembly Language Video Breakdown.md",
+   "slug": "assembly-language-video-breakdown",
+   "title": "Architectural Analysis and Systems Breakdown of Assembly Language",
+   "segments": [
+    {
+     "file": "assembly-language-video-breakdown/01-foundational-overview-and-historical-evolution.md",
+     "title": "Foundational Overview and Historical Evolution",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       3,
+       28
+      ]
+     ],
+     "findings": [
+      "D05-C1",
+      "D05-M1",
+      "D05-M2",
+      "D05-m1",
+      "D05-m11",
+      "D05-m12"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/02-instruction-set-architecture-heterogeneity-and-modern-comput.md",
+     "title": "Instruction Set Architecture Heterogeneity and Modern Computing Domains",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       29,
+       43
+      ]
+     ],
+     "findings": [
+      "D05-M9",
+      "D05-m2",
+      "D05-m3"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/03-memory-layout-and-sectional-topology-in-assembly-programs.md",
+     "title": "Memory Layout and Sectional Topology in Assembly Programs",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       44,
+       57
+      ]
+     ],
+     "findings": [
+      "D05-C1",
+      "D05-M3",
+      "D05-M8",
+      "D05-m4",
+      "D05-m10"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/04-execution-flow-analysis-64-bit-linux-system-programming.md",
+     "title": "Execution Flow Analysis: 64-Bit Linux System Programming",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       58,
+       61
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-language-video-breakdown/05-data-allocation-and-relative-addressing-mechanics.md",
+     "title": "Data Allocation and Relative Addressing Mechanics",
+     "kind": "subsection",
+     "ranges": [
+      [
+       62,
+       75
+      ]
+     ],
+     "findings": [
+      "D05-M6",
+      "D05-m10",
+      "D05-m11"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/06-hardware-register-utilization-and-parameter-staging.md",
+     "title": "Hardware Register Utilization and Parameter Staging",
+     "kind": "subsection",
+     "ranges": [
+      [
+       76,
+       94
+      ]
+     ],
+     "findings": [
+      "D05-C1",
+      "D05-M6",
+      "D05-m5",
+      "D05-m6",
+      "D05-m11"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/07-control-flow-termination-and-fault-prevention.md",
+     "title": "Control Flow Termination and Fault Prevention",
+     "kind": "subsection",
+     "ranges": [
+      [
+       95,
+       116
+      ]
+     ],
+     "findings": [
+      "D05-C1",
+      "D05-M4",
+      "D05-M5",
+      "D05-m7",
+      "D05-m11"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/08-toolchain-orchestration-binary-generation-via-assembler-and.md",
+     "title": "Toolchain Orchestration: Binary Generation via Assembler and Linker",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       117,
+       130
+      ]
+     ],
+     "findings": [
+      "D05-C1",
+      "D05-M9",
+      "D05-m8",
+      "D05-m9"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/09-systemic-implications-microarchitecture-security-and-future.md",
+     "title": "Systemic Implications: Microarchitecture, Security, and Future Paradigms",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       131,
+       138
+      ]
+     ],
+     "findings": [
+      "D05-C1",
+      "D05-C2",
+      "D05-M7"
+     ]
+    },
+    {
+     "file": "assembly-language-video-breakdown/10-works-cited.md",
+     "title": "Works cited",
+     "kind": "references",
+     "ranges": [
+      [
+       139,
+       158
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": []
+  },
+  {
    "source": "Assembly-Fortran-Comparison.md",
    "slug": "assembly-fortran-comparison",
    "title": "Comparative Strategic Analysis of Assembly and Modern Fortran: Pedagogical Yield, Toolchain Friction, and Industry Trajectories",
@@ -619,6 +790,775 @@
    "unmapped_findings": []
   },
   {
+   "source": "Fortran Video Breakdown.md",
+   "slug": "fortran-video-breakdown",
+   "title": "Technical Deconstruction of Fireship's \"FORTRAN in 100 Seconds\": Historical Foundations, Language Mechanics, and Modern Scientific Computing",
+   "segments": [
+    {
+     "file": "fortran-video-breakdown/01-historical-genesis-and-the-optimizing-compiler-paradigm.md",
+     "title": "Historical Genesis and the Optimizing Compiler Paradigm",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       3,
+       8
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-M6",
+      "D07-m7",
+      "D07-m10"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/02-electromechanical-constraints-punch-cards-fixed-form-and-typ.md",
+     "title": "Electromechanical Constraints: Punch Cards, Fixed Form, and Typography",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       9,
+       21
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-M4",
+      "D07-m1",
+      "D07-m2"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/03-technical-evaluation-of-video-content-and-syntactic-mechanic.md",
+     "title": "Technical Evaluation of Video Content and Syntactic Mechanics",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       22,
+       25
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-C3"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/04-program-initialization-and-source-extensions.md",
+     "title": "Program Initialization and Source Extensions",
+     "kind": "subsection",
+     "ranges": [
+      [
+       26,
+       29
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-M5"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/05-implicit-typing-rules-and-the-implicit-none-anomaly.md",
+     "title": "Implicit Typing Rules and the implicit none Anomaly",
+     "kind": "subsection",
+     "ranges": [
+      [
+       30,
+       46
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-m3",
+      "D07-m4",
+      "D07-m9",
+      "D07-m11"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/06-data-types-and-stream-output.md",
+     "title": "Data Types and Stream Output",
+     "kind": "subsection",
+     "ranges": [
+      [
+       47,
+       50
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-m5"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/07-memory-architecture-static-matrices-to-modern-pointers.md",
+     "title": "Memory Architecture: Static Matrices to Modern Pointers",
+     "kind": "subsection",
+     "ranges": [
+      [
+       51,
+       54
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-M8"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/08-control-flow-and-procedural-modularity.md",
+     "title": "Control Flow and Procedural Modularity",
+     "kind": "subsection",
+     "ranges": [
+      [
+       55,
+       58
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-M7"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/09-comparative-architectural-evolution.md",
+     "title": "Comparative Architectural Evolution",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       59,
+       72
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-M1",
+      "D07-M2",
+      "D07-m2",
+      "D07-m6",
+      "D07-m8"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/10-the-mechanics-of-numerical-supremacy-in-high-performance-com.md",
+     "title": "The Mechanics of Numerical Supremacy in High-Performance Computing",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       73,
+       80
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-C2",
+      "D07-M3"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/11-critical-assessment-of-rapid-micro-pedagogy.md",
+     "title": "Critical Assessment of Rapid Micro-Pedagogy",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       81,
+       86
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-C3"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/12-conclusion.md",
+     "title": "Conclusion",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       87,
+       90
+      ]
+     ],
+     "findings": [
+      "D07-C1",
+      "D07-C2"
+     ]
+    },
+    {
+     "file": "fortran-video-breakdown/13-works-cited.md",
+     "title": "Works cited",
+     "kind": "references",
+     "ranges": [
+      [
+       91,
+       107
+      ]
+     ],
+     "findings": [
+      "D07-C1"
+     ]
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": []
+  },
+  {
+   "source": "YouTube Video Breakdown.md",
+   "slug": "youtube-video-breakdown",
+   "title": "Performance Analysis and Architectural Breakdown: C++ vs. Fortran vs. COBOL (Dave's Garage Episode 04)",
+   "segments": [
+    {
+     "file": "youtube-video-breakdown/01-benchmark-design-and-experimental-protocol.md",
+     "title": "Benchmark Design and Experimental Protocol",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       3,
+       8
+      ]
+     ],
+     "findings": [
+      "D09-M2",
+      "D09-M3",
+      "D09-m6",
+      "D09-m7"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/02-architectural-foundations-of-the-contending-languages.md",
+     "title": "Architectural Foundations of the Contending Languages",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       9,
+       12
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "youtube-video-breakdown/03-cobol-business-data-processing-and-record-orientation.md",
+     "title": "COBOL: Business Data Processing and Record Orientation",
+     "kind": "subsection",
+     "ranges": [
+      [
+       13,
+       17
+      ]
+     ],
+     "findings": [
+      "D09-C3",
+      "D09-M8"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/04-fortran-mathematical-array-translation-and-vectorization.md",
+     "title": "Fortran: Mathematical Array Translation and Vectorization",
+     "kind": "subsection",
+     "ranges": [
+      [
+       18,
+       23
+      ]
+     ],
+     "findings": [
+      "D09-M4",
+      "D09-M5",
+      "D09-M10"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/05-c-zero-overhead-abstractions-and-systems-control.md",
+     "title": "C++: Zero-Overhead Abstractions and Systems Control",
+     "kind": "subsection",
+     "ranges": [
+      [
+       24,
+       28
+      ]
+     ],
+     "findings": [
+      "D09-m3",
+      "D09-m4"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/06-empirical-results-and-quantitative-comparison.md",
+     "title": "Empirical Results and Quantitative Comparison",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       29,
+       40
+      ]
+     ],
+     "findings": [
+      "D09-C1",
+      "D09-C4",
+      "D09-M1",
+      "D09-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/07-analysis-of-compiler-variations-in-fortran.md",
+     "title": "Analysis of Compiler Variations in Fortran",
+     "kind": "subsection",
+     "ranges": [
+      [
+       41,
+       58
+      ]
+     ],
+     "findings": [
+      "D09-C2",
+      "D09-M1",
+      "D09-M6",
+      "D09-m1",
+      "D09-m5",
+      "D09-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/08-memory-hierarchy-dynamics-and-compiler-code-generation.md",
+     "title": "Memory Hierarchy Dynamics and Compiler Code Generation",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       59,
+       62
+      ]
+     ],
+     "findings": [
+      "D09-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/09-cache-subsystem-locality-1-bit-vs-8-bit-storage.md",
+     "title": "Cache Subsystem Locality: 1-Bit vs. 8-Bit Storage",
+     "kind": "subsection",
+     "ranges": [
+      [
+       63,
+       69
+      ]
+     ],
+     "findings": [
+      "D09-M7",
+      "D09-m3",
+      "D09-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/10-object-oriented-abstraction-costs.md",
+     "title": "Object-Oriented Abstraction Costs",
+     "kind": "subsection",
+     "ranges": [
+      [
+       70,
+       74
+      ]
+     ],
+     "findings": [
+      "D09-M9",
+      "D09-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/11-structural-bottlenecks-in-the-cobol-execution-model.md",
+     "title": "Structural Bottlenecks in the COBOL Execution Model",
+     "kind": "subsection",
+     "ranges": [
+      [
+       75,
+       80
+      ]
+     ],
+     "findings": [
+      "D09-C1",
+      "D09-C3",
+      "D09-M8",
+      "D09-m2",
+      "D09-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/12-broader-systems-engineering-implications.md",
+     "title": "Broader Systems Engineering Implications",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       81,
+       84
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "youtube-video-breakdown/13-the-limits-of-algorithmic-microbenchmarks.md",
+     "title": "The Limits of Algorithmic Microbenchmarks",
+     "kind": "subsection",
+     "ranges": [
+      [
+       85,
+       90
+      ]
+     ],
+     "findings": [
+      "D09-M4"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/14-compiler-infrastructure-over-linguistic-inception.md",
+     "title": "Compiler Infrastructure Over Linguistic Inception",
+     "kind": "subsection",
+     "ranges": [
+      [
+       91,
+       96
+      ]
+     ],
+     "findings": [
+      "D09-M1"
+     ]
+    },
+    {
+     "file": "youtube-video-breakdown/15-works-cited.md",
+     "title": "Works cited",
+     "kind": "references",
+     "ranges": [
+      [
+       97,
+       176
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": []
+  },
+  {
+   "source": "YouTube Video Content Analysis.md",
+   "slug": "youtube-video-content-analysis",
+   "title": "Comparative Empirical Analysis of Programming Language Runtime Dynamics: The Prime Sieve Benchmark Evaluation",
+   "segments": [
+    {
+     "file": "youtube-video-content-analysis/01-architectural-context-and-historical-provenance.md",
+     "title": "Architectural Context and Historical Provenance",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       3,
+       7
+      ]
+     ],
+     "findings": [
+      "D11-M7",
+      "D11-m1",
+      "D11-m2",
+      "D11-m8"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/02-algorithmic-framework-and-execution-criteria.md",
+     "title": "Algorithmic Framework and Execution Criteria",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       8,
+       13
+      ]
+     ],
+     "findings": [
+      "D11-M1",
+      "D11-m3",
+      "D11-m4"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/03-comparative-systems-analysis-ada-pascal-and-delphi-implement.md",
+     "title": "Comparative Systems Analysis: Ada, Pascal, and Delphi Implementations",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       14,
+       23
+      ]
+     ],
+     "findings": [
+      "D11-C1",
+      "D11-M5",
+      "D11-M7",
+      "D11-m7"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/04-compiler-code-generation-and-safety-mechanics-in-ada.md",
+     "title": "Compiler Code Generation and Safety Mechanics in Ada",
+     "kind": "subsection",
+     "ranges": [
+      [
+       24,
+       28
+      ]
+     ],
+     "findings": [
+      "D11-C2",
+      "D11-M3"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/05-the-pascal-and-delphi-memory-management-models.md",
+     "title": "The Pascal and Delphi Memory Management Models",
+     "kind": "subsection",
+     "ranges": [
+      [
+       29,
+       34
+      ]
+     ],
+     "findings": [
+      "D11-C1",
+      "D11-M2",
+      "D11-M6"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/06-cross-paradigm-performance-dynamics-across-the-systems-spect.md",
+     "title": "Cross-Paradigm Performance Dynamics Across the Systems Spectrum",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       35,
+       50
+      ]
+     ],
+     "findings": [
+      "D11-C3",
+      "D11-M2",
+      "D11-M4",
+      "D11-M7",
+      "D11-m4",
+      "D11-m5",
+      "D11-m6"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/07-systematic-implications-for-modern-software-engineering.md",
+     "title": "Systematic Implications for Modern Software Engineering",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       51,
+       57
+      ]
+     ],
+     "findings": [
+      "D11-C2",
+      "D11-m5"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/08-conclusions.md",
+     "title": "Conclusions",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       58,
+       61
+      ]
+     ],
+     "findings": [
+      "D11-C1",
+      "D11-C2",
+      "D11-M7"
+     ]
+    },
+    {
+     "file": "youtube-video-content-analysis/09-works-cited.md",
+     "title": "Works cited",
+     "kind": "references",
+     "ranges": [
+      [
+       62,
+       85
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": []
+  },
+  {
+   "source": "assembly_language_architectural_explorer.html",
+   "slug": "assembly-language-architectural-explorer",
+   "title": "Assembly Language: Architectural Analysis & Systems Explorer",
+   "segments": [
+    {
+     "file": "assembly-language-architectural-explorer/01-summary-strip-no-heading.md",
+     "title": "Summary strip (no heading)",
+     "kind": "html-section#summary",
+     "ranges": [
+      [
+       123,
+       146
+      ]
+     ],
+     "findings": [
+      "D06-m9"
+     ]
+    },
+    {
+     "file": "assembly-language-architectural-explorer/02-instruction-set-architecture-isa-heterogeneity-paradigms.md",
+     "title": "Instruction Set Architecture (ISA) Heterogeneity & Paradigms",
+     "kind": "html-section#tab-content-isa",
+     "ranges": [
+      [
+       152,
+       207
+      ],
+      [
+       641,
+       642
+      ],
+      [
+       645,
+       675
+      ],
+      [
+       856,
+       900
+      ],
+      [
+       901,
+       961
+      ]
+     ],
+     "findings": [
+      "D06-C2",
+      "D06-M3",
+      "D06-m2",
+      "D06-m6",
+      "D06-m7"
+     ]
+    },
+    {
+     "file": "assembly-language-architectural-explorer/03-virtual-memory-layout-sectional-topology.md",
+     "title": "Virtual Memory Layout & Sectional Topology",
+     "kind": "html-section#tab-content-memory",
+     "ranges": [
+      [
+       210,
+       325
+      ],
+      [
+       676,
+       708
+      ],
+      [
+       962,
+       980
+      ]
+     ],
+     "findings": [
+      "D06-M4",
+      "D06-M6",
+      "D06-m8",
+      "D06-m9",
+      "D06-m10"
+     ]
+    },
+    {
+     "file": "assembly-language-architectural-explorer/04-64-bit-linux-execution-flow-register-state-machine.md",
+     "title": "64-Bit Linux Execution Flow & Register State Machine",
+     "kind": "html-section#tab-content-execution",
+     "ranges": [
+      [
+       328,
+       453
+      ],
+      [
+       643,
+       644
+      ],
+      [
+       709,
+       808
+      ],
+      [
+       981,
+       1019
+      ],
+      [
+       1020,
+       1040
+      ]
+     ],
+     "findings": [
+      "D06-M1",
+      "D06-M2",
+      "D06-m3",
+      "D06-m9"
+     ]
+    },
+    {
+     "file": "assembly-language-architectural-explorer/05-binary-toolchain-orchestration-object-file-linking.md",
+     "title": "Binary Toolchain Orchestration & Object File Linking",
+     "kind": "html-section#tab-content-toolchain",
+     "ranges": [
+      [
+       456,
+       547
+      ],
+      [
+       809,
+       833
+      ],
+      [
+       1041,
+       1056
+      ]
+     ],
+     "findings": [
+      "D06-C3",
+      "D06-m4",
+      "D06-m5",
+      "D06-m9",
+      "D06-m10",
+      "D06-m11"
+     ]
+    },
+    {
+     "file": "assembly-language-architectural-explorer/06-systemic-implications-security-microarchitecture-high-perfor.md",
+     "title": "Systemic Implications: Security, Microarchitecture & High Performance",
+     "kind": "html-section#tab-content-systemic",
+     "ranges": [
+      [
+       550,
+       623
+      ],
+      [
+       1057,
+       1074
+      ]
+     ],
+     "findings": [
+      "D06-M7"
+     ]
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": [
+    "D06-C1",
+    "D06-M5",
+    "D06-m1",
+    "D06-m12"
+   ]
+  },
+  {
    "source": "assembly_vs_fortran_learning_advisor.html",
    "slug": "assembly-vs-fortran-learning-advisor",
    "title": "Assembly vs. Modern Fortran: Strategic Learning Advisor",
@@ -743,6 +1683,336 @@
    ]
   },
   {
+   "source": "fortran_technical_deconstruction.html",
+   "slug": "fortran-technical-deconstruction",
+   "title": "Fortran Technical Deconstruction & Interactive Analysis",
+   "segments": [
+    {
+     "file": "fortran-technical-deconstruction/01-section-1-historical-genesis-the-optimizing-compiler-paradig.md",
+     "title": "Section 1: Historical Genesis & The Optimizing Compiler Paradigm",
+     "kind": "html-section#sec-genesis",
+     "ranges": [
+      [
+       133,
+       179
+      ],
+      [
+       530,
+       588
+      ],
+      [
+       609,
+       613
+      ],
+      [
+       614,
+       634
+      ],
+      [
+       726,
+       743
+      ],
+      [
+       756,
+       786
+      ]
+     ],
+     "findings": [
+      "D08-C1",
+      "D08-C3",
+      "D08-M1",
+      "D08-M2",
+      "D08-M3",
+      "D08-M4",
+      "D08-m3",
+      "D08-m4"
+     ]
+    },
+    {
+     "file": "fortran-technical-deconstruction/02-section-2-electromechanical-constraints-fixed-source-form.md",
+     "title": "Section 2: Electromechanical Constraints & Fixed Source Form",
+     "kind": "html-section#sec-punchcard",
+     "ranges": [
+      [
+       182,
+       245
+      ],
+      [
+       589,
+       608
+      ],
+      [
+       609,
+       613
+      ]
+     ],
+     "findings": [
+      "D08-M7",
+      "D08-m5",
+      "D08-m6",
+      "D08-m7",
+      "D08-m8"
+     ]
+    },
+    {
+     "file": "fortran-technical-deconstruction/03-section-3-video-code-deconstruction-interactive-compiler-sim.md",
+     "title": "Section 3: Video Code Deconstruction & Interactive Compiler Simulator",
+     "kind": "html-section#sec-compiler",
+     "ranges": [
+      [
+       248,
+       321
+      ],
+      [
+       614,
+       634
+      ],
+      [
+       635,
+       685
+      ]
+     ],
+     "findings": [
+      "D08-C2",
+      "D08-M1",
+      "D08-M2"
+     ]
+    },
+    {
+     "file": "fortran-technical-deconstruction/04-section-4-comparative-architectural-evolution.md",
+     "title": "Section 4: Comparative Architectural Evolution",
+     "kind": "html-section#sec-evolution",
+     "ranges": [
+      [
+       324,
+       357
+      ],
+      [
+       686,
+       725
+      ],
+      [
+       726,
+       743
+      ],
+      [
+       744,
+       755
+      ]
+     ],
+     "findings": [
+      "D08-M6",
+      "D08-m8"
+     ]
+    },
+    {
+     "file": "fortran-technical-deconstruction/05-section-5-high-performance-computing-memory-aliasing-suprema.md",
+     "title": "Section 5: High-Performance Computing & Memory Aliasing Supremacy",
+     "kind": "html-section#sec-hpc",
+     "ranges": [
+      [
+       360,
+       440
+      ],
+      [
+       756,
+       786
+      ]
+     ],
+     "findings": [
+      "D08-C3",
+      "D08-M3",
+      "D08-M4",
+      "D08-M5",
+      "D08-m9"
+     ]
+    },
+    {
+     "file": "fortran-technical-deconstruction/06-section-6-evaluation-of-rapid-micro-pedagogy.md",
+     "title": "Section 6: Evaluation of Rapid Micro-Pedagogy",
+     "kind": "html-section#sec-pedagogy",
+     "ranges": [
+      [
+       443,
+       498
+      ]
+     ],
+     "findings": [
+      "D08-m9"
+     ]
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": [
+    "D08-M8",
+    "D08-m1",
+    "D08-m2"
+   ]
+  },
+  {
+   "source": "prime_sieve_benchmark_interactive_explorer.html",
+   "slug": "prime-sieve-benchmark-interactive-explorer",
+   "title": "Comparative Analysis: Prime Sieve Benchmark Dynamics",
+   "segments": [
+    {
+     "file": "prime-sieve-benchmark-interactive-explorer/01-overview.md",
+     "title": "overview",
+     "kind": "html-section#overview",
+     "ranges": [
+      [
+       76,
+       112
+      ]
+     ],
+     "findings": [
+      "D12-M7",
+      "D12-m1",
+      "D12-m3"
+     ]
+    },
+    {
+     "file": "prime-sieve-benchmark-interactive-explorer/02-1-algorithmic-framework-benchmark-harness.md",
+     "title": "1. Algorithmic Framework & Benchmark Harness",
+     "kind": "html-section#call-to-action",
+     "ranges": [
+      [
+       115,
+       177
+      ]
+     ],
+     "findings": [
+      "D12-M4",
+      "D12-M7",
+      "D12-m2"
+     ]
+    },
+    {
+     "file": "prime-sieve-benchmark-interactive-explorer/03-2-cross-paradigm-performance-spectrum.md",
+     "title": "2. Cross-Paradigm Performance Spectrum",
+     "kind": "html-section#paradigm-chart",
+     "ranges": [
+      [
+       180,
+       227
+      ],
+      [
+       491,
+       509
+      ],
+      [
+       510,
+       510
+      ],
+      [
+       511,
+       511
+      ],
+      [
+       514,
+       587
+      ],
+      [
+       588,
+       603
+      ],
+      [
+       604,
+       614
+      ]
+     ],
+     "findings": [
+      "D12-C1",
+      "D12-C2",
+      "D12-C3",
+      "D12-M6",
+      "D12-M9",
+      "D12-m3"
+     ]
+    },
+    {
+     "file": "prime-sieve-benchmark-interactive-explorer/04-3-systems-systems-deep-dive-ada-pascal-and-delphi.md",
+     "title": "3. Systems Systems Deep Dive: Ada, Pascal, and Delphi",
+     "kind": "html-section#systems-matrix",
+     "ranges": [
+      [
+       230,
+       317
+      ],
+      [
+       512,
+       513
+      ],
+      [
+       615,
+       637
+      ]
+     ],
+     "findings": [
+      "D12-C3",
+      "D12-C4",
+      "D12-M9",
+      "D12-m8"
+     ]
+    },
+    {
+     "file": "prime-sieve-benchmark-interactive-explorer/05-4-micro-architectural-memory-cache-simulator.md",
+     "title": "4. Micro-Architectural Memory & Cache Simulator",
+     "kind": "html-section#cache-simulator",
+     "ranges": [
+      [
+       320,
+       412
+      ],
+      [
+       638,
+       640
+      ],
+      [
+       641,
+       655
+      ],
+      [
+       656,
+       703
+      ]
+     ],
+     "findings": [
+      "D12-M1",
+      "D12-M2",
+      "D12-M3",
+      "D12-M7",
+      "D12-m6",
+      "D12-m7"
+     ]
+    },
+    {
+     "file": "prime-sieve-benchmark-interactive-explorer/06-5-engineering-synthesis-architectural-takeaways.md",
+     "title": "5. Engineering Synthesis & Architectural Takeaways",
+     "kind": "html-section#synthesis",
+     "ranges": [
+      [
+       415,
+       476
+      ],
+      [
+       704,
+       731
+      ]
+     ],
+     "findings": [
+      "D12-M5",
+      "D12-m4",
+      "D12-m5"
+     ]
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": [
+    "D12-M8",
+    "D12-m9"
+   ]
+  },
+  {
    "source": "retro_game_dev_language_advisor.html",
    "slug": "retro-game-dev-language-advisor",
    "title": "Retro Game Dev Advisor: Assembly vs. Fortran (1980s-1990s Constraints)",
@@ -864,6 +2134,162 @@
     "D04-M5"
    ],
    "unmapped_findings": []
+  },
+  {
+   "source": "software_drag_race_breakdown.html",
+   "slug": "software-drag-race-breakdown",
+   "title": "C++ vs Fortran vs COBOL: Performance & Architecture Breakdown",
+   "segments": [
+    {
+     "file": "software-drag-race-breakdown/01-evaluating-compiled-execution-efficiency.md",
+     "title": "Evaluating Compiled Execution Efficiency",
+     "kind": "html-section#overview",
+     "ranges": [
+      [
+       63,
+       94
+      ]
+     ],
+     "findings": [
+      "D10-C1",
+      "D10-C2",
+      "D10-M7",
+      "D10-M8",
+      "D10-m2",
+      "D10-m8"
+     ]
+    },
+    {
+     "file": "software-drag-race-breakdown/02-quantitative-results-compiler-sensitivity.md",
+     "title": "Quantitative Results & Compiler Sensitivity",
+     "kind": "html-section#results",
+     "ranges": [
+      [
+       96,
+       133
+      ],
+      [
+       331,
+       331
+      ],
+      [
+       332,
+       333
+      ],
+      [
+       334,
+       344
+      ],
+      [
+       345,
+       385
+      ],
+      [
+       386,
+       432
+      ],
+      [
+       433,
+       439
+      ]
+     ],
+     "findings": [
+      "D10-C1",
+      "D10-C2",
+      "D10-C3",
+      "D10-M8",
+      "D10-M9",
+      "D10-m5"
+     ]
+    },
+    {
+     "file": "software-drag-race-breakdown/03-memory-hierarchy-cache-locality-simulator.md",
+     "title": "Memory Hierarchy & Cache Locality Simulator",
+     "kind": "html-section#cache-simulator",
+     "ranges": [
+      [
+       135,
+       198
+      ],
+      [
+       440,
+       505
+      ]
+     ],
+     "findings": [
+      "D10-M1",
+      "D10-M2",
+      "D10-M3",
+      "D10-M8",
+      "D10-m2",
+      "D10-m3",
+      "D10-m4"
+     ]
+    },
+    {
+     "file": "software-drag-race-breakdown/04-language-paradigm-architectural-foundations.md",
+     "title": "Language Paradigm & Architectural Foundations",
+     "kind": "html-section#architecture",
+     "ranges": [
+      [
+       200,
+       272
+      ],
+      [
+       506,
+       517
+      ]
+     ],
+     "findings": [
+      "D10-C1",
+      "D10-C2",
+      "D10-M4",
+      "D10-M5",
+      "D10-M6",
+      "D10-M8",
+      "D10-m3",
+      "D10-m5",
+      "D10-m6",
+      "D10-m7"
+     ]
+    },
+    {
+     "file": "software-drag-race-breakdown/05-benchmark-rules-faithful-implementation-criteria.md",
+     "title": "Benchmark Rules & Faithful Implementation Criteria",
+     "kind": "html-section#integrity",
+     "ranges": [
+      [
+       274,
+       305
+      ]
+     ],
+     "findings": [
+      "D10-C4",
+      "D10-M7",
+      "D10-M8",
+      "D10-m2"
+     ]
+    },
+    {
+     "file": "software-drag-race-breakdown/06-engineering-takeaways-microbenchmarks-vs-reality.md",
+     "title": "Engineering Takeaways: Microbenchmarks vs Reality",
+     "kind": "html-section#call-to-action",
+     "ranges": [
+      [
+       307,
+       322
+      ]
+     ],
+     "findings": [
+      "D10-M8",
+      "D10-m6"
+     ]
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": [
+    "D10-m1"
+   ]
   }
  ]
 }

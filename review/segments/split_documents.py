@@ -157,6 +157,51 @@ def find_line(lines, pattern, start=0):
     return None
 
 
+def script_chunks(lines):
+    """Split the main (last) <script> block into top-level chunks: (start, end, text, names).
+
+    A chunk starts at a top-level statement (function, const, let, var, document., window.).
+    Comment lines directly above a statement belong to that chunk.
+    """
+    s = max(i for i, l in enumerate(lines) if re.match(r"\s*<script>\s*$", l))
+    e = find_line(lines, r"</script>", s)
+    body = [(i, l) for i, l in enumerate(lines[s + 1:e], s + 1)]
+    # The indent of the first statement. (A template string can start at column 0, so min() is wrong.)
+    indent = next(len(l) - len(l.lstrip()) for _, l in body if l.strip() and not l.strip().startswith("//"))
+    starts = []
+    for i, l in body:
+        if l.strip() and len(l) - len(l.lstrip()) == indent and re.match(
+                r"\s*(async\s+)?(function |const |let |var |document\.|window\.)", l):
+            j = i
+            while j - 1 > s and lines[j - 1].strip().startswith("//") and \
+                    len(lines[j - 1]) - len(lines[j - 1].lstrip()) == indent:
+                j -= 1
+            starts.append(j)
+    chunks = []
+    for k, a in enumerate(starts):
+        b = starts[k + 1] if k + 1 < len(starts) else e
+        text = "\n".join(lines[a:b])
+        names = set(re.findall(r"^\s*(?:async\s+)?(?:function\s+(\w+)|(?:const|let|var)\s+(\w+))", text, re.M)[0]) - {""} \
+            if re.search(r"^\s*(?:async\s+)?(?:function\s+\w+|(?:const|let|var)\s+\w+)", text, re.M) else set()
+        chunks.append((a, b, text, names))
+    return chunks
+
+
+def linked_chunks(frag, chunks):
+    """The script chunks that a section uses: its element ids, its handlers, and the data they read."""
+    ids = set(re.findall(r'\bid="([^"]+)"', frag))
+    handlers = set(re.findall(r'\bon\w+="\s*(\w+)\s*\(', frag))
+    hit = set()
+    for k, (_, _, text, names) in enumerate(chunks):
+        if names & handlers or any(re.search(rf"""['"`#]{re.escape(i)}['"`]""", text) for i in ids):
+            hit.add(k)
+    used = " ".join(chunks[k][2] for k in hit)
+    for k, (_, _, text, names) in enumerate(chunks):  # one level: data and helpers that the hits read
+        if k not in hit and any(re.search(rf"\b{re.escape(n)}\b", used) for n in names):
+            hit.add(k)
+    return [chunks[k] for k in sorted(hit)]
+
+
 def script_blocks(lines):
     """Return named JS ranges from the main (last) script block."""
     s = max(i for i, l in enumerate(lines) if "<script>" in l)
@@ -176,7 +221,9 @@ def split_html(path):
     src = path.read_text(encoding="utf-8")
     lines = src.splitlines()
     doc_title = re.search(r"<title>(.*?)</title>", src, re.S).group(1).strip()
-    js = script_blocks(lines)
+    legacy = bool(find_line(lines, r"// Quiz State"))
+    js = script_blocks(lines) if legacy else None
+    chunks = None if legacy else script_chunks(lines)
     segs = []
     i = 0
     while (start := find_line(lines, r"<section\b", i)) is not None:
@@ -185,16 +232,22 @@ def split_html(path):
         sid = (re.search(r'<section id="([^"]+)"', lines[start]) or [None, ""])[1]
         h = re.search(r"<h[23][^>]*>(.*?)</h[23]>", frag, re.S)
         title = re.sub(r"<[^>]+>|\s+", " ", h.group(1)).strip() if h else sid
-        title = re.sub(r"^[^\w]+", "", title) or f"section-{len(segs) + 1}"
         if not sid:
             sid = "summary" if not segs else "call-to-action"
+        fallback = "Summary strip (no heading)" if sid == "summary" else f"Section {len(segs) + 1} (no heading)"
+        title = re.sub(r"^[^\w]+", "", title or "") or fallback
         linked = []
-        if re.search(r"setAnswer|quiz-result", frag):
-            linked.append(("Quiz scoring logic", js["quiz"]))
-        if re.search(r"switchPhase", frag):
-            linked.append(("Roadmap phase data", js["roadmap"]))
-        if "<canvas" in frag:
-            linked.append(("Chart data", js["charts"]))
+        if legacy:  # the first two pages: find the script by its comment markers
+            if re.search(r"setAnswer|quiz-result", frag):
+                linked.append(("Quiz scoring logic", js["quiz"]))
+            if re.search(r"switchPhase", frag):
+                linked.append(("Roadmap phase data", js["roadmap"]))
+            if "<canvas" in frag:
+                linked.append(("Chart data", js["charts"]))
+        else:  # other pages: find the script by the ids and handlers that the section uses
+            for a, b, text, names in linked_chunks(frag, chunks):
+                label = ", ".join(sorted(names)) or "code"
+                linked.append((f"`{label}`", (a, b)))
         body = html_text(frag)
         ranges = [[start + 1, end + 1]]
         for label, (a, b) in linked:
@@ -247,12 +300,43 @@ def findings_block(found, rel_findings):
             "The script matches them to this part by source line.\n\n" + "\n".join(rows) + "\n")
 
 
+VIDEOS = json.loads((FINDINGS_DIR / "videos.json").read_text(encoding="utf-8")) if (FINDINGS_DIR / "videos.json").exists() else {}
+# Moments in the video for each document part: findings/video-moments/*.json,
+# each file {"source": "<document file name>", "moments": {"01": {"t": "mm:ss", "note": "..."}, ...}}.
+MOMENTS = {}
+for _p in sorted((FINDINGS_DIR / "video-moments").glob("*.json")) if (FINDINGS_DIR / "video-moments").exists() else []:
+    _d = json.loads(_p.read_text(encoding="utf-8"))
+    MOMENTS[_d["source"]] = _d.get("moments", {})
+
+
+def video_line(source_name, idx):
+    """The source video of a document, with the moment for this part when the review found one."""
+    v = VIDEOS.get(source_name)
+    if not v:
+        return ""
+    url = f"https://www.youtube.com/watch?v={v['id']}"
+    m = MOMENTS.get(source_name, {}).get(f"{idx:02d}")
+    if m and m.get("t"):
+        mm, ss = (int(x) for x in m["t"].split(":"))
+        moment = f" · [at {m['t']}]({url}&t={mm * 60 + ss}s)"
+        note = f" {m['note']}" if m.get("note") else ""
+    elif m:
+        moment, note = "", f" {m.get('note', '')}"
+    else:
+        moment, note = "", ""
+    return (f"> **Source video:** [{v['title']}]({url}) ({v['channel']}, {v['duration']}){moment}.{note}\n\n")
+
+
 def write_segment(out_dir, idx, seg, found):
     name = f"{idx:02d}-{slugify(seg['title'])}.md"
     fm = "\n".join(f"{k}: {v}" for k, v in seg["meta"].items())
+    source_name = seg["meta"]["source"].split("/", 1)[1]
+    v = VIDEOS.get(source_name)
+    if v:
+        fm += f"\nvideo: https://www.youtube.com/watch?v={v['id']}"
     fm += "\nfindings: [" + ", ".join(f["id"] for f in found) + "]"
     (out_dir / name).write_text(
-        f"---\n{fm}\n---\n\n# {seg['title']}\n\n{seg['body'].strip()}\n"
+        f"---\n{fm}\n---\n\n# {seg['title']}\n\n{video_line(source_name, idx)}{seg['body'].strip()}\n"
         f"{findings_block(found, '../../findings/')}{REVIEW_TEMPLATE}",
         encoding="utf-8",
     )
@@ -297,6 +381,9 @@ def main():
         total += len(entries)
 
         index += [f"## `{path.name}`", "", f"_{doc_title}_ · {len(entries)} document parts", ""]
+        if path.name in VIDEOS:
+            v = VIDEOS[path.name]
+            index += [f"Source video: [{v['title']}](https://www.youtube.com/watch?v={v['id']}) ({v['channel']}, {v['duration']})", ""]
         if doc_level:
             index += ["Findings about the full document (not one part): " +
                       ", ".join(f"`{f['id']}`" for f in doc_level), ""]

@@ -1,0 +1,4134 @@
+[
+ {
+  "id": "D05-C1",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "critical",
+  "location": "L5, L46-56, L91-98, L105-106, L119-129, L134-137",
+  "lines": [
+   [
+    5,
+    5
+   ],
+   [
+    46,
+    56
+   ],
+   [
+    91,
+    98
+   ],
+   [
+    105,
+    106
+   ],
+   [
+    119,
+    129
+   ],
+   [
+    134,
+    137
+   ]
+  ],
+  "claim": "Citation \"1\" (the video) supports each sentence",
+  "problem": "The video is 2:43 long. It does not mention ELF (the Linux executable format), page tables, W XOR X, Ring 0 and Ring 3, `int 0x80`, `rcx`, the MMU (memory management unit), `execve`, the System V ABI (application binary interface), stdin and stderr, or security work. The document still cites the video for each of these. A reader cannot tell which facts come from the video and which come from the AI.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-C2",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "critical",
+  "location": "L135",
+  "lines": [
+   [
+    135,
+    135
+   ]
+  ],
+  "claim": "A wrong register or an unexpected syscall identifier gives \"immediate hardware exceptions or segmentation faults\"",
+  "problem": "This is false for most cases. An unknown system call number returns the error code -38 (ENOSYS) in `rax`. A bad buffer pointer returns -14 (EFAULT). A bad file descriptor returns -9 (EBADF). The program continues. A learner who believes the document will not examine `rax` after a system call. Examining `rax` is the main debugging step.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M1",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L26",
+  "lines": [
+   [
+    26,
+    26
+   ]
+  ],
+  "claim": "In 1947 Booth \"at Birkbeck\" made assembly while she designed the APEC",
+  "problem": "The St Andrews biography (web check) says that Booth was in the USA from February to September 1947. It dates the APEC design to 1949. The 1947 work was the report \"Coding for the A.R.C.\". The video says 1947 and \"the all-purpose electronic computer\" (00:13 to 00:18), so the video also mixes the dates. The document cites [5] (a French college blog) and [6] (a blog tag page), not [8] (St Andrews).",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M2",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L27",
+  "lines": [
+   [
+    27,
+    27
+   ]
+  ],
+  "claim": "Fortran in 1957 \"established cross-platform portability\"",
+  "problem": "The first Fortran compiler ran on one machine, the IBM 704. Portability came later with FORTRAN IV and the 1966 standard. The video only says \"high-level languages like Fortran a few years later\" (00:31). This point is relevant to the B side.",
+  "tags": [
+   "KNOW",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M3",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L50, L54",
+  "lines": [
+   [
+    50,
+    50
+   ],
+   [
+    54,
+    54
+   ]
+  ],
+  "claim": "`.data` holds read/write initialized data",
+  "problem": "The document is correct here, but the video is not. The video says \"data section is where we can initialize constants\" (01:16). The document silently corrects the video and still cites the video. It never says that true constants go in a read-only section (`.rodata` or `section .rodata` in NASM). The learner gets two different stories and no explanation.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M4",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L98",
+  "lines": [
+   [
+    98,
+    98
+   ]
+  ],
+  "claim": "\"The CPU stores the return instruction pointer in rcx ... inspects rax, and invokes sys_write\"",
+  "problem": "This mixes the CPU and the kernel. The CPU saves `rip` in `rcx` and the flags in `r11`, then jumps to a kernel entry address. Kernel code reads `rax` and calls `sys_write`. The document omits `r11`. It also omits that `syscall` overwrites `rcx` and `r11`. That is a real trap for a learner. The cited source [14] is a table of syscall numbers. It does not describe this mechanism.",
+  "tags": [
+   "KNOW",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M5",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L105",
+  "lines": [
+   [
+    105,
+    105
+   ]
+  ],
+  "claim": "Without an exit call, the MMU \"trips a general protection fault\"",
+  "problem": "On x86-64, an access to an unmapped page causes a page fault, not a general protection fault. Illegal instruction bytes give SIGILL, not SIGSEGV. The likely real path is this: the CPU runs into zero padding. Zero bytes decode as `add [rax], al`. After the write call, `rax` holds 14. A write to address 14 causes a page fault, and the kernel sends SIGSEGV. The video only says that the program gets a segmentation fault (02:21).",
+  "tags": [
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M6",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L62, L93",
+  "lines": [
+   [
+    62,
+    62
+   ],
+   [
+    93,
+    93
+   ]
+  ],
+  "claim": "Heading \"Relative Addressing Mechanics\"",
+  "problem": "The program uses an absolute address, not a relative one. The reviewer assembled an equivalent program. `mov rsi, msg` gave a 10-byte instruction with an absolute relocation (R_X86_64_64). RIP-relative addressing is `lea rsi, [rel msg]`. The difference matters: the absolute form fails when a learner links a position-independent executable.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M7",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L134, L136-137",
+  "lines": [
+   [
+    134,
+    134
+   ],
+   [
+    136,
+    137
+   ]
+  ],
+  "claim": "Assembly is critical for high-frequency trading, and execution time \"must remain strictly deterministic\"",
+  "problem": "The video names only bare metal access, performance, device drivers, embedded systems, and WebAssembly (00:33 to 00:46). The document cites the video for trading, crypto, malware, and security audits. \"Strictly deterministic\" is an overclaim for trading systems. Constant-time code in cryptography is a real topic, but it is about side channels, not speed.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M8",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L56",
+  "lines": [
+   [
+    56,
+    56
+   ]
+  ],
+  "claim": "W XOR X \"prevents arbitrary code execution vulnerabilities\"",
+  "problem": "W XOR X (a page is writable or executable, never both) blocks injected code in data pages. Code-reuse attacks such as ROP (return-oriented programming) still work. Also, `_start` is not \"required by the dynamic system loader\". This program is static and has no dynamic loader. The kernel jumps to the entry address in the ELF header. `ld` uses `_start` as the default entry symbol.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-M9",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "major",
+  "location": "L32, L37, L42, L127",
+  "lines": [
+   [
+    32,
+    32
+   ],
+   [
+    37,
+    37
+   ],
+   [
+    42,
+    42
+   ],
+   [
+    127,
+    127
+   ]
+  ],
+  "claim": "Citations [7], [2], [12]",
+  "problem": "The document cites [7], the Wikipedia page for Booth's APEXC computer, for the ARM instruction length. It cites [2], a spam-like mirror site, for WebAssembly. It cites [12], a Game Boy tool blog, for ELF relocation. None of these sources supports its sentence.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m1",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L5",
+  "lines": [
+   [
+    5,
+    5
+   ]
+  ],
+  "claim": "Each assembly statement corresponds to one opcode",
+  "problem": "Directives such as `section`, `db`, `equ` and `global` give no instruction. Macros can give many.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m2",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L31",
+  "lines": [
+   [
+    31,
+    31
+   ]
+  ],
+  "claim": "Other ISAs need \"binary translation or virtualization\"",
+  "problem": "Virtualization runs code of the same ISA (instruction set architecture). Code for a different ISA needs emulation or translation, for example QEMU or Rosetta 2.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m3",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L32",
+  "lines": [
+   [
+    32,
+    32
+   ]
+  ],
+  "claim": "\"x86 and x86-64 microarchitectures\"",
+  "problem": "x86-64 is an ISA. A microarchitecture is one chip design, for example AMD Zen. The strict CISC and RISC split is also dated.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m4",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L51, L55",
+  "lines": [
+   [
+    51,
+    51
+   ],
+   [
+    55,
+    55
+   ]
+  ],
+  "claim": "`.bss` variables are \"reserved dynamically at runtime\"",
+  "problem": "The size of `.bss` is fixed when you assemble and link (for example `resb 64`). Only the zero fill happens at load time.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m5",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L78",
+  "lines": [
+   [
+    78,
+    78
+   ]
+  ],
+  "claim": "Registers circumvent \"external memory caches\"",
+  "problem": "Modern caches are on the CPU die, not external. \"Single-cycle\" is a simplification.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m6",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L91",
+  "lines": [
+   [
+    91,
+    91
+   ]
+  ],
+  "claim": "`rax` holds the call number \"under the System V AMD64 ABI\"",
+  "problem": "The system call convention is the Linux kernel convention. The ABI document shows it only in an appendix. The normal function call convention is different (the fourth argument is `rcx`, not `r10`). A learner can mix the two.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m7",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L97",
+  "lines": [
+   [
+    97,
+    97
+   ]
+  ],
+  "claim": "`int 0x80` belongs to \"legacy 32-bit\" x86",
+  "problem": "`int 0x80` still works on 64-bit Linux, but it uses the 32-bit call numbers and cuts pointers to 32 bits. This is a common beginner bug.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m8",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L127",
+  "lines": [
+   [
+    127,
+    127
+   ]
+  ],
+  "claim": "Instructions become \"hexadecimal opcodes\"",
+  "problem": "The object file holds binary bytes. Hexadecimal is only a way to show them.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m9",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L129",
+  "lines": [
+   [
+    129,
+    129
+   ]
+  ],
+  "claim": "The kernel \"initializes the hardware stack and base pointers\"",
+  "problem": "The kernel sets `rsp` and puts argc, argv and the environment on the stack. It does not set up `rbp` as a frame base.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m10",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L56, L73",
+  "lines": [
+   [
+    56,
+    56
+   ],
+   [
+    73,
+    73
+   ]
+  ],
+  "claim": "W XOR X symbol and the length formula",
+  "problem": "Both are images. Screen readers and text search cannot read them.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m11",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L7-24, L66-69, L80-89, L100-103",
+  "lines": [
+   [
+    7,
+    24
+   ],
+   [
+    66,
+    69
+   ],
+   [
+    80,
+    89
+   ],
+   [
+    100,
+    103
+   ]
+  ],
+  "claim": "Code blocks",
+  "problem": "The same code appears three times. The raw file has escape characters (`\\!`, `\\$`, `\\_`). If the owner copies the raw text, NASM fails.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D05-m12",
+  "doc": "05",
+  "source": "Assembly Language Video Breakdown.md",
+  "severity": "minor",
+  "location": "L3-28",
+  "lines": [
+   [
+    3,
+    28
+   ]
+  ],
+  "claim": "History section",
+  "problem": "The video gives the IBM 7090 example and says there are \"hundreds of instructions\" (01:44). The document omits both, but it adds many facts that the video does not give.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-C1",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "critical",
+  "location": "L851-853, L1076-1080",
+  "lines": [
+   [
+    851,
+    853
+   ],
+   [
+    1076,
+    1080
+   ]
+  ],
+  "claim": "The ISA tab shows a radar chart",
+  "problem": "The code draws the chart only inside `switchTab('isa')`. The load handler does not call `switchTab` or `initRadarChart`. The ISA tab is the default tab. Thus the chart area is empty on first load. The user must open another tab and then come back.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-C2",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "critical",
+  "location": "L907-935, L949",
+  "lines": [
+   [
+    907,
+    935
+   ],
+   [
+    949,
+    949
+   ]
+  ],
+  "claim": "Radar scores such as x86-64 95/30/60/95/30 and WebAssembly \"Cross-Platform Security\" 100",
+  "problem": "The numbers have no source, no unit and no method. Report 05 has no scores. The code hides the scale ticks (`display: false`), so the reader cannot see the values. \"Register Count\" gives WebAssembly 40, but WebAssembly has no registers. It uses a stack and local variables.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-C3",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "critical",
+  "location": "L823",
+  "lines": [
+   [
+    823,
+    823
+   ]
+  ],
+  "claim": "Hexdump of `hello.o`: `48 89 c7 48 8d 35 00 00 00 00 e8 00 00 00 00`",
+  "problem": "These bytes decode as `mov rdi, rax`, `lea rsi, [rip+0]` and a `call`. The program has none of these instructions. The panel also says \"Unresolved relocation entry: _start\". The local build shows one relocation only, for `msg` in `.data` (type R_X86_64_64). `_start` is defined in the same file and needs no relocation.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M1",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "L713-797",
+  "lines": [
+   [
+    713,
+    797
+   ]
+  ],
+  "claim": "RIP values 0x401000, +7, +7, +7, +7, +2, +7, +2",
+  "problem": "The page assumes that every `mov` is 7 bytes and `xor rdi, rdi` is 2 bytes. In the local GNU `as` build, `mov rsi, msg` is 10 bytes and `xor rdi, rdi` is 3 bytes. Thus the addresses from step 3 are wrong. The exact sizes from NASM can differ. Also, the page shows the address of the current instruction but the register values after that instruction. It mixes two conventions.",
+  "tags": [
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M2",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "L759-781",
+  "lines": [
+   [
+    759,
+    781
+   ]
+  ],
+  "claim": "After the write `syscall`, `rax` stays 0x1",
+  "problem": "The kernel returns the number of bytes written in `rax`. The correct value is 14 (0xE). The `syscall` instruction also overwrites `rcx` and `r11`. The simulator hides the return value, which is the main debugging signal for a learner.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M3",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "L204",
+  "lines": [
+   [
+    204,
+    204
+   ]
+  ],
+  "claim": "Her \"1958 treatise\" came \"prior to\" Fortran (1957)",
+  "problem": "The sentence contradicts itself: 1958 is after 1957. Also, the St Andrews biography (web check) dates the APEC design to 1949, not 1947 (see review 05, M1).",
+  "tags": [
+   "DOC",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M4",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "L252, L692, L699",
+  "lines": [
+   [
+    252,
+    252
+   ],
+   [
+    692,
+    692
+   ],
+   [
+    699,
+    699
+   ]
+  ],
+  "claim": "`.data` holds \"Initialized Static Constants\", `.bss` is \"Uninitialized Dynamic Data\"",
+  "problem": "The page repeats the error of the video: \"data section is where we can initialize constants\" (01:16). But the page also marks `.data` as RW- (writable). Constants belong in `.rodata`. The `.bss` badge \"Dynamic\" contradicts report 05, which says \"Uninitialized Static Data\" (report L51).",
+  "tags": [
+   "DOC",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M5",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "whole page, L73, L631",
+  "lines": [
+   [
+    73,
+    73
+   ],
+   [
+    631,
+    631
+   ]
+  ],
+  "claim": "\"Architectural Analysis\"",
+  "problem": "The page has no citation and no link to the video or to report 05. A comment (L73) says that the page explains its relation to the source report, but no visible text does this. A reader cannot trace any claim.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M6",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "L218, L293, L682",
+  "lines": [
+   [
+    218,
+    218
+   ],
+   [
+    293,
+    293
+   ],
+   [
+    682,
+    682
+   ]
+  ],
+  "claim": "Modern systems \"strictly enforce\" W XOR X to \"prevent\" shellcode",
+  "problem": "W XOR X (a page is writable or executable, never both) blocks injected code in data pages. It does not stop code-reuse attacks such as ROP. Linux also lets a program ask for writable and executable memory, for example for a JIT compiler. \"Strictly\" is an overclaim.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-M7",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "major",
+  "location": "L598, L602",
+  "lines": [
+   [
+    598,
+    598
+   ],
+   [
+    602,
+    602
+   ]
+  ],
+  "claim": "\"Single-cycle register manipulation bypassing CPU cache misses\" and \"compiler dynamic memory allocation\"",
+  "problem": "Registers do not remove cache misses. Data must still come from memory into a register. Compilers do not allocate memory at runtime. This text is new on the page. Report 05 does not say it.",
+  "tags": [
+   "KNOW",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m1",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L8, L10",
+  "lines": [
+   [
+    8,
+    8
+   ],
+   [
+    10,
+    10
+   ]
+  ],
+  "claim": "CDN scripts",
+  "problem": "`cdn.tailwindcss.com` is the Tailwind Play CDN for development only. `cdn.jsdelivr.net/npm/chart.js` has no version pin. The page needs a network connection and can break after a new major release.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m2",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L949",
+  "lines": [
+   [
+    949,
+    949
+   ]
+  ],
+  "claim": "`ticks: { max: 100 }`",
+  "problem": "In Chart.js 3 and later, `max` belongs on the scale, not on `ticks`. Thus the scale is automatic, not 0 to 100.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m3",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L415, L713, L1029",
+  "lines": [
+   [
+    415,
+    415
+   ],
+   [
+    713,
+    713
+   ],
+   [
+    1029,
+    1029
+   ]
+  ],
+  "claim": "RIP display",
+  "problem": "The first value has 16 hex digits. The steps use 8 digits. The reset value `0x000000000401000` has 15 digits.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m4",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L813, L527",
+  "lines": [
+   [
+    813,
+    813
+   ],
+   [
+    527,
+    527
+   ]
+  ],
+  "claim": "Phase 1 command \"Cat hello.asm\"",
+  "problem": "Linux commands are case sensitive. `Cat` fails and `cat` works. The static HTML shows `nasm -f elf64 hello.asm` for phase 1, and the script replaces it on load.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m5",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L830",
+  "lines": [
+   [
+    830,
+    830
+   ]
+  ],
+  "claim": "`file` output with \"entry point 0x401000\"",
+  "problem": "The entry address 0x401000 matches the local build. But `file` does not usually print the entry point. `readelf -h` does.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m6",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L672",
+  "lines": [
+   [
+    672,
+    672
+   ]
+  ],
+  "claim": "WebAssembly example `i32.const 10` then `i32.add`",
+  "problem": "`i32.add` needs two values on the stack. This code has one, so a WebAssembly validator rejects it.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m7",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L654, L663",
+  "lines": [
+   [
+    654,
+    654
+   ],
+   [
+    663,
+    663
+   ]
+  ],
+  "claim": "`mov rax, [rsi + rdx*8]` shows the CISC difference",
+  "problem": "This is a load with scaled addressing. AArch64 has the same kind of load (`ldr x0, [x1, x2, lsl #3]`). An example such as `add rax, [rsi]` shows arithmetic on a memory operand, which is the real CISC difference.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m8",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L228, L233-237",
+  "lines": [
+   [
+    228,
+    228
+   ],
+   [
+    233,
+    237
+   ]
+  ],
+  "claim": "Kernel space near \"High Address (0x7FFF...)\"",
+  "problem": "On x86-64 Linux, user space ends near 0x00007FFFFFFFFFFF. Kernel space starts at 0xFFFF800000000000. The map also joins the stack and the heap in one band.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m9",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L142, L218, L293, L320, L336, L464",
+  "lines": [
+   [
+    142,
+    142
+   ],
+   [
+    218,
+    218
+   ],
+   [
+    293,
+    293
+   ],
+   [
+    320,
+    320
+   ],
+   [
+    336,
+    336
+   ],
+   [
+    464,
+    464
+   ]
+  ],
+  "claim": "Formatting",
+  "problem": "The text `$W \\oplus X$` needs a math library, but the page loads none. The raw LaTeX shows on screen. Backticks around `sys_write` and `NASM` also show as raw characters.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m10",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L241-257, L477-507, L103-117",
+  "lines": [
+   [
+    241,
+    257
+   ],
+   [
+    477,
+    507
+   ],
+   [
+    103,
+    117
+   ]
+  ],
+  "claim": "Clickable items",
+  "problem": "The memory blocks and toolchain steps are `div` elements with `onclick`. A keyboard user cannot reach them. The tabs have no ARIA roles. Emoji icons have no text alternative. Much text is 10 px.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m11",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L464",
+  "lines": [
+   [
+    464,
+    464
+   ]
+  ],
+  "claim": "High-level compilers do \"garbage-collection injections\"",
+  "problem": "This is not a standard compiler stage. The report (L119) does not say it.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D06-m12",
+  "doc": "06",
+  "source": "assembly_language_architectural_explorer.html",
+  "severity": "minor",
+  "location": "L634",
+  "lines": [
+   [
+    634,
+    634
+   ]
+  ],
+  "claim": "\"POSIX Compliant\"",
+  "problem": "The program uses Linux system call numbers. It does not run on other POSIX systems such as macOS.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-C1",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "critical",
+  "location": "L5-89, L93, L98",
+  "lines": [
+   [
+    5,
+    89
+   ],
+   [
+    93,
+    93
+   ],
+   [
+    98,
+    98
+   ]
+  ],
+  "claim": "The superscript numbers cite sources for each sentence.",
+  "problem": "The citations do not support the text. Source [1] is a Facebook group post about formatted input and output. The report cites it about 15 times for history, uppercase letters, character sizes, functions, intent and coarrays. Source [6] is a Hackaday article. The reviewer read it (WebFetch). It does not discuss card columns, keypunch models or errors in the video. But the report cites [6] for these (L11, L15, L20, L53).",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-C2",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "critical",
+  "location": "L76-77, L89",
+  "lines": [
+   [
+    76,
+    77
+   ],
+   [
+    89,
+    89
+   ]
+  ],
+  "claim": "\"the Fortran standard enforces pointer non-aliasing by design\"",
+  "problem": "This is wrong. Aliasing means two names for the same memory. The standard puts a rule on the programmer: do not change memory through one argument if another argument points to it. The compiler assumes that the rule is true. It does not check it. If the programmer breaks the rule, the program gives wrong results and no error. Arguments with `pointer` or `target` can alias legally. C99 `restrict` is the same kind of promise, so the contrast \"merely a hint\" is false.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-C3",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "critical",
+  "location": "L24, L83-85",
+  "lines": [
+   [
+    24,
+    24
+   ],
+   [
+    83,
+    85
+   ]
+  ],
+  "claim": "The report analyzes \"the specific technical concepts\" of the video.",
+  "problem": "The report catches only two problems. It misses these errors in the video: (1) \"first computer language standard\" in 1957 (00:17 to 00:20). The first Fortran standard was FORTRAN 66, in 1966. (2) \"first ever\" high-level language (00:02 to 00:03). Earlier languages existed. (3) `do while` as a feature at the start (01:58 to 02:04). Standard `do while` came with Fortran 90. (4) Functions take \"immutable arguments\" (02:14). This is false (M7). (5) The file suffix selects the version (01:04 to 01:07). This is false (M5).",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M1",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L66",
+  "lines": [
+   [
+    66,
+    66
+   ]
+  ],
+  "claim": "Modern Fortran has \"mandatory implicit none\".",
+  "problem": "This is not true. The standard, up to Fortran 2023, still uses implicit typing when a program does not declare a variable. `implicit none` is a strong best practice, not a rule of the language. Fortran 2018 added `implicit none (type, external)`. A learner can think that a modern compiler catches every typo. It does not, unless the code has `implicit none` or the learner uses a compiler flag such as `-fimplicit-none`.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M2",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L71",
+  "lines": [
+   [
+    71,
+    71
+   ]
+  ],
+  "claim": "The classical column lists OpenMP and MPI. The modern column says \"native SPMD parallelism via coarrays\".",
+  "problem": "The classical column is out of time order. MPI (1994) and OpenMP (1997) came after FORTRAN 77. The modern column gives the wrong picture. Most modern Fortran HPC code uses MPI and OpenMP, and now GPU offload. Coarrays are a small part of real use. In gfortran, coarrays need the OpenCoarrays library, which uses MPI.",
+  "tags": [
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M3",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L78-79",
+  "lines": [
+   [
+    78,
+    79
+   ]
+  ],
+  "claim": "BLAS and LAPACK were \"optimized in Fortran\". Decades of hardware work around column-major order give kernels near the hardware limit.",
+  "problem": "The reference BLAS and LAPACK are in Fortran. But the fast BLAS libraries that NumPy, Julia and MATLAB use (OpenBLAS, Intel MKL, BLIS) have their core loops in C and assembly. Hardware does not prefer column-major order. Caches prefer contiguous access in any order. Column-major order (columns stored one after the other) only helps if the inner loop runs on the first index.",
+  "tags": [
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M4",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L20",
+  "lines": [
+   [
+    20,
+    20
+   ]
+  ],
+  "claim": "The IBM 026 and 029 keypunches had no lowercase and no shift keys. Lowercase came in the 1970s.",
+  "problem": "The report repeats the story of the video (01:11 to 01:15) and adds details. The 026 and 029 had a numeric shift. The main limit was the 6-bit character code of the computers, with no space for lowercase letters. Standard Fortran permitted lowercase letters only from Fortran 90.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M5",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L28",
+  "lines": [
+   [
+    28,
+    28
+   ]
+  ],
+  "claim": "`.f95` is uncommon. Use `.f90` for free form. Old ifort releases do not accept `.f95`.",
+  "problem": "The advice is correct and useful. The forum thread [7] says the same. But the video says that the suffix selects \"a certain version like Fortran 95\" (01:04 to 01:07). The report does not correct this. In gfortran, the suffix selects fixed or free source form. The flag `-std=` selects the standard. The ifort detail has no real source.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M6",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L7",
+  "lines": [
+   [
+    7,
+    7
+   ]
+  ],
+  "claim": "The FORTRAN I team made \"loop unrolling mechanisms\" and \"control-flow graphs\". The code \"equaled or surpassed\" hand code.",
+  "problem": "Histories of FORTRAN I describe index register allocation, common subexpression removal and flow analysis by frequency simulation. The reviewer does not know of a source for loop unrolling. \"Surpassed\" is stronger than the video (00:35 to 00:37), which says \"just as fast\". The only citation is [2], a blog.",
+  "tags": [
+   "VERIFY",
+   "VIDEO"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M7",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L57",
+  "lines": [
+   [
+    57,
+    57
+   ]
+  ],
+  "claim": "Subroutines use \"pass-by-reference\". `pure` guarantees no \"memory mutations\".",
+  "problem": "The standard does not require pass by reference. Compilers can copy in and copy out. A `pure` procedure cannot change data outside itself, but it can change its local variables. Also, the video says that a function takes \"immutable arguments\" (02:14 to 02:16). This is false. A function can change an argument unless the argument has `intent(in)`. The report explains `intent`, but does not say that the video is wrong.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-M8",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "major",
+  "location": "L53",
+  "lines": [
+   [
+    53,
+    53
+   ]
+  ],
+  "claim": "Early Fortran used \"real, dimension(100, 100) :: matrix\". Modern pointers are \"type-safe\".",
+  "problem": "The `::` form is Fortran 90 syntax. Early code used `DIMENSION A(100,100)` or `REAL A(100,100)`. The learner gets two eras mixed. The video says that modern versions use pointers to allocate memory (01:52 to 01:56). The report adds `allocatable`, which is correct. But it does not say that `allocatable` is the preferred tool. Pointers can still leak memory and point to freed memory.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m1",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L15",
+  "lines": [
+   [
+    15,
+    15
+   ]
+  ],
+  "claim": "\"a character in column 1 marked the card as a comment\"",
+  "problem": "Only `C` (and `*` from FORTRAN 77) in column 1 marks a comment. A digit in column 1 is part of a statement label.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m2",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L20, L65",
+  "lines": [
+   [
+    20,
+    20
+   ],
+   [
+    65,
+    65
+   ]
+  ],
+  "claim": "Free form permits lines of up to 132 characters.",
+  "problem": "This is true for Fortran 90 to Fortran 2018. Fortran 2023 increased the limit to 10,000 characters.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m3",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L32",
+  "lines": [
+   [
+    32,
+    32
+   ]
+  ],
+  "claim": "The I to N rule comes from the word \"Integer\".",
+  "problem": "This is a common story. Many sources say that it comes from the math custom of `i` to `n` for integer indices. The report gives one story as fact.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m4",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L33",
+  "lines": [
+   [
+    33,
+    33
+   ]
+  ],
+  "claim": "Put `implicit none` in every program, module and procedure.",
+  "problem": "A procedure inside a module gets `implicit none` from the module. The learner can write it once per module.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m5",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L49",
+  "lines": [
+   [
+    49,
+    49
+   ]
+  ],
+  "claim": "Character variables need an explicit size.",
+  "problem": "The video says the same (01:29 to 01:33). Modern Fortran also has `character(len=:), allocatable`, which changes its length at run time.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m6",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L69",
+  "lines": [
+   [
+    69,
+    69
+   ]
+  ],
+  "claim": "Classical FORTRAN relied on computed GOTO and arithmetic IF.",
+  "problem": "FORTRAN 77 already had block `IF ... THEN ... ELSE`. The contrast fits FORTRAN 66 better than FORTRAN 77.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m7",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L5",
+  "lines": [
+   [
+    5,
+    5
+   ]
+  ],
+  "claim": "\"the earliest widely adopted high-level programming language\"",
+  "problem": "This wording is correct. It corrects the \"first ever\" claim of the video (00:02 to 00:03). But the report does not say that it corrects the video.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m8",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L63, L71",
+  "lines": [
+   [
+    63,
+    63
+   ],
+   [
+    71,
+    71
+   ]
+  ],
+  "claim": "\"Fortran 2018+\"",
+  "problem": "The current standard is Fortran 2023. The report does not name it.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m9",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L36-43",
+  "lines": [
+   [
+    36,
+    43
+   ]
+  ],
+  "claim": "The report quotes the code of the video.",
+  "problem": "The transcript does not show code, so this review cannot check the exact text. The fortran-lang forum thread confirms that `n` and `doubled` have no declaration under `implicit none`. The analysis at L45 is correct: without `implicit none`, `doubled` is REAL.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m10",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L6",
+  "lines": [
+   [
+    6,
+    6
+   ]
+  ],
+  "claim": "Machine time cost \"hundreds of dollars per hour\". The IBM 704 was the first mass-produced computer with floating-point hardware.",
+  "problem": "Both are plausible. The sources are [1] (a Facebook post) and [5] (a Hackaday tag page). Neither is a good source for these facts.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D07-m11",
+  "doc": "07",
+  "source": "Fortran Video Breakdown.md",
+  "severity": "minor",
+  "location": "L36-43",
+  "lines": [
+   [
+    36,
+    43
+   ]
+  ],
+  "claim": "The code block",
+  "problem": "The code has no code fence and has escaped characters such as `\\=` and `\\*`. It does not show as code.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-C1",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "critical",
+  "location": "L168-174, L536-549",
+  "lines": [
+   [
+    168,
+    174
+   ],
+   [
+    536,
+    549
+   ]
+  ],
+  "claim": "A bar chart of \"Developer Effort / Time (Hours)\" (100, 15, 12, 5) and \"Execution Overhead\" (0, 400, 10, 2 percent)",
+  "problem": "The numbers are invented. No source is given, and report 07 has no such numbers. The chart puts hours and percent on one axis. The title says \"1950s\", but one bar is \"Modern Fortran / C (-O3)\". \"Hand Assembly 0%\" suggests that hand code is perfect. A learner can take these numbers as measured data.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-C2",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "critical",
+  "location": "L657-669",
+  "lines": [
+   [
+    657,
+    669
+   ]
+  ],
+  "claim": "Without `implicit none` and declarations, the program prints `2 4 6 8 10`.",
+  "problem": "This output is wrong. Under implicit typing, `doubled` starts with \"d\", so it is REAL. gfortran prints real numbers such as `2.00000000`. Report L45 says this correctly. The warning text \"REAL/INTEGER\" avoids the answer. gfortran does not give these warnings by default. The simulator hides the exact lesson of the page.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-C3",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "critical",
+  "location": "L94, L379, L386, L396, L781",
+  "lines": [
+   [
+    94,
+    94
+   ],
+   [
+    379,
+    379
+   ],
+   [
+    386,
+    386
+   ],
+   [
+    396,
+    396
+   ],
+   [
+    781,
+    781
+   ]
+  ],
+  "claim": "\"0% Aliasing Overhead\". Dummy arguments are \"guaranteed disjoint by specification\". \"Compiler GUARANTEES 'a' and 'b' do not overlap!\"",
+  "problem": "This is wrong (see review 07, C2). The programmer promises that the arguments do not overlap. The compiler does not check it. `call add(x, x, n)` compiles and breaks the rule without an error. The \"0%\" figure has no source.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M1",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L290, L614-684",
+  "lines": [
+   [
+    290,
+    290
+   ],
+   [
+    614,
+    684
+   ]
+  ],
+  "claim": "A button \"Execute Compiler (gfortran -O2)\"",
+  "problem": "No compiler runs. The code selects one of three fixed texts from two checkboxes. The page does not say that the output is simulated. The error text is close to real gfortran text, but the line \"Fatal Error: Termination due to compilation errors.\" is not normal gfortran output for this case.",
+  "tags": [
+   "DOC",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M2",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L254, L264, L626",
+  "lines": [
+   [
+    254,
+    254
+   ],
+   [
+    264,
+    264
+   ],
+   [
+    626,
+    626
+   ]
+  ],
+  "claim": "The simulator shows \"Fireship's snippet\".",
+  "problem": "The page code uses `do n = 1, 5` and the file name `myApp.f90`. Report L39 gives `do n = 1, 10`, and report L28 says that the video uses `.f95`. The page changes the code of the video but still calls it the code of the video.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M3",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L778-784",
+  "lines": [
+   [
+    778,
+    784
+   ]
+  ],
+  "claim": "The Fortran example of good practice",
+  "problem": "The subroutine has no `implicit none` and never declares `n`. It works only because `n` starts with a letter in the I to N range. Thus the page uses the implicit typing that it criticizes in section 3.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M4",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L765-773",
+  "lines": [
+   [
+    765,
+    773
+   ]
+  ],
+  "claim": "In C, the compiler \"cannot hold values in hardware registers\" and must do \"repeated L1/L2 cache re-loads\".",
+  "problem": "For `a[i] += b[i]`, each element is loaded one time in any case. GCC and Clang vectorize this loop. They add a run-time check for overlap. Aliasing has a real cost, but in other loop shapes, and the cost is smaller than the page shows.",
+  "tags": [
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M5",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L405, L427",
+  "lines": [
+   [
+    405,
+    405
+   ],
+   [
+    427,
+    427
+   ]
+  ],
+  "claim": "\"Decades of hardware cache optimizations align specifically with this layout\". \"BLAS and LAPACK (Optimized Fortran Libraries)\".",
+  "problem": "Hardware does not prefer column-major order. The fast BLAS libraries (OpenBLAS, MKL, BLIS) have core loops in C and assembly. See review 07, M3.",
+  "tags": [
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M6",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L696-698, L719-723",
+  "lines": [
+   [
+    696,
+    698
+   ],
+   [
+    719,
+    723
+   ]
+  ],
+  "claim": "The evolution table: \"mandatory implicit none\", and coarrays as the modern parallel model",
+  "problem": "The same errors as review 07, M1 and M2. Also, the row \"Typing Discipline\" has the domain \"memory\", so the filter \"Memory and Arrays\" shows it, and \"Syntax\" shows only one row.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M7",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L234",
+  "lines": [
+   [
+    234,
+    234
+   ]
+  ],
+  "claim": "The IBM 026 and 029 \"lacked lowercase character sets and shift keys entirely\".",
+  "problem": "This is stronger than the report. The keypunches had a numeric shift. See review 07, M4.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-M8",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "major",
+  "location": "L506, whole page",
+  "lines": [
+   [
+    506,
+    506
+   ]
+  ],
+  "claim": "\"Based on technical report\"",
+  "problem": "The page has no citations and no link to the video or to report 07. A reader cannot trace any claim to a source.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m1",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L8",
+  "lines": [
+   [
+    8,
+    8
+   ]
+  ],
+  "claim": "Tailwind from `cdn.tailwindcss.com`",
+  "problem": "This is the Tailwind Play CDN, for development only. The page needs a network connection and does not work offline.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m2",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L10",
+  "lines": [
+   [
+    10,
+    10
+   ]
+  ],
+  "claim": "Chart.js from `cdn.jsdelivr.net/npm/chart.js`",
+  "problem": "The version is not pinned. A future major release can break the chart.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m3",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L108-125, L136, L171",
+  "lines": [
+   [
+    108,
+    125
+   ],
+   [
+    136,
+    136
+   ],
+   [
+    171,
+    171
+   ]
+  ],
+  "claim": "Tabs, emoji icons and the chart canvas",
+  "problem": "The tab buttons have no `role=\"tab\"` or `aria-selected`. The emoji icons have no `aria-hidden`. The chart canvas has no text alternative. A screen reader user gets little help.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m4",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L565-568",
+  "lines": [
+   [
+    565,
+    568
+   ]
+  ],
+  "claim": "The x-axis labels",
+  "problem": "The code cuts labels longer than 16 characters. \"1957 Fortran I Compiler\" shows as \"1957 Fortran I..\".",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m5",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L593",
+  "lines": [
+   [
+    593,
+    593
+   ]
+  ],
+  "claim": "\"'C' or '*'\" in column 1 marks a comment",
+  "problem": "This is correct for FORTRAN 77 and better than report L15. `*` was not valid in FORTRAN 66.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m6",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L597",
+  "lines": [
+   [
+    597,
+    597
+   ]
+  ],
+  "claim": "Column 6 \"signaled to the IBM card reader\"",
+  "problem": "The compiler reads column 6, not the card reader. The card reader only reads holes.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m7",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L605",
+  "lines": [
+   [
+    605,
+    605
+   ]
+  ],
+  "claim": "Card sorting machines \"assign line numbers to decks\"",
+  "problem": "A sorter reads the sequence numbers. It does not assign them. People or keypunch programs punched them.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m8",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L240, L601, L692",
+  "lines": [
+   [
+    240,
+    240
+   ],
+   [
+    601,
+    601
+   ],
+   [
+    692,
+    692
+   ]
+  ],
+  "claim": "Free form permits up to 132 characters per line.",
+  "problem": "Fortran 2023 increased the limit to 10,000 characters. See review 07, m2.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D08-m9",
+  "doc": "08",
+  "source": "fortran_technical_deconstruction.html",
+  "severity": "minor",
+  "location": "L366, L449",
+  "lines": [
+   [
+    366,
+    366
+   ],
+   [
+    449,
+    449
+   ]
+  ],
+  "claim": "A \"70-year-old language\" that is \"dominant\" in supercomputing",
+  "problem": "The report says \"six decades\" (report L84). \"Dominant\" goes too far. C++ is now common in new HPC code. Fortran still has a large share.",
+  "tags": [
+   "DOC",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-C1",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "critical",
+  "location": "L33-39, L77",
+  "lines": [
+   [
+    33,
+    39
+   ],
+   [
+    77,
+    77
+   ]
+  ],
+  "claim": "C++ about 10,000 P/s, Fortran about 6,000 P/s, COBOL 252 P/s, and COBOL \"40 to 50 times slower\"",
+  "problem": "The video gives different numbers. At 13:51, Fortran gets 1163 passes and COBOL gets 1118 passes. At 14:03, the C++ program of Dave gets 1936 passes. Dave says that Fortran and COBOL are \"about the same speed\" and \"about half the speed of my c plus effort\" (14:03). Thus the ratio of C++ to COBOL is about 1.7, not 40 to 50. The ranking and the gap in the document are wrong.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-C2",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "critical",
+  "location": "L41-57",
+  "lines": [
+   [
+    41,
+    57
+   ]
+  ],
+  "claim": "Eight Fortran compilers (gfortran 7 to 11, ifort, ifx, flang 12) with flags and P/s",
+  "problem": "The video names no Fortran compiler, no version and no compiler flag. The reviewer fetched the cited source [7]. It is a fortran-lang forum thread from March 2022, with numbers from one user on an AMD Ryzen 7 3700X. The video uses a Threadripper (00:19). The document presents these numbers as \"the benchmark\" of Episode 04. That is a false attribution. The thread also shows ranges up to about 18,000 for other program variants, so the table shows only one variant.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-C3",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "critical",
+  "location": "L16, L75-79",
+  "lines": [
+   [
+    16,
+    16
+   ],
+   [
+    75,
+    79
+   ]
+  ],
+  "claim": "COBOL is slow because of table indexing, emulated bit operations and slow dynamic memory in each pass",
+  "problem": "The video contradicts this section. At 05:17, the COBOL array holds a one-bit value repeated 500,000 times. At 05:30, Dave says that the COBOL program keeps a spare, preset copy of the array and copies it for each pass. He says that this \"isn't technically faithful to the original\". So the COBOL program does not allocate memory in each pass. Also, COBOL was not slow in this race (C1). The section explains a result that did not occur.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-C4",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "critical",
+  "location": "L35-37",
+  "lines": [
+   [
+    35,
+    37
+   ]
+  ],
+  "claim": "Throughput cells in the main results table",
+  "problem": "The cells are images. The C++ cell shows only \"≈ 10,000\" and a dash, and the Fortran cell shows \"≈ 6,000\" and a dash. The range has no upper value. The COBOL cell shows only \"≈\" and no number. The main results table of the document is thus incomplete.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M1",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L39, L43, L93",
+  "lines": [
+   [
+    39,
+    39
+   ],
+   [
+    43,
+    43
+   ],
+   [
+    93,
+    93
+   ]
+  ],
+  "claim": "C++ and Fortran \"operate near the theoretical limits\". Modern gfortran \"narrows the gap\". Fortran \"remains competitive with modern C++\"",
+  "problem": "In the video, Fortran runs at about half the speed of C++ (14:03). At 14:15, Dave says that the leader runs at more than 4,000 passes per second, and that it is not C, C++ or Assembly. So the C++ entry is not near a \"theoretical limit\". Also, the gfortran-11 value in the document (12,417) is higher than its own C++ value (about 10,000). The document contradicts itself.",
+  "tags": [
+   "VIDEO",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M2",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L6",
+  "lines": [
+   [
+    6,
+    6
+   ]
+  ],
+  "claim": "Each program runs for \"a fixed, non-extendable duration of 5.0 seconds\"",
+  "problem": "The Primes CONTRIBUTING file says that a program runs for \"at least 5 seconds\" and stops as soon as possible after that (checked by WebFetch). At 10:25, the video shows that the Fortran program checks the time after each pass. The last pass can end after 5 seconds. The value \"5 seconds\" is correct. The word \"non-extendable\" is wrong.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M3",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L7",
+  "lines": [
+   [
+    7,
+    7
+   ]
+  ],
+  "claim": "The \"faithful\" rules: a class, a new buffer on each pass, validation against 78,498 primes \"before execution finishes\"",
+  "problem": "The rules are mostly correct, but the document cites them to [7], a forum thread, not to the repository [5]. The CONTRIBUTING file (checked by WebFetch) requires a class or equivalent, a new instance for each pass, a buffer allocated at runtime, and no external libraries. It does not say \"validate before execution finishes\". The document also omits that the COBOL program in the video breaks these rules (05:30). The reviewer did not check which rules existed on the date of the video.",
+  "tags": [
+   "DOC",
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M4",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L21, L88",
+  "lines": [
+   [
+    21,
+    21
+   ],
+   [
+    88,
+    88
+   ]
+  ],
+  "claim": "Standard Fortran \"specifies that array arguments cannot overlap\", which gives the compiler \"complete freedom\"",
+  "problem": "This is too strong. The standard gives this rule to the programmer, and compilers do not check it. Arguments with POINTER or TARGET can overlap. A program that breaks the rule can give wrong results with no error message. Also, the sieve uses one array, so this rule has almost no effect on this race.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M5",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L22",
+  "lines": [
+   [
+    22,
+    22
+   ]
+  ],
+  "claim": "Fortran 2003 and 2008 \"introduced object-oriented paradigms and dynamic memory management\"",
+  "problem": "Dynamic arrays (ALLOCATABLE) came in Fortran 90, not in 2003 or 2008. Object-oriented features came in Fortran 2003. Fortran 2008 mainly added coarrays (parallel features).",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M6",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L57",
+  "lines": [
+   [
+    57,
+    57
+   ]
+  ],
+  "claim": "Intel compilers are slower because they focus on \"AVX-512\" floating-point work",
+  "problem": "The table at L52-53 shows the flag \"-march=core-avx2\". That flag selects AVX2 (256-bit vector instructions), not AVX-512. The explanation has no source. It is a guess presented as a fact.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M7",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L66-68",
+  "lines": [
+   [
+    66,
+    68
+   ]
+  ],
+  "claim": "Bit storage is faster than byte storage because of the cache. The Fortran bit version gives about 50% more throughput than byte arrays",
+  "problem": "The video does not test or discuss this. The machine in the video is a Threadripper, but the document uses generic cache sizes. In the Primes project, some fast solutions use bytes, not bits, so the cache argument is not always true. The \"50%\" comes from the forum thread [7]. The fetched thread says the gain is over the best \"bitfield\" results, not over byte arrays.",
+  "tags": [
+   "VIDEO",
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M8",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L16, L79",
+  "lines": [
+   [
+    16,
+    16
+   ],
+   [
+    79,
+    79
+   ]
+  ],
+  "claim": "COBOL \"lacks native unsigned integer types\" and \"native bitwise\" operations",
+  "problem": "A COBOL number with PIC 9 and no S sign is unsigned. The COBOL 2002 standard added bit and boolean data, but compiler support varies. The video shows a one-bit array in the COBOL program (05:17). The claims are too strong.",
+  "tags": [
+   "KNOW",
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M9",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L73",
+  "lines": [
+   [
+    73,
+    73
+   ]
+  ],
+  "claim": "An object-oriented Fortran sieve is 30% to 50% slower than a procedural one",
+  "problem": "No source gives these numbers. The fetched thread [7] does not state this range. The video shows no such test.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-M10",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "major",
+  "location": "L20",
+  "lines": [
+   [
+    20,
+    20
+   ]
+  ],
+  "claim": "Fortran \"represents the earliest high-level programming language\"",
+  "problem": "This is an overclaim. Earlier high-level languages exist, for example Plankalkul (design) and Short Code. Fortran was the first widely used high-level language with an optimizing compiler. The video says that Fortran \"goes back to 1954\" (01:35).",
+  "tags": [
+   "KNOW",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m1",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L47-54",
+  "lines": [
+   [
+    47,
+    54
+   ]
+  ],
+  "claim": "\"[cite: 7]\" in each compiler row",
+  "problem": "These are raw generation artifacts. All eight rows depend on one forum post.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m2",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L77",
+  "lines": [
+   [
+    77,
+    77
+   ]
+  ],
+  "claim": "COBOL \"performance deficit of approximately 252 P/s\"",
+  "problem": "A deficit (a difference) cannot be the rate itself. The value 252 is a COBOL rate from no known source.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m3",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L27, L66",
+  "lines": [
+   [
+    27,
+    27
+   ],
+   [
+    66,
+    66
+   ]
+  ],
+  "claim": "C++ keeps working data \"entirely within the processor's highest-speed cache lines\"",
+  "problem": "L66 says that the 61 KB bit array spills out of the 32 to 48 KB L1 cache. The two sentences contradict each other.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m4",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L26",
+  "lines": [
+   [
+    26,
+    26
+   ]
+  ],
+  "claim": "C++ \"guarantees zero-cost abstractions\"",
+  "problem": "This is a design principle (the \"zero-overhead principle\"), not a guarantee. Some features, for example exceptions and virtual calls, have a cost.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m5",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L56",
+  "lines": [
+   [
+    56,
+    56
+   ]
+  ],
+  "claim": "gfortran-7 to gfortran-11 gives a 39.4% increase",
+  "problem": "The arithmetic is correct (12,417 divided by 8,905 is 1.394). But the thread may report total passes in 5 seconds, not passes per second. The unit needs a check.",
+  "tags": [
+   "DOC",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m6",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L6-7, L33-77",
+  "lines": [
+   [
+    6,
+    7
+   ],
+   [
+    33,
+    77
+   ]
+  ],
+  "claim": "Numbers shown as images",
+  "problem": "All key numbers are images of formulas. A screen reader cannot read them. A reader cannot search or copy them.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D09-m7",
+  "doc": "09",
+  "source": "YouTube Video Breakdown.md",
+  "severity": "minor",
+  "location": "L5",
+  "lines": [
+   [
+    5,
+    5
+   ]
+  ],
+  "claim": "\"retired Microsoft systems engineer Dave Plummer\"",
+  "problem": "This is correct in substance. At 00:58, Dave says that he is a retired operating systems engineer from Microsoft, from the MS-DOS and Windows 95 days.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-C1",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "critical",
+  "location": "L84-86, L229, L353",
+  "lines": [
+   [
+    84,
+    86
+   ],
+   [
+    229,
+    229
+   ],
+   [
+    353,
+    353
+   ]
+  ],
+  "claim": "\"Peak Throughput 13,500 P/s\", C++ range 10,000 to 13,500",
+  "problem": "The video gives 1936 passes for the C++ program of Dave (14:03). Report 09 gives \"about 10,000\". The value 13,500 is in neither source. The page invents its headline number.",
+  "tags": [
+   "VIDEO",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-C2",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "critical",
+  "location": "L89-91, L114, L267, L353",
+  "lines": [
+   [
+    89,
+    91
+   ],
+   [
+    114,
+    114
+   ],
+   [
+    267,
+    267
+   ],
+   [
+    353,
+    353
+   ]
+  ],
+  "claim": "COBOL at 252 P/s, \"~50x\" slower, lags \"by ~98%\"",
+  "problem": "At 13:51, Fortran gets 1163 passes and COBOL gets 1118 passes. Dave says that they are about the same speed. The bar chart shows the opposite of the video result.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-C3",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "critical",
+  "location": "L119-129, L334-343, L350-353",
+  "lines": [
+   [
+    119,
+    129
+   ],
+   [
+    334,
+    343
+   ],
+   [
+    350,
+    353
+   ]
+  ],
+  "claim": "Fortran compiler chart (gfortran 7 to 11, ifort, ifx, flang) as part of Episode 04",
+  "problem": "The video names no compiler and no flag. The data comes from a 2022 forum post on an AMD Ryzen 7 3700X (checked by WebFetch). The video uses a Threadripper (00:19). The first chart also puts this gfortran-11 value next to the invented C++ value (C1). The two bars come from different tests, so the comparison has no meaning.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-C4",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "critical",
+  "location": "L279, L292",
+  "lines": [
+   [
+    279,
+    279
+   ],
+   [
+    292,
+    292
+   ]
+  ],
+  "claim": "The rules \"prevent ... static array caching or precomputed prime tables\" for \"all submissions\"",
+  "problem": "At 05:30, Dave says that the COBOL program keeps a preset copy of the array and \"isn't technically faithful to the original\". So one of the three programs breaks the rule that the page states. The page hides this.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M1",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L140-196, L440-503",
+  "lines": [
+   [
+    140,
+    196
+   ],
+   [
+    440,
+    503
+   ]
+  ],
+  "claim": "\"Simulate CPU cache saturation\"",
+  "problem": "The function updateSimulator only swaps fixed text. It calculates nothing. The size values are correct: 61 KB is 190% of 32 KB, 12% of 512 KB. 488 KB is 1525% of 32 KB and 95% of 512 KB. But the \"~50% Throughput Penalty\" and \"0% (Optimal)\" are fixed claims with no model. The model ignores the access order of the sieve and hardware prefetch (the CPU loads data before a request). The label \"100% Residency (12%)\" is confusing.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M2",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L195, L478",
+  "lines": [
+   [
+    195,
+    195
+   ],
+   [
+    478,
+    478
+   ]
+  ],
+  "claim": "Fetching bytes from \"lower cache tiers or RAM costs up to 100x more cycles\"",
+  "problem": "The page itself says that the 488 KB byte array fits in L2 (95%, L490). L2 latency is about 12 to 15 cycles, not 100 times the cost of a bit operation. The RAM case does not apply to this data size.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M3",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L140",
+  "lines": [
+   [
+    140,
+    140
+   ]
+  ],
+  "claim": "1-bit storage \"drastically\" outperforms an 8-bit byte array",
+  "problem": "The video does not test this. In the Primes project, some fast solutions use bytes. The result depends on the CPU, the compiler and the code.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M4",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L238",
+  "lines": [
+   [
+    238,
+    238
+   ]
+  ],
+  "claim": "\"Standard Fortran guarantees array arguments do not overlap\"",
+  "problem": "The standard puts this rule on the programmer, and compilers do not check it. POINTER and TARGET arguments can overlap. The sieve uses one array, so this rule does not explain this race.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M5",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L240, L246",
+  "lines": [
+   [
+    240,
+    240
+   ],
+   [
+    246,
+    246
+   ]
+  ],
+  "claim": "Bit storage gives \"~50% gains over byte arrays\". Object-oriented Fortran costs \"30%-50%\"",
+  "problem": "No source on the page. The fetched forum thread says the 50% gain is over the best \"bitfield\" results, not over byte arrays. The 30% to 50% range does not appear in the thread.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M6",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L264-266",
+  "lines": [
+   [
+    264,
+    266
+   ]
+  ],
+  "claim": "COBOL has \"No Native Bitwise Operations\". PERFORM VARYING \"bounds checking resists loop-unrolling\"",
+  "problem": "At 05:17, the video shows a COBOL array of one-bit values. The COBOL 2002 standard has bit data, but support varies. The loop claim is a guess with no source.",
+  "tags": [
+   "VIDEO",
+   "KNOW",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M7",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L80-81, L302",
+  "lines": [
+   [
+    80,
+    81
+   ],
+   [
+    302,
+    302
+   ]
+  ],
+  "claim": "\"Executes for exactly 5.0 non-extendable seconds\"",
+  "problem": "The Primes CONTRIBUTING file says \"at least 5 seconds\", then stop as soon as possible (checked by WebFetch). At 10:25, the Fortran program checks the time after each full pass.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M8",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L63-328",
+  "lines": [
+   [
+    63,
+    328
+   ]
+  ],
+  "claim": "Footer: \"Based on Dave's Garage Episode 04\"",
+  "problem": "The page has no citation and no link to the video. A reader cannot trace any number. Almost no content comes from the episode itself.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-M9",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "major",
+  "location": "L101",
+  "lines": [
+   [
+    101,
+    101
+   ]
+  ],
+  "claim": "Fortran output \"changes radically based on compiler versions and optimization flags\"",
+  "problem": "All five gfortran rows use the same flags. The data cannot separate the effect of flags from the effect of the compiler.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m1",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L7-8",
+  "lines": [
+   [
+    7,
+    8
+   ]
+  ],
+  "claim": "Scripts from cdn.tailwindcss.com and cdn.jsdelivr.net/npm/chart.js",
+  "problem": "The Tailwind Play CDN is for development only. The Chart.js link has no version, so a future major release can break the charts. The page does not work offline.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m2",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L74, L140, L297, L302",
+  "lines": [
+   [
+    74,
+    74
+   ],
+   [
+    140,
+    140
+   ],
+   [
+    297,
+    297
+   ],
+   [
+    302,
+    302
+   ]
+  ],
+  "claim": "\"$N$\", \"$N = 1,000,000$\", \"$P/s$\"",
+  "problem": "The page loads no math library. The reader sees raw dollar signs.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m3",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L195, L220, L257, L264-266, L478",
+  "lines": [
+   [
+    195,
+    195
+   ],
+   [
+    220,
+    220
+   ],
+   [
+    257,
+    257
+   ],
+   [
+    264,
+    266
+   ],
+   [
+    478,
+    478
+   ]
+  ],
+  "claim": "Code in backticks",
+  "problem": "Backticks are Markdown, not HTML. The page shows them as literal characters.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m4",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L502",
+  "lines": [
+   [
+    502,
+    502
+   ]
+  ],
+  "claim": "Byte storage \"expands the working memory set by 800%\"",
+  "problem": "Eight times the size is an increase of 700%, or a size of 800%.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m5",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L51, L112, L127, L209-212",
+  "lines": [
+   [
+    51,
+    51
+   ],
+   [
+    112,
+    112
+   ],
+   [
+    127,
+    127
+   ],
+   [
+    209,
+    212
+   ]
+  ],
+  "claim": "Navigation, charts and tabs",
+  "problem": "The canvas charts have no text alternative. The navigation bar is hidden on small screens, with no menu. The tab buttons have no role or selected state for screen readers. Status uses color only.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m6",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L258, L319",
+  "lines": [
+   [
+    258,
+    258
+   ],
+   [
+    319,
+    319
+   ]
+  ],
+  "claim": "Decimal math has \"no rounding error\". Binary rounding errors \"are illegal\"",
+  "problem": "Decimal arithmetic still rounds, for example in division. Financial rules require correct decimal results, but \"illegal\" is too strong.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m7",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L239",
+  "lines": [
+   [
+    239,
+    239
+   ]
+  ],
+  "claim": "Fortran has \"Unrivaled performance\" in matrix work",
+  "problem": "This is marketing language. Tuned C, C++ and vendor libraries give the same speed.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D10-m8",
+  "doc": "10",
+  "source": "software_drag_race_breakdown.html",
+  "severity": "minor",
+  "location": "L68, L76",
+  "lines": [
+   [
+    68,
+    68
+   ],
+   [
+    76,
+    76
+   ]
+  ],
+  "claim": "Dave Plummer is a retired Microsoft engineer. N is 1,000,000 with 78,498 primes",
+  "problem": "These are correct. The video confirms Dave (00:58) and the one-million limit (13:03). 78,498 is the correct count of primes below one million.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-C1",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "critical",
+  "location": "L16, L33, L60",
+  "lines": [
+   [
+    16,
+    16
+   ],
+   [
+    33,
+    33
+   ],
+   [
+    60,
+    60
+   ]
+  ],
+  "claim": "E01 is a \"head-to-head evaluation\" of Ada, Pascal and Delphi, and \"benchmarking Ada, Pascal, and Delphi\" gives the results.",
+  "problem": "Delphi was not raced. Dave says that the Delphi version uses the type ByteBool [16:36], a full byte per flag. He says \"its score cannot be counted\" [16:48]. He also names the commercial license [16:56]. The race is \"a heads-up Ada vs Pascal showdown\" [19:07].",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-C2",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "critical",
+  "location": "L27, L55, L60",
+  "lines": [
+   [
+    27,
+    27
+   ],
+   [
+    55,
+    55
+   ],
+   [
+    60,
+    60
+   ]
+  ],
+  "claim": "\"The results of Episode 01\" show that safe languages reach the speed of unrestricted languages. GNAT output \"closely rivals\" C.",
+  "problem": "The video has no safety on and off test and no C in the race. The only result is Ada against Pascal, and Ada lost: \"that's gotta hurt for the Ada guys\" [20:03]. Dave compiled Ada with GCC and expected a benefit [20:17]. He thinks the difference comes from the code [20:26]. The report states the opposite of the video. The exact pass counts are on screen only.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-C3",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "critical",
+  "location": "L39-43",
+  "lines": [
+   [
+    39,
+    43
+   ]
+  ],
+  "claim": "Throughput bands: native \"1.0x to 0.7x\", managed \"0.6x to 0.3x\", interpreted \"0.05x to 0.001x\".",
+  "problem": "The video gives no per-category numbers. It gives only the extremes of that day: a record of 7301 passes per second [20:38] and a slowest entry of \"one pass every 294 seconds\" [20:47]. That is a spread of about 2 million to 1. The lowest band (0.001x) is about 2,000 times too optimistic for the slowest entry. The bands are invented and look like measured data.",
+  "tags": [
+   "VIDEO",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M1",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L11",
+  "lines": [
+   [
+    11,
+    11
+   ]
+  ],
+  "claim": "The rules forbid \"irregular wheel factorizations\".",
+  "problem": "The repository rules (CONTRIBUTING.md of PlummersSoftwareLLC/Primes, read on the web in pass 1) permit wheel solutions. They get the tag algorithm=wheel. The rules do require a buffer that is allocated at run time, so that part is correct.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M2",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L32, L45-47",
+  "lines": [
+   [
+    32,
+    32
+   ],
+   [
+    45,
+    47
+   ]
+  ],
+  "claim": "A packed bit array puts the \"entire candidate buffer\" in the L1 data cache. Memory drops \"by an order of magnitude\".",
+  "problem": "For odd numbers to one million, the bit array is 62,500 bytes (61 KiB). Most x86 CPUs have 32 to 48 KiB of L1 data cache, so the array does not fit. It fits the 128 KiB L1 of Apple M-series performance cores. L47 is more careful (\"L2, and in many architectures L1\"). A saving of 8 times is less than an order of magnitude (10 times).",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M3",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L27",
+  "lines": [
+   [
+    27,
+    27
+   ]
+  ],
+  "claim": "Checks are removed with \"-O3 combined with pragma assertions that suppress checks\". The checks \"disrupt instruction pipelining\". GCC \"vectorizes contiguous memory updates\".",
+  "problem": "The mechanism is wrong. -O3 is an optimization level. It does not turn checks off. In Ada you turn checks off with pragma Suppress or the GNAT switch -gnatp. Check branches almost never fail, so the CPU predicts them well. The cost is extra instructions, not pipeline damage. The sieve writes with a stride (a fixed step larger than one), so vectorization is unlikely. Correct part: GNAT does run-time checks by default.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M4",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L49",
+  "lines": [
+   [
+    49,
+    49
+   ]
+  ],
+  "claim": "AOT compilers remove bounds-check branches \"entirely\". Managed runtimes suffer \"recurring branch misprediction penalties\".",
+  "problem": "C and C++ have no bounds checks to remove. Compilers remove only the checks that they can prove safe. A check that never fails is almost never mispredicted. JIT compilers (compilers that run while the program runs) such as HotSpot also remove many range checks in loops.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M5",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L20-22",
+  "lines": [
+   [
+    20,
+    22
+   ]
+  ],
+  "claim": "Compiler table: Delphi uses \"whole-program link-time code generation\". The Pascal memory strategy is \"byte-boolean arrays or bitmapped primitives\".",
+  "problem": "The Delphi compiler has a smart linker that drops unused code. It does not do link-time code generation. The row cites [1], the video, and the video says nothing about this. The video shows that the Pascal version uses a packed bit array [11:11] and the Delphi version uses ByteBool bytes [16:36]. The table does not give these facts.",
+  "tags": [
+   "VIDEO",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M6",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L33",
+  "lines": [
+   [
+    33,
+    33
+   ]
+  ],
+  "claim": "With {$R-} and {$Q-}, Free Pascal and Delphi compete \"within a narrow margin of both Ada and C++\".",
+  "problem": "Range and overflow checks are already off by default in Free Pascal. There is no C++ in E01 and Delphi has no score. The video does not show these switches. The sentence has no support.",
+  "tags": [
+   "KNOW",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-M7",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "major",
+  "location": "L6, L16, L22, L41, L60",
+  "lines": [
+   [
+    6,
+    6
+   ],
+   [
+    16,
+    16
+   ],
+   [
+    22,
+    22
+   ],
+   [
+    41,
+    41
+   ],
+   [
+    60,
+    60
+   ]
+  ],
+  "claim": "Citations support the E01 facts.",
+  "problem": "The E01 focus (L6, L16) cites [2], a podcast summary of a different episode (C# against Java). L22, L41 and L60 cite [1], the video, for claims that the video does not make. See section 4.",
+  "tags": [
+   "DOC",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m1",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L6",
+  "lines": [
+   [
+    6,
+    6
+   ]
+  ],
+  "claim": "The series grew to \"more than 60 programming languages\".",
+  "problem": "The repository description says \"100+\" languages (read on the web in pass 1). The video says \"some 45\" [01:24].",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m2",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L5",
+  "lines": [
+   [
+    5,
+    5
+   ]
+  ],
+  "claim": "The repository rose \"to the top ranks of global developer trending charts\".",
+  "problem": "The only citation is [2], a podcast summary. The captions do not say this.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m3",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L12",
+  "lines": [
+   [
+    12,
+    12
+   ]
+  ],
+  "claim": "Each pass checks the prime count against a known value.",
+  "problem": "The video shows ValidateResults, which compares the count with a table of known counts [13:04 to 13:21]. The captions do not show a check on every pass.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m4",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L10, L46, L49",
+  "lines": [
+   [
+    10,
+    10
+   ],
+   [
+    46,
+    46
+   ],
+   [
+    49,
+    49
+   ]
+  ],
+  "claim": "Formulas (the limit, the complexity, the footprint, the step).",
+  "problem": "They are images (image1 to image5). A reader cannot copy them, search them or read them with a screen reader. The footprint number in L46 is not in the text.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m5",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L56 vs L43",
+  "lines": [
+   [
+    56,
+    56
+   ],
+   [
+    43,
+    43
+   ]
+  ],
+  "claim": "Python trails Ada and Pascal \"by one or two orders of magnitude\".",
+  "problem": "L43 puts interpreted languages at 0.05x to 0.001x, which is 1.3 to 3 orders. The two statements do not agree.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m6",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L41",
+  "lines": [
+   [
+    41,
+    41
+   ]
+  ],
+  "claim": "Fortran is in the native group of E01.",
+  "problem": "E01 does not race Fortran. Dave only says that he did not have Fortran compilers ready [02:47]. Fortran comes in a later episode (E04).",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m7",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L22",
+  "lines": [
+   [
+    22,
+    22
+   ]
+  ],
+  "claim": "Delphi uses a \"fastcall register convention\".",
+  "problem": "Delphi calls this the \"register\" calling convention. It is similar to fastcall, but the name is different.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D11-m8",
+  "doc": "11",
+  "source": "YouTube Video Content Analysis.md",
+  "severity": "minor",
+  "location": "L5",
+  "lines": [
+   [
+    5,
+    5
+   ]
+  ],
+  "claim": "Dave Plummer is a \"former Microsoft systems engineer\".",
+  "problem": "Correct. He speaks of his Microsoft work in the MS-DOS and Windows 95 days [00:41].",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-C1",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "critical",
+  "location": "L186, L492-508, L539",
+  "lines": [
+   [
+    186,
+    186
+   ],
+   [
+    492,
+    508
+   ],
+   [
+    539,
+    539
+   ]
+  ],
+  "claim": "\"Empirical performance throughput\": C / C++ 2550, Rust 2520, Zig 2480, C# 1480, Python 20, Bash 0.5 passes per second.",
+  "problem": "The video gives no per-language table. It gives only the extremes of that day: 7301 passes per second [20:38] and \"one pass every 294 seconds\" [20:47]. The top value is not the page top value (2550), and the slowest entry is about 150 times slower than Bash on the page. The ratios in the data are consistent with each other (2240 divided by 2550 is 0.88), so the numbers are made to look calculated. No source is given.",
+  "tags": [
+   "VIDEO",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-C2",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "critical",
+  "location": "L496-497, L499",
+  "lines": [
+   [
+    496,
+    497
+   ],
+   [
+    499,
+    499
+   ]
+  ],
+  "claim": "\"Ada (GNAT -O3)\" 2350 is faster than \"Pascal (Free Pascal)\" 2240. \"Ada (Default Safety)\" is 890.",
+  "problem": "In E01 Pascal beat Ada: \"that's gotta hurt for the Ada guys\" [20:03]. The video has no \"default safety\" Ada run. The chart reverses the only real result of the video. The exact counts are on screen only.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-C3",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "critical",
+  "location": "L498, L305-313",
+  "lines": [
+   [
+    498,
+    498
+   ],
+   [
+    305,
+    313
+   ]
+  ],
+  "claim": "Delphi scores 2180 passes per second (0.85x).",
+  "problem": "Dave says the Delphi score \"cannot be counted\" [16:48] because it uses ByteBool bytes [16:36]. He also names the commercial license [16:56]. The page invents a score for a language that the video did not race.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-C4",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "critical",
+  "location": "L239-271, L616-636",
+  "lines": [
+   [
+    239,
+    271
+   ],
+   [
+    616,
+    636
+   ]
+  ],
+  "claim": "Safety simulator: checks on give \"-60% to -65% vs Unrestricted C\". Checks off give \"Parity with C/C++\" and \"Zero Overhead (Vectorized)\".",
+  "problem": "The toggle changes only four text labels. It computes nothing and does not change the chart. The penalty numbers have no source. -O3 does not turn checks off (L269, L633). In Ada you use pragma Suppress or -gnatp. {$R+} {$Q+} are not the Free Pascal default (L263, L627), so \"Default Defensive\" is wrong for Pascal. A strided sieve loop (a loop with a fixed step larger than one) seldom vectorizes.",
+  "tags": [
+   "DOC",
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M1",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L324 vs L679-701",
+  "lines": [
+   [
+    324,
+    324
+   ],
+   [
+    679,
+    701
+   ]
+  ],
+  "claim": "The bit array fits \"inside high-speed L1/L2 CPU cache\".",
+  "problem": "The page calculator itself shows 61.04 KiB against an L1 limit of 32 KiB, so \"1.9x Limit\" (L688). The text and the calculator do not agree.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M2",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L44, L678-701",
+  "lines": [
+   [
+    44,
+    44
+   ],
+   [
+    678,
+    701
+   ]
+  ],
+  "claim": "L1 is 32 KiB, L2 is 512 KiB. Above L2 the badge says \"L3 / DRAM Spillover\".",
+  "problem": "The sizes are fixed. Many current CPUs have 32 to 48 KiB L1 data cache and 1 to 2 MiB L2. Apple M-series performance cores have 128 KiB L1. The comment at L44 promises an L3 check, but the code has none. L3 cache and DRAM (main memory) are different levels with very different speed. L697 says \"Zero DRAM latency stalls\" as a fact.",
+  "tags": [
+   "KNOW",
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M3",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L366, L668, L671",
+  "lines": [
+   [
+    366,
+    366
+   ],
+   [
+    668,
+    668
+   ],
+   [
+    671,
+    671
+   ]
+  ],
+  "claim": "A bit write costs \"4 Ops (SHR, AND, OR, Mask Write)\". A byte write costs \"1 Op\".",
+  "problem": "To clear a bit you use AND with an inverted mask. To set a bit you use OR. One write does not need the two. A bit update is a read, a change and a write. The byte case also needs address work. The counts are not measured and do not predict speed.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M4",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L143",
+  "lines": [
+   [
+    143,
+    143
+   ]
+  ],
+  "claim": "\"Wheel factorizations are strictly prohibited.\"",
+  "problem": "The repository rules (CONTRIBUTING.md of PlummersSoftwareLLC/Primes, read on the web in pass 1) permit wheel solutions with the tag algorithm=wheel. The run-time buffer rule (L130) is correct. The 5-second rule (L169) is correct: at least 5 seconds.",
+  "tags": [
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M5",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L722",
+  "lines": [
+   [
+    722,
+    722
+   ]
+  ],
+  "claim": "\"When compiled with -O3 optimization directives, safety checks are verified statically without sacrificing loop execution speed.\"",
+  "problem": "-O3 is an optimization level. It does not prove programs safe. The compiler removes only the checks that it can prove safe. Static proof of Ada needs SPARK (a checked subset of Ada) and its tools.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M6",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L572-575, L507",
+  "lines": [
+   [
+    572,
+    575
+   ],
+   [
+    507,
+    507
+   ]
+  ],
+  "claim": "A linear bar chart shows all 15 values.",
+  "problem": "Python (20), Ruby (15), PHP (64) and Bash (0.5) are almost invisible next to 2550. A log scale or a table is necessary for a range this wide. The chart hides the largest effect in the data.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M7",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L85, L94, L143, L147, L156, L333, L408",
+  "lines": [
+   [
+    85,
+    85
+   ],
+   [
+    94,
+    94
+   ],
+   [
+    143,
+    143
+   ],
+   [
+    147,
+    147
+   ],
+   [
+    156,
+    156
+   ],
+   [
+    333,
+    333
+   ],
+   [
+    408,
+    408
+   ]
+  ],
+  "claim": "Math such as $N = 1,000,000$ and $\\sqrt{N}$ and \\frac.",
+  "problem": "The page loads no math library. The reader sees raw dollar signs and backslashes. L169 shows raw ** marks and L324 shows raw backticks, because the page is HTML, not Markdown.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M8",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L8, L10",
+  "lines": [
+   [
+    8,
+    8
+   ],
+   [
+    10,
+    10
+   ]
+  ],
+  "claim": "Tailwind and Chart.js come from CDNs (content delivery networks, remote servers).",
+  "problem": "cdn.tailwindcss.com is the Tailwind \"Play CDN\". Tailwind says it is for development, not for production. The Chart.js link has no version, so a future major version can break the page. Without a network, the page has no layout and no chart.",
+  "tags": [
+   "KNOW"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-M9",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "major",
+  "location": "L59, L200-202, L249, L578-583",
+  "lines": [
+   [
+    59,
+    59
+   ],
+   [
+    200,
+    202
+   ],
+   [
+    249,
+    249
+   ],
+   [
+    578,
+    583
+   ]
+  ],
+  "claim": "Accessibility.",
+  "problem": "The chart canvas has no text alternative and no data table. The detail card opens only with a mouse click on a bar, not with a keyboard. The navigation is hidden on small screens (hidden md:flex) and has no replacement. The toggle buttons have no aria-pressed state. Category shows only by color. Much text is 10 to 11 pixels.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m1",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L85",
+  "lines": [
+   [
+    85,
+    85
+   ]
+  ],
+  "claim": "\"Microsoft systems engineer Dave Plummer\".",
+  "problem": "He is a retired Microsoft engineer. He speaks of the MS-DOS and Windows 95 days [00:41]. Report 11 says \"former\" correctly.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m2",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L156",
+  "lines": [
+   [
+    156,
+    156
+   ]
+  ],
+  "claim": "\"Invalid passes are discarded.\"",
+  "problem": "The video shows one ValidateResults call against a table of known counts [13:04 to 13:21]. It does not show a check on every pass or discarded passes. The value 78,498 is correct.",
+  "tags": [
+   "VIDEO",
+   "VERIFY"
+  ],
+  "status": "verify",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m3",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L85, L43, L493",
+  "lines": [
+   [
+    85,
+    85
+   ],
+   [
+    43,
+    43
+   ],
+   [
+    493,
+    493
+   ]
+  ],
+  "claim": "\"45+ programming languages\".",
+  "problem": "The chart has 15 bars and merges C and C++ in one bar. The video says \"some 45\" [01:24].",
+  "tags": [
+   "DOC",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m4",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L718",
+  "lines": [
+   [
+    718,
+    718
+   ]
+  ],
+  "claim": "Raw speed: \"C, C++, Rust, Zig, Fortran\".",
+  "problem": "Fortran is not in the chart and not raced in E01. The recommendation has no data on the page.",
+  "tags": [
+   "DOC",
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m5",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L437, L445",
+  "lines": [
+   [
+    437,
+    437
+   ],
+   [
+    445,
+    445
+   ]
+  ],
+  "claim": "Safe builds \"match unrestricted C/C++\". Managed runtimes are \"economically preferable\".",
+  "problem": "These cards repeat the overclaims of report 11 (C2 and L56 there). E01 does not show them.",
+  "tags": [
+   "VIDEO"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m6",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L674, L682-692",
+  "lines": [
+   [
+    674,
+    674
+   ],
+   [
+    682,
+    692
+   ]
+  ],
+  "claim": "The cache code compares kib with numbers.",
+  "problem": "kib is a text string from toFixed. JavaScript converts it, so the result is correct, but the code is fragile. L568 uses substr, which is deprecated.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m7",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L366 vs L668, L380, L399-404",
+  "lines": [
+   [
+    366,
+    366
+   ],
+   [
+    668,
+    668
+   ],
+   [
+    380,
+    380
+   ],
+   [
+    399,
+    404
+   ]
+  ],
+  "claim": "Start values in the HTML.",
+  "problem": "The HTML says \"Write\", the script says \"Mask Write\". The start badge is green \"L2 Cache Resident\" and the script makes it amber. The script replaces them at load, so a reader sees a flash of different text.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m8",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L232",
+  "lines": [
+   [
+    232,
+    232
+   ]
+  ],
+  "claim": "\"Systems Systems Deep Dive\".",
+  "problem": "The word is doubled.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ },
+ {
+  "id": "D12-m9",
+  "doc": "12",
+  "source": "prime_sieve_benchmark_interactive_explorer.html",
+  "severity": "minor",
+  "location": "L31-50, L485",
+  "lines": [
+   [
+    31,
+    50
+   ],
+   [
+    485,
+    485
+   ]
+  ],
+  "claim": "Comments about the palette and \"NO SVG\".",
+  "problem": "These are leftover instructions from the page generator. They do not help the reader.",
+  "tags": [
+   "DOC"
+  ],
+  "status": "open",
+  "pass": 1,
+  "scope": "lines"
+ }
+]

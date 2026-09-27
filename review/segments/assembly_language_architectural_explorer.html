@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Language: Architectural Analysis & Systems Explorer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            base: '#0f172a',      // Slate 900
+                            card: '#1e293b',      // Slate 800
+                            border: '#334155',    // Slate 700
+                            amber: '#d97706',     // Amber 600
+                            amberLight: '#f59e0b',// Amber 500
+                            teal: '#0d9488',      // Teal 600
+                            tealLight: '#14b8a6', // Teal 500
+                            sky: '#0284c7',       // Sky 600
+                            bg: '#f8fafc'         // Light slate neutral background
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Essential responsive chart container styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        /* Custom scrollbar styling for terminal code containers */
+        .code-scroll::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .code-scroll::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .code-scroll::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Chosen Palette: Slate Warm Neutrals with Silicon Amber & Cyan/Teal Structural Highlights -->
+    <!-- Application Structure Plan: 
+         1. Header & Quick Architecture Specs KPI Bar: Provides foundational metrics and direct topic grounding.
+         2. Tabbed Primary Workspace:
+            - Tab 1: ISA Heterogeneity & Domains (x86-64 vs ARM64 vs WASM) with Chart.js radar comparison and dynamic operational matrix.
+            - Tab 2: Sectional Memory Topology (Interactive Virtual Memory space map, segment access protections, and W^X security rules).
+            - Tab 3: Interactive Register & Syscall Simulator (Step-by-step execution animator for 64-bit Linux Hello World with live RAX/RDI/RSI/RDX changes, terminal output, and kernel space transition details).
+            - Tab 4: Toolchain & Build Pipeline (Interactive flowchart showing translation from assembly mnemonics, NASM object file creation, symbol tables, to linker execution).
+            - Tab 5: Security & Microarchitecture Domain Matrix (Filterable cards highlighting malware reverse engineering, ABI rules, and high-frequency optimization).
+         3. Dynamic Contextual Introductory Paragraphs for each section explain the purpose and relationship to the source report.
+    -->
+    <!-- Visualization & Content Choices:
+         - ISA Comparison -> Goal: Compare -> Interactive Tabbed Matrix + Chart.js Radar Chart -> Allows multi-dimensional view of CISC, RISC, WASM.
+         - Memory Topology -> Goal: Organize & Explain -> Interactive Virtual Address Stack/Heap Visualizer -> Clickable memory bands revealing section permissions and allocations.
+         - Assembly Execution Flow -> Goal: Interactive Process Execution -> Line-by-line Register State Machine -> Users click "Next Instruction" to physically see RAX, RDI, RSI, RDX mutate and terminal output render.
+         - Toolchain Pipeline -> Goal: Process Flow -> Interactive HTML/CSS Diagram Node Flow with details panel on click.
+         - Domain Applications -> Goal: Explore Domain Insights -> Interactive Category Filter Cards.
+         - Confirming NO SVG used; icons represented via CSS shapes, standard HTML/Unicode symbols, and Canvas elements.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Top Navigation Header -->
+    <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded bg-amber-500 flex items-center justify-center font-mono font-bold text-slate-900 text-lg shadow">
+                    0x
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                        Assembly Language Architectural Explorer
+                        <span class="text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded font-mono">x86-64 / ARM / WASM</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Systems Breakdown, Register Dynamics & Execution Mechanics</p>
+                </div>
+            </div>
+
+            <!-- Primary Navigation Tabs -->
+            <nav class="flex items-center space-x-1 overflow-x-auto pb-1 md:pb-0 font-medium text-xs sm:text-sm">
+                <button onclick="switchTab('isa')" id="nav-isa" class="tab-btn px-3 py-1.5 rounded-lg transition-colors bg-amber-600 text-white font-semibold shadow">
+                    ISA Spectrum
+                </button>
+                <button onclick="switchTab('memory')" id="nav-memory" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+                    Memory Topology
+                </button>
+                <button onclick="switchTab('execution')" id="nav-execution" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+                    Register Simulator
+                </button>
+                <button onclick="switchTab('toolchain')" id="nav-toolchain" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+                    Toolchain Pipeline
+                </button>
+                <button onclick="switchTab('systemic')" id="nav-systemic" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+                    Security & Systems
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- KPI Metrics / Executive Overview Header Strip -->
+    <section class="bg-slate-900 text-slate-200 border-b border-slate-800 py-3 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="border-l-2 border-amber-500 pl-3">
+                <div class="text-slate-400 uppercase tracking-wider font-mono text-[10px]">Pioneer Genesis</div>
+                <div class="font-bold text-slate-100 text-sm">Kathleen Booth (1947)</div>
+                <div class="text-[11px] text-slate-400">ARC & APEC Calculators</div>
+            </div>
+            <div class="border-l-2 border-teal-500 pl-3">
+                <div class="text-slate-400 uppercase tracking-wider font-mono text-[10px]">ISA Paradigm</div>
+                <div class="font-bold text-slate-100 text-sm">CISC vs RISC vs Stack</div>
+                <div class="text-[11px] text-slate-400">Hardware Specific Encodings</div>
+            </div>
+            <div class="border-l-2 border-sky-500 pl-3">
+                <div class="text-slate-400 uppercase tracking-wider font-mono text-[10px]">ABI Standard</div>
+                <div class="font-bold text-slate-100 text-sm">Linux System V AMD64</div>
+                <div class="text-[11px] text-slate-400">RAX, RDI, RSI, RDX Syscalls</div>
+            </div>
+            <div class="border-l-2 border-indigo-500 pl-3">
+                <div class="text-slate-400 uppercase tracking-wider font-mono text-[10px]">Memory Model</div>
+                <div class="font-bold text-slate-100 text-sm">W &#8853; X Security Rule</div>
+                <div class="text-[11px] text-slate-400">Isolated Text & Data Pages</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Body -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= TAB 1: ISA SPECTRUM & HETEROGENEITY ================= -->
+        <section id="tab-content-isa" class="tab-pane space-y-6">
+            <!-- Section Introductory Paragraph -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                    Instruction Set Architecture (ISA) Heterogeneity & Paradigms
+                </h2>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Assembly language is not a single portable standard; it is a human-readable symbolic representation of a specific physical silicon architecture or virtual execution runtime. This section explores the fundamental trade-offs between Complex Instruction Set Computing (CISC), Reduced Instruction Set Computing (RISC), and Virtual Stack Machines. Use the dynamic chart and interactive matrix below to analyze how opcode encoding length, register accessibility, and memory evaluation rules differ across modern hardware platforms.
+                </p>
+            </div>
+
+            <!-- Visual Comparison Block: Chart + Interactive Matrix -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Chart Container -->
+                <div class="lg:col-span-5 bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 mb-1">Architectural Dimension Radar</h3>
+                        <p class="text-xs text-slate-500 mb-4">Comparative evaluation of execution traits across CPU paradigms.</p>
+                        <div class="chart-container">
+                            <canvas id="isaRadarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600">
+                        <strong class="text-slate-800">Key Takeaway:</strong> CISC (x86-64) maximizes direct memory arithmetic flexibility at the cost of variable opcode lengths. RISC (ARM64) optimizes hardware cycle efficiency with strict load-store models. WASM abstracts silicon for safe web sandboxing.
+                    </div>
+                </div>
+
+                <!-- Interactive Comparative Matrix -->
+                <div class="lg:col-span-7 bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <h3 class="text-base font-bold text-slate-900">ISA Architectural Matrix</h3>
+                        <div class="flex space-x-1 bg-slate-100 p-1 rounded-lg text-xs" id="isa-selector">
+                            <button onclick="selectIsa('x86')" id="isa-btn-x86" class="px-3 py-1 rounded font-medium bg-amber-600 text-white shadow-sm">x86-64 (CISC)</button>
+                            <button onclick="selectIsa('arm')" id="isa-btn-arm" class="px-3 py-1 rounded font-medium text-slate-600 hover:text-slate-900">ARM64 (RISC)</button>
+                            <button onclick="selectIsa('wasm')" id="isa-btn-wasm" class="px-3 py-1 rounded font-medium text-slate-600 hover:text-slate-900">WebAssembly</button>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Card View for selected ISA -->
+                    <div id="isa-detail-display" class="bg-slate-900 text-slate-200 p-5 rounded-xl border border-slate-800 flex-1 font-mono text-xs space-y-4">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Context Strip -->
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 text-amber-900">
+                <h3 class="font-bold text-sm text-amber-950 flex items-center gap-2 mb-1">
+                    <span>&#128269;</span> Historical Milestone: The Origins of Assembly (1947)
+                </h3>
+                <p class="text-xs leading-relaxed text-amber-900">
+                    Formulated by mathematician <strong>Kathleen Booth</strong> at Birkbeck College while working on the Automatic Relay Calculator (ARC) and All-Purpose Electronic Computer (APEC), symbolic assembly replaced manual numeric machine instruction transcription. Her 1958 treatise <em>Programming for an Automatic Digital Calculator</em> codified these early low-level software design concepts prior to the advent of portable high-level languages like Fortran (1957).
+                </p>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: MEMORY TOPOLOGY & SECTIONS ================= -->
+        <section id="tab-content-memory" class="tab-pane hidden space-y-6">
+            <!-- Section Introductory Paragraph -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-teal-500 inline-block"></span>
+                    Virtual Memory Layout & Sectional Topology
+                </h2>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    When an Executable and Linkable Format (ELF) binary is loaded into virtual memory by the Linux kernel, the memory manager allocates structured virtual memory pages. To prevent security exploits like arbitrary shellcode execution, modern operating systems strictly enforce the <strong>Write XOR Execute ($W \oplus X$)</strong> security model. Select any segment in the virtual memory diagram below to explore its runtime access permissions, binary footprint impact, and operational utility.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Virtual Address Space Explorer Visualizer -->
+                <div class="lg:col-span-6 bg-slate-900 text-white p-5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-sm font-bold font-mono text-amber-400">Virtual Memory Address Space Map</h3>
+                            <span class="text-[10px] font-mono bg-slate-800 text-slate-400 px-2 py-0.5 rounded">High Address (0x7FFF...)</span>
+                        </div>
+
+                        <!-- Stacked Virtual Memory Visual Blocks -->
+                        <div class="space-y-2 font-mono text-xs">
+                            <div class="p-3 bg-slate-800 border border-slate-700 rounded text-slate-400 text-center opacity-75">
+                                Kernel Space (Protected Ring 0 Memory)
+                            </div>
+                            <div class="p-2 border-dashed border border-slate-700 rounded text-slate-500 text-center text-[11px]">
+                                &#8595; Stack / Heap (Dynamic Memory Allocations) &#8593;
+                            </div>
+
+                            <!-- Interactive Clickable Assembly Sections -->
+                            <div onclick="inspectSection('bss')" id="mem-block-bss" class="mem-block p-4 bg-teal-900/40 border-2 border-teal-500/80 hover:bg-teal-900/70 rounded cursor-pointer transition-all flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-teal-300">.bss Section</div>
+                                    <div class="text-[10px] text-teal-200/70">Uninitialized Static & Global Variables</div>
+                                </div>
+                                <span class="bg-teal-950 text-teal-300 px-2 py-1 rounded text-[10px] border border-teal-800 font-bold">RW-</span>
+                            </div>
+
+                            <div onclick="inspectSection('data')" id="mem-block-data" class="mem-block p-4 bg-amber-900/40 border-2 border-amber-500/80 hover:bg-amber-900/70 rounded cursor-pointer transition-all flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-amber-300">.data Section</div>
+                                    <div class="text-[10px] text-amber-200/70">Initialized Static Constants & Strings</div>
+                                </div>
+                                <span class="bg-amber-950 text-amber-300 px-2 py-1 rounded text-[10px] border border-amber-800 font-bold">RW-</span>
+                            </div>
+
+                            <div onclick="inspectSection('text')" id="mem-block-text" class="mem-block p-4 bg-sky-900/40 border-2 border-sky-500/80 hover:bg-sky-900/70 rounded cursor-pointer transition-all flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-sky-300">.text Section</div>
+                                    <div class="text-[10px] text-sky-200/70">Executable Machine Opcodes & Entry Point (_start)</div>
+                                </div>
+                                <span class="bg-sky-950 text-sky-300 px-2 py-1 rounded text-[10px] border border-sky-800 font-bold">R-X</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-[10px] font-mono text-slate-400">Low Address (0x0040...)</span>
+                            <span class="text-[10px] text-amber-400 font-mono">Click a section to inspect architectural parameters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Details & Security Analysis Card -->
+                <div class="lg:col-span-6 bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-200 pb-3">
+                            <div>
+                                <span id="section-badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-800">
+                                    Executable Code Segment
+                                </span>
+                                <h3 id="section-title" class="text-xl font-bold text-slate-900 mt-1">.text Section</h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-slate-500">Access Permissions</div>
+                                <div id="section-permissions" class="font-mono font-bold text-slate-800 text-sm">Read / Execute (R-X)</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-xs text-slate-600">
+                            <div>
+                                <strong class="text-slate-800 block mb-1">Architectural Utility & ELF Allocation:</strong>
+                                <p id="section-desc" class="leading-relaxed">
+                                    Houses the executable machine instructions. Operating system page tables enforce read and execute permissions while strictly denying write access to enforce $W \oplus X$ memory protection rules.
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200 font-mono">
+                                <div>
+                                    <span class="text-slate-400 block text-[10px]">DISK BINARY IMPACT</span>
+                                    <span id="section-disk-impact" class="font-bold text-slate-800">Stores Machine Opcodes</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block text-[10px]">RUNTIME PAGE STATE</span>
+                                    <span id="section-runtime-state" class="font-bold text-slate-800">Mapped Read-Only Exec</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <strong class="text-slate-800 block mb-1">NASM Assembly Syntax Declaration:</strong>
+                                <pre id="section-syntax" class="bg-slate-900 text-amber-400 p-3 rounded-lg font-mono text-xs overflow-x-auto">
+section .text
+    global _start
+_start:
+    mov rax, 1 ; sys_write syscall</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                        <span>Security Principle: <strong class="text-slate-700">Write XOR Execute ($W \oplus X$)</strong></span>
+                        <span class="text-emerald-600 font-semibold">&#10003; Memory Enforced</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: REGISTER & SYSCALL STEP SIMULATOR ================= -->
+        <section id="tab-content-execution" class="tab-pane hidden space-y-6">
+            <!-- Section Introductory Paragraph -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-sky-500 inline-block"></span>
+                    64-Bit Linux Execution Flow & Register State Machine
+                </h2>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    In 64-bit x86-64 Linux programming under the System V AMD64 ABI, parameters for operating system kernel system calls are staged inside dedicated physical CPU registers rather than pushed onto the stack. Use the interactive step-through engine below to execute a 64-bit Linux <code>"Hello, World!"</code> binary line-by-line. Observe how register values mutate, how system calls (`sys_write` and `sys_exit`) transition execution to Ring 0 kernel space, and how clean process termination prevents segmentation faults (`SIGSEGV`).
+                </p>
+            </div>
+
+            <!-- Execution Step-Through Control Dashboard -->
+            <div class="bg-slate-900 text-white rounded-xl p-5 border border-slate-800 shadow-xl space-y-6">
+                <!-- Controls Bar -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-mono text-amber-400 uppercase tracking-widest">Linux Kernel Execution Sandbox</span>
+                        <h3 class="text-lg font-bold font-mono text-white">System V AMD64 ABI Syscall Animator</h3>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="resetExecution()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded border border-slate-700 transition">
+                            &#8634; Reset
+                        </button>
+                        <button onclick="stepExecution()" id="btn-next-step" class="px-4 py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-mono text-xs font-bold rounded shadow transition flex items-center gap-2">
+                            <span>Step Instruction &#9654;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Column 1: Assembly Code View -->
+                    <div class="lg:col-span-5 bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs code-scroll overflow-x-auto">
+                        <div class="text-slate-500 pb-2 mb-2 border-b border-slate-800 flex justify-between">
+                            <span>ASM SOURCE (hello.asm)</span>
+                            <span id="instruction-pointer-label" class="text-amber-400">RIP: _start</span>
+                        </div>
+                        <div class="space-y-1">
+                            <div id="code-line-0" class="p-1 rounded transition-colors text-slate-500">section .data</div>
+                            <div id="code-line-1" class="p-1 rounded transition-colors text-slate-400 pl-4">msg db "Hello, World!", 0x0a</div>
+                            <div id="code-line-2" class="p-1 rounded transition-colors text-slate-400 pl-4">len equ $ - msg <span class="text-slate-600">// len = 14 bytes</span></div>
+                            <div id="code-line-3" class="p-1 rounded transition-colors text-slate-500 mt-2">section .text</div>
+                            <div id="code-line-4" class="p-1 rounded transition-colors text-slate-500 pl-4">global _start</div>
+                            <div id="code-line-5" class="p-1 rounded transition-colors font-bold text-slate-300">_start:</div>
+                            <div id="code-line-6" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">mov rax, 1 <span class="text-slate-500">// Syscall #1: sys_write</span></div>
+                            <div id="code-line-7" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">mov rdi, 1 <span class="text-slate-500">// FD #1: stdout</span></div>
+                            <div id="code-line-8" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">mov rsi, msg <span class="text-slate-500">// Buffer memory address</span></div>
+                            <div id="code-line-9" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">mov rdx, len <span class="text-slate-500">// Buffer length (14)</span></div>
+                            <div id="code-line-10" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">syscall <span class="text-amber-400">// Trigger Ring 0 write</span></div>
+                            <div id="code-line-11" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold mt-2">mov rax, 60 <span class="text-slate-500">// Syscall #60: sys_exit</span></div>
+                            <div id="code-line-12" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">xor rdi, rdi <span class="text-slate-500">// Status code 0 (Success)</span></div>
+                            <div id="code-line-13" class="code-exec-line p-1.5 rounded transition-all text-slate-300 pl-4 font-semibold">syscall <span class="text-amber-400">// Terminate process</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Live CPU Register View & Hardware State -->
+                    <div class="lg:col-span-4 bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs flex flex-col justify-between">
+                        <div>
+                            <div class="text-slate-500 pb-2 mb-3 border-b border-slate-800 flex justify-between items-center">
+                                <span>64-BIT CPU REGISTERS</span>
+                                <span class="text-[10px] bg-slate-800 text-teal-400 px-1.5 py-0.5 rounded">User Mode (Ring 3)</span>
+                            </div>
+
+                            <div class="space-y-2">
+                                <!-- RAX -->
+                                <div id="reg-box-rax" class="p-2 bg-slate-900 border border-slate-800 rounded flex justify-between items-center transition-all">
+                                    <span class="text-amber-400 font-bold">RAX (Syscall ID)</span>
+                                    <span id="reg-val-rax" class="text-white bg-slate-950 px-2 py-0.5 rounded border border-slate-800">0x0000000000000000</span>
+                                </div>
+                                <!-- RDI -->
+                                <div id="reg-box-rdi" class="p-2 bg-slate-900 border border-slate-800 rounded flex justify-between items-center transition-all">
+                                    <span class="text-sky-400 font-bold">RDI (Arg 1: FD/Status)</span>
+                                    <span id="reg-val-rdi" class="text-white bg-slate-950 px-2 py-0.5 rounded border border-slate-800">0x0000000000000000</span>
+                                </div>
+                                <!-- RSI -->
+                                <div id="reg-box-rsi" class="p-2 bg-slate-900 border border-slate-800 rounded flex justify-between items-center transition-all">
+                                    <span class="text-teal-400 font-bold">RSI (Arg 2: Buffer Pt)</span>
+                                    <span id="reg-val-rsi" class="text-white bg-slate-950 px-2 py-0.5 rounded border border-slate-800">0x0000000000000000</span>
+                                </div>
+                                <!-- RDX -->
+                                <div id="reg-box-rdx" class="p-2 bg-slate-900 border border-slate-800 rounded flex justify-between items-center transition-all">
+                                    <span class="text-purple-400 font-bold">RDX (Arg 3: Count)</span>
+                                    <span id="reg-val-rdx" class="text-white bg-slate-950 px-2 py-0.5 rounded border border-slate-800">0x0000000000000000</span>
+                                </div>
+                                <!-- RIP -->
+                                <div id="reg-box-rip" class="p-2 bg-slate-900 border border-slate-800 rounded flex justify-between items-center transition-all">
+                                    <span class="text-slate-400 font-bold">RIP (Instruction Pt)</span>
+                                    <span id="reg-val-rip" class="text-amber-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">0x0000000000401000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kernel / CPU Ring State Indicator -->
+                        <div id="privilege-level-indicator" class="mt-4 p-2 bg-slate-900 rounded border border-slate-800 text-[11px] text-center text-slate-400">
+                            Current Mode: <strong class="text-emerald-400">Ring 3 (User Execution)</strong>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Contextual Explanation & Virtual Terminal Output -->
+                    <div class="lg:col-span-3 flex flex-col justify-between space-y-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="text-slate-500 pb-2 mb-2 border-b border-slate-800">HARDWARE EXPLANATION</div>
+                                <p id="execution-step-desc" class="text-slate-300 leading-relaxed text-[11px]">
+                                    Click "Step Instruction" to begin loading register parameters for the Linux System V ABI write system call.
+                                </p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-800 text-[10px] text-slate-500" id="step-counter-text">
+                                Step 0 of 8
+                            </div>
+                        </div>
+
+                        <!-- Virtual Terminal Stream Output -->
+                        <div class="bg-black p-4 rounded-xl border border-slate-800 font-mono text-xs">
+                            <div class="text-slate-500 text-[10px] pb-1 border-b border-slate-900 flex justify-between">
+                                <span>TERMINAL STDOUT</span>
+                                <span class="text-emerald-500">&#9679; bash</span>
+                            </div>
+                            <div class="pt-2 text-emerald-400 font-bold text-sm min-h-[40px] flex items-center" id="terminal-stdout">
+                                <span class="text-slate-600 font-normal">$ ./hello</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: TOOLCHAIN & BUILD PIPELINE ================= -->
+        <section id="tab-content-toolchain" class="tab-pane hidden space-y-6">
+            <!-- Section Introductory Paragraph -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-indigo-500 inline-block"></span>
+                    Binary Toolchain Orchestration & Object File Linking
+                </h2>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Unlike high-level compilers that build abstract syntax trees and perform garbage-collection injections, an assembler performs a direct, deterministic translation of alphanumeric mnemonics into native binary machine opcodes. Click through the build pipeline stages below to understand how the Netwide Assembler (`NASM`) and GNU Linker (`ld`) transform unlinked object files into standalone, executable ELF binaries.
+                </p>
+            </div>
+
+            <!-- Build Pipeline Interactive Flowchart -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Interactive Flow Visualizer -->
+                <div class="lg:col-span-7 bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <h3 class="text-base font-bold text-slate-900">Multi-Stage Compilation Workflow</h3>
+                    
+                    <!-- Step Nodes -->
+                    <div class="space-y-3 font-mono text-xs">
+                        <!-- Step 1: Assembly Source -->
+                        <div onclick="selectToolchainStep(1)" id="toolchain-node-1" class="toolchain-node p-4 rounded-xl border-2 border-amber-500 bg-amber-50 cursor-pointer transition-all flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-amber-600 text-white font-bold flex items-center justify-center text-sm">1</div>
+                                <div>
+                                    <div class="font-bold text-slate-900">Assembly Source File</div>
+                                    <div class="text-[11px] text-slate-500">hello.asm (Human readable mnemonics & directives)</div>
+                                </div>
+                            </div>
+                            <span class="text-xs text-amber-700 font-bold">Input</span>
+                        </div>
+
+                        <!-- Arrow connector -->
+                        <div class="text-center text-slate-400 font-bold text-xs">&#8595; Executed via NASM Assembler (nasm -f elf64) &#8595;</div>
+
+                        <!-- Step 2: Relocatable Object File -->
+                        <div onclick="selectToolchainStep(2)" id="toolchain-node-2" class="toolchain-node p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-indigo-400 cursor-pointer transition-all flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-slate-700 text-white font-bold flex items-center justify-center text-sm">2</div>
+                                <div>
+                                    <div class="font-bold text-slate-900">Relocatable Object File</div>
+                                    <div class="text-[11px] text-slate-500">hello.o (Machine opcodes, unresolved pointer symbols)</div>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-500 font-bold">Intermediate</span>
+                        </div>
+
+                        <!-- Arrow connector -->
+                        <div class="text-center text-slate-400 font-bold text-xs">&#8595; Processed via GNU Linker (ld hello.o -o hello) &#8595;</div>
+
+                        <!-- Step 3: Executable ELF Binary -->
+                        <div onclick="selectToolchainStep(3)" id="toolchain-node-3" class="toolchain-node p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-emerald-400 cursor-pointer transition-all flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-slate-700 text-white font-bold flex items-center justify-center text-sm">3</div>
+                                <div>
+                                    <div class="font-bold text-slate-900">Standalone Executable Binary</div>
+                                    <div class="text-[11px] text-slate-500">hello (ELF format with resolved memory headers & entry point)</div>
+                                </div>
+                            </div>
+                            <span class="text-xs text-emerald-600 font-bold">Final Artifact</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolchain Details Box -->
+                <div class="lg:col-span-5 bg-slate-900 text-slate-200 p-5 rounded-xl border border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                            <span id="toolchain-step-num" class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                                Phase 1 of 3
+                            </span>
+                            <span id="toolchain-step-cmd" class="font-mono text-xs text-slate-400">nasm -f elf64 hello.asm</span>
+                        </div>
+
+                        <h3 id="toolchain-step-title" class="text-lg font-bold text-white mb-2">Assembly Source Creation</h3>
+                        
+                        <p id="toolchain-step-desc" class="text-xs text-slate-300 leading-relaxed mb-4">
+                            Programmers define data allocations and system instruction sequences in human-readable assembly source code (.asm). At this stage, memory offsets are represented symbolically via labels like _start and msg.
+                        </p>
+
+                        <div id="toolchain-step-box" class="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs text-amber-300 space-y-2">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex justify-between items-center">
+                        <span>Target Format: <strong>ELF64 (64-bit Linux)</strong></span>
+                        <span class="text-amber-400 font-mono">Kernel Loadable</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: SYSTEMIC IMPLICATIONS & SECURITY ================= -->
+        <section id="tab-content-systemic" class="tab-pane hidden space-y-6">
+            <!-- Section Introductory Paragraph -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span>
+                    Systemic Implications: Security, Microarchitecture & High Performance
+                </h2>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    While modern business applications rely on managed high-level languages, low-level assembly remains indispensable in critical infrastructure domains. Analyzing disassembler outputs is crucial for cybersecurity reverse engineers, while bare-metal register placement dictates latency bounds in kernel drivers and high-frequency trading engines. Filter the cards below to explore how assembly mastery impacts specific computing fields.
+                </p>
+            </div>
+
+            <!-- Domain Filter Buttons -->
+            <div class="flex flex-wrap gap-2 text-xs font-medium">
+                <button onclick="filterDomains('all')" id="domain-btn-all" class="domain-btn px-3 py-1.5 rounded-lg bg-slate-900 text-white shadow">All Domains</button>
+                <button onclick="filterDomains('security')" id="domain-btn-security" class="domain-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Cybersecurity & Malware Analysis</button>
+                <button onclick="filterDomains('performance')" id="domain-btn-performance" class="domain-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">High-Performance & HFT</button>
+                <button onclick="filterDomains('web')" id="domain-btn-web" class="domain-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">WebAssembly Ecosystem</button>
+            </div>
+
+            <!-- Domain Card Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="domain-cards-container">
+                <!-- Card 1: Cybersecurity -->
+                <div class="domain-card domain-security bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-bold">SECURITY AUDITING</span>
+                            <span class="text-xl">&#128737;</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Disassembly & Exploit Analysis</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            Compiled production binaries lack high-level variable names or type systems. Vulnerability researchers and security analysts rely on disassemblers to inspect compiled instruction streams, identify unsafe buffer writes, and neutralize malware payloads.
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded border border-slate-200 font-mono text-[11px] text-slate-700">
+                        <strong>Key Vector:</strong> Detecting stack overflow overrides & non-executable stack bypasses.
+                    </div>
+                </div>
+
+                <!-- Card 2: Microarchitecture & HFT -->
+                <div class="domain-card domain-performance bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">LATENCY CRITICAL</span>
+                            <span class="text-xl">&#9889;</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Deterministic Performance Optimization</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            In high-frequency trading (HFT) platforms and real-time kernel drivers, automated garbage collection and compiler dynamic memory allocation introduce unacceptable latency jitter. Direct register staging circumvents system bus latency.
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded border border-slate-200 font-mono text-[11px] text-slate-700">
+                        <strong>Key Vector:</strong> Single-cycle register manipulation bypassing CPU cache misses.
+                    </div>
+                </div>
+
+                <!-- Card 3: WebAssembly -->
+                <div class="domain-card domain-web bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">VIRTUAL RUNTIMES</span>
+                            <span class="text-xl">&#127760;</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">WebAssembly (WASM) Evolution</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            WebAssembly brings low-level execution concepts to browser sandboxes. By utilizing a binary-encoded stack virtual machine, WASM enables C, C++, and Rust applications to execute in client browsers at near-native speeds.
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded border border-slate-200 font-mono text-[11px] text-slate-700">
+                        <strong>Key Vector:</strong> Cross-platform high-performance sandboxed client execution.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-4 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>
+                Assembly Language Architectural Analysis & Interactive Systems Breakdown
+            </div>
+            <div class="font-mono text-slate-500 text-[11px]">
+                Target ISA: x86-64 System V AMD64 ABI | POSIX Compliant
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Global State Management
+        let isaRadarChart = null;
+        let currentStep = 0;
+
+        // Data Models
+        const isaData = {
+            x86: {
+                title: "x86-64 Architecture (Intel / AMD)",
+                class: "Complex Instruction Set Computer (CISC)",
+                encoding: "Variable Length (1 to 15 bytes)",
+                model: "Direct Register-Memory Evaluation",
+                deployment: "Enterprise Servers, Workstations, PCs",
+                hardware: "Direct Physical Silicon",
+                example: "mov rax, [rsi + rdx*8] ; Direct memory load + calc"
+            },
+            arm: {
+                title: "ARM64 / AArch64 Architecture (Apple Silicon / Mobile)",
+                class: "Reduced Instruction Set Computer (RISC)",
+                encoding: "Fixed Length (32 bits standard)",
+                model: "Strict Load-Store Register Paradigm",
+                deployment: "Mobile Devices, Modern Laptops, IoT, Embedded",
+                hardware: "Direct Physical Silicon",
+                example: "ldr x0, [x1] ; Explicit Load\nadd x0, x0, x2 ; Register Arithmetic"
+            },
+            wasm: {
+                title: "WebAssembly (WASM Virtual Stack Machine)",
+                class: "Virtual Stack Machine Runtime",
+                encoding: "Variable Byte-Encoded Opcodes",
+                model: "Stack Push / Pop Evaluation Model",
+                deployment: "Web Browsers, Cloud Edge, Serverless Sandboxes",
+                hardware: "Abstracted Virtual Hardware Sandbox",
+                example: "i32.const 10\ni32.add ; Operates on top of virtual stack"
+            }
+        };
+
+        const memorySections = {
+            text: {
+                title: ".text Section",
+                badge: "Executable Code Segment",
+                badgeClass: "bg-sky-100 text-sky-800",
+                permissions: "Read / Execute (R-X)",
+                desc: "Contains physical binary instruction opcodes executed by the CPU instruction pointer (RIP). Modern OS page tables strictly configure .text as non-writable to enforce W ^ X memory security protections.",
+                diskImpact: "Contains Machine Code Opcodes",
+                runtimeState: "Mapped Read-Only Executable Page",
+                syntax: "section .text\n    global _start\n_start:\n    mov rax, 1 ; sys_write"
+            },
+            data: {
+                title: ".data Section",
+                badge: "Initialized Static Data",
+                badgeClass: "bg-amber-100 text-amber-800",
+                permissions: "Read / Write (RW-)",
+                desc: "Allocates memory space for global variables and constants initialized prior to execution (e.g., string literals). Because initial values are defined beforehand, they directly increase compiled binary file size on disk.",
+                diskImpact: "Inflates Storage Footprint",
+                runtimeState: "Copied to Writable Memory Pages",
+                syntax: "section .data\n    msg db \"Hello, World!\", 0x0a\n    len equ $ - msg"
+            },
+            bss: {
+                title: ".bss Section",
+                badge: "Uninitialized Dynamic Data",
+                badgeClass: "bg-teal-100 text-teal-800",
+                permissions: "Read / Write (RW-)",
+                desc: "Reserves virtual address space for uninitialized mutable runtime variables. Instead of inflating binary disk storage, the OS kernel dynamically zero-fills these virtual memory pages upon process creation.",
+                diskImpact: "Zero Disk Storage Overhead",
+                runtimeState: "Zero-Filled by OS Loader on Exec",
+                syntax: "section .bss\n    buffer resb 64 ; Reserves 64 bytes"
+            }
+        };
+
+        // Execution Flow Simulator Steps
+        const executionSteps = [
+            {
+                line: 6,
+                rip: "0x00401000",
+                rax: "0x0000000000000001",
+                rdi: "0x0000000000000000",
+                rsi: "0x0000000000000000",
+                rdx: "0x0000000000000000",
+                highlightReg: "rax",
+                ring: "Ring 3 (User Space)",
+                desc: "Instruction: 'mov rax, 1'. Loads System Call Identifier 1 (sys_write) into accumulator register RAX according to System V AMD64 ABI conventions.",
+                terminal: "$ ./hello"
+            },
+            {
+                line: 7,
+                rip: "0x00401007",
+                rax: "0x0000000000000001",
+                rdi: "0x0000000000000001",
+                rsi: "0x0000000000000000",
+                rdx: "0x0000000000000000",
+                highlightReg: "rdi",
+                ring: "Ring 3 (User Space)",
+                desc: "Instruction: 'mov rdi, 1'. Loads File Descriptor 1 (standard output / stdout) into RDI, which serves as First Argument for Linux system calls.",
+                terminal: "$ ./hello"
+            },
+            {
+                line: 8,
+                rip: "0x0040100E",
+                rax: "0x0000000000000001",
+                rdi: "0x0000000000000001",
+                rsi: "0x0000000000402000",
+                rdx: "0x0000000000000000",
+                highlightReg: "rsi",
+                ring: "Ring 3 (User Space)",
+                desc: "Instruction: 'mov rsi, msg'. Loads virtual address pointer (0x402000) of string buffer into RSI (Second Argument).",
+                terminal: "$ ./hello"
+            },
+            {
+                line: 9,
+                rip: "0x00401015",
+                rax: "0x0000000000000001",
+                rdi: "0x0000000000000001",
+                rsi: "0x0000000000402000",
+                rdx: "0x000000000000000E",
+                highlightReg: "rdx",
+                ring: "Ring 3 (User Space)",
+                desc: "Instruction: 'mov rdx, len'. Sets RDX (Third Argument) to 14 bytes (computed via assembler constant expression '$ - msg').",
+                terminal: "$ ./hello"
+            },
+            {
+                line: 10,
+                rip: "0x0040101C",
+                rax: "0x0000000000000001",
+                rdi: "0x0000000000000001",
+                rsi: "0x0000000000402000",
+                rdx: "0x000000000000000E",
+                highlightReg: "none",
+                ring: "Ring 0 (Kernel Privilege Transition)",
+                desc: "Instruction: 'syscall'. CPU initiates privilege transition from User Ring 3 to Kernel Ring 0. Linux sys_write executes, sending 14 bytes from RSI memory pointer to stdout console driver.",
+                terminal: "Hello, World!"
+            },
+            {
+                line: 11,
+                rip: "0x0040101E",
+                rax: "0x000000000000003C",
+                rdi: "0x0000000000000001",
+                rsi: "0x0000000000402000",
+                rdx: "0x000000000000000E",
+                highlightReg: "rax",
+                ring: "Ring 3 (User Space)",
+                desc: "Instruction: 'mov rax, 60'. Loads System Call Identifier 60 (sys_exit) into RAX to prepare for clean process termination.",
+                terminal: "Hello, World!"
+            },
+            {
+                line: 12,
+                rip: "0x00401025",
+                rax: "0x000000000000003C",
+                rdi: "0x0000000000000000",
+                rsi: "0x0000000000402000",
+                rdx: "0x000000000000000E",
+                highlightReg: "rdi",
+                ring: "Ring 3 (User Space)",
+                desc: "Instruction: 'xor rdi, rdi'. Clears RDI register to 0 via single-cycle bitwise XOR (Exit Return Status Code 0 = Success).",
+                terminal: "Hello, World!"
+            },
+            {
+                line: 13,
+                rip: "0x00401027",
+                rax: "0x000000000000003C",
+                rdi: "0x0000000000000000",
+                rsi: "0x0000000000402000",
+                rdx: "0x000000000000000E",
+                highlightReg: "none",
+                ring: "Kernel Process Terminated",
+                desc: "Instruction: 'syscall'. Kernel receives sys_exit, frees mapped virtual memory pages, and communicates return status 0 back to parent shell context. Prevents segmentation fault (SIGSEGV).",
+                terminal: "Hello, World!\n[Process exited with code 0]"
+            }
+        ];
+
+        // Toolchain Stage Data
+        const toolchainSteps = {
+            1: {
+                num: "Phase 1 of 3",
+                cmd: "Cat hello.asm",
+                title: "Symbolic Source Formulation",
+                desc: "Programmers define data allocations and system instruction sequences in human-readable assembly source code (.asm). Memory offsets are represented symbolically via labels like _start and msg.",
+                boxHTML: "<code>section .data<br>&nbsp;&nbsp;msg db 'Hello, World!', 0x0a<br>&nbsp;&nbsp;len equ $ - msg<br>section .text<br>&nbsp;&nbsp;global _start</code>"
+            },
+            2: {
+                num: "Phase 2 of 3",
+                cmd: "nasm -f elf64 hello.asm -o hello.o",
+                title: "Assembler Processing & Relocatable Object File",
+                desc: "NASM converts human mnemonics into raw hexadecimal opcodes. At this stage, internal pointer addresses remain unresolved relocation offsets inside an ELF object file (.o).",
+                boxHTML: "<div class='text-slate-400'>Hexdump snippet (hello.o):</div><code>48 89 c7 48 8d 35 00 00 00 00 e8 00 00 00 00</code><div class='text-amber-400 text-[10px] mt-1'>Unresolved relocation entry: _start -> 0x00000000</div>"
+            },
+            3: {
+                num: "Phase 3 of 3",
+                cmd: "ld hello.o -o hello",
+                title: "Linker Binding & Absolute ELF Executable",
+                desc: "The GNU Linker (ld) processes symbol tables, maps virtual memory section headers (.text at 0x401000), binds entry symbol _start, and generates executable ELF binaries ready for kernel execve execution.",
+                boxHTML: "<div class='text-emerald-400'>Executable Bound:</div><code>ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, entry point 0x401000</code>"
+            }
+        };
+
+        // Navigation Switching Logic
+        function switchTab(tabKey) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-amber-600', 'text-white', 'shadow', 'font-semibold');
+                el.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800');
+            });
+
+            const activePane = document.getElementById(`tab-content-${tabKey}`);
+            const activeNav = document.getElementById(`nav-${tabKey}`);
+
+            if (activePane) activePane.classList.remove('hidden');
+            if (activeNav) {
+                activeNav.classList.add('bg-amber-600', 'text-white', 'shadow', 'font-semibold');
+                activeNav.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800');
+            }
+
+            if (tabKey === 'isa' && !isaRadarChart) {
+                initRadarChart();
+            }
+        }
+
+        // ISA Selector Logic
+        function selectIsa(key) {
+            const data = isaData[key];
+            if (!data) return;
+
+            ['x86', 'arm', 'wasm'].forEach(k => {
+                const btn = document.getElementById(`isa-btn-${k}`);
+                if (k === key) {
+                    btn.className = "px-3 py-1 rounded font-medium bg-amber-600 text-white shadow-sm";
+                } else {
+                    btn.className = "px-3 py-1 rounded font-medium text-slate-600 hover:text-slate-900";
+                }
+            });
+
+            const display = document.getElementById('isa-detail-display');
+            display.innerHTML = `
+                <div>
+                    <h4 class="text-amber-400 font-bold text-sm mb-1">${data.title}</h4>
+                    <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[10px]">${data.class}</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px] pt-2">
+                    <div>
+                        <span class="text-slate-500 block">ENCODING FORMAT</span>
+                        <span class="text-slate-200 font-bold">${data.encoding}</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">EVALUATION MODEL</span>
+                        <span class="text-slate-200 font-bold">${data.model}</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">PRIMARY DOMAINS</span>
+                        <span class="text-slate-200 font-bold">${data.deployment}</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block">HARDWARE COUPLING</span>
+                        <span class="text-slate-200 font-bold">${data.hardware}</span>
+                    </div>
+                </div>
+                <div class="pt-2 border-t border-slate-800">
+                    <span class="text-slate-500 block mb-1">SAMPLE INSTRUCTION CODE:</span>
+                    <pre class="bg-slate-950 p-2 rounded text-teal-300 overflow-x-auto text-[11px]">${data.example}</pre>
+                </div>
+            `;
+        }
+
+        // Initialize Chart.js Radar Chart
+        function initRadarChart() {
+            const ctx = document.getElementById('isaRadarChart').getContext('2d');
+            isaRadarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Memory Flexibility', 
+                        'Opcode Simplicity', 
+                        'Register Count', 
+                        'Hardware Coupling', 
+                        'Cross-Platform Security'
+                    ],
+                    datasets: [
+                        {
+                            label: 'x86-64 (CISC)',
+                            data: [95, 30, 60, 95, 30],
+                            borderColor: '#d97706',
+                            backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'ARM64 (RISC)',
+                            data: [50, 85, 90, 95, 40],
+                            borderColor: '#0d9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'WebAssembly',
+                            data: [20, 90, 40, 10, 100],
+                            borderColor: '#0284c7',
+                            backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#cbd5e1' },
+                            pointLabels: {
+                                font: { size: 10, family: 'sans-serif' },
+                                color: '#334155'
+                            },
+                            ticks: { display: false, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Memory Section Visualizer Selection
+        function inspectSection(key) {
+            const data = memorySections[key];
+            if (!data) return;
+
+            document.querySelectorAll('.mem-block').forEach(el => el.classList.remove('ring-2', 'ring-amber-400'));
+            const selectedBlock = document.getElementById(`mem-block-${key}`);
+            if (selectedBlock) selectedBlock.classList.add('ring-2', 'ring-amber-400');
+
+            document.getElementById('section-title').innerText = data.title;
+            document.getElementById('section-badge').innerText = data.badge;
+            document.getElementById('section-badge').className = `text-xs font-mono font-bold px-2 py-0.5 rounded ${data.badgeClass}`;
+            document.getElementById('section-permissions').innerText = data.permissions;
+            document.getElementById('section-desc').innerText = data.desc;
+            document.getElementById('section-disk-impact').innerText = data.diskImpact;
+            document.getElementById('section-runtime-state').innerText = data.runtimeState;
+            document.getElementById('section-syntax').innerText = data.syntax;
+        }
+
+        // Register Simulator Execution Controls
+        function stepExecution() {
+            if (currentStep >= executionSteps.length) return;
+            const state = executionSteps[currentStep];
+
+            // Highlight source code line
+            document.querySelectorAll('.code-exec-line').forEach(el => el.classList.remove('bg-amber-600/30', 'text-amber-300', 'border-l-2', 'border-amber-500'));
+            const lineEl = document.getElementById(`code-line-${state.line}`);
+            if (lineEl) lineEl.classList.add('bg-amber-600/30', 'text-amber-300', 'border-l-2', 'border-amber-500');
+
+            // Update Register Values
+            document.getElementById('reg-val-rax').innerText = state.rax;
+            document.getElementById('reg-val-rdi').innerText = state.rdi;
+            document.getElementById('reg-val-rsi').innerText = state.rsi;
+            document.getElementById('reg-val-rdx').innerText = state.rdx;
+            document.getElementById('reg-val-rip').innerText = state.rip;
+
+            // Highlight register changed
+            document.querySelectorAll('#reg-box-rax, #reg-box-rdi, #reg-box-rsi, #reg-box-rdx').forEach(el => el.classList.remove('border-amber-500', 'bg-amber-950/40'));
+            if (state.highlightReg !== 'none') {
+                const regBox = document.getElementById(`reg-box-${state.highlightReg}`);
+                if (regBox) regBox.classList.add('border-amber-500', 'bg-amber-950/40');
+            }
+
+            // Update ring & description text
+            document.getElementById('privilege-level-indicator').innerHTML = `Current Mode: <strong class="text-amber-400">${state.ring}</strong>`;
+            document.getElementById('execution-step-desc').innerText = state.desc;
+            document.getElementById('step-counter-text').innerText = `Step ${currentStep + 1} of ${executionSteps.length}`;
+            document.getElementById('terminal-stdout').innerText = state.terminal;
+
+            currentStep++;
+
+            if (currentStep >= executionSteps.length) {
+                const btn = document.getElementById('btn-next-step');
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                btn.innerHTML = '<span>Execution Completed</span>';
+            }
+        }
+
+        function resetExecution() {
+            currentStep = 0;
+            document.querySelectorAll('.code-exec-line').forEach(el => el.classList.remove('bg-amber-600/30', 'text-amber-300', 'border-l-2', 'border-amber-500'));
+            document.querySelectorAll('#reg-box-rax, #reg-box-rdi, #reg-box-rsi, #reg-box-rdx').forEach(el => el.classList.remove('border-amber-500', 'bg-amber-950/40'));
+
+            document.getElementById('reg-val-rax').innerText = '0x0000000000000000';
+            document.getElementById('reg-val-rdi').innerText = '0x0000000000000000';
+            document.getElementById('reg-val-rsi').innerText = '0x0000000000000000';
+            document.getElementById('reg-val-rdx').innerText = '0x0000000000000000';
+            document.getElementById('reg-val-rip').innerText = '0x000000000401000';
+
+            document.getElementById('privilege-level-indicator').innerHTML = `Current Mode: <strong class="text-emerald-400">Ring 3 (User Execution)</strong>`;
+            document.getElementById('execution-step-desc').innerText = `Click "Step Instruction" to begin loading register parameters for the Linux System V ABI write system call.`;
+            document.getElementById('step-counter-text').innerText = `Step 0 of ${executionSteps.length}`;
+            document.getElementById('terminal-stdout').innerHTML = `<span class="text-slate-600 font-normal">$ ./hello</span>`;
+
+            const btn = document.getElementById('btn-next-step');
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.innerHTML = '<span>Step Instruction &#9654;</span>';
+        }
+
+        // Toolchain Pipeline Interactive Selector
+        function selectToolchainStep(step) {
+            const data = toolchainSteps[step];
+            if (!data) return;
+
+            document.querySelectorAll('.toolchain-node').forEach(el => el.classList.remove('border-amber-500', 'bg-amber-50'));
+            const node = document.getElementById(`toolchain-node-${step}`);
+            if (node) node.classList.add('border-amber-500', 'bg-amber-50');
+
+            document.getElementById('toolchain-step-num').innerText = data.num;
+            document.getElementById('toolchain-step-cmd').innerText = data.cmd;
+            document.getElementById('toolchain-step-title').innerText = data.title;
+            document.getElementById('toolchain-step-desc').innerText = data.desc;
+            document.getElementById('toolchain-step-box').innerHTML = data.boxHTML;
+        }
+
+        // Domain Card Filtering Logic
+        function filterDomains(category) {
+            document.querySelectorAll('.domain-btn').forEach(btn => {
+                btn.className = "domain-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200";
+            });
+
+            const activeBtn = document.getElementById(`domain-btn-${category}`);
+            if (activeBtn) activeBtn.className = "domain-btn px-3 py-1.5 rounded-lg bg-slate-900 text-white shadow";
+
+            document.querySelectorAll('.domain-card').forEach(card => {
+                if (category === 'all' || card.classList.contains(`domain-${category}`)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize Default View State on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            selectIsa('x86');
+            inspectSection('text');
+            selectToolchainStep(1);
+        });
+    </script>
+</body>
+</html>
