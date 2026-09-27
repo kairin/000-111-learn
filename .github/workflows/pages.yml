@@ -5,6 +5,8 @@ name: Build and deploy site
 on:
   push:
     branches: [main]
+  # A pull request runs the build and the game check, but it does not publish.
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -56,13 +58,16 @@ jobs:
         run: npm run build
 
       - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
 
       - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
         with:
           path: serve
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

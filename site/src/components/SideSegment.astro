@@ -2,6 +2,7 @@
 /** One segment on one side: strengths, limits, an example sentence, and the words it uses. */
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Code } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
 import findings from '../data/findings.json';
 import { SIDES, other, codeLang, segments, wordsOf, byPart, type Side } from '../lib/learn';
 import { inline } from '../lib/inline';
@@ -36,6 +37,11 @@ const next = segments[i + 1];
 	}}
 >
 	<div class={`side-page side-${side}`}>
+		{me.image && (
+			<a href={`${base}/${side}/`} class="side-photo-link">
+				<Image class="side-photo-small" src={me.image.src} alt={me.image.alt} widths={[240, 480]} sizes="240px" />
+			</a>
+		)}
 		<p class="side-badge"><span class="side-letter">{me.letter}</span> {me.label} · {me.name} · {me.tagline}</p>
 		<p class="lead">{seg.question}</p>
 
