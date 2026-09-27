@@ -73,7 +73,10 @@ export default defineConfig({
 				},
 				{
 					label: 'The game',
-					items: [{ label: 'First test: the two sides together', link: '/game/' }],
+					items: [
+						{ label: 'First test: the two sides together', link: '/game/' },
+						{ label: 'Second test: the dot in 3D', link: '/game/3d/' },
+					],
 				},
 				{ label: 'Plan and decisions', items: [{ autogenerate: { directory: 'plan' } }] },
 				{

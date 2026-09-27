@@ -229,3 +229,18 @@ body:has(.duet) { --sl-content-width: 90rem; }
 .duet-circle .c-radius { stroke: var(--side-b); stroke-width: 3; }
 .duet-circle .c-sine { stroke: #f5d000; stroke-width: 4; }
 .duet-circle .c-point { fill: #f5d000; }
+
+/* The second test (the dot in 3D): the two drawings of the B side. */
+.view3d { margin: 0 0 0.6rem; }
+.view3d svg { width: 100%; height: auto; display: block; }
+.view3d text { font-size: 20px; fill: var(--sl-color-gray-3); font-family: var(--__sl-font-mono); }
+.view3d .v-floor { fill: none; stroke: #3050d0; stroke-width: 2; stroke-dasharray: 8 6; }
+.view3d .v-floor-line { stroke: #3050d0; stroke-width: 4; }
+.view3d .v-foot { fill: none; stroke: #00aaaa; stroke-width: 3; }
+.view3d .v-path { fill: none; stroke: var(--sl-color-gray-4); stroke-width: 3; }
+.view3d .v-screen { stroke: var(--sl-color-accent); stroke-width: 5; }
+.view3d .v-eye { fill: var(--sl-color-white); }
+.view3d .v-sight { stroke: var(--side-b); stroke-width: 3; stroke-dasharray: 10 6; }
+.view3d .v-pole { stroke: var(--sl-color-gray-3); stroke-width: 3; }
+.view3d .v-hit { fill: var(--sl-color-accent); }
+.view3d .v-dot { fill: #f5d000; }

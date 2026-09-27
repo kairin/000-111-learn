@@ -120,13 +120,18 @@ const partName = (id: string) => partsData.find((p) => p.id === id)?.name ?? id;
 			</div>
 		)}
 
+		<p>
+			<strong>Next:</strong> the <a href={`${base}/game/3d/`}>second test</a> gives the same dot a third direction,
+			depth.
+		</p>
+
 		<h2>The words that each program uses</h2>
 		<p>
 			Each program is a text in its language. The pills show the words that the <a href={`${base}/dictionary/`}>dictionary</a>
 			already has. "New words" are real words of the language that the dictionary does not have yet: they are good
 			words to learn next.
 		</p>
-		{game.programs.map((p) => (
+		{game.programs.filter((p) => p.test === 1).map((p) => (
 			<section class={`program side-${p.side}`}>
 				<h3>
 					<span class="side-letter">{SIDES[p.side as 'a' | 'b'].letter}</span> <a href={p.url}><code>{p.file}</code></a>
