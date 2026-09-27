@@ -185,3 +185,12 @@ table.compare td { font-size: var(--sl-text-sm); vertical-align: top; }
 .bar b { position: relative; padding-left: 0.4rem; color: var(--sl-color-white); font-size: var(--sl-text-xs); line-height: 1.4rem; }
 .bar-legend { margin-top: 0.5rem; }
 @media (max-width: 40rem) { .bar-row { grid-template-columns: 6rem 1fr 1fr; } }
+
+/* ---------- the game page ---------- */
+.dos-screen { width: 100%; max-width: 48rem; aspect-ratio: 4 / 3; margin: 1rem 0 0.5rem; border-radius: 0.5rem; overflow: hidden; background: #000; border: 1px solid var(--sl-color-hairline); }
+.notice { border: 1px dashed var(--sl-color-gray-4); border-radius: var(--rt-radius); padding: 0.75rem 1rem; }
+.steps-list li { margin-bottom: 0.5rem; }
+.program { border-left: 3px solid var(--side); padding-left: 0.9rem; margin-top: 1.25rem; }
+.program h3 { font-size: var(--sl-text-base); }
+.word-pill { margin: 0 0.15rem 0.3rem 0; font-weight: 600; }
+.new-word { margin-right: 0.3rem; border: 1px dashed var(--side); }

@@ -40,34 +40,23 @@ The site has two sides, A and B. Seven segments are common to the two sides. A s
 | 1 | Choose the goal: learn the two languages, with a game at the end | Done |
 | 2 | Put the site on Astro and Starlight, built by GitHub Actions | Done |
 | 3 | Make the language lens the center of the site: A side, B side, dictionary | Done |
-| 4 | Toolchain test: build a small program on each side and run it in the browser | Next. It needs decision O7. |
-| 5 | Game design: the concept and the limits | It needs decision O8. |
+| 4 | Toolchain test: build a small program on each side and run it in the browser | Done. See the game page of the site. |
+| 5 | Game design: the rules of the lander game | Next |
 | 6 | The 12-week course and the game | After phases 4 and 5 |
 | 7 | Second review pass (background research) | Not started. It does not block other work. |
 
-## Phase 4: run code from the two sides in the browser
+## Phase 4: the first test (done)
 
-A static web page can run a compiled program inside the browser. GitHub Actions builds the program. The page loads the result. No server is necessary.
+The first test works. The files are in `game/`, and the steps are in `game/README.md`.
 
-**B side (Fortran):**
+1. **B side:** `lab/sine_table.f90` calculates 256 sine values as whole numbers.
+2. **A side:** `src/spike.asm` draws the curve and moves a dot along it. It is 655 bytes and uses 8086 instructions only.
+3. **The check:** DOSBox runs the A-side test without a screen. The B-side checker agrees with the answers on 256 of 256 values.
+4. **The website:** js-dos runs the game on the page `/game/`. The player files come from this site only. The page also shows the dictionary words that each program uses, and the new words to learn next.
 
-- LFortran translates Fortran into WebAssembly (Wasm), a format that browsers run. LFortran is a beta tool and knows a subset of Fortran.
-- LLVM Flang with Emscripten also makes Wasm. It takes more setup, but it knows more of the language.
+GitHub Actions does these steps for each push. If the check fails, the website does not change.
 
-**A side (Assembly):**
-
-- The NASM assembler makes a DOS program. js-dos, a copy of an old PC that runs in the browser, then runs it on the page.
-- WebAssembly text (`.wat`) is an assembly-like language that browsers run directly. It is not the language of a real processor.
-
-**Limits:** Wasm code that uses many threads needs a special server setting. GitHub Pages cannot set it. A small script (`coi-serviceworker`) solves this. The PC copies add a few MB, so only the game pages load them.
-
-**The first test (after decision O7):**
-
-1. A side: a NASM program that switches to the 320 x 200 graphics mode, draws one moving dot, and stops when you push a key. It runs in js-dos on a page of the site.
-2. B side: a modern Fortran program that makes a table of numbers (for example, sine values) for the A-side program.
-3. A check in GitHub Actions compares the result of the A-side program with the B-side reference.
-
-## Decision O7: how the two languages share the game
+## Decision D19 (was O7): how the two languages share the game
 
 The only free compiler that makes DOS programs from Fortran (OpenWatcom) knows only FORTRAN 77. That is the dialect of 1977, not modern Fortran.
 
@@ -75,13 +64,13 @@ The only free compiler that makes DOS programs from Fortran (OpenWatcom) knows o
 |---|---|---|
 | A. All in DOS | FORTRAN 77 and 8086 Assembly in one DOS program | Very authentic, but you learn old Fortran |
 | B. All in the browser | Modern Fortran as Wasm, and WebAssembly text | No PC copy, but the Assembly is not a real processor language |
-| **C. Split roles (recommended)** | The game is 8086 Assembly in js-dos. Modern Fortran is the laboratory: it makes tables and levels, it checks the Assembly results, and it runs a physics page in the browser. | Each language does its best job, and you learn real forms of the two |
+| **C. Split roles (chosen)** | The game is 8086 Assembly in js-dos. Modern Fortran is the laboratory: it makes tables and levels, it checks the Assembly results, and it runs a physics page in the browser. | Each language does its best job, and you learn real forms of the two |
 
-## Decision O8: the game
+## Decision D20 (was O8): the game
 
-Recommended concept: a small lander game. You steer a ship to a soft landing against gravity. Fortran calculates the physics. Assembly draws the screen and reads the keys.
+Chosen concept: a small lander game. You steer a ship to a soft landing against gravity. Fortran calculates the physics. Assembly draws the screen and reads the keys.
 
-Recommended limits: an 8086 or 386 PC, VGA Mode 13h (320 x 200 pixels, 256 colors), then Mode X for smooth page flips. The screen updates at 70 or 35 frames each second. The review found that a locked 60 frames each second is not possible in Mode 13h.
+Chosen limits: an 8086 or 386 PC, VGA Mode 13h (320 x 200 pixels, 256 colors), then Mode X for smooth page flips. The screen updates at 70 or 35 frames each second. The review found that a locked 60 frames each second is not possible in Mode 13h.
 
 ## Phase 6: the 12-week course (draft)
 

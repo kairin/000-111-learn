@@ -212,6 +212,7 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 - [x] Move the site to Astro + Starlight, built and deployed by GitHub Actions (D10, D12)
 - [x] Make the language lens the center of the site (D16)
 - [x] Write all documents in ASD-STE100 (D17)
+- [x] Make the first test of the game: the two sides agree on 256 of 256 values (D19, D20)
 - [ ] Browser-run Assembly and Fortran demos (PLAN.md, Phase 4)
 - [ ] Pass 2: get and examine the high-risk citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
@@ -237,3 +238,4 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 | 2026-09-27 | Wrote the plan (with in-browser Assembly/Fortran), the decision log, and the session record | `plan/` |
 | 2026-09-27 | Goal decided: learn both through a constrained game that you can play in the browser. Site moved to Astro + Starlight on GitHub Actions. Hooks and `gh-pages` removed | `site/`, `.github/`, `plan/` |
 | 2026-09-27 | Language lens (A side, B side), dictionaries, STE writing standard. Review moved to background research | `learn/`, `site/` |
+| 2026-09-27 | Decisions D19 and D20. First test of the game: Fortran table, 8086 program in js-dos, check in DOSBox | `game/`, `site/` |

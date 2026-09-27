@@ -18,9 +18,20 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Ubuntu 24.04: the same system as game/dev.sh on the owner's computer.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
+
+      # The game: the B side (Fortran) makes the table, the A side (8086 Assembly) uses it,
+      # and a check in DOSBox proves that the two sides agree. If the check fails, nothing is published.
+      - name: Install the game toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends gfortran nasm dosbox
+
+      - name: Build and test the game
+        run: bash game/build.sh
 
       - uses: actions/setup-python@v6
         with:

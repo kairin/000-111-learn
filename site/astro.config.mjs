@@ -58,6 +58,10 @@ export default defineConfig({
 					label: 'B side: Fortran',
 					items: [{ slug: 'b' }, ...LEARN_SEGMENTS.map((s) => ({ label: s.title, link: `/b/${s.id}/` }))],
 				},
+				{
+					label: 'The game',
+					items: [{ label: 'First test: the two sides together', link: '/game/' }],
+				},
 				{ label: 'Plan and decisions', items: [{ autogenerate: { directory: 'plan' } }] },
 				{
 					label: 'Background research',

@@ -1,0 +1,182 @@
+#!/usr/bin/env node
+/**
+ * Put the game on the site. Runs after sync-content.mjs, before `astro build`.
+ *
+ *   node_modules/js-dos/dist -> public/js-dos/   the PC emulator for the browser (GPL-2.0, with license and notice)
+ *   ../game/build/site/      -> public/game/     the game bundle from game/build.sh (if it exists)
+ *   ../game/{src,test,lab}   -> src/data/game.json   the words that each program uses, with the lens
+ *
+ * The output folders are git-ignored. On a computer without the game toolchain, the site still builds:
+ * the game page then says that the game build is missing.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { BASE } from '../site.config.mjs';
+
+const SITE_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const REPO = path.resolve(SITE_DIR, '..');
+const GAME = path.join(REPO, 'game');
+const VOCAB = path.join(REPO, 'learn/vocabulary');
+const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+const readList = (p) => fs.readFileSync(p, 'utf8').split('\n').filter((l) => l && !l.startsWith('#'));
+
+// ------------------------------------------------------------ js-dos (only the parts that the page needs)
+const JSDOS_SRC = path.join(SITE_DIR, 'node_modules/js-dos/dist');
+const JSDOS_OUT = path.join(SITE_DIR, 'public/js-dos');
+fs.rmSync(JSDOS_OUT, { recursive: true, force: true });
+const skip = (name) => /\.(map|symbols)$/.test(name) || name.startsWith('wdosbox-x') || name === 'types';
+function copyDir(src, dst) {
+	fs.mkdirSync(dst, { recursive: true });
+	for (const e of fs.readdirSync(src, { withFileTypes: true })) {
+		if (skip(e.name)) continue;
+		const s = path.join(src, e.name), d = path.join(dst, e.name);
+		e.isDirectory() ? copyDir(s, d) : fs.copyFileSync(s, d);
+	}
+}
+copyDir(JSDOS_SRC, JSDOS_OUT);
+const jsdosVersion = readJson(path.join(SITE_DIR, 'node_modules/js-dos/package.json')).version;
+fs.copyFileSync(path.join(SITE_DIR, 'licenses/GPL-2.0.txt'), path.join(JSDOS_OUT, 'LICENSE.txt'));
+fs.writeFileSync(
+	path.join(JSDOS_OUT, 'NOTICE.txt'),
+	`js-dos ${jsdosVersion} (https://js-dos.com) runs the DOS programs of this site.\n` +
+		`License: GNU General Public License version 2 (see LICENSE.txt in this folder).\n` +
+		`Source code: https://github.com/caiiiycuk/js-dos/tree/${jsdosVersion}\n` +
+		`This site copies the unchanged files from the npm package js-dos@${jsdosVersion}.\n`,
+);
+
+// ------------------------------------------------------------ the game build
+const BUILD = path.join(GAME, 'build/site');
+const GAME_OUT = path.join(SITE_DIR, 'public/game');
+fs.rmSync(GAME_OUT, { recursive: true, force: true });
+let info = null;
+if (fs.existsSync(path.join(BUILD, 'game.json'))) {
+	fs.cpSync(BUILD, GAME_OUT, { recursive: true });
+	info = readJson(path.join(BUILD, 'game.json'));
+}
+
+// A small page that holds only the player. The game page shows it in an iframe,
+// so the styles of js-dos cannot change the styles of the site.
+if (info) {
+	fs.writeFileSync(
+		path.join(GAME_OUT, 'player.html'),
+		`<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A-side program in a copy of a 1980s PC</title>
+<link rel="stylesheet" href="${BASE}/js-dos/js-dos.css">
+<style>html,body{margin:0;height:100%;background:#000}#dos{width:100%;height:100%}</style>
+</head>
+<body>
+<div id="dos"></div>
+<script src="${BASE}/js-dos/js-dos.js"></script>
+<script>
+Dos(document.getElementById("dos"), {
+  url: "${BASE}/game/spike.jsdos",
+  pathPrefix: "${BASE}/js-dos/emulators/",
+  autoStart: true,
+  kiosk: true,
+  noCloud: true,
+  theme: "dark",
+  imageRendering: "pixelated",
+  mouseCapture: false,
+  // Keep the command interface of the emulator for tests (window.ci.screenshot() gives the screen pixels).
+  onEvent: (event, ci) => { if (event === "ci-ready") window.ci = ci; }
+});
+</script>
+</body>
+</html>
+`,
+	);
+}
+
+// ------------------------------------------------------------ the words of each program (the lens)
+const dictA = readJson(path.join(VOCAB, 'assembly.json')).words;
+const dictB = readJson(path.join(VOCAB, 'fortran.json')).words;
+const mnemonics = new Set(readList(path.join(VOCAB, 'reference/8086-mnemonics.txt')));
+const directives = new Set(['ORG', 'BITS', 'CPU', 'DB', 'DW', 'DD', 'TIMES', 'INCBIN', '%INCLUDE', '%DEFINE', '%MACRO', 'SECTION', 'EQU', 'RESB', 'RESW']);
+const registers = new Set(['AX', 'BX', 'CX', 'DX', 'SI', 'DI', 'BP', 'SP', 'CS', 'DS', 'ES', 'SS', 'AH', 'AL', 'BH', 'BL', 'CH', 'CL', 'DH', 'DL']);
+const fortranKeywords = new Map(
+	readList(path.join(VOCAB, 'reference/fortran2018-keywords.txt'))
+		.map((l) => l.split(','))
+		.filter(([, cat]) => cat !== 'specifier'), // argument names such as UNIT or DIM look like variable names
+);
+const hexNorm = (s) => s.toUpperCase().replace(/^0+(?=[0-9A-F])/, '');
+
+function analyzeAsm(file) {
+	const raw = fs.readFileSync(file, 'utf8');
+	const code = raw.replace(/;.*$/gm, '');
+	// A word must not start inside a number: in 3Ch, "Ch" is not the register CH.
+	const tokens = new Set((code.match(/(?<![0-9A-Za-z_])[%A-Za-z_.][A-Za-z0-9_.]*/g) || []).map((t) => t.toUpperCase()));
+	const hexes = new Set((code.match(/\b[0-9][0-9A-Fa-f]*h\b/g) || []).map(hexNorm));
+	const has = (re) => re.test(code);
+	const matched = dictA.filter((w) => {
+		const m = w.word.match(/^INT (\w+), (AH|AX)=(\w+)$/);
+		if (m) {
+			const [, vec, reg, val] = m;
+			const want = hexNorm(val);
+			const regs = reg === 'AH' ? [`AH,\\s*0*${want}`, `AX,\\s*0*${want}00H`] : [`AX,\\s*0*${want}`];
+			return has(new RegExp(`\\bINT\\s+0*${hexNorm(vec)}\\b`, 'i')) && regs.some((r) => new RegExp(`\\bMOV\\s+${r}\\b`, 'i').test(code));
+		}
+		if (w.word === '[ ]') return has(/\[/);
+		if (w.word === 'label:') return has(/^\s*[A-Za-z_.]\w*:/m);
+		if (w.word === ';') return /;/.test(raw);
+		if (w.word === ',') return has(/,/);
+		if (w.word === 'h') return hexes.size > 0;
+		return w.word.split(' / ').some((alt) =>
+			/^[0-9A-F]+h$/i.test(alt) ? hexes.has(hexNorm(alt)) : tokens.has(alt.toUpperCase()),
+		);
+	});
+	const known = new Set(matched.flatMap((w) => w.word.toUpperCase().split(/[^%A-Z0-9]+/)));
+	const fresh = [...tokens].filter((t) => (mnemonics.has(t) || directives.has(t) || registers.has(t)) && !known.has(t)).sort();
+	return { matched: matched.map((w) => ({ word: w.word, pos: w.pos, segment: w.segment })), fresh, lines: raw.split('\n').length };
+}
+
+function analyzeFortran(file) {
+	const raw = fs.readFileSync(file, 'utf8');
+	const code = raw.replace(/'[^'\n]*'|"[^"\n]*"/g, (s) => (/^'\(/.test(s) ? "'(FMT)'" : '""')).replace(/!.*$/gm, '');
+	const tokens = new Set((code.match(/[A-Za-z_][A-Za-z0-9_]*/g) || []).map((t) => t.toUpperCase()));
+	const has = (re) => re.test(code);
+	const special = {
+		'::': /::/, '=': /[^=<>/]=[^=]/, '+ -': /[+-]/, '* /': /[^*]\*[^*]|[^/(]\/[^/=)]/, '**': /\*\*/, '( )': /\(/,
+		'!': /!/, '&': /&\s*$/m, 'x(:)': /\(\s*:\s*\)/, 'x(2:5)': /\(\s*\w+\s*:\s*\w+\s*\)/, '*': /\b(print|read)\s*\*/i,
+		"'(F8.2)'": /'\(FMT\)'/, '== /= < > <= >=': /==|\/=|<=|>=|[^<]<[^=]|[^>=-]>[^=]/, '.and. .or. .not.': /\.(and|or|not)\./i,
+		'REAL( )': /[=+\-*/(,]\s*real\s*\(/i, 'INT( )': /[=+\-*/(,]\s*int\s*\(/i,
+	};
+	const matched = dictB.filter((w) => {
+		if (w.word in special) return w.word === '!' ? /!/.test(raw) : w.word === '&' ? /&\s*$/m.test(raw) : has(special[w.word]);
+		if (/^INTENT\((IN|OUT)\)$/.test(w.word)) return has(new RegExp(`intent\\s*\\(\\s*${w.word.slice(7, -1)}\\s*\\)`, 'i'));
+		if (w.word === 'BIND(C)') return has(/bind\s*\(\s*c\s*\)/i);
+		return w.word.split(' / ').some((alt) => {
+			// "IF ... THEN ... END IF": the first word is enough (a one-line IF has no THEN).
+			const words = (alt.includes('...') ? [alt.split(/\s+/)[0]] : alt.split(/\s+/)).filter((t) => /^[A-Z_][A-Z0-9_]*$/.test(t));
+			return words.length > 0 && words.every((t) => tokens.has(t));
+		});
+	});
+	const known = new Set(matched.flatMap((w) => w.word.toUpperCase().split(/[^A-Z0-9_]+/)));
+	const fresh = [...tokens].filter((t) => fortranKeywords.has(t) && !known.has(t)).sort();
+	return { matched: matched.map((w) => ({ word: w.word, pos: w.pos, segment: w.segment })), fresh, lines: raw.split('\n').length };
+}
+
+const programs = [
+	['src/spike.asm', 'a', 'The game (first test): draws the curve and moves the dot'],
+	['src/sine_y.inc', 'a', 'The shared routine: one angle in, one screen row out'],
+	['test/check.asm', 'a', 'The test: runs sine_y for 256 angles and writes the rows to a file'],
+	['lab/sine_table.f90', 'b', 'The laboratory: makes the sine table'],
+	['lab/check_y.f90', 'b', 'The checker: compares the A-side rows with its own answers'],
+].map(([rel, side, role]) => ({
+	file: rel,
+	side,
+	role,
+	url: `https://github.com/kairin/000-111-learn/blob/main/game/${rel}`,
+	...(side === 'a' ? analyzeAsm : analyzeFortran)(path.join(GAME, rel)),
+}));
+
+fs.mkdirSync(path.join(SITE_DIR, 'src/data'), { recursive: true });
+fs.writeFileSync(path.join(SITE_DIR, 'src/data/game.json'), JSON.stringify({ built: Boolean(info), info, jsdosVersion, programs }, null, 1));
+console.log(
+	`sync-game: js-dos ${jsdosVersion}, game build ${info ? 'found' : 'MISSING (run game/dev.sh)'}; ` +
+		programs.map((p) => `${p.file} ${p.matched.length} known / ${p.fresh.length} new`).join(', '),
+);

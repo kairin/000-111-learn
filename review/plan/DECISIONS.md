@@ -4,10 +4,7 @@
 
 ## Open decisions
 
-| ID | Decision | Options | Recommendation | Why it matters |
-|---|---|---|---|---|
-| **O7** | How the two languages share the game | A: all in DOS (FORTRAN 77 and 8086). B: all in the browser (Fortran as Wasm, WebAssembly text). C: split roles. | **C.** The game is 8086 Assembly in js-dos. Modern Fortran is the laboratory: tables, checks, a physics page. | It sets the first toolchain test and the real words that you learn on each side. |
-| **O8** | The game concept and its limits | A lander game, a falling-sand game, or a small space trader. Also the processor, the graphics mode and the size limits. | A lander game. An 8086 or 386 PC with VGA Mode 13h, then Mode X. 70 or 35 frames each second. | It sets the size of the 12-week course. |
+None at this time. The next choices come with the game design (see [PLAN.md](PLAN.md), phase 5).
 
 ## Decided
 
@@ -31,6 +28,9 @@
 | **D16** | **The lens:** treat Assembly and Fortran as real languages, with parts of speech. The site has an A side (Assembly) and a B side (Fortran). Seven segments are common to the two sides. | Decided by the owner, done | Assembly is the first language of the machine. Fortran speaks maths. Each segment page shows strengths and words. |
 | **D17** | **The writing standard:** write all documents in ASD-STE100 Simplified Technical English, for a reader who is not a developer | Decided by the owner, done | The source is `/home/kkk/Apps/ASD-STE100`. A global skill, a global rule and a global hook apply it in every Claude Code session. |
 | **D18** | **The review is background research.** The four AI-written guides only helped start the idea. The review shows areas that are easy to miss. | Decided by the owner, done | The review pages are in the "Background research" part of the menu. Relevant findings show as "Watch out" notes on the segment pages. |
+
+| **D19** | **The game uses split roles** (was O7). The game is 8086 Assembly in js-dos. Modern Fortran is the laboratory: it makes tables, checks the A-side answers, and later runs a physics page. | Decided by the owner | The first test works: the two sides agree on 256 of 256 values. See `game/README.md`. |
+| **D20** | **The game is a small lander game** (was O8). An 8086 or 386 PC, VGA Mode 13h, then Mode X. 70 or 35 frames each second. | Decided by the owner | The rules of the game come in phase 5. |
 
 ## Why some decisions changed
 

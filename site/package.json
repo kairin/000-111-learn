@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "sync": "node scripts/sync-content.mjs && node scripts/og-image.mjs",
+    "sync": "node scripts/sync-content.mjs && node scripts/sync-game.mjs && node scripts/og-image.mjs",
     "predev": "npm run sync",
     "dev": "astro dev",
     "prebuild": "npm run sync",
@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/starlight": "^0.42.4",
     "astro": "^7.2.10",
+    "js-dos": "8.4.1",
     "sharp": "^0.35.3"
   },
   "allowScripts": {

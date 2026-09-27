@@ -19,7 +19,8 @@ The owner is not a developer. The starting point is one skill: reading English. 
 |---|---|
 | `learn/` | The learning content: the A-side and B-side pages, the seven segments, the parts of speech, and the two dictionaries |
 | `review/` | Background research: four AI-written guides, their parts, the review and its findings, and the plan |
-| `site/` | The website (Astro with Starlight). It reads `learn/` and `review/`. |
+| `game/` | The game: 8086 Assembly (A side) and the Fortran laboratory (B side), with the build and the check |
+| `site/` | The website (Astro with Starlight). It reads `learn/`, `review/` and the game build. |
 | `.github/workflows/` | GitHub Actions builds and publishes the website after each push |
 
 ## Writing rule
