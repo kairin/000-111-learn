@@ -3,12 +3,29 @@ import segments from '../data/learn-segments.json';
 import parts from '../data/parts-of-speech.json';
 import vocabA from '../data/vocab-a.json';
 import vocabB from '../data/vocab-b.json';
+import aSideCassette from '../assets/learn/a-side-cassette.jpg';
+
+/** A photo for a side. The B side has no photo yet: add one to learn/images/ and here. */
+export type SideImage = { src: ImageMetadata; alt: string };
 
 export type Side = 'a' | 'b';
 export type Word = { word: string; pos: string; segment: string; meaning: string; example: string };
 
-export const SIDES: Record<Side, { letter: string; name: string; label: string; tagline: string; vocab: typeof vocabA }> = {
-	a: { letter: 'A', name: 'Assembly', label: 'A side', tagline: 'The first language of the machine', vocab: vocabA },
+export const SIDES: Record<
+	Side,
+	{ letter: string; name: string; label: string; tagline: string; vocab: typeof vocabA; image?: SideImage }
+> = {
+	a: {
+		letter: 'A',
+		name: 'Assembly',
+		label: 'A side',
+		tagline: 'The first language of the machine',
+		vocab: vocabA,
+		image: {
+			src: aSideCassette,
+			alt: 'A cassette tape with a handwritten label: "A Side. Assembly, the first language of the machine."',
+		},
+	},
 	b: { letter: 'B', name: 'Fortran', label: 'B side', tagline: 'The language that speaks maths', vocab: vocabB },
 };
 export const other = (side: Side): Side => (side === 'a' ? 'b' : 'a');

@@ -1,6 +1,7 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Code } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
 import { SIDES, segments, parts, wordsOf, type Side } from '../lib/learn';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -46,6 +47,9 @@ const headline: Record<Side, { value: string; label: string }> = {
 		<div class="sides">
 			{sides.map((s) => (
 				<a class={`side-card side-${s}`} href={`${base}/${s}/`}>
+					{SIDES[s].image && (
+						<Image class="side-photo" src={SIDES[s].image!.src} alt={SIDES[s].image!.alt} widths={[360, 720]} sizes="(max-width: 50rem) 100vw, 360px" />
+					)}
 					<div class="side-head"><span class="side-letter">{SIDES[s].letter}</span> {SIDES[s].label}</div>
 					<div class="side-name">{SIDES[s].name}</div>
 					<div class="side-tag">{SIDES[s].tagline}</div>

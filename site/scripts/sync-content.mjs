@@ -4,6 +4,7 @@
  *
  *   learn/*.md, review/**.md -> src/content/docs/**  (Starlight pages; links rewritten to site routes)
  *   learn/*.json             -> src/data/*.json      (segments, parts of speech, the two dictionaries)
+ *   learn/images/*           -> src/assets/learn/*   (photos; Astro makes optimized copies)
  *   review/segments/*.html   -> public/sources/*.html (original interactive pages, copied verbatim)
  *   review/findings/*.json   -> src/data/*.json      (findings with status overrides, heatmap, progress)
  *
@@ -18,6 +19,8 @@ const SITE_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const REPO = path.resolve(SITE_DIR, '..');
 const REVIEW = path.join(REPO, 'review');
 const LEARN = path.join(REPO, 'learn');
+const LEARN_IMAGES = path.join(LEARN, 'images');
+const ASSETS_LEARN = path.join(SITE_DIR, 'src/assets/learn');
 const DOCS = path.join(SITE_DIR, 'src/content/docs');
 const DATA = path.join(SITE_DIR, 'src/data');
 const PUBLIC_SOURCES = path.join(SITE_DIR, 'public/sources');
@@ -86,13 +89,17 @@ function listFiles(dir, ext) {
 }
 
 // ------------------------------------------------------------ links
-function resolveHref(href, fromFile) {
+function resolveHref(href, fromFile, outFile) {
 	// A site path written as "/a/" in learn/*.md gets the base path.
 	if (href.startsWith('/') && !href.startsWith(BASE + '/')) return BASE + href;
 	if (/^([a-z]+:|#|\/)/i.test(href)) return href;
 	const [p, frag] = href.split('#');
 	const target = path.resolve(path.dirname(fromFile), decodeURIComponent(p));
 	const hash = frag ? `#${frag}` : '';
+	// An image from learn/images: point to its copy in src/assets/learn (Astro optimizes it).
+	if (target.startsWith(LEARN_IMAGES + path.sep) && outFile) {
+		return path.relative(path.dirname(outFile), path.join(ASSETS_LEARN, path.basename(target))).split(path.sep).join('/');
+	}
 	const r = routes.get(target) || routes.get(target.replace(/\/$/, ''));
 	if (r) return routeUrl(r.slug) + hash;
 	if (target.endsWith('.html') && htmlSources.includes(target)) return `${BASE}/sources/${path.basename(target)}`;
@@ -103,12 +110,12 @@ function resolveHref(href, fromFile) {
 	return href;
 }
 
-function rewriteLinks(md, fromFile) {
+function rewriteLinks(md, fromFile, outFile) {
 	// Leave fenced code blocks untouched.
 	return md
 		.split(/(^```[\s\S]*?^```)/m)
 		.map((chunk, i) =>
-			i % 2 ? chunk : chunk.replace(/(\]\()([^)\s]+)(\))/g, (_, a, href, b) => a + resolveHref(href, fromFile) + b),
+			i % 2 ? chunk : chunk.replace(/(\]\()([^)\s]+)(\))/g, (_, a, href, b) => a + resolveHref(href, fromFile, outFile) + b),
 		)
 		.join('');
 }
@@ -148,6 +155,9 @@ fs.rmSync(DOCS, { recursive: true, force: true });
 fs.rmSync(DATA, { recursive: true, force: true });
 fs.rmSync(PUBLIC_SOURCES, { recursive: true, force: true });
 fs.mkdirSync(DATA, { recursive: true });
+// Images of the learning content (for example the A-side cassette photo).
+fs.rmSync(ASSETS_LEARN, { recursive: true, force: true });
+if (fs.existsSync(LEARN_IMAGES)) fs.cpSync(LEARN_IMAGES, ASSETS_LEARN, { recursive: true });
 fs.mkdirSync(PUBLIC_SOURCES, { recursive: true });
 
 // A route with child routes must be <slug>/index.md so it sits inside its sidebar group.
@@ -180,7 +190,7 @@ for (const [src, r] of routes) {
 			.map((sg) => `- [${sg.title}](${BASE}/${r.side}/${sg.id}/): ${sg.question}`)
 			.join('\n') + '\n';
 	}
-	const out = `---\n${fm.join('\n')}\n---\n\n${note}${metaTable(meta, src)}${rewriteLinks(body, src)}${tail}`;
+	const out = `---\n${fm.join('\n')}\n---\n\n${note}${metaTable(meta, src)}${rewriteLinks(body, src, r.out)}${tail}`;
 	fs.mkdirSync(path.dirname(r.out), { recursive: true });
 	fs.writeFileSync(r.out, out);
 }
