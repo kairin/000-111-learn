@@ -53,11 +53,11 @@ On a PC screen, row 0 is at the top. Thus, a larger row number is lower on the s
 
 ## The second test: the dot in 3D
 
-The second test gives the dot of the first test a third direction: depth. The dot still goes up and down with the sine. It now also goes near and far with the cosine. The program draws the world in perspective: a far point is smaller and nearer to the center of the screen.
+The second test gives the dot of the first test a third direction: depth. The dot still goes up and down with the sine. It now also moves from the back to the front: the curve starts far away and ends near. The middle point of the curve (angle 128) is the center of the 3D space. The program draws the world in perspective: a far point is smaller and nearer to the center of the screen.
 
 | File | Side | What it does |
 |---|---|---|
-| `lab/sine_table.f90` | B | The same table as the first test. The cosine of an angle is the sine of the angle plus 64 (a quarter turn). Thus, the second test needs no new table. |
+| `lab/sine_table.f90` | B | The same table as the first test. The height of the dot is the sine. Thus, the second test needs no new table. |
 | `src/path3d.inc` | A | Two routines. `path_point`: one angle in, one 3D point (X, Y, Z) out. `project`: one 3D point in, one screen position out. The game and the test use these same routines. |
 | `src/dot3d.asm` | A | Draws a floor, the path in the air and its footprint on the floor. Then it moves a yellow dot along the path, with a pole down to its shadow. A near dot is larger. The keys are the same as in the first test. |
 | `test/check3d.asm` | A | Runs the two routines for all 256 angles. It writes three numbers for each angle to `P3D.BIN`: the screen x and y of the dot, and the screen y of its shadow. It has no graphics. |
@@ -65,7 +65,9 @@ The second test gives the dot of the first test a third direction: depth. The do
 
 ### The world and the eye
 
-- **X** goes from left (-256) to right (254). **Y** goes from down (-64) to up (64). **Z** goes from near (-128) to far (128). The floor is at Y = -96.
+- **X** goes from left (-192) to right (190): 1.5 times (angle - 128). **Y** goes from down (-64) to up (64): 64 times the sine. **Z** goes from far (128) to near (-127): 128 - angle. The floor is at Y = -96.
+- At angle 128, the point is X = 0, Y = 0, Z = 0: the middle of the curve is the center of the world.
+- Seen from above, the path is a straight line from the back left to the front right. Seen from the side, it is the sine curve.
 - The eye is at the height Y = 120, and 448 in front of the center of the world. The screen is 200 in front of the eye.
 - The perspective is two divisions:
   - screen x = 160 + X * 200 / (Z + 448)
@@ -74,7 +76,7 @@ The second test gives the dot of the first test a third direction: depth. The do
 
 ### Three new ideas on the A side
 
-- **A product that is too large for AX.** The cosine can be 256, and 256 * 128 = 32768. That number does not fit in AX with a sign. `IMUL` puts the full product in DX:AX. To divide it by 256, the program keeps the middle two bytes: `mov al, ah` and `mov ah, dl`.
+- **Divide by 256 with two moves.** `IMUL` puts the full product in DX:AX. To divide it by 256, the program keeps the middle two bytes: `mov al, ah` and `mov ah, dl`. This needs no shift.
 - **The perspective division.** `IDIV CX` divides DX:AX by the distance from the eye.
 - **An undo list.** The dot, the pole and the shadow cover many pixels. The routine `plot` keeps the old color and the place of each pixel before it draws. The routine `undo` puts the old colors back, the last pixel first.
 
@@ -82,7 +84,7 @@ The second test gives the dot of the first test a third direction: depth. The do
 
 - The two sides agree on 256 of 256 points (768 of 768 numbers).
 - The largest difference from exact maths is 1 pixel.
-- `DOT3D.COM` is 1120 bytes. It uses the same `sine.bin` of 512 bytes.
+- `DOT3D.COM` is 1103 bytes. It uses the same `sine.bin` of 512 bytes.
 
 The page `/game/3d/` shows the program between the two panels, as the first page does. The B panel has two drawings: the world from above and the world from the side. In each drawing, the line from the eye to the dot crosses the screen at the screen position of the dot.
 

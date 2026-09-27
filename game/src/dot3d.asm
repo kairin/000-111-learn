@@ -1,5 +1,6 @@
 ; A side: the second test. The same dot as in the first test, but the world now has depth.
-; The dot goes up and down (the sine) and also near and far (the cosine).
+; The dot goes up and down (the sine) and also from the back to the front.
+; The middle point of the curve is the center of the 3D space.
 ; The program draws a floor, the path in the air, and the footprint of the path on the floor.
 ; Then it moves a yellow dot along the path. A pole goes from the dot down to its shadow.
 ; A near dot is larger than a far dot.

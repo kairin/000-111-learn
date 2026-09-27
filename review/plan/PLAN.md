@@ -60,8 +60,8 @@ GitHub Actions does these steps for each push. If the check fails, the website d
 
 The owner asked for the same movement of the dot, but in a world with depth. The files are in `game/`, and the steps are in `game/README.md` ("The second test").
 
-1. **B side:** the same `sine.bin`. The cosine is the sine a quarter turn later.
-2. **A side:** `src/dot3d.asm` draws a floor and moves the dot in perspective, with a pole to its shadow. It is 1120 bytes and uses 8086 instructions only.
+1. **B side:** the same `sine.bin`. The curve starts at the back and ends at the front. Its middle point is the center of the 3D space.
+2. **A side:** `src/dot3d.asm` draws a floor and moves the dot in perspective, with a pole to its shadow. It is 1103 bytes and uses 8086 instructions only.
 3. **The check:** the B-side checker agrees with the A-side test on 256 of 256 points.
 4. **The website:** the page `/game/3d/`.
 

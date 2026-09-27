@@ -26,11 +26,12 @@ program check_3d
   close (unit)
 
   do i = 0, n - 1
-    ! The same steps as path_point: multiply, then keep the middle two bytes
-    ! (an arithmetic shift right by 8). The cosine is the sine 64 angles later.
-    x = 2 * (i - 128)
+    ! The same steps as path_point: X is 1.5 times (i - 128), rounded down.
+    ! Y: multiply, then keep the middle two bytes (an arithmetic shift right by 8).
+    ! Z goes from the back (128) to the front (-127).
+    x = (i - 128) + shifta(i - 128, 1)
     y = shifta(int(table(i)) * 64, 8)
-    z = shifta(int(table(modulo(i + 64, n))) * 128, 8)
+    z = 128 - i
     ! The same steps as project. Fortran and the 8086 both round a division toward zero.
     expected(1, i) = 160 + (x * screen_distance) / (z + eye_distance)
     expected(2, i) = horizon_row - ((y - eye_height) * screen_distance) / (z + eye_distance)
@@ -38,9 +39,9 @@ program check_3d
 
     ! The exact maths, with decimal-point numbers.
     theta = 2.0_real64 * pi * i / n
-    xr = 2.0_real64 * (i - 128)
+    xr = 1.5_real64 * (i - 128)
     yr = 64.0_real64 * sin(theta)
-    zr = 128.0_real64 * cos(theta)
+    zr = 128.0_real64 - i
     exact(1, i) = nint(160 + xr * screen_distance / (zr + eye_distance))
     exact(2, i) = nint(horizon_row - (yr - eye_height) * screen_distance / (zr + eye_distance))
     exact(3, i) = nint(horizon_row - (floor - eye_height) * screen_distance / (zr + eye_distance))

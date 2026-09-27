@@ -12,7 +12,7 @@ const partName = (id: string) => partsData.find((p) => p.id === id)?.name ?? id;
 const N = 256;
 const path = Array.from({ length: N }, (_, i) => {
 	const t = (2 * Math.PI * i) / N;
-	return { x: 2 * (i - 128), y: 64 * Math.sin(t), z: 128 * Math.cos(t) };
+	return { x: 1.5 * (i - 128), y: 64 * Math.sin(t), z: 128 - i };
 });
 const topPath = path.map((p) => `${p.x.toFixed(1)},${(-p.z).toFixed(1)}`).join(' ');
 const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(' ');
@@ -21,7 +21,7 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 <StarlightPage
 	frontmatter={{
 		title: 'The game: second test, the dot in 3D',
-		description: 'The dot of the first test gets depth. Fortran makes the same table, 8086 Assembly adds a third direction and a perspective division, and a check proves that the two sides agree.',
+		description: 'The dot of the first test gets depth. It moves from the back to the front. Fortran makes the same table, 8086 Assembly adds a third direction and a perspective division, and a check proves that the two sides agree.',
 		tableOfContents: false,
 		editUrl: false,
 	}}
@@ -30,8 +30,8 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 		<p class="lead">
 			In the <a href={`${base}/game/`}>first test</a>, the dot moved on a flat plane: left to right, and up and down.
 			This test gives the world a third direction: <strong>depth</strong>. The dot still goes up and down with the sine.
-			It now also goes near and far with the cosine. A near dot is larger, and a far dot comes nearer to the center of
-			the screen.
+			It now also moves from the back to the front. The curve starts far away and ends near you. Its middle point is
+			the center of the 3D space. A near dot is larger, and a far dot comes nearer to the center of the screen.
 		</p>
 
 		{game.built && info?.check3d ? (
@@ -68,7 +68,8 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 							<button type="button" id="btn-restart" class="ghost">Restart</button>
 						</div>
 						<p class="muted small">
-							Blue: the floor. Gray: the path in the air. Cyan: the footprint of the path on the floor. The light-gray
+							Blue: the floor. Gray: the path in the air, from the back to the front. Cyan: the footprint of the path on
+							the floor, a straight line through the center. The light-gray
 							pole goes from the dot down to its shadow (red), so you can see where the dot is in the depth.
 						</p>
 					</div>
@@ -97,7 +98,7 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 						</figure>
 						<figure class="view3d">
 							<figcaption class="small muted">From the side: the height and the depth</figcaption>
-							<svg viewBox="-470 -190 630 330" role="img" aria-label="The world from the side. The path is an oval. The line of sight from the eye to the dot crosses the screen at the screen y of the dot.">
+							<svg viewBox="-470 -190 630 330" role="img" aria-label="The world from the side. The path is the sine curve, from far to near. The line of sight from the eye to the dot crosses the screen at the screen y of the dot.">
 								<line x1="-128" y1="96" x2="128" y2="96" class="v-floor-line" />
 								<polyline points={sidePath} class="v-path" />
 								<line x1="-248" y1="-170" x2="-248" y2="29" class="v-screen" />
@@ -126,14 +127,14 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 		<ol class="steps-list">
 			<li>
 				<span class="pill side-b">B</span> <strong>The same table.</strong> The laboratory (<code>lab/sine_table.f90</code>)
-				makes no new file. The cosine of an angle is the sine of the angle a quarter turn later. Thus, the A side reads the
-				cosine from <code>sine.bin</code> at the angle plus 64.
+				makes no new file. The height of the dot is the sine, as in the first test.
 			</li>
 			<li>
 				<span class="pill side-a">A</span> <strong>A third direction.</strong> The routine <code>path_point</code>
 				(<code>src/path3d.inc</code>) gives three numbers for each angle: X (left and right), Y (up and down, the sine),
-				and Z (near and far, the cosine). Seen from the side, the path is an oval. Seen from the front, it is the curve of
-				the first test.
+				and Z (the depth: 128 at the back, down to -127 at the front). At the middle angle, 128, the point is X = 0,
+				Y = 0, Z = 0: the center of the 3D space. Seen from above, the path is a straight line from the back left to the
+				front right. Seen from the side, it is the sine curve.
 			</li>
 			<li>
 				<span class="pill side-a">A</span> <strong>The perspective.</strong> The routine <code>project</code> divides by
@@ -231,15 +232,13 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 
 		function aSide(i: number) {
 			const sine = table!.getInt16(i * 2, true);
-			const ci = (i + 64) & 255;
-			const cosine = table!.getInt16(ci * 2, true);
 			const y = (sine * 64) >> 8; // imul cx, then keep the middle two bytes of DX:AX
-			const z = (cosine * 128) >> 8;
-			const x = 2 * (i - 128);
+			const z = 128 - i; // mov cx, 128 · sub cx, si
+			const x = (i - 128) + ((i - 128) >> 1); // sub ax, 128 · mov dx, ax · sar dx, 1 · add ax, dx
 			const dot = project(x, y, z);
 			const shadow = project(x, FLOOR, z);
 			const size = z >= 43 ? 2 : z >= -43 ? 3 : 4;
-			return { i, ci, sine, cosine, x, y, z, ...dot, shadowY: shadow.sy, size, di: dot.sy * 320 + dot.sx };
+			return { i, sine, x, y, z, ...dot, shadowY: shadow.sy, size, di: dot.sy * 320 + dot.sx };
 		}
 
 		function row(code: string, result: string, note = '') {
@@ -253,7 +252,7 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 		function render(i: number) {
 			const a = points[i];
 			const theta = (2 * Math.PI * i) / 256;
-			const ex = { x: a.x, y: 64 * Math.sin(theta), z: 128 * Math.cos(theta) };
+			const ex = { x: 1.5 * (i - 128), y: 64 * Math.sin(theta), z: 128 - i };
 			const d = ex.z + EYE_DISTANCE;
 			const exX = 160 + (ex.x * SCREEN_DISTANCE) / d;
 			const exY = HORIZON_ROW - ((ex.y - EYE_HEIGHT) * SCREEN_DISTANCE) / d;
@@ -263,11 +262,9 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 				row('mov ax, [sine_table + bx]', `AX = ${a.sine}`, `the sine, at angle ${i}`),
 				row('imul cx (64)', `DX:AX = ${a.sine * 64}`, ''),
 				row('mov al, ah · mov ah, dl', `Y = ${a.y}`, 'divide by 256: keep the middle two bytes'),
-				row('add bx, 64 · and bx, 00FFh', `angle ${a.ci}`, 'a quarter turn later'),
-				row('mov ax, [sine_table + bx]', `AX = ${a.cosine}`, 'the cosine'),
-				row('imul cx (128)', `DX:AX = ${a.cosine * 128}`, 'too large for AX alone'),
-				row('mov al, ah · mov ah, dl', `Z = ${a.z}`, 'the depth'),
-				row('sub ax, 128 · shl ax, 1', `X = ${a.x}`, 'left and right'),
+				row('mov cx, 128 · sub cx, si', `Z = ${a.z}`, 'the depth: from the back to the front'),
+				row('sub ax, 128', `AX = ${i - 128}`, ''),
+				row('mov dx, ax · sar dx, 1 · add ax, dx', `X = ${a.x}`, 'left and right: 1.5 times'),
 				row('add cx, 448', `CX = ${a.distance}`, 'the distance from the eye'),
 				row('imul dx (200)', `DX:AX = ${a.x * 200}`, ''),
 				row('idiv cx · add ax, 160', `x = ${a.sx}`, 'the screen column'),
@@ -276,14 +273,12 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 				row('project, with Y = -96', `y = ${a.shadowY}`, 'the row of the shadow'),
 				row('call plot (DL = 14)', `A000:${hex(a.di)}`, `a yellow square, ${a.size} × ${a.size} (${depth})`),
 			].join('');
-			aBytes!.innerHTML =
-				`Bytes ${i * 2}–${i * 2 + 1} (sine) and ${a.ci * 2}–${a.ci * 2 + 1} (cosine) of <code>sine.bin</code>: ` +
-				`<code>${hex(a.sine, 2)} ${hex(a.sine >> 8, 2)}</code> and <code>${hex(a.cosine, 2)} ${hex(a.cosine >> 8, 2)}</code>.`;
+			aBytes!.innerHTML = `Bytes ${i * 2} and ${i * 2 + 1} of <code>sine.bin</code>: <code>${hex(a.sine, 2)} ${hex(a.sine >> 8, 2)}</code> (the low byte comes first).`;
 			bSteps!.innerHTML = [
 				row('θ = 2π · i / 256', `${((360 * i) / 256).toFixed(2)}°`, 'the angle'),
-				row('X = 2 · (i − 128)', `${ex.x}`, 'left and right'),
+				row('X = 1.5 · (i − 128)', `${ex.x}`, `A side: ${a.x}`),
 				row('Y = 64 · sin(θ)', `${ex.y.toFixed(3)}`, `A side: ${a.y}`),
-				row('Z = 128 · cos(θ)', `${ex.z.toFixed(3)}`, `A side: ${a.z}`),
+				row('Z = 128 − i', `${ex.z}`, 'from the back (128) to the front'),
 				row('d = Z + 448', `${d.toFixed(3)}`, 'the distance from the eye'),
 				row('x = 160 + 200 · X / d', `${exX.toFixed(3)}`, `A side: ${a.sx}, difference ${Math.abs(a.sx - exX).toFixed(3)} pixel`),
 				row('y = 50 − 200 · (Y − 120) / d', `${exY.toFixed(3)}`, `A side: ${a.sy}, difference ${Math.abs(a.sy - exY).toFixed(3)} pixel`),

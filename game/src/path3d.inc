@@ -19,11 +19,12 @@ HORIZON_ROW     equ 50
 FLOOR           equ -96         ; the Y of the floor
 
 ; path_point: the 3D point of the path for one angle.
-; The height is the sine (as in the first test). The depth is the cosine:
-; the sine of the angle a quarter turn (64 angles) later.
+; The height is the sine, as in the first test. The path starts at the back (far)
+; and ends at the front (near). The middle angle (128) is the center of the world:
+; X = 0, Y = 0, Z = 0.
 ;
 ; In:  SI = angle number, 0 to 255
-; Out: AX = X (-256 to 254), BX = Y (-64 to 64), CX = Z (-128 to 128)
+; Out: AX = X (-192 to 190), BX = Y (-64 to 64), CX = Z (128 to -127)
 ; Also changes: DX
 ; Needs: the label sine_table (256 words from the B-side file sine.bin)
 path_point:
@@ -34,23 +35,16 @@ path_point:
     imul cx                     ; DX:AX = sine * 64
     mov al, ah                  ; divide DX:AX by 256: keep the middle two bytes
     mov ah, dl
-    push ax                     ; keep Y
+    mov bx, ax                  ; BX = Y
 
-    mov bx, si
-    add bx, 64                  ; a quarter turn later
-    and bx, 00FFh               ; after angle 255, start again at 0
-    shl bx, 1
-    mov ax, [sine_table + bx]   ; the cosine
-    mov cx, 128                 ; the depth: 128 near and 128 far
-    imul cx                     ; DX:AX = cosine * 128 (too large for AX alone)
-    mov al, ah                  ; divide DX:AX by 256
-    mov ah, dl
-    mov cx, ax                  ; CX = Z
+    mov cx, 128
+    sub cx, si                  ; CX = Z = 128 - angle: from the back to the front
 
-    pop bx                      ; BX = Y
     mov ax, si
-    sub ax, 128
-    shl ax, 1                   ; AX = X = 2 * (angle - 128)
+    sub ax, 128                 ; AX = angle - 128
+    mov dx, ax
+    sar dx, 1                   ; DX = half of it (rounded down)
+    add ax, dx                  ; AX = X = 1.5 * (angle - 128)
     ret
 
 ; project: change a 3D point into a screen position (the perspective).
