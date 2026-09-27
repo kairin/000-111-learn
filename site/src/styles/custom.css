@@ -201,3 +201,31 @@ table.compare td { font-size: var(--sl-text-sm); vertical-align: top; }
 .side-photo-small { display: block; width: 240px; height: auto; border-radius: 0.4rem; box-shadow: 0 4px 14px rgb(0 0 0 / 0.3); }
 @media (max-width: 40rem) { .side-photo-link { float: none; margin: 0 0 1rem; } .side-photo-small { width: 100%; } }
 .sl-markdown-content img[src*='-side-cassette'] { max-width: 36rem; width: 100%; border-radius: 0.5rem; box-shadow: 0 4px 16px rgb(0 0 0 / 0.3); }
+
+/* ---------- the game page: A and B working together ---------- */
+body:has(.duet) { --sl-content-width: 90rem; }
+.duet { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr); gap: 1rem; align-items: start; margin-top: 1rem; }
+.sl-markdown-content .duet > *, .sl-markdown-content .duet-panel > *, .sl-markdown-content .duet-screen > * { margin-top: 0; }
+@media (max-width: 72rem) { .duet { grid-template-columns: 1fr; } .duet-screen { order: -1; } }
+.duet-panel { border: 1px solid var(--side); border-top: 4px solid var(--side); border-radius: var(--rt-radius); padding: 0.75rem; background: linear-gradient(180deg, var(--side-low), transparent 12rem); }
+.duet-panel header { display: grid; gap: 0.3rem; margin-bottom: 0.6rem; }
+.duet-panel h3 { font-size: var(--sl-text-base); color: var(--side); margin: 0; }
+.duet-photo { width: 100%; max-width: 12rem; height: auto; border-radius: 0.35rem; }
+.duet-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.25rem; font-size: var(--sl-text-xs); }
+.duet-steps li { display: grid; grid-template-columns: 1fr auto; column-gap: 0.5rem; padding: 0.3rem 0.45rem; border-radius: 0.3rem; background: var(--sl-color-bg-nav); border-left: 3px solid var(--side); margin: 0; }
+.duet-steps code { font-size: var(--sl-text-xs); background: none; padding: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.duet-steps .val { font-family: var(--__sl-font-mono); font-weight: 700; color: var(--side); white-space: nowrap; }
+.duet-steps .note { grid-column: 1 / -1; color: var(--sl-color-gray-3); font-size: 0.7rem; }
+.duet-screen .dos-screen { max-width: none; margin-top: 0; }
+.duet-now { font-family: var(--__sl-font-mono); font-size: var(--sl-text-sm); text-align: center; margin: 0.4rem 0; }
+.duet-controls { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.duet-controls .spacer { flex: 1; }
+.duet-controls button { font: inherit; font-size: var(--sl-text-xs); padding: 0.2rem 0.55rem; border-radius: 0.3rem; cursor: pointer;
+	border: 1px solid var(--sl-color-gray-5); background: var(--sl-color-black); color: var(--sl-color-white); }
+.duet-controls button[aria-pressed='true'] { background: var(--sl-color-accent); color: var(--sl-color-black); border-color: var(--sl-color-accent); }
+.duet-circle { width: 100%; max-width: 13rem; display: block; margin: 0 auto 0.6rem; }
+.duet-circle .c-ring { fill: none; stroke: var(--sl-color-gray-4); stroke-width: 2; }
+.duet-circle .c-axis { stroke: var(--sl-color-gray-5); stroke-width: 1; }
+.duet-circle .c-radius { stroke: var(--side-b); stroke-width: 3; }
+.duet-circle .c-sine { stroke: #f5d000; stroke-width: 4; }
+.duet-circle .c-point { fill: #f5d000; }
