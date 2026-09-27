@@ -143,12 +143,12 @@ What the site has:
 2. Click **Export status.json** and save it as `review/findings/status.json`.
 3. Run `uv run site/build.py`, then commit and push. The site updates, and git history becomes the audit trail.
 
-## Publishing to GitHub Pages (not done yet)
+## Publishing to GitHub Pages
 
-`000-111-learn/` is not a git repository yet. To publish:
-1. `git init`, commit, and push to a new GitHub repository. Free GitHub Pages requires a **public** repository, so the review and the Gemini documents become public.
-2. In the repository, go to **Settings → Pages → Source** and choose **GitHub Actions**.
-3. Every push that changes `serve/` runs `.github/workflows/pages.yml`, which publishes `serve/` as-is.
+- **Repository (public):** https://github.com/kairin/000-111-learn
+- **Live site:** https://kairin.github.io/000-111-learn/
+
+Pages is set to the **GitHub Actions** source. Every push to `main` that changes `serve/` runs `.github/workflows/pages.yml`, which publishes `serve/` as-is. The site is not built in CI, so run `uv run site/build.py` and commit `serve/` before pushing.
 
 ## Status and next steps
 
@@ -156,7 +156,7 @@ What the site has:
 - [x] Adversarial review, pass 1 (desk review)
 - [x] Extract findings to JSON and map them onto segments (61 findings)
 - [x] Build the review-tracker website into `serve/`
-- [ ] Create the GitHub repository and enable Pages
+- [x] Create the public GitHub repository and enable Pages
 - [ ] **Decide the primary goal: career skill or retro game.** This decides which document is worth revising.
 - [ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
@@ -177,3 +177,4 @@ What the site has:
 | 2026-09-27 | Documented process and status | `README.md` |
 | 2026-09-27 | Extracted 61 findings to JSON; mapped onto segments; comparison report | `findings/` |
 | 2026-09-27 | Built the review-tracker static site and GitHub Pages workflow | `site/`, `serve/`, `.github/` |
+| 2026-09-27 | Published public repo and enabled GitHub Pages (Actions) | https://kairin.github.io/000-111-learn/ |
