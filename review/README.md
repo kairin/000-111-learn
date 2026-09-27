@@ -36,8 +36,8 @@ The four documents live in `segments/`.
 │       ├── 00-SUMMARY.md
 │       └── 01-…review.md … 04-…review.md
 ├── site/                            ← website generator (build.py + assets/)
-├── serve/                           ← (generated) static website for GitHub Pages
-└── .github/workflows/pages.yml      ← deploys serve/ to GitHub Pages
+├── serve/                           ← (generated) static website; copied to the gh-pages branch on push
+└── .githooks/                       ← pre-commit: regenerate + stage; pre-push: publish gh-pages
 ```
 
 Files marked **(generated)** are overwritten on every run, so don't hand-edit them.
@@ -141,14 +141,30 @@ What the site has:
 **How tracking works on a static site.** GitHub Pages can't save anything, so status changes follow a commit loop:
 1. On the Findings page, change statuses and notes. They are saved in your browser only.
 2. Click **Export status.json** and save it as `review/findings/status.json`.
-3. Run `uv run site/build.py`, then commit and push. The site updates, and git history becomes the audit trail.
+3. `git add review/findings/status.json && git commit && git push`. The hooks rebuild and publish the site, and git history becomes the audit trail.
 
-## Publishing to GitHub Pages
+## Publishing to GitHub Pages (local build, no Actions)
 
 - **Repository (public):** https://github.com/kairin/000-111-learn
 - **Live site:** https://kairin.github.io/000-111-learn/
 
-Pages is set to the **GitHub Actions** source. Every push to `main` that changes `serve/` runs `.github/workflows/pages.yml`, which publishes `serve/` as-is. The site is not built in CI, so run `uv run site/build.py` and commit `serve/` before pushing.
+Nothing is built on GitHub, and the repository has no Actions workflow. Two local git hooks in `.githooks/` do the work:
+
+| Hook | Runs on | What it does |
+|---|---|---|
+| `pre-commit` | every `git commit` | Runs `site/regenerate.sh`, which takes a snapshot of the **staged** files, re-splits the segments, re-maps the findings, rebuilds `serve/`, and **stages the regenerated files into the same commit**. If the build fails, the commit is aborted. |
+| `pre-push` | `git push` of `main` | Copies the pushed commit's `serve/` folder into a new commit on the **`gh-pages`** branch and pushes `gh-pages` too. It skips this if the site is unchanged. |
+
+GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub still runs its own built-in publish step after `gh-pages` changes; every Pages site gets this, and it can't be disabled. That step only copies the files, because `.nojekyll` switches off Jekyll processing.
+
+**Daily use:** edit `review/…`, then `git add … && git commit && git push`. That's all.
+
+**Rules:**
+- **New clone:** hooks aren't cloned. Enable them once with `git config core.hooksPath .githooks`. You also need `uv`, `python3` and `rsync`.
+- **Don't edit generated files by hand** (`serve/`, segment files, `manifest.json`, `segment-map.md`). Each commit overwrites them.
+- The build is **deterministic**: there are no timestamps and `markdown` is pinned. Commits that don't touch `review/` or `site/` therefore produce no site changes.
+- `git commit --no-verify` skips regeneration, and the site can then lag behind. Run `site/regenerate.sh` and commit to catch up.
+- **Never commit to `gh-pages` by hand.** The pre-push hook owns it.
 
 ## Status and next steps
 
@@ -157,6 +173,7 @@ Pages is set to the **GitHub Actions** source. Every push to `main` that changes
 - [x] Extract findings to JSON and map them onto segments (61 findings)
 - [x] Build the review-tracker website into `serve/`
 - [x] Create the public GitHub repository and enable Pages
+- [x] Replace the Actions deployment with local hooks and a `gh-pages` branch
 - [ ] **Decide the primary goal: career skill or retro game.** This decides which document is worth revising.
 - [ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
@@ -178,3 +195,4 @@ Pages is set to the **GitHub Actions** source. Every push to `main` that changes
 | 2026-09-27 | Extracted 61 findings to JSON; mapped onto segments; comparison report | `findings/` |
 | 2026-09-27 | Built the review-tracker static site and GitHub Pages workflow | `site/`, `serve/`, `.github/` |
 | 2026-09-27 | Published public repo and enabled GitHub Pages (Actions) | https://kairin.github.io/000-111-learn/ |
+| 2026-09-27 | Removed the Actions workflow; the site is now built locally by git hooks and served from `gh-pages` | `.githooks/`, `site/regenerate.sh` |

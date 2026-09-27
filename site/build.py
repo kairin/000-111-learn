@@ -1,10 +1,13 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["markdown>=3.5"]
+# dependencies = ["markdown==3.11"]  # pinned: output must be byte-identical for identical input
 # ///
 """Build the review-tracking static site from ../review into ../serve.
 
-Run:  uv run site/build.py        (from the 000-111-learn folder)
+Run:  uv run site/build.py [--out DIR]   (default DIR: <repo>/serve)
+
+The output is deterministic (no timestamps, sorted inputs), so rebuilding unchanged
+inputs produces no git diff. The pre-commit hook (.githooks/pre-commit) relies on this.
 
 Everything under serve/ is regenerated on each run (a CNAME file is kept).
 Inputs, all under review/:
@@ -21,8 +24,8 @@ import html
 import json
 import os
 import re
+import argparse
 import shutil
-from datetime import datetime
 from pathlib import Path
 
 import markdown
@@ -60,7 +63,7 @@ def load_findings():
 def build_route_map():
     """source path (absolute) -> output path (relative to OUT)."""
     routes = {}
-    for src in REVIEW.rglob("*"):
+    for src in sorted(REVIEW.rglob("*")):
         if not src.is_file():
             continue
         rel = src.relative_to(REVIEW)
@@ -75,7 +78,7 @@ def build_route_map():
         elif src.suffix in (".html", ".json"):
             routes[src] = rel
     # directories of segment files -> segment index with anchor
-    for d in (REVIEW / "segments").iterdir():
+    for d in sorted((REVIEW / "segments").iterdir()):
         if d.is_dir():
             routes[d] = Path("segments/index.html")
     return routes
@@ -188,7 +191,7 @@ def page(out, title, body, *, crumbs=None, wide=False):
 {crumb_html}
 {body}
 </main>
-<footer class="site">Built {datetime.now().strftime("%Y-%m-%d %H:%M")} from <code>review/</code> by <code>site/build.py</code>.</footer>
+<footer class="site">Generated from <code>review/</code> by <code>site/build.py</code>.</footer>
 <script src="{root}assets/search-index.js"></script>
 <script src="{root}assets/app.js"></script>
 </body>
@@ -382,6 +385,10 @@ def slug(s):
 
 # ------------------------------------------------------------------ main
 def main():
+    global OUT
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--out", type=Path, default=OUT, help="output folder (default: %(default)s)")
+    OUT = ap.parse_args().out.resolve()
     if OUT.exists():
         for child in OUT.iterdir():
             if child.name in ("CNAME",):

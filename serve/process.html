@@ -84,8 +84,8 @@
 │       ├── 00-SUMMARY.md
 │       └── 01-…review.md … 04-…review.md
 ├── site/                            ← website generator (build.py + assets/)
-├── serve/                           ← (generated) static website for GitHub Pages
-└── .github/workflows/pages.yml      ← deploys serve/ to GitHub Pages
+├── serve/                           ← (generated) static website; copied to the gh-pages branch on push
+└── .githooks/                       ← pre-commit: regenerate + stage; pre-push: publish gh-pages
 </code></pre>
 <p>Files marked <strong>(generated)</strong> are overwritten on every run, so don't hand-edit them.</p>
 <h2 id="step-1-segmentation-segments">Step 1: Segmentation (<code>segments/</code>)</h2>
@@ -260,13 +260,42 @@
 <p><strong>How tracking works on a static site.</strong> GitHub Pages can't save anything, so status changes follow a commit loop:
 1. On the Findings page, change statuses and notes. They are saved in your browser only.
 2. Click <strong>Export status.json</strong> and save it as <code>review/findings/status.json</code>.
-3. Run <code>uv run site/build.py</code>, then commit and push. The site updates, and git history becomes the audit trail.</p>
-<h2 id="publishing-to-github-pages">Publishing to GitHub Pages</h2>
+3. <code>git add review/findings/status.json &amp;&amp; git commit &amp;&amp; git push</code>. The hooks rebuild and publish the site, and git history becomes the audit trail.</p>
+<h2 id="publishing-to-github-pages-local-build-no-actions">Publishing to GitHub Pages (local build, no Actions)</h2>
 <ul>
 <li><strong>Repository (public):</strong> https://github.com/kairin/000-111-learn</li>
 <li><strong>Live site:</strong> https://kairin.github.io/000-111-learn/</li>
 </ul>
-<p>Pages is set to the <strong>GitHub Actions</strong> source. Every push to <code>main</code> that changes <code>serve/</code> runs <code>.github/workflows/pages.yml</code>, which publishes <code>serve/</code> as-is. The site is not built in CI, so run <code>uv run site/build.py</code> and commit <code>serve/</code> before pushing.</p>
+<p>Nothing is built on GitHub, and the repository has no Actions workflow. Two local git hooks in <code>.githooks/</code> do the work:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>Runs on</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pre-commit</code></td>
+<td>every <code>git commit</code></td>
+<td>Runs <code>site/regenerate.sh</code>, which takes a snapshot of the <strong>staged</strong> files, re-splits the segments, re-maps the findings, rebuilds <code>serve/</code>, and <strong>stages the regenerated files into the same commit</strong>. If the build fails, the commit is aborted.</td>
+</tr>
+<tr>
+<td><code>pre-push</code></td>
+<td><code>git push</code> of <code>main</code></td>
+<td>Copies the pushed commit's <code>serve/</code> folder into a new commit on the <strong><code>gh-pages</code></strong> branch and pushes <code>gh-pages</code> too. It skips this if the site is unchanged.</td>
+</tr>
+</tbody>
+</table></div>
+<p>GitHub Pages is set to <strong>Deploy from a branch: <code>gh-pages</code> / (root)</strong>. GitHub still runs its own built-in publish step after <code>gh-pages</code> changes; every Pages site gets this, and it can't be disabled. That step only copies the files, because <code>.nojekyll</code> switches off Jekyll processing.</p>
+<p><strong>Daily use:</strong> edit <code>review/…</code>, then <code>git add … &amp;&amp; git commit &amp;&amp; git push</code>. That's all.</p>
+<p><strong>Rules:</strong>
+- <strong>New clone:</strong> hooks aren't cloned. Enable them once with <code>git config core.hooksPath .githooks</code>. You also need <code>uv</code>, <code>python3</code> and <code>rsync</code>.
+- <strong>Don't edit generated files by hand</strong> (<code>serve/</code>, segment files, <code>manifest.json</code>, <code>segment-map.md</code>). Each commit overwrites them.
+- The build is <strong>deterministic</strong>: there are no timestamps and <code>markdown</code> is pinned. Commits that don't touch <code>review/</code> or <code>site/</code> therefore produce no site changes.
+- <code>git commit --no-verify</code> skips regeneration, and the site can then lag behind. Run <code>site/regenerate.sh</code> and commit to catch up.
+- <strong>Never commit to <code>gh-pages</code> by hand.</strong> The pre-push hook owns it.</p>
 <h2 id="status-and-next-steps">Status and next steps</h2>
 <ul>
 <li>[x] Split the documents into segments (56)</li>
@@ -274,6 +303,7 @@
 <li>[x] Extract findings to JSON and map them onto segments (61 findings)</li>
 <li>[x] Build the review-tracker website into <code>serve/</code></li>
 <li>[x] Create the public GitHub repository and enable Pages</li>
+<li>[x] Replace the Actions deployment with local hooks and a <code>gh-pages</code> branch</li>
 <li>[ ] <strong>Decide the primary goal: career skill or retro game.</strong> This decides which document is worth revising.</li>
 <li>[ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):</li>
 <li>the LANL Fortran report,</li>
@@ -329,10 +359,15 @@
 <td>Published public repo and enabled GitHub Pages (Actions)</td>
 <td>https://kairin.github.io/000-111-learn/</td>
 </tr>
+<tr>
+<td>2026-09-27</td>
+<td>Removed the Actions workflow; the site is now built locally by git hooks and served from <code>gh-pages</code></td>
+<td><code>.githooks/</code>, <code>site/regenerate.sh</code></td>
+</tr>
 </tbody>
 </table></div></article>
 </main>
-<footer class="site">Built 2026-09-27 16:11 from <code>review/</code> by <code>site/build.py</code>.</footer>
+<footer class="site">Generated from <code>review/</code> by <code>site/build.py</code>.</footer>
 <script src="./assets/search-index.js"></script>
 <script src="./assets/app.js"></script>
 </body>
