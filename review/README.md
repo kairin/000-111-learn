@@ -243,3 +243,4 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 | 2026-09-27 | The A-side cassette photo on all A-side pages and in the link preview. Pull requests now run the build and the game check | `learn/images/`, `site/`, `.github/` |
 | 2026-09-27 | The B-side cassette photo on all B-side pages. The link preview shows the two cassettes | `learn/images/`, `site/` |
 | 2026-09-27 | Split and reviewed eight video guides (documents 05 to 12). Each part shows its source video and moment | `segments/`, `adversarial-review-pass1/`, `findings/` |
+| 2026-09-27 | Game page: A and B panels in step with the dot; program keys for speed, pause and step | `game/`, `site/` |

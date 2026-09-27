@@ -9,6 +9,7 @@
  * The output folders are git-ignored. On a computer without the game toolchain, the site still builds:
  * the game page then says that the game build is missing.
  */
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -53,6 +54,11 @@ let info = null;
 if (fs.existsSync(path.join(BUILD, 'game.json'))) {
 	fs.cpSync(BUILD, GAME_OUT, { recursive: true });
 	info = readJson(path.join(BUILD, 'game.json'));
+	// A fingerprint of the game files. The page adds it to their addresses (?v=...), so a browser
+	// never plays an older copy that it keeps in its cache or in the js-dos local storage.
+	const hash = crypto.createHash('sha256');
+	for (const f of ['spike.jsdos', 'sine.bin']) hash.update(fs.readFileSync(path.join(BUILD, f)));
+	info.version = hash.digest('hex').slice(0, 12);
 }
 
 // A small page that holds only the player. The game page shows it in an iframe,
@@ -74,7 +80,7 @@ if (info) {
 <script src="${BASE}/js-dos/js-dos.js"></script>
 <script>
 Dos(document.getElementById("dos"), {
-  url: "${BASE}/game/spike.jsdos",
+  url: "${BASE}/game/spike.jsdos?v=${info.version}",
   pathPrefix: "${BASE}/js-dos/emulators/",
   autoStart: true,
   kiosk: true,
