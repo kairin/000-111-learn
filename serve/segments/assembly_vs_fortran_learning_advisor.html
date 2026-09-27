@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly vs. Modern Fortran: Strategic Learning Advisor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#f8fafc',
+                            card: '#ffffff',
+                            navy: '#0f172a',
+                            slate: '#334155',
+                            assembly: '#2563eb', // Indigo Blue
+                            fortran: '#0d9488',  // Emerald Teal
+                            amber: '#d97706'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .tab-active {
+            border-bottom: 3px solid #0f172a;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        .quiz-option:hover {
+            border-color: #0d9488;
+            background-color: #f0fdf4;
+        }
+        .quiz-option.selected {
+            border-color: #0d9488;
+            background-color: #ccfbf1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Chosen Palette: Warm Neutral & Slate Harmony -->
+    <!-- Application Structure Plan: The application is designed as an interactive strategic advisor tailored for software engineers evaluating Assembly vs Modern Fortran. It includes:
+        1. Executive Recommendation Summary: A quick direct answer based on typical profiles.
+        2. Diagnostic Recommendation Engine: An interactive 4-question quiz calculating personal affinity score based on career targets, timeline, background, and output goals.
+        3. 12-Week Curriculum Explorer: Side-by-side interactive roadmap allowing users to step through weekly milestones (Weeks 1-4, 5-8, 9-12).
+        4. Pedagogical & Technical Deep Dive: Interactive comparative cards contrasting hardware literacy vs array-oriented abstraction.
+        5. Labor Market & Toolchain Analytics: Dynamic Chart.js visualizations for compensation, market distribution, and ergonomics comparison.
+        6. Assembly ISA Decision Matrix: Modular exploration of x86-64, AArch64, and RISC-V.
+        This flow transforms a static comparative report into an active decision-making utility. -->
+    <!-- Visualization & Content Choices: 
+        - Quiz Match Matrix -> HTML/JS State -> Dynamic Recommendation Card + Match % Gauge -> Interactive diagnostic guidance.
+        - 12-Week Milestones -> Tabbed Interactive Timeline -> Clear comparison of achievable outputs.
+        - Market & Compensation -> Chart.js Bar & Radar Chart -> Visualizing career metrics without SVG/Mermaid.
+        - Toolchain Ergonomics -> Interactive Filter Table -> Clear overview of friction factors.
+        - ISA Tradeoffs -> Interactive Card Selector -> Resolves Assembly-specific choice. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-slate-900 text-white font-mono font-bold flex items-center justify-center rounded text-sm">
+                        &gt;_
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-900 leading-tight">Language Choice Advisor</h1>
+                        <p class="text-xs text-slate-500">Assembly vs. Modern Fortran (90-Day Track)</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                    <a href="#wizard" class="hover:text-slate-900 transition">Decision Quiz</a>
+                    <a href="#roadmap" class="hover:text-slate-900 transition">12-Week Roadmap</a>
+                    <a href="#pedagogy" class="hover:text-slate-900 transition">Pedagogical Yield</a>
+                    <a href="#market" class="hover:text-slate-900 transition">Market & Ecosystem</a>
+                    <a href="#isa" class="hover:text-slate-900 transition">ISA Matrix</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Intro Section / Executive Summary -->
+        <section class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+            <div class="max-w-3xl">
+                <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 font-semibold text-xs rounded-full uppercase tracking-wider mb-3">
+                    Strategic Executive Summary
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+                    Which language should you learn for the rest of the year?
+                </h2>
+                <p class="text-slate-600 leading-relaxed mb-6">
+                    With three months remaining, your choice depends on whether your priority is <strong class="text-slate-900">hardware mechanics & security analysis</strong> or <strong class="text-slate-900">shipping functional high-performance mathematical software</strong>.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-blue-900 text-lg">Pick Assembly if...</span>
+                            <span class="text-xs font-mono bg-blue-200 text-blue-800 px-2 py-0.5 rounded">Hardware Level</span>
+                        </div>
+                        <ul class="text-sm text-blue-900 space-y-2">
+                            <li class="flex items-start">
+                                <span class="mr-2 text-blue-600">•</span>
+                                <span>You want to demystify microarchitecture, registers, and memory topology.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-blue-600">•</span>
+                                <span>You work in cybersecurity, reverse engineering, kernel, or firmware.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-blue-600">•</span>
+                                <span><strong>Target 90-Day Outcome:</strong> Reading/auditing compiled binaries in Ghidra & Compiler Explorer.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-teal-900 text-lg">Pick Modern Fortran if...</span>
+                            <span class="text-xs font-mono bg-teal-200 text-teal-800 px-2 py-0.5 rounded">High Math Level</span>
+                        </div>
+                        <ul class="text-sm text-teal-900 space-y-2">
+                            <li class="flex items-start">
+                                <span class="mr-2 text-teal-600">•</span>
+                                <span>You want to build complete, multi-threaded scientific simulations fast.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-teal-600">•</span>
+                                <span>You work in STEM, aerospace, weather/climate modeling, or national labs.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-teal-600">•</span>
+                                <span><strong>Target 90-Day Outcome:</strong> Architecting a parallel PDE solver or matrix simulation engine from scratch.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Quiz Section -->
+        <section id="wizard" class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-white mb-2">Interactive Recommendation Engine</h3>
+                <p class="text-slate-400 text-sm">Answer 4 quick questions to compute your personalized affinity match score.</p>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Question 1 -->
+                <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                    <p class="text-sm font-semibold text-slate-300 mb-3">1. What is your primary educational or career objective?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q1', 'assembly')" class="quiz-q1 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            A. Vulnerability research, reverse engineering, or firmware development.
+                        </button>
+                        <button onclick="setAnswer('q1', 'fortran')" class="quiz-q1 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            B. High-Performance Computing (HPC), mathematical physics, or climate modeling.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                    <p class="text-sm font-semibold text-slate-300 mb-3">2. What type of project do you expect to build by the end of 90 days?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q2', 'assembly')" class="quiz-q2 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            A. Auditing compiled C code, analyzing disassembly, or micro-optimizing assembly loops.
+                        </button>
+                        <button onclick="setAnswer('q2', 'fortran')" class="quiz-q2 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            B. A standalone, parallelized simulation program (e.g., fluid dynamics or matrix engine).
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                    <p class="text-sm font-semibold text-slate-300 mb-3">3. How do you prefer to interact with hardware and memory?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q3', 'assembly')" class="quiz-q3 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            A. Direct register control, stack frames, physical pointers, and byte alignment.
+                        </button>
+                        <button onclick="setAnswer('q3', 'fortran')" class="quiz-q3 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            B. High-level multidimensional arrays, non-aliasing parameters, and built-in SIMD.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                    <p class="text-sm font-semibold text-slate-300 mb-3">4. What toolchain environment fits your current workflow?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q4', 'assembly')" class="quiz-q4 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            A. Disassemblers (Ghidra), low-level debuggers (GDB), and online syntax translators.
+                        </button>
+                        <button onclick="setAnswer('q4', 'fortran')" class="quiz-q4 quiz-option border border-slate-600 rounded-lg p-3 text-left text-sm font-medium text-slate-200 transition">
+                            B. Package managers (`fpm`), modern language servers (`fortls`), and Conda environments.
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Output Dashboard -->
+            <div id="quiz-result" class="mt-6 p-6 bg-slate-800 rounded-xl border border-slate-700 hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="w-full md:w-1/2">
+                        <h4 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-1">Recommendation Output</h4>
+                        <div id="recommendation-title" class="text-2xl font-bold text-white mb-2">Select all options above</div>
+                        <p id="recommendation-desc" class="text-sm text-slate-300">Complete the diagnostic questions to unlock your customized learning strategy.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 flex flex-col items-center">
+                        <div class="w-full space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span class="text-blue-400">Assembly Affinity</span>
+                                    <span id="score-assembly" class="text-blue-400 font-bold">50%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden">
+                                    <div id="bar-assembly" class="bg-blue-500 h-full transition-all duration-500" style="width: 50%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span class="text-teal-400">Modern Fortran Affinity</span>
+                                    <span id="score-fortran" class="text-teal-400 font-bold">50%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden">
+                                    <div id="bar-fortran" class="bg-teal-500 h-full transition-all duration-500" style="width: 50%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12-Week Roadmap Explorer -->
+        <section id="roadmap" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">12-Week Acquisition Roadmap & Milestones</h3>
+                    <p class="text-slate-500 text-sm">Compare developmental phases across a 90-day learning trajectory.</p>
+                </div>
+                <div class="mt-4 md:mt-0 inline-flex p-1 bg-slate-100 rounded-lg">
+                    <button id="btn-phase-1" onclick="switchPhase(1)" class="px-3 py-1.5 text-xs font-medium rounded-md bg-white text-slate-900 shadow-sm">Weeks 1–4</button>
+                    <button id="btn-phase-2" onclick="switchPhase(2)" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-600 hover:text-slate-900">Weeks 5–8</button>
+                    <button id="btn-phase-3" onclick="switchPhase(3)" class="px-3 py-1.5 text-xs font-medium rounded-md text-slate-600 hover:text-slate-900">Weeks 9–12</button>
+                </div>
+            </div>
+
+            <!-- Content Grid for Phases -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Assembly Track Card -->
+                <div class="border border-blue-200 bg-blue-50/30 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-blue-900 font-mono text-sm">Assembly Language Track</span>
+                        <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-full">Low-Level Floor</span>
+                    </div>
+                    <div id="assembly-roadmap-content" class="space-y-3">
+                        <!-- Dynamic Content Inserted by JS -->
+                    </div>
+                </div>
+
+                <!-- Fortran Track Card -->
+                <div class="border border-teal-200 bg-teal-50/30 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-teal-900 font-mono text-sm">Modern Fortran Track</span>
+                        <span class="text-xs bg-teal-100 text-teal-800 font-semibold px-2.5 py-1 rounded-full">High Math Level</span>
+                    </div>
+                    <div id="fortran-roadmap-content" class="space-y-3">
+                        <!-- Dynamic Content Inserted by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attainable Milestone Comparison -->
+            <div class="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">End-of-Quarter Attainable Milestone Comparison</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-start space-x-2">
+                        <span class="text-blue-600 font-bold">Assembly:</span>
+                        <span class="text-slate-700">Reading and auditing decompiled binaries, mapping disassembled blocks to high-level code, and identifying micro-optimization bottlenecks.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                        <span class="text-teal-600 font-bold">Modern Fortran:</span>
+                        <span class="text-slate-700">Architecting and running an end-to-end, parallelized partial differential equation solver or matrix simulation engine from scratch.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pedagogical Dividend Section -->
+        <section id="pedagogy" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div>
+                <h3 class="text-xl font-bold text-slate-900">Pedagogical Yield: Mental Models & Core Dividends</h3>
+                <p class="text-slate-500 text-sm">How learning each language permanently shapes your software engineering capabilities.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Assembly Dividend Card -->
+                <div class="border border-slate-200 rounded-xl p-6 space-y-4 hover:border-blue-300 transition">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">
+                            CPU
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Hardware Transparency</h4>
+                            <p class="text-xs text-slate-500">Unmasking physical machine mechanics</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-2.5">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">1.</span>
+                            <span><strong>Concrete Memory Topology:</strong> Replaces lexical scoping with stack frames, register allocation, pointer displacements, and cache alignment.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">2.</span>
+                            <span><strong>Compiler Lowering Visibility:</strong> Observe loop unrolling, AVX vectorization, and register spills directly in generated disassembly.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">3.</span>
+                            <span><strong>System ABI Contracts:</strong> Understand calling conventions, interrupts, system calls, and stack preservation rules.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fortran Dividend Card -->
+                <div class="border border-slate-200 rounded-xl p-6 space-y-4 hover:border-teal-300 transition">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">
+                            MAT
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Numerical Abstraction</h4>
+                            <p class="text-xs text-slate-500">Treating data as structured mathematical fields</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-2.5">
+                        <li class="flex items-start">
+                            <span class="text-teal-600 font-bold mr-2">1.</span>
+                            <span><strong>Non-Aliasing Arrays:</strong> Built-in guarantee that parameter arrays do not overlap, enabling compilers to generate aggressive SIMD loops automatically.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-teal-600 font-bold mr-2">2.</span>
+                            <span><strong>First-Class Array Slicing:</strong> Concise matrix slice notation and column-major memory indexing without nested procedural loop boilerplate.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-teal-600 font-bold mr-2">3.</span>
+                            <span><strong>Native Parallelism (Coarrays):</strong> Built-in SPMD distributed-memory abstractions that bypass complex third-party message passing wrappers.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market & Toolchain Analytics Dashboard -->
+        <section id="market" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+            <div>
+                <h3 class="text-xl font-bold text-slate-900">Labor Market Realities & Toolchain Ecosystem</h3>
+                <p class="text-slate-500 text-sm">Quantitative analysis of compensation, modern tooling friction, and industry roles.</p>
+            </div>
+
+            <!-- Charts Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Salary Chart -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h4 class="text-sm font-bold text-slate-800 mb-1 text-center">US Annual Salary Range Comparison ($ USD)</h4>
+                    <p class="text-xs text-slate-500 text-center mb-4">Based on defense, cybersecurity, and national lab benchmarks</p>
+                    <div class="chart-container">
+                        <canvas id="salaryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Ergonomics Radar Chart -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h4 class="text-sm font-bold text-slate-800 mb-1 text-center">Developer Experience & Toolchain Friction Score</h4>
+                    <p class="text-xs text-slate-500 text-center mb-4">Higher score indicates lower developer friction / better ergonomics</p>
+                    <div class="chart-container">
+                        <canvas id="ergonomicsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toolchain Matrix Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-200 bg-slate-50 text-slate-700">
+                            <th class="p-3 font-semibold">Metric</th>
+                            <th class="p-3 font-semibold text-blue-700">Assembly Ecosystem</th>
+                            <th class="p-3 font-semibold text-teal-700">Modern Fortran Ecosystem</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="p-3 font-medium text-slate-900">Primary Compilers</td>
+                            <td class="p-3 text-slate-600 font-mono text-xs">GNU Assembler (as), NASM, Yasm, LLVM-MC</td>
+                            <td class="p-3 text-slate-600 font-mono text-xs">GFortran, Intel Fortran (ifx), LLVM Flang, LFortran</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium text-slate-900">Build System</td>
+                            <td class="p-3 text-slate-600">Raw Makefiles, CMake linker integration</td>
+                            <td class="p-3 text-slate-600"><span class="bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-mono text-xs">fpm</span> (Fortran Package Manager), CMake, Meson</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium text-slate-900">IDE & Tooling</td>
+                            <td class="p-3 text-slate-600">Ghidra, Compiler Explorer, GDB/LLDB debuggers</td>
+                            <td class="p-3 text-slate-600">VS Code + <span class="font-mono text-xs">fortls</span> LSP, Jupyter Notebooks (LFortran)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium text-slate-900">Target Industry Roles</td>
+                            <td class="p-3 text-slate-600">Reverse Engineer, Malware Analyst, Firmware Engineer</td>
+                            <td class="p-3 text-slate-600">HPC Application Specialist, Climate Scientist, Computational Physicist</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ISA Selection Matrix (Assembly Specific) -->
+        <section id="isa" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div>
+                <span class="inline-block px-2.5 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded mb-2">Prerequisite Choice for Assembly</span>
+                <h3 class="text-xl font-bold text-slate-900">Instruction Set Architecture (ISA) Tradeoff Matrix</h3>
+                <p class="text-slate-500 text-sm">If choosing Assembly, selecting the target microarchitecture is your crucial first step.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- x86-64 -->
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-blue-400 transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-slate-900 font-mono">x86-64</h4>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">CISC Standard</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">Dominates desktop, enterprise servers, and reverse engineering benchmarks.</p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-4">
+                            <li>• <strong>Pros:</strong> Industry demand for malware analysis & binary exploitation.</li>
+                            <li>• <strong>Cons:</strong> Complex variable-length instructions (1-15 bytes), decades of legacy baggage.</li>
+                        </ul>
+                    </div>
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 p-2 rounded text-center">Best for Reverse Engineering</span>
+                </div>
+
+                <!-- AArch64 -->
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-blue-400 transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-slate-900 font-mono">AArch64 (ARM)</h4>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Modern RISC</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">Powers modern mobile devices, Apple Silicon, and cloud instances (AWS Graviton).</p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-4">
+                            <li>• <strong>Pros:</strong> Fixed 32-bit width, 31 general registers, smooth Apple/Mobile dev setup.</li>
+                            <li>• <strong>Cons:</strong> Strict load/store model require adjusting memory reasoning.</li>
+                        </ul>
+                    </div>
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 p-2 rounded text-center">Best for Apple / Cloud Hardware</span>
+                </div>
+
+                <!-- RISC-V -->
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-blue-400 transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-slate-900 font-mono">RISC-V</h4>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Open Standard</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">Engineered specifically for academic clarity and clean hardware implementations.</p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-4">
+                            <li>• <strong>Pros:</strong> Minimal ~40 instruction base set, uniform register fields.</li>
+                            <li>• <strong>Cons:</strong> Requires emulator (QEMU/Spike) setup due to smaller native silicon footprint.</li>
+                        </ul>
+                    </div>
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 p-2 rounded text-center">Best for Pedagogical Purity</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Decision Checklist / Call to Action -->
+        <section class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 text-center space-y-4">
+            <h3 class="text-2xl font-bold">Ready to Start Your 90-Day Learning Track?</h3>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+                Set up your environment today using modern toolchains to minimize initial setup friction.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-2">
+                <a href="https://godbolt.org" target="_blank" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-sm rounded-xl transition">
+                    Explore Assembly on Compiler Explorer
+                </a>
+                <a href="https://fortran-lang.org" target="_blank" class="px-5 py-2.5 bg-teal-600 hover:bg-teal-500 font-medium text-sm rounded-xl transition">
+                    Get Started with Fortran (fpm & fortls)
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+        <p>Based on the Comparative Strategic Analysis of Assembly and Modern Fortran (90-Day Track).</p>
+    </footer>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        // Quiz State Management
+        const quizAnswers = { q1: null, q2: null, q3: null, q4: null };
+
+        function setAnswer(question, choice) {
+            quizAnswers[question] = choice;
+            
+            // Update UI selected styling
+            document.querySelectorAll(`.quiz-${question}`).forEach(btn => {
+                btn.classList.remove('selected', 'border-teal-500', 'bg-teal-900/40');
+            });
+            event.currentTarget.classList.add('selected', 'border-teal-500', 'bg-teal-900/40');
+
+            calculateRecommendation();
+        }
+
+        function calculateRecommendation() {
+            const keys = Object.keys(quizAnswers);
+            const answeredCount = keys.filter(k => quizAnswers[k] !== null).length;
+            
+            document.getElementById('quiz-result').classList.remove('hidden');
+
+            let assemblyCount = 0;
+            let fortranCount = 0;
+
+            keys.forEach(k => {
+                if (quizAnswers[k] === 'assembly') assemblyCount++;
+                if (quizAnswers[k] === 'fortran') fortranCount++;
+            });
+
+            const total = assemblyCount + fortranCount;
+            if (total === 0) return;
+
+            const assemblyScore = Math.round((assemblyCount / total) * 100);
+            const fortranScore = Math.round((fortranCount / total) * 100);
+
+            document.getElementById('score-assembly').innerText = `${assemblyScore}%`;
+            document.getElementById('score-fortran').innerText = `${fortranScore}%`;
+            document.getElementById('bar-assembly').style.width = `${assemblyScore}%`;
+            document.getElementById('bar-fortran').style.width = `${fortranScore}%`;
+
+            const title = document.getElementById('recommendation-title');
+            const desc = document.getElementById('recommendation-desc');
+
+            if (assemblyCount > fortranCount) {
+                title.innerText = "Recommended Choice: Assembly Language";
+                title.className = "text-2xl font-bold text-blue-400 mb-2";
+                desc.innerText = "Your answers highlight a strong preference for low-level systems literacy, hardware reverse engineering, and understanding CPU microarchitecture.";
+            } else if (fortranCount > assemblyCount) {
+                title.innerText = "Recommended Choice: Modern Fortran";
+                title.className = "text-2xl font-bold text-teal-400 mb-2";
+                desc.innerText = "Your answers show a strong alignment with shipping production scientific software, array-oriented parallel computing, and numerical simulation.";
+            } else {
+                title.innerText = "Balanced Strategic Fit";
+                title.className = "text-2xl font-bold text-amber-400 mb-2";
+                desc.innerText = "You have equal interest in systems security and mathematical modeling. Consider Assembly if your main language is C/Rust, or Fortran if working in STEM.";
+            }
+        }
+
+        // Roadmap Data & Switch Logic
+        const roadmapData = {
+            1: {
+                assembly: [
+                    "Binary representations and hexadecimal conversions",
+                    "CPU register sets (GPRs) and flag registers",
+                    "Basic integer arithmetic and bitwise logic operations",
+                    "Stack pointer manipulation & System V ABI calling conventions"
+                ],
+                fortran: [
+                    "Free-form syntax and strict strong typing",
+                    "Dynamic array allocation & stride operations",
+                    "Intrinsic mathematical functions and modular code organization",
+                    "Structured file I/O operations"
+                ]
+            },
+            2: {
+                assembly: [
+                    "Memory addressing modes (base + index * scale + displacement)",
+                    "Control-flow recovery (conditional jumps, branch target analysis)",
+                    "Stack frame preservation and local storage offsets",
+                    "Linking compiled C routines directly with assembly subroutines"
+                ],
+                fortran: [
+                    "User-defined derived types with type-bound procedures",
+                    "Procedure interfaces and pure functions",
+                    "OpenMP multi-threading pragmas",
+                    "Integration of optimized BLAS and LAPACK linear algebra libraries"
+                ]
+            },
+            3: {
+                assembly: [
+                    "Disassembly inspection in Ghidra and Compiler Explorer",
+                    "Binary patching and control-flow hijacking concepts",
+                    "Tracking SIMD vector registers (AVX-512 / ARM NEON)",
+                    "Profiling branch mispredictions and microarchitectural pipeline stalls"
+                ],
+                fortran: [
+                    "Native distributed memory scaling via coarrays",
+                    "Multi-core loop parallelization using `do concurrent`",
+                    "Build orchestration and dependency tracking using `fpm`",
+                    "Deploying parallel PDE solvers on HPC clusters"
+                ]
+            }
+        };
+
+        function switchPhase(phase) {
+            // Update button styles
+            [1, 2, 3].forEach(p => {
+                const btn = document.getElementById(`btn-phase-${p}`);
+                if (p === phase) {
+                    btn.className = "px-3 py-1.5 text-xs font-medium rounded-md bg-white text-slate-900 shadow-sm";
+                } else {
+                    btn.className = "px-3 py-1.5 text-xs font-medium rounded-md text-slate-600 hover:text-slate-900";
+                }
+            });
+
+            // Update assembly roadmap list
+            const asmContainer = document.getElementById('assembly-roadmap-content');
+            asmContainer.innerHTML = roadmapData[phase].assembly.map(item => `
+                <div class="flex items-start text-xs text-slate-700 space-x-2">
+                    <span class="text-blue-500 font-bold">•</span>
+                    <span>${item}</span>
+                </div>
+            `).join('');
+
+            // Update fortran roadmap list
+            const ftContainer = document.getElementById('fortran-roadmap-content');
+            ftContainer.innerHTML = roadmapData[phase].fortran.map(item => `
+                <div class="flex items-start text-xs text-slate-700 space-x-2">
+                    <span class="text-teal-500 font-bold">•</span>
+                    <span>${item}</span>
+                </div>
+            `).join('');
+        }
+
+        // Initialize Default Roadmap Phase
+        document.addEventListener("DOMContentLoaded", () => {
+            switchPhase(1);
+            initCharts();
+        });
+
+        // Initialize Chart.js Data Visualizations
+        function initCharts() {
+            // Salary Range Chart
+            const ctxSalary = document.getElementById('salaryChart').getContext('2d');
+            new Chart(ctxSalary, {
+                type: 'bar',
+                data: {
+                    labels: ['Assembly (Security/Kernel)', 'Modern Fortran (HPC/Labs)'],
+                    datasets: [
+                        {
+                            label: 'Min US Base ($)',
+                            data: [112000, 105000],
+                            backgroundColor: 'rgba(37, 99, 235, 0.6)',
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Max US Base ($)',
+                            data: [180000, 245000],
+                            backgroundColor: 'rgba(13, 148, 136, 0.6)',
+                            borderColor: 'rgba(13, 148, 136, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: $${context.raw.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) { return '$' + value / 1000 + 'k'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Developer Ergonomics Radar Chart
+            const ctxErgo = document.getElementById('ergonomicsChart').getContext('2d');
+            new Chart(ctxErgo, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Build Ergonomics',
+                        'IDE/LSP Support',
+                        'Diagnostic Help',
+                        'Code Portability',
+                        'Safety & Checking',
+                        'Rapid Prototyping'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Assembly',
+                            data: [20, 40, 15, 10, 10, 30],
+                            fill: true,
+                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                            borderColor: 'rgb(37, 99, 235)',
+                            pointBackgroundColor: 'rgb(37, 99, 235)'
+                        },
+                        {
+                            label: 'Modern Fortran',
+                            data: [85, 80, 75, 90, 85, 80],
+                            fill: true,
+                            backgroundColor: 'rgba(13, 148, 136, 0.2)',
+                            borderColor: 'rgb(13, 148, 136)',
+                            pointBackgroundColor: 'rgb(13, 148, 136)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

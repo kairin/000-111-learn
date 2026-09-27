@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Game Dev Advisor: Assembly vs. Fortran (1980s-1990s Constraints)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        retro: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            text: '#f8fafc',
+                            amber: '#f59e0b',
+                            cyan: '#06b6d4',
+                            indigo: '#6366f1',
+                            emerald: '#10b981',
+                            rose: '#f43f5e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .quiz-option:hover {
+            border-color: #06b6d4;
+            background-color: rgba(6, 182, 212, 0.1);
+        }
+        .quiz-option.selected {
+            border-color: #06b6d4;
+            background-color: rgba(6, 182, 212, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased bg-slate-950 text-slate-100">
+
+    <!-- Chosen Palette: Retro Midnight & Cyber Amber (Slate-950, Cyan-500, Amber-500, Indigo-500) -->
+    <!-- Application Structure Plan: 
+        The application is structured as an interactive strategic advisor specifically tailored for game developers targeting 1980s-1990s hardware ceilings (sub-MB RAM, clock budgets, Mode 13h, fixed-point math) while serving modern player expectations.
+        1. Retro Paradigm Hero & Strategic Summary: Direct comparison of real-time rasterization vs simulation depth.
+        2. Game Concept Diagnostic Engine: Interactive 4-question diagnostic quiz tailored to game genres, hardware needs, and rendering goals.
+        3. 90-Day Retro Game Dev Roadmap: 12-week interactive timeline contrasting bare-metal Assembly action loops vs Fortran procedural universe loops.
+        4. Modern Player Satisfaction & Low-Level Architecture Explorer: Side-by-side comparative cards breaking down input latency (INT 09h), V-Sync (0x3DA), and procedural generation capabilities.
+        5. Engine & Genre Suitability Analytics: Dynamic Chart.js visualizations for genre matching and hardware performance distribution.
+        6. Vintage Toolchain & Emulator Matrix: Filterable table detailing OpenWatcom, NASM, DOSBox-X, 86Box, and Ghidra workflows. -->
+    <!-- Visualization & Content Choices:
+        - Quiz Diagnostic -> Dynamic JS Match Score -> Calculates exact language affinity for the user's specific game design concept.
+        - 12-Week Milestones -> Tabbed Roadmap -> Highlights achievable retro game deliverables (Mode 13h Raycaster vs Procedural Galaxy Engine).
+        - Genre Radar & Engine Capabilities -> Chart.js Radar & Stacked Bar Charts -> Visualizing technical strengths without SVG/Mermaid.
+        - Toolchain Matrix -> Interactive Filter Table -> Highlights setup requirements for modern workstations targeting retro environments. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 bg-amber-500 text-slate-950 font-mono font-bold text-lg flex items-center justify-center rounded-lg shadow-lg shadow-amber-500/20">
+                        80s
+                    </div>
+                    <div>
+                        <h1 class="text-base font-bold text-white leading-tight font-mono">Retro Game Dev Advisor</h1>
+                        <p class="text-xs text-amber-400 font-mono">1980s–1990s Hardware Ceilings (90-Day Track)</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6 text-xs font-mono font-medium text-slate-400">
+                    <a href="#summary" class="hover:text-amber-400 transition">Executive Verdict</a>
+                    <a href="#diagnostic" class="hover:text-amber-400 transition">Game Diagnostic</a>
+                    <a href="#roadmap" class="hover:text-amber-400 transition">12-Week Roadmap</a>
+                    <a href="#architecture" class="hover:text-amber-400 transition">Modern Player UX</a>
+                    <a href="#analytics" class="hover:text-amber-400 transition">Genre Analytics</a>
+                    <a href="#toolchains" class="hover:text-amber-400 transition">Toolchains</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Executive Summary Section -->
+        <section id="summary" class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-3xl space-y-4">
+                <span class="inline-block px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-xs rounded-full uppercase tracking-wider">
+                    Strategic Retro Game Dev Paradigm
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono">
+                    Designing Under Vintage Limits for Modern Players
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Developing a video game under 1980s and 1990s constraints—such as sub-megabyte RAM limits, 4.77–33 MHz CPUs, and direct VGA framebuffer manipulation (<code class="text-cyan-400 font-mono">0xA000:0000</code>)—requires choosing your primary engineering bottleneck: <strong class="text-amber-400">Pixel Rendering & Hardware Retrace</strong> versus <strong class="text-cyan-400">Procedural Physics & Matrix Simulation</strong>.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-slate-800/80 border border-indigo-500/30 rounded-xl p-5 hover:border-indigo-500/60 transition">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-indigo-400 font-mono text-base">CHOOSE ASSEMBLY IF...</span>
+                            <span class="text-xs font-mono bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded">Action / Arcade</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-3">You want to build real-time, high-frame-rate arcade games, tile scrollers, or pseudo-3D raycasters (*Wolfenstein* style).</p>
+                        <ul class="text-xs text-slate-400 space-y-1.5 font-mono">
+                            <li class="flex items-center"><span class="text-indigo-400 mr-2">&gt;</span> Bare-metal Mode 13h pixel blitting</li>
+                            <li class="flex items-center"><span class="text-indigo-400 mr-2">&gt;</span> Zero-latency keyboard IRQ (<code class="text-indigo-300">INT 09h</code>)</li>
+                            <li class="flex items-center"><span class="text-indigo-400 mr-2">&gt;</span> Locked 60/70 FPS V-Sync pacing (<code class="text-indigo-300">0x3DA</code>)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800/80 border border-cyan-500/30 rounded-xl p-5 hover:border-cyan-500/60 transition">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-cyan-400 font-mono text-base">CHOOSE FORTRAN IF...</span>
+                            <span class="text-xs font-mono bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded">Sim / Strategy</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-3">You want to build deeply systemic games like orbital space flight simulators, tactical wargames, or procedural universe engines.</p>
+                        <ul class="text-xs text-slate-400 space-y-1.5 font-mono">
+                            <li class="flex items-center"><span class="text-cyan-400 mr-2">&gt;</span> Fast multidimensional grid operations</li>
+                            <li class="flex items-center"><span class="text-cyan-400 mr-2">&gt;</span> Non-aliasing matrix transformations</li>
+                            <li class="flex items-center"><span class="text-cyan-400 mr-2">&gt;</span> Procedural generation & cellular automata</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Quiz Section -->
+        <section id="diagnostic" class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+            <div>
+                <h3 class="text-xl font-bold font-mono text-white flex items-center gap-2">
+                    <span class="w-3 h-3 bg-amber-500 inline-block rounded-sm"></span>
+                    Retro Game Concept Diagnostic Engine
+                </h3>
+                <p class="text-slate-400 text-sm mt-1">Answer 4 questions about your target game design to calculate your language affinity score for the next 90 days.</p>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Question 1 -->
+                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80">
+                    <p class="text-sm font-semibold text-slate-200 mb-3 font-mono">1. What is the primary visual presentation of your target game?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q1', 'assembly')" class="quiz-q1 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">A. Pixel-based Real-time Graphics</strong>
+                            Direct VGA Mode 13h (320x200 256-color), sprite animation, tile scrolling, or raycasting.
+                        </button>
+                        <button onclick="setAnswer('q1', 'fortran')" class="quiz-q1 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">B. Grid / Matrix / Terminal Display</strong>
+                            ANSI/ASCII terminal text graphics, tactical grid maps, or high-level drawing harnesses.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80">
+                    <p class="text-sm font-semibold text-slate-200 mb-3 font-mono">2. What constitutes the heaviest computational load in your game?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q2', 'assembly')" class="quiz-q2 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">A. Framebuffer Blitting & Input Polling</strong>
+                            Moving 64,000 bytes/frame to VRAM, custom sprite clipping, and zero-latency keyboard IRQs.
+                        </button>
+                        <button onclick="setAnswer('q2', 'fortran')" class="quiz-q2 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">B. Mathematical Systems & Simulation</strong>
+                            Orbital physics vectors, trade economic webs, cellular automata terrain, or procedural galaxies.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80">
+                    <p class="text-sm font-semibold text-slate-200 mb-3 font-mono">3. What player experience metric is most crucial for your design?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q3', 'assembly')" class="quiz-q3 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">A. Zero Input Lag & Fluid 60/70 FPS</strong>
+                            Twitch Arcade responsiveness without screen tearing or frame pacing hitches.
+                        </button>
+                        <button onclick="setAnswer('q3', 'fortran')" class="quiz-q3 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">B. Emergent Systemic Depth & Infinite Replayability</strong>
+                            Rich tactical choices, deep procedural universe generation, and complex AI state trees.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80">
+                    <p class="text-sm font-semibold text-slate-200 mb-3 font-mono">4. What is your preferred lower-level math approach?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="setAnswer('q4', 'assembly')" class="quiz-q4 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">A. Fixed-Point & Shift Operations</strong>
+                            16.16 / 8.8 integer scaling, LUT (look-up table) trigonometry, manual register optimization.
+                        </button>
+                        <button onclick="setAnswer('q4', 'fortran')" class="quiz-q4 quiz-option border border-slate-700 rounded-lg p-3 text-left text-xs font-medium text-slate-300 transition">
+                            <strong class="block text-slate-100 text-sm mb-1">B. Native Array Expressions & Formulae</strong>
+                            Direct mathematical notation, multidimensional array slicing, vector calculations.
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Output Dashboard -->
+            <div id="quiz-result" class="p-6 bg-slate-800 rounded-xl border border-slate-700 hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="w-full md:w-1/2">
+                        <span class="text-xs uppercase tracking-wider font-mono font-semibold text-amber-400">Diagnostic Verdict</span>
+                        <div id="recommendation-title" class="text-xl font-bold font-mono text-white mt-1 mb-2">Select all options above</div>
+                        <p id="recommendation-desc" class="text-xs text-slate-300 leading-relaxed">Complete the diagnostic options to compute your tailored game engine development path.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 flex flex-col items-center">
+                        <div class="w-full space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span class="text-indigo-400 font-bold">Assembly Language Fit</span>
+                                    <span id="score-assembly" class="text-indigo-400 font-bold">50%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700">
+                                    <div id="bar-assembly" class="bg-indigo-500 h-full transition-all duration-500" style="width: 50%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span class="text-cyan-400 font-bold">Fortran Simulation Fit</span>
+                                    <span id="score-fortran" class="text-cyan-400 font-bold">50%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700">
+                                    <div id="bar-fortran" class="bg-cyan-500 h-full transition-all duration-500" style="width: 50%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12-Week Roadmap Explorer -->
+        <section id="roadmap" class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-bold font-mono text-white flex items-center gap-2">
+                        <span class="w-3 h-3 bg-cyan-500 inline-block rounded-sm"></span>
+                        90-Day Retro Game Dev Acquisition Track
+                    </h3>
+                    <p class="text-slate-400 text-sm mt-1">Compare milestones across a 12-week development trajectory targeting vintage hardware.</p>
+                </div>
+                <div class="inline-flex p-1 bg-slate-950 rounded-lg border border-slate-800">
+                    <button id="btn-phase-1" onclick="switchPhase(1)" class="px-3 py-1.5 text-xs font-mono font-medium rounded-md bg-slate-800 text-amber-400 shadow-sm border border-slate-700">Weeks 1–4</button>
+                    <button id="btn-phase-2" onclick="switchPhase(2)" class="px-3 py-1.5 text-xs font-mono font-medium rounded-md text-slate-400 hover:text-slate-200">Weeks 5–8</button>
+                    <button id="btn-phase-3" onclick="switchPhase(3)" class="px-3 py-1.5 text-xs font-mono font-medium rounded-md text-slate-400 hover:text-slate-200">Weeks 9–12</button>
+                </div>
+            </div>
+
+            <!-- Content Grid for Phases -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Assembly Track Card -->
+                <div class="border border-indigo-500/30 bg-slate-800/40 rounded-xl p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-indigo-400 font-mono text-sm">Assembly Track (x86 DOS / Mode 13h)</span>
+                        <span class="text-xs font-mono bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full">Bare-Metal Rasterization</span>
+                    </div>
+                    <div id="assembly-roadmap-content" class="space-y-2.5 font-mono text-xs">
+                        <!-- Dynamic Content Inserted by JS -->
+                    </div>
+                </div>
+
+                <!-- Fortran Track Card -->
+                <div class="border border-cyan-500/30 bg-slate-800/40 rounded-xl p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-cyan-400 font-mono text-sm">Fortran Track (OpenWatcom FORTRAN 77)</span>
+                        <span class="text-xs font-mono bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded-full">Mathematical Engine</span>
+                    </div>
+                    <div id="fortran-roadmap-content" class="space-y-2.5 font-mono text-xs">
+                        <!-- Dynamic Content Inserted by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attainable Milestone Summary -->
+            <div class="p-4 bg-slate-950/80 border border-slate-800 rounded-xl">
+                <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-amber-400 mb-2">90-Day Deliverable Comparison</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="flex items-start space-x-2">
+                        <span class="text-indigo-400 font-mono font-bold">Assembly:</span>
+                        <span class="text-slate-300">A smooth 60/70 FPS 2D action game, tile scroller, or pseudo-3D raycaster (*Wolfenstein* style) running directly on real mode DOS.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                        <span class="text-cyan-400 font-mono font-bold">Fortran:</span>
+                        <span class="text-slate-300">A deep, complex simulation game (e.g., orbital space flight dynamics, procedural galaxy generator, or tactical wargame engine).</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Player Experience vs Vintage Hardware Section -->
+        <section id="architecture" class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+            <div>
+                <h3 class="text-xl font-bold font-mono text-white flex items-center gap-2">
+                    <span class="w-3 h-3 bg-indigo-500 inline-block rounded-sm"></span>
+                    Satisfying Modern Players Under Vintage Constraints
+                </h3>
+                <p class="text-slate-400 text-sm mt-1">How low-level architecture tackles modern gameplay expectations despite 1980s hardware ceilings.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Latency Card -->
+                <div class="bg-slate-800/50 border border-slate-700/80 rounded-xl p-5 space-y-3">
+                    <div class="flex items-center space-x-2 text-indigo-400 font-mono text-sm font-bold">
+                        <span>[IRQ 09h]</span>
+                        <span>Zero Input Latency</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Modern players reject sluggish BIOS keyboard polling (<code class="text-amber-400">INT 16h</code>). In Assembly, hooking hardware interrupt <code class="text-indigo-300">INT 09h</code> captures raw key scancodes instantly into a bitmask, enabling lag-free multi-key diagonal inputs.
+                    </p>
+                    <div class="text-[11px] font-mono bg-slate-900 p-2 rounded text-indigo-300 border border-slate-800">
+                        Assembly: Native IRQ Hooking<br>
+                        Fortran: Requires Assembly/C Wrapper
+                    </div>
+                </div>
+
+                <!-- Frame Pacing Card -->
+                <div class="bg-slate-800/50 border border-slate-700/80 rounded-xl p-5 space-y-3">
+                    <div class="flex items-center space-x-2 text-amber-400 font-mono text-sm font-bold">
+                        <span>[Port 0x3DA]</span>
+                        <span>Locked V-Sync Pacing</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Visual tearing ruins retro immersion. Polling VGA input status port <code class="text-amber-400">0x3DA</code> synchronizes off-screen RAM buffer flips with the CRT vertical retrace, guaranteeing locked 60 or 70 FPS without tearing.
+                    </p>
+                    <div class="text-[11px] font-mono bg-slate-900 p-2 rounded text-amber-300 border border-slate-800">
+                        Assembly: Direct Port I/O<br>
+                        Fortran: OS/Library Dependent
+                    </div>
+                </div>
+
+                <!-- Procedural Depth Card -->
+                <div class="bg-slate-800/50 border border-slate-700/80 rounded-xl p-5 space-y-3">
+                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm font-bold">
+                        <span>[MATRIX]</span>
+                        <span>Emergent Systemic Depth</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Without large RAM for pre-rendered assets, modern engagement relies on procedural depth. Fortran excels at generating entire star systems, cellular terrain, and economic markets inside a tiny 200 KB binary.
+                    </p>
+                    <div class="text-[11px] font-mono bg-slate-900 p-2 rounded text-cyan-300 border border-slate-800">
+                        Fortran: Native Array Math<br>
+                        Assembly: Tedious Integer Math
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Genre Analytics & Performance Profile Section -->
+        <section id="analytics" class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-8">
+            <div>
+                <h3 class="text-xl font-bold font-mono text-white flex items-center gap-2">
+                    <span class="w-3 h-3 bg-amber-500 inline-block rounded-sm"></span>
+                    Retro Game Engine & Genre Suitability Analytics
+                </h3>
+                <p class="text-slate-400 text-sm mt-1">Quantitative comparison of technical capabilities under 1980s–1990s execution constraints.</p>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Radar Chart -->
+                <div class="bg-slate-950/80 p-5 rounded-xl border border-slate-800">
+                    <h4 class="text-xs font-mono font-bold text-slate-200 mb-1 text-center">Genre Suitability Index</h4>
+                    <p class="text-[11px] text-slate-400 text-center mb-4">Matching technical capabilities with retro game genres</p>
+                    <div class="chart-container">
+                        <canvas id="genreRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bar Chart -->
+                <div class="bg-slate-950/80 p-5 rounded-xl border border-slate-800">
+                    <h4 class="text-xs font-mono font-bold text-slate-200 mb-1 text-center">CPU Cycle Overhead Allocation (80s Hardware)</h4>
+                    <p class="text-[11px] text-slate-400 text-center mb-4">Estimated frame budget distribution across tasks</p>
+                    <div class="chart-container">
+                        <canvas id="cycleBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Retro Toolchains & Emulator Matrix -->
+        <section id="toolchains" class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+            <div>
+                <h3 class="text-xl font-bold font-mono text-white flex items-center gap-2">
+                    <span class="w-3 h-3 bg-cyan-500 inline-block rounded-sm"></span>
+                    Retro Toolchain & Emulation Workstation
+                </h3>
+                <p class="text-slate-400 text-sm mt-1">Cross-compilation, assembly, and cycle-exact emulation setups for modern workstations.</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs font-mono">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-950 text-slate-300">
+                            <th class="p-3">Tool / Component</th>
+                            <th class="p-3">Role & Functionality</th>
+                            <th class="p-3">Target Platform</th>
+                            <th class="p-3">Primary Language Fit</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800 text-slate-300">
+                        <tr class="hover:bg-slate-800/40">
+                            <td class="p-3 font-bold text-indigo-400">NASM / WASM</td>
+                            <td class="p-3">Netwide Assembler for emitting 16-bit real mode .COM and .EXE binaries.</td>
+                            <td class="p-3">x86 DOS / PC XT/AT</td>
+                            <td class="p-3"><span class="bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded">Assembly</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/40">
+                            <td class="p-3 font-bold text-cyan-400">OpenWatcom FORTRAN 77</td>
+                            <td class="p-3">Premier open-source compiler supporting 16-bit real mode & 32-bit DOS4GW.</td>
+                            <td class="p-3">16/32-bit DOS</td>
+                            <td class="p-3"><span class="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded">Fortran</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/40">
+                            <td class="p-3 font-bold text-amber-400">DOSBox-X / 86Box</td>
+                            <td class="p-3">Cycle-exact hardware emulation with real-time register & memory debuggers.</td>
+                            <td class="p-3">Emulated IBM PC / VGA</td>
+                            <td class="p-3"><span class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">Both</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/40">
+                            <td class="p-3 font-bold text-emerald-400">Ghidra / IDA Pro</td>
+                            <td class="p-3">Disassembling historical commercial 80s/90s game binaries to study tricks.</td>
+                            <td class="p-3">x86 / 6502 / 68000</td>
+                            <td class="p-3"><span class="bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded">Assembly</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Final Call to Action / Decision Checklist -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 text-center space-y-4">
+            <h3 class="text-2xl font-bold font-mono text-white">Ready to Author Your Retro Engine?</h3>
+            <p class="text-slate-400 text-xs max-w-xl mx-auto leading-relaxed">
+                Set up your modern workstation today with NASM or OpenWatcom paired with DOSBox-X to start your 90-day development track.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-2 font-mono text-xs">
+                <a href="https://godbolt.org" target="_blank" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 font-bold rounded-xl transition text-white shadow-lg shadow-indigo-600/20">
+                    Test x86 Assembly on Compiler Explorer
+                </a>
+                <a href="https://github.com/open-watcom/open-watcom-v2" target="_blank" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 font-bold rounded-xl transition text-white shadow-lg shadow-cyan-600/20">
+                    Explore OpenWatcom Compiler Toolkit
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500 font-mono">
+        <p>Based on the Comparative Strategic Analysis of Assembly and Fortran for 1980s–1990s Constrained Game Development.</p>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Quiz State Management
+        const quizAnswers = { q1: null, q2: null, q3: null, q4: null };
+
+        function setAnswer(question, choice) {
+            quizAnswers[question] = choice;
+            
+            // Update UI styling for selected options
+            document.querySelectorAll(`.quiz-${question}`).forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+
+            calculateRecommendation();
+        }
+
+        function calculateRecommendation() {
+            const keys = Object.keys(quizAnswers);
+            const answeredCount = keys.filter(k => quizAnswers[k] !== null).length;
+            
+            document.getElementById('quiz-result').classList.remove('hidden');
+
+            let assemblyCount = 0;
+            let fortranCount = 0;
+
+            keys.forEach(k => {
+                if (quizAnswers[k] === 'assembly') assemblyCount++;
+                if (quizAnswers[k] === 'fortran') fortranCount++;
+            });
+
+            const total = assemblyCount + fortranCount;
+            if (total === 0) return;
+
+            const assemblyScore = Math.round((assemblyCount / total) * 100);
+            const fortranScore = Math.round((fortranCount / total) * 100);
+
+            document.getElementById('score-assembly').innerText = `${assemblyScore}%`;
+            document.getElementById('score-fortran').innerText = `${fortranScore}%`;
+            document.getElementById('bar-assembly').style.width = `${assemblyScore}%`;
+            document.getElementById('bar-fortran').style.width = `${fortranScore}%`;
+
+            const title = document.getElementById('recommendation-title');
+            const desc = document.getElementById('recommendation-desc');
+
+            if (assemblyCount > fortranCount) {
+                title.innerText = "Target Path: Assembly Language (Bare-Metal)";
+                title.className = "text-xl font-bold font-mono text-indigo-400 mt-1 mb-2";
+                desc.innerText = "Your game concept demands direct hardware control, pixel blitting, zero-latency input, and high frame rates. Assembly is mandatory for your retro action/arcade title.";
+            } else if (fortranCount > assemblyCount) {
+                title.innerText = "Target Path: Modern / FORTRAN 77 (Simulation Engine)";
+                title.className = "text-xl font-bold font-mono text-cyan-400 mt-1 mb-2";
+                desc.innerText = "Your game design prioritizes complex mathematical systems, cellular automata, orbital physics, or procedural generation. Fortran will allow you to build an extraordinarily deep game.";
+            } else {
+                title.innerText = "Balanced Design Concept";
+                title.className = "text-xl font-bold font-mono text-amber-400 mt-1 mb-2";
+                desc.innerText = "Your game shares traits of both action and complex simulation. Consider writing core math in Fortran and linking assembly subroutines for rendering!";
+            }
+        }
+
+        // Roadmap Data & Switch Logic
+        const roadmapData = {
+            1: {
+                assembly: [
+                    "Registers (AX, BX, CX, DX, SI, DI) & Real Mode segment math",
+                    "Setting BIOS Video Mode 13h via INT 10h (320x200 256-color)",
+                    "Direct pixel plotting at physical memory address 0xA000:0000",
+                    "Fixed-point integer arithmetic (16.16) & shift operations"
+                ],
+                fortran: [
+                    "FORTRAN 77 / Modern Fortran free-form syntax & strict typing",
+                    "DO loop structures & multi-dimensional array mapping",
+                    "ASCII / ANSI terminal graphics rendering loops",
+                    "Game state data structures & deterministic random seeds"
+                ]
+            },
+            2: {
+                assembly: [
+                    "Fast RAM double-buffering & string blitting (REP MOVSW)",
+                    "Hooking hardware interrupt INT 09h for lag-free keyboard bitmasks",
+                    "Polling status port 0x3DA for CRT vertical retrace (V-Sync)",
+                    "Sprite clipping, transparency masking, & dirty rectangle updates"
+                ],
+                fortran: [
+                    "Cellular automata terrain & procedural map generation algorithms",
+                    "Matrix operations for orbital mechanics / physical trajectories",
+                    "Integration of linear algebra logic for tactical combat systems",
+                    "File Save/Load binary serialization"
+                ]
+            },
+            3: {
+                assembly: [
+                    "Fixed-point trigonometry LUTs for 2D tile scrolling or pseudo-3D raycasting",
+                    "Programmable Interval Timer (PIT 8253) music/sound interrupt hooks",
+                    "Profiling assembly loops in DOSBox-X debuggers",
+                    "Shipping a complete, smooth 60 FPS standalone DOS executable (.COM/.EXE)"
+                ],
+                fortran: [
+                    "Procedural galaxy generation & trading economy web engine",
+                    "Coupling simulation core with low-level drawing harness / C subroutines",
+                    "Optimizing loop unrolling & array non-aliasing execution",
+                    "Deploying a complete procedural strategy / flight sim game"
+                ]
+            }
+        };
+
+        function switchPhase(phase) {
+            [1, 2, 3].forEach(p => {
+                const btn = document.getElementById(`btn-phase-${p}`);
+                if (p === phase) {
+                    btn.className = "px-3 py-1.5 text-xs font-mono font-medium rounded-md bg-slate-800 text-amber-400 shadow-sm border border-slate-700";
+                } else {
+                    btn.className = "px-3 py-1.5 text-xs font-mono font-medium rounded-md text-slate-400 hover:text-slate-200";
+                }
+            });
+
+            const asmContainer = document.getElementById('assembly-roadmap-content');
+            asmContainer.innerHTML = roadmapData[phase].assembly.map(item => `
+                <div class="flex items-start text-slate-300 space-x-2">
+                    <span class="text-indigo-400 font-bold">&gt;</span>
+                    <span>${item}</span>
+                </div>
+            `).join('');
+
+            const ftContainer = document.getElementById('fortran-roadmap-content');
+            ftContainer.innerHTML = roadmapData[phase].fortran.map(item => `
+                <div class="flex items-start text-slate-300 space-x-2">
+                    <span class="text-cyan-400 font-bold">&gt;</span>
+                    <span>${item}</span>
+                </div>
+            `).join('');
+        }
+
+        // Initialize Default Roadmap & Charts
+        document.addEventListener("DOMContentLoaded", () => {
+            switchPhase(1);
+            initCharts();
+        });
+
+        // Initialize Chart.js Data Visualizations
+        function initCharts() {
+            // Genre Suitability Radar Chart
+            const ctxRadar = document.getElementById('genreRadarChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '2D Fast Arcade',
+                        'Pseudo-3D Raycaster',
+                        'Orbital Flight Sim',
+                        'Tactical Wargame',
+                        'Procedural Universe',
+                        'Cellular Automata Sim'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Assembly Engine',
+                            data: [95, 90, 40, 50, 45, 55],
+                            fill: true,
+                            backgroundColor: 'rgba(99, 102, 241, 0.25)',
+                            borderColor: 'rgb(99, 102, 241)',
+                            pointBackgroundColor: 'rgb(99, 102, 241)'
+                        },
+                        {
+                            label: 'Fortran Engine',
+                            data: [20, 30, 95, 90, 95, 90],
+                            fill: true,
+                            backgroundColor: 'rgba(6, 182, 212, 0.25)',
+                            borderColor: 'rgb(6, 182, 212)',
+                            pointBackgroundColor: 'rgb(6, 182, 212)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#334155' },
+                            grid: { color: '#1e293b' },
+                            ticks: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+
+            // CPU Cycle Overhead Distribution (Stacked Bar Chart)
+            const ctxBar = document.getElementById('cycleBarChart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Assembly Action Loop', 'Fortran Simulation Loop'],
+                    datasets: [
+                        {
+                            label: 'Rendering & Framebuffer',
+                            data: [50, 20],
+                            backgroundColor: '#6366f1'
+                        },
+                        {
+                            label: 'Input & Hardware IRQs',
+                            data: [15, 5],
+                            backgroundColor: '#f59e0b'
+                        },
+                        {
+                            label: 'Physics & Simulation Math',
+                            data: [20, 65],
+                            backgroundColor: '#06b6d4'
+                        },
+                        {
+                            label: 'Memory & Overhead',
+                            data: [15, 10],
+                            backgroundColor: '#64748b'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}% CPU Cycles`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            max: 100,
+                            ticks: { color: '#64748b', callback: function(v) { return v + '%'; } },
+                            grid: { color: '#1e293b' }
+                        },
+                        y: {
+                            stacked: true,
+                            ticks: { color: '#cbd5e1', font: { family: 'JetBrains Mono', size: 10 } },
+                            grid: { color: '#1e293b' }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+ {"doc": "01", "source": "Assembly-Fortran-Comparison.md", "short": "Career report",
+  "question": "Which language to learn in 90 days for career and skills?",
+  "review": "adversarial-review-pass1/01-Assembly-Fortran-Comparison.review.md",
+  "passes": [{"pass": 1, "goal_met": "Partly", "confidence": "Medium-low",
+              "headline": "Broken salary data; LANL claim cited to a Freelancer page; milestones not like-for-like"}]},
+ {"doc": "02", "source": "Assembly-Versus-Fortran-Comparison.md", "short": "Retro game report",
+  "question": "Which language to learn in 90 days to build an 80s/90s-constrained game?",
+  "review": "adversarial-review-pass1/02-Assembly-Versus-Fortran-Comparison.review.md",
+  "passes": [{"pass": 1, "goal_met": "No", "confidence": "Low",
+              "headline": "Its Fortran advantages don't exist on 80s/90s DOS; history contradicts its genre mapping"}]},
+ {"doc": "03", "source": "assembly_vs_fortran_learning_advisor.html", "short": "Career advisor page", "derived_from": "01",
+  "question": "Same as 01, as a quiz, roadmap and charts",
+  "review": "adversarial-review-pass1/03-assembly_vs_fortran_learning_advisor.review.md",
+  "passes": [{"pass": 1, "goal_met": "No / Partly", "confidence": "Low",
+              "headline": "Quiz only restates answers and gives a verdict after one click; salary chart changes its source's numbers"}]},
+ {"doc": "04", "source": "retro_game_dev_language_advisor.html", "short": "Retro advisor page", "derived_from": "02",
+  "question": "Same as 02, as a quiz, roadmap and charts",
+  "review": "adversarial-review-pass1/04-retro_game_dev_language_advisor.review.md",
+  "passes": [{"pass": 1, "goal_met": "No", "confidence": "Low",
+              "headline": "FORTRAN 77 fixed-/free-form contradiction; impossible 'locked 60 fps'; invented charts"}]}
+]

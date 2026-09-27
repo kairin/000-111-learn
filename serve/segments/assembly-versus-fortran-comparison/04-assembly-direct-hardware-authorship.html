@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assembly: Direct Hardware Authorship · Review tracker</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-root="../../">
+<header class="site">
+  <a class="brand" href="../../index.html">Review tracker</a>
+  <nav class="main"><a href="../../index.html">Dashboard</a><a href="../../findings/index.html">Findings</a><a href="../index.html">Segments</a><a href="../../adversarial-review-pass1/00-SUMMARY.html">Reviews</a><a href="../../process.html">Process</a></nav>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off">
+    <div id="search-results" hidden></div>
+    <button id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main class="">
+<nav class="crumbs"><a href="../index.html">Segments</a> / <a href="../Assembly-Versus-Fortran-Comparison.html">Assembly-Versus-Fortran-Comparison.md</a> / Assembly: Direct Hardware Authorship</nav>
+<p class="seg-status"><span class="sev sev-critical">4 findings</span> · <span class="muted">subsection</span></p><details class="meta" open><summary>Metadata</summary><table><tr><th>source</th><td><a href="../Assembly-Versus-Fortran-Comparison.html">../Assembly-Versus-Fortran-Comparison.md</a></td></tr><tr><th>document</th><td>Comparative Strategic Analysis of Assembly and Fortran for 1980s–1990s Constrained Game Development: Low-Level Optimization, Simulation Architecture, and Modern Player Experience</td></tr><tr><th>kind</th><td>subsection</td></tr><tr><th>parent</th><td>90-Day Execution Timelines and Attainable Milestones</td></tr><tr><th>lines</th><td>35-44</td></tr><tr><th>findings</th><td><a class="fid" href="../../findings/index.html#q=D02-C4">D02-C4</a> <a class="fid" href="../../findings/index.html#q=D02-M1">D02-M1</a> <a class="fid" href="../../findings/index.html#q=D02-M3">D02-M3</a> <a class="fid" href="../../findings/index.html#q=D02-M4">D02-M4</a></td></tr></table></details><article class="md"><h1 id="assembly-direct-hardware-authorship">Assembly: Direct Hardware Authorship</h1>
+<blockquote>
+<p>Parent section: <strong>90-Day Execution Timelines and Attainable Milestones</strong></p>
+</blockquote>
+<p>In 1980s and early 1990s game production, commercial titles were authored almost exclusively in assembly1. Because compilers of that era generated suboptimal machine code, squeezing 30 to 60 frames per second out of a 4.77 MHz to 25 MHz CPU required manual instruction scheduling and cycle counting1.<br />
+Within a dedicated three-month timeline focusing on x86 DOS development, a programmer can master:</p>
+<ul>
+<li>Direct segment:offset addressing, manipulating the 64 KB memory bank allocated to the VGA framebuffer1.  </li>
+<li>Fixed-point 16.16 or 8.8 mathematics using integer registers (AX, BX, CX, DX), eliminating the severe latency of software floating-point emulation8.  </li>
+<li>Hardware vertical retrace synchronization via polling input status register 1 (port 0x3DA), completely eliminating visual tearing1.  </li>
+<li>Efficient blitting loops utilizing string manipulation instructions (LODSB, STOSB, MOVSW), unrolled manually to maximize memory throughput1.</li>
+</ul>
+<hr />
+<h2 id="review-findings-mapped-to-this-segment">Review findings mapped to this segment</h2>
+<p>Source of truth: <code>../../findings/</code> (pass 1). Mapped by source line range.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Evidence</th>
+<th>Status</th>
+<th>Location</th>
+<th>Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D02-C4</td>
+<td>critical</td>
+<td>KNOW DOC</td>
+<td>open</td>
+<td>L33, L42, L112, L166</td>
+<td><em>Claim:</em> "Locked 60/70 FPS", V-Sync "completely eliminating tearing" in Mode 13h — (a) Mode 13h runs at <strong>70 Hz</strong>, so a vsync-locked game gets 70 or 35 fps, not a locked 60. (b) Mode 13h has <strong>one page</strong>, so there is no page flipping. Copying 64,000 bytes during the ~1–1.5 ms vertical blank is not possible over ISA, so tearing is <em>reduced</em>, not eliminated. Tear-free flipping needs Mode X (which L11 mentions but the roadmap never uses). (c) The document's own figure (L70), 3.84 MB/s, exceeds what many 8/16-bit ISA VGA cards could sustain.</td>
+</tr>
+<tr>
+<td>D02-M1</td>
+<td>major</td>
+<td>KNOW</td>
+<td>open</td>
+<td>L37</td>
+<td><em>Claim:</em> Early-1990s commercial titles authored "almost exclusively in assembly" — True for 8-bit systems in the 1980s. <strong>False for early-1990s PC</strong>, where C with assembly inner loops was the norm (id Software titles, for example). Source: a Reddit thread [1].</td>
+</tr>
+<tr>
+<td>D02-M3</td>
+<td>major</td>
+<td>KNOW</td>
+<td>open</td>
+<td>L10, L37</td>
+<td><em>Claim:</em> Era clock range "1–33 MHz", and 30–60 fps from a "4.77 MHz" CPU — The document claims "1990s" but stops at 33 MHz (486DX2-66 in 1992; Pentiums by the mid-1990s). VGA Mode 13h games at 60 fps on a 4.77 MHz 8088 is not credible. The scope is inconsistent.</td>
+</tr>
+<tr>
+<td>D02-M4</td>
+<td>major</td>
+<td>KNOW</td>
+<td>open</td>
+<td>L41, L30–31</td>
+<td><em>Claim:</em> 16.16 fixed point "using AX, BX, CX, DX" — These are <strong>16-bit</strong> registers. 16.16 math needs 32-bit registers (EAX…, 386+) or register pairs on 8086. <code>REP MOVSD</code> (L31) is also 386+. The document mixes 8086 and 386 targets without saying so.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="review-worksheet">Review worksheet</h2>
+<h3 id="1-goal-objective-of-this-segment">1. Goal / objective of this segment</h3>
+<p><em>What is this segment trying to establish or help the reader decide?</em></p>
+<h3 id="2-key-claims-to-test">2. Key claims to test</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Claim</th>
+<th>Evidence given (citation / data)</th>
+<th>Verifiable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="3-adversarial-review">3. Adversarial review</h3>
+<ul>
+<li><strong>Strongest counter-argument:</strong></li>
+<li><strong>Unsupported, overstated, or outdated claims:</strong></li>
+<li><strong>Source quality (primary vs. blog/forum/marketing):</strong></li>
+<li><strong>Omissions / what a skeptic would ask:</strong></li>
+<li><strong>Internal consistency with other segments:</strong></li>
+</ul>
+<h3 id="4-evaluation">4. Evaluation</h3>
+<ul>
+<li><strong>Does the segment achieve its goal?</strong> (Yes / Partly / No)</li>
+<li><strong>Confidence:</strong> (High / Medium / Low)</li>
+<li><strong>Required fixes:</strong></li>
+</ul></article><nav class="pager"><a href="03-90-day-execution-timelines-and-attainable-milestones.html">← Previous: 90-Day Execution Timelines and Attainable Milestones</a><a href="05-fortran-the-engine-of-pure-mathematical-simulation.html">Next →: Fortran: The Engine of Pure Mathematical Simulation</a></nav>
+</main>
+<footer class="site">Built 2026-09-27 16:06 from <code>review/</code> by <code>site/build.py</code>.</footer>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

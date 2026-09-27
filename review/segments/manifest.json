@@ -1,0 +1,869 @@
+{
+ "documents": [
+  {
+   "source": "Assembly-Fortran-Comparison.md",
+   "slug": "assembly-fortran-comparison",
+   "title": "Comparative Strategic Analysis of Assembly and Modern Fortran: Pedagogical Yield, Toolchain Friction, and Industry Trajectories",
+   "segments": [
+    {
+     "file": "assembly-fortran-comparison/01-introduction-and-framing.md",
+     "title": "Introduction and framing",
+     "kind": "preamble",
+     "ranges": [
+      [
+       1,
+       4
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-fortran-comparison/02-execution-timelines-and-attainable-milestones.md",
+     "title": "Execution Timelines and Attainable Milestones",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       5,
+       15
+      ]
+     ],
+     "findings": [
+      "D01-C3",
+      "D01-M5"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/03-assembly-reading-fluency-versus-authoring-competence.md",
+     "title": "Assembly: Reading Fluency Versus Authoring Competence",
+     "kind": "subsection",
+     "ranges": [
+      [
+       16,
+       20
+      ]
+     ],
+     "findings": [
+      "D01-m5"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/04-modern-fortran-rapid-transition-to-production-capability.md",
+     "title": "Modern Fortran: Rapid Transition to Production Capability",
+     "kind": "subsection",
+     "ranges": [
+      [
+       21,
+       25
+      ]
+     ],
+     "findings": [
+      "D01-C3",
+      "D01-M1",
+      "D01-M5"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/05-pedagogical-yield-hardware-literacy-versus-mathematical-comp.md",
+     "title": "Pedagogical Yield: Hardware Literacy Versus Mathematical Computing Abstractions",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       26,
+       45
+      ]
+     ],
+     "findings": [
+      "D01-m6"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/06-the-architectural-literacy-of-assembly.md",
+     "title": "The Architectural Literacy of Assembly",
+     "kind": "subsection",
+     "ranges": [
+      [
+       46,
+       52
+      ]
+     ],
+     "findings": [
+      "D01-m1"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/07-the-numerical-mastery-of-modern-fortran.md",
+     "title": "The Numerical Mastery of Modern Fortran",
+     "kind": "subsection",
+     "ranges": [
+      [
+       53,
+       60
+      ]
+     ],
+     "findings": [
+      "D01-M2",
+      "D01-M3",
+      "D01-M4",
+      "D01-M5",
+      "D01-m2"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/08-toolchain-complexity-developer-ergonomics-and-ecosystem-mode.md",
+     "title": "Toolchain Complexity, Developer Ergonomics, and Ecosystem Modernization",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       61,
+       73
+      ]
+     ],
+     "findings": [
+      "D01-M6",
+      "D01-M7"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/09-the-assembly-environment-fragmented-and-unforgiving.md",
+     "title": "The Assembly Environment: Fragmented and Unforgiving",
+     "kind": "subsection",
+     "ranges": [
+      [
+       74,
+       82
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-fortran-comparison/10-the-modern-fortran-renaissance-modernized-and-accessible.md",
+     "title": "The Modern Fortran Renaissance: Modernized and Accessible",
+     "kind": "subsection",
+     "ranges": [
+      [
+       83,
+       95
+      ]
+     ],
+     "findings": [
+      "D01-M7"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/11-architectural-set-selection-the-prerequisite-choice-for-asse.md",
+     "title": "Architectural Set Selection: The Prerequisite Choice for Assembly",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       96,
+       109
+      ]
+     ],
+     "findings": [
+      "D01-m6"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/12-the-pragmatic-utility-of-x86-64.md",
+     "title": "The Pragmatic Utility of x86-64",
+     "kind": "subsection",
+     "ranges": [
+      [
+       110,
+       115
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-fortran-comparison/13-the-structural-elegance-of-risc-v.md",
+     "title": "The Structural Elegance of RISC-V",
+     "kind": "subsection",
+     "ranges": [
+      [
+       116,
+       121
+      ]
+     ],
+     "findings": [
+      "D01-m3"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/14-the-contemporary-dominance-of-aarch64.md",
+     "title": "The Contemporary Dominance of AArch64",
+     "kind": "subsection",
+     "ranges": [
+      [
+       122,
+       127
+      ]
+     ],
+     "findings": [
+      "D01-m4"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/15-labor-market-realities-economic-returns-and-industry-demand.md",
+     "title": "Labor Market Realities, Economic Returns, and Industry Demand",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       128,
+       139
+      ]
+     ],
+     "findings": [
+      "D01-C1",
+      "D01-M8",
+      "D01-M9"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/16-the-assembly-market-security-firmware-and-binary-analysis.md",
+     "title": "The Assembly Market: Security, Firmware, and Binary Analysis",
+     "kind": "subsection",
+     "ranges": [
+      [
+       140,
+       147
+      ]
+     ],
+     "findings": [
+      "D01-C1"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/17-the-fortran-market-high-performance-computing-and-legacy-inf.md",
+     "title": "The Fortran Market: High-Performance Computing and Legacy Infrastructure",
+     "kind": "subsection",
+     "ranges": [
+      [
+       148,
+       156
+      ]
+     ],
+     "findings": [
+      "D01-C1",
+      "D01-C2",
+      "D01-M9"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/18-strategic-decision-framework-and-selection-criteria.md",
+     "title": "Strategic Decision Framework and Selection Criteria",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       157,
+       167
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-fortran-comparison/19-criteria-for-selecting-assembly-language.md",
+     "title": "Criteria for Selecting Assembly Language",
+     "kind": "subsection",
+     "ranges": [
+      [
+       168,
+       173
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-fortran-comparison/20-criteria-for-selecting-modern-fortran.md",
+     "title": "Criteria for Selecting Modern Fortran",
+     "kind": "subsection",
+     "ranges": [
+      [
+       174,
+       179
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-fortran-comparison/21-conclusions.md",
+     "title": "Conclusions",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       180,
+       189
+      ]
+     ],
+     "findings": [
+      "D01-C3"
+     ]
+    },
+    {
+     "file": "assembly-fortran-comparison/22-works-cited.md",
+     "title": "Works cited",
+     "kind": "references",
+     "ranges": [
+      [
+       190,
+       261
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [],
+   "unmapped_findings": []
+  },
+  {
+   "source": "Assembly-Versus-Fortran-Comparison.md",
+   "slug": "assembly-versus-fortran-comparison",
+   "title": "Comparative Strategic Analysis of Assembly and Fortran for 1980s\u20131990s Constrained Game Development: Low-Level Optimization, Simulation Architecture, and Modern Player Experience",
+   "segments": [
+    {
+     "file": "assembly-versus-fortran-comparison/01-introduction-and-framing.md",
+     "title": "Introduction and framing",
+     "kind": "preamble",
+     "ranges": [
+      [
+       1,
+       4
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/02-the-retro-engineering-paradigm-1980s-1990s-hardware-ceilings.md",
+     "title": "The Retro-Engineering Paradigm: 1980s\u20131990s Hardware Ceilings",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       5,
+       23
+      ]
+     ],
+     "findings": [
+      "D02-C2",
+      "D02-M2",
+      "D02-M3",
+      "D02-m5"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/03-90-day-execution-timelines-and-attainable-milestones.md",
+     "title": "90-Day Execution Timelines and Attainable Milestones",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       24,
+       34
+      ]
+     ],
+     "findings": [
+      "D02-C4",
+      "D02-C5",
+      "D02-M4",
+      "D02-m4"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/04-assembly-direct-hardware-authorship.md",
+     "title": "Assembly: Direct Hardware Authorship",
+     "kind": "subsection",
+     "ranges": [
+      [
+       35,
+       44
+      ]
+     ],
+     "findings": [
+      "D02-C4",
+      "D02-M1",
+      "D02-M3",
+      "D02-M4"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/05-fortran-the-engine-of-pure-mathematical-simulation.md",
+     "title": "Fortran: The Engine of Pure Mathematical Simulation",
+     "kind": "subsection",
+     "ranges": [
+      [
+       45,
+       55
+      ]
+     ],
+     "findings": [
+      "D02-C1",
+      "D02-M5"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/06-technical-architecture-low-level-optimization-vs-simulation.md",
+     "title": "Technical Architecture: Low-Level Optimization vs. Simulation Power",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       56,
+       67
+      ]
+     ],
+     "findings": [
+      "D02-C2",
+      "D02-M5",
+      "D02-M7"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/07-the-assembly-advantage-conquering-the-80s-90s-hardware-bottl.md",
+     "title": "The Assembly Advantage: Conquering the 80s/90s Hardware Bottlenecks",
+     "kind": "subsection",
+     "ranges": [
+      [
+       68,
+       77
+      ]
+     ],
+     "findings": [
+      "D02-m5"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/08-the-fortran-advantage-simulation-depth-and-procedural-comple.md",
+     "title": "The Fortran Advantage: Simulation Depth and Procedural Complexity",
+     "kind": "subsection",
+     "ranges": [
+      [
+       78,
+       86
+      ]
+     ],
+     "findings": [
+      "D02-C1"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/09-designing-for-the-modern-player-under-vintage-constraints.md",
+     "title": "Designing for the Modern Player Under Vintage Constraints",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       87,
+       100
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/10-1-responsiveness-and-input-latency.md",
+     "title": "1. Responsiveness and Input Latency",
+     "kind": "subsection",
+     "ranges": [
+      [
+       101,
+       107
+      ]
+     ],
+     "findings": [
+      "D02-M5"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/11-2-smooth-frame-pacing-and-visual-fluidity.md",
+     "title": "2. Smooth Frame Pacing and Visual Fluidity",
+     "kind": "subsection",
+     "ranges": [
+      [
+       108,
+       113
+      ]
+     ],
+     "findings": [
+      "D02-C4",
+      "D02-m1"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/12-3-emergent-simulation-and-procedural-depth.md",
+     "title": "3. Emergent Simulation and Procedural Depth",
+     "kind": "subsection",
+     "ranges": [
+      [
+       114,
+       119
+      ]
+     ],
+     "findings": [
+      "D02-C3"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/13-toolchains-and-environment-setup.md",
+     "title": "Toolchains and Environment Setup",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       120,
+       123
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/14-assembly-retro-toolchain.md",
+     "title": "Assembly Retro Toolchain",
+     "kind": "subsection",
+     "ranges": [
+      [
+       124,
+       132
+      ]
+     ],
+     "findings": [
+      "D02-M8",
+      "D02-m3"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/15-fortran-retro-toolchain.md",
+     "title": "Fortran Retro Toolchain",
+     "kind": "subsection",
+     "ranges": [
+      [
+       133,
+       139
+      ]
+     ],
+     "findings": [
+      "D02-M9",
+      "D02-m2"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/16-the-definitive-verdict-which-language-should-you-learn.md",
+     "title": "The Definitive Verdict: Which Language Should You Learn?",
+     "kind": "section-lead",
+     "ranges": [
+      [
+       140,
+       159
+      ]
+     ],
+     "findings": [
+      "D02-C3",
+      "D02-M6"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/17-choose-assembly-if.md",
+     "title": "Choose Assembly If:",
+     "kind": "subsection",
+     "ranges": [
+      [
+       160,
+       167
+      ]
+     ],
+     "findings": [
+      "D02-C4",
+      "D02-M5",
+      "D02-M6"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/18-choose-fortran-if.md",
+     "title": "Choose Fortran If:",
+     "kind": "subsection",
+     "ranges": [
+      [
+       168,
+       175
+      ]
+     ],
+     "findings": [
+      "D02-C1",
+      "D02-C3",
+      "D02-M6"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/19-recommended-strategy-for-the-remaining-months.md",
+     "title": "Recommended Strategy for the Remaining Months",
+     "kind": "subsection",
+     "ranges": [
+      [
+       176,
+       179
+      ]
+     ],
+     "findings": [
+      "D02-M6"
+     ]
+    },
+    {
+     "file": "assembly-versus-fortran-comparison/20-works-cited.md",
+     "title": "Works cited",
+     "kind": "references",
+     "ranges": [
+      [
+       180,
+       210
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [
+    "D02-M10"
+   ],
+   "unmapped_findings": []
+  },
+  {
+   "source": "assembly_vs_fortran_learning_advisor.html",
+   "slug": "assembly-vs-fortran-learning-advisor",
+   "title": "Assembly vs. Modern Fortran: Strategic Learning Advisor",
+   "segments": [
+    {
+     "file": "assembly-vs-fortran-learning-advisor/01-which-language-should-you-learn-for-the-rest-of-the-year.md",
+     "title": "Which language should you learn for the rest of the year?",
+     "kind": "html-section#summary",
+     "ranges": [
+      [
+       119,
+       173
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-vs-fortran-learning-advisor/02-interactive-recommendation-engine.md",
+     "title": "Interactive Recommendation Engine",
+     "kind": "html-section#wizard",
+     "ranges": [
+      [
+       176,
+       268
+      ],
+      [
+       536,
+       593
+      ]
+     ],
+     "findings": [
+      "D03-C1",
+      "D03-C2",
+      "D03-M3",
+      "D03-m3"
+     ]
+    },
+    {
+     "file": "assembly-vs-fortran-learning-advisor/03-12-week-acquisition-roadmap-milestones.md",
+     "title": "12-Week Acquisition Roadmap & Milestones",
+     "kind": "html-section#roadmap",
+     "ranges": [
+      [
+       271,
+       323
+      ],
+      [
+       594,
+       669
+      ]
+     ],
+     "findings": [
+      "D03-M1",
+      "D03-M2"
+     ]
+    },
+    {
+     "file": "assembly-vs-fortran-learning-advisor/04-pedagogical-yield-mental-models-core-dividends.md",
+     "title": "Pedagogical Yield: Mental Models & Core Dividends",
+     "kind": "html-section#pedagogy",
+     "ranges": [
+      [
+       326,
+       387
+      ]
+     ],
+     "findings": []
+    },
+    {
+     "file": "assembly-vs-fortran-learning-advisor/05-labor-market-realities-toolchain-ecosystem.md",
+     "title": "Labor Market Realities & Toolchain Ecosystem",
+     "kind": "html-section#market",
+     "ranges": [
+      [
+       390,
+       451
+      ],
+      [
+       676,
+       771
+      ]
+     ],
+     "findings": [
+      "D03-C3",
+      "D03-C4",
+      "D03-m5"
+     ]
+    },
+    {
+     "file": "assembly-vs-fortran-learning-advisor/06-instruction-set-architecture-isa-tradeoff-matrix.md",
+     "title": "Instruction Set Architecture (ISA) Tradeoff Matrix",
+     "kind": "html-section#isa",
+     "ranges": [
+      [
+       454,
+       510
+      ]
+     ],
+     "findings": [
+      "D03-m4"
+     ]
+    },
+    {
+     "file": "assembly-vs-fortran-learning-advisor/07-ready-to-start-your-90-day-learning-track.md",
+     "title": "Ready to Start Your 90-Day Learning Track?",
+     "kind": "html-section#call-to-action",
+     "ranges": [
+      [
+       513,
+       526
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [
+    "D03-M4"
+   ],
+   "unmapped_findings": [
+    "D03-m1",
+    "D03-m2"
+   ]
+  },
+  {
+   "source": "retro_game_dev_language_advisor.html",
+   "slug": "retro-game-dev-language-advisor",
+   "title": "Retro Game Dev Advisor: Assembly vs. Fortran (1980s-1990s Constraints)",
+   "segments": [
+    {
+     "file": "retro-game-dev-language-advisor/01-designing-under-vintage-limits-for-modern-players.md",
+     "title": "Designing Under Vintage Limits for Modern Players",
+     "kind": "html-section#summary",
+     "ranges": [
+      [
+       115,
+       154
+      ]
+     ],
+     "findings": [
+      "D04-M1"
+     ]
+    },
+    {
+     "file": "retro-game-dev-language-advisor/02-retro-game-concept-diagnostic-engine.md",
+     "title": "Retro Game Concept Diagnostic Engine",
+     "kind": "html-section#diagnostic",
+     "ranges": [
+      [
+       157,
+       260
+      ],
+      [
+       484,
+       541
+      ]
+     ],
+     "findings": [
+      "D04-C1"
+     ]
+    },
+    {
+     "file": "retro-game-dev-language-advisor/03-90-day-retro-game-dev-acquisition-track.md",
+     "title": "90-Day Retro Game Dev Acquisition Track",
+     "kind": "html-section#roadmap",
+     "ranges": [
+      [
+       263,
+       318
+      ],
+      [
+       542,
+       614
+      ]
+     ],
+     "findings": [
+      "D04-C2",
+      "D04-C3"
+     ]
+    },
+    {
+     "file": "retro-game-dev-language-advisor/04-satisfying-modern-players-under-vintage-constraints.md",
+     "title": "Satisfying Modern Players Under Vintage Constraints",
+     "kind": "html-section#architecture",
+     "ranges": [
+      [
+       321,
+       376
+      ]
+     ],
+     "findings": [
+      "D04-C3",
+      "D04-M4"
+     ]
+    },
+    {
+     "file": "retro-game-dev-language-advisor/05-retro-game-engine-genre-suitability-analytics.md",
+     "title": "Retro Game Engine & Genre Suitability Analytics",
+     "kind": "html-section#analytics",
+     "ranges": [
+      [
+       379,
+       408
+      ],
+      [
+       621,
+       731
+      ]
+     ],
+     "findings": [
+      "D04-C4",
+      "D04-C5"
+     ]
+    },
+    {
+     "file": "retro-game-dev-language-advisor/06-retro-toolchain-emulation-workstation.md",
+     "title": "Retro Toolchain & Emulation Workstation",
+     "kind": "html-section#toolchains",
+     "ranges": [
+      [
+       411,
+       458
+      ]
+     ],
+     "findings": [
+      "D04-M2",
+      "D04-M3"
+     ]
+    },
+    {
+     "file": "retro-game-dev-language-advisor/07-ready-to-author-your-retro-engine.md",
+     "title": "Ready to Author Your Retro Engine?",
+     "kind": "html-section#call-to-action",
+     "ranges": [
+      [
+       461,
+       474
+      ]
+     ],
+     "findings": []
+    }
+   ],
+   "document_findings": [
+    "D04-M5"
+   ],
+   "unmapped_findings": []
+  }
+ ]
+}

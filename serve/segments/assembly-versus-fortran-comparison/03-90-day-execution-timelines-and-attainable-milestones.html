@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>90-Day Execution Timelines and Attainable Milestones · Review tracker</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-root="../../">
+<header class="site">
+  <a class="brand" href="../../index.html">Review tracker</a>
+  <nav class="main"><a href="../../index.html">Dashboard</a><a href="../../findings/index.html">Findings</a><a href="../index.html">Segments</a><a href="../../adversarial-review-pass1/00-SUMMARY.html">Reviews</a><a href="../../process.html">Process</a></nav>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off">
+    <div id="search-results" hidden></div>
+    <button id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main class="">
+<nav class="crumbs"><a href="../index.html">Segments</a> / <a href="../Assembly-Versus-Fortran-Comparison.html">Assembly-Versus-Fortran-Comparison.md</a> / 90-Day Execution Timelines and Attainable Milestones</nav>
+<p class="seg-status"><span class="sev sev-critical">4 findings</span> · <span class="muted">section-lead</span></p><details class="meta" open><summary>Metadata</summary><table><tr><th>source</th><td><a href="../Assembly-Versus-Fortran-Comparison.html">../Assembly-Versus-Fortran-Comparison.md</a></td></tr><tr><th>document</th><td>Comparative Strategic Analysis of Assembly and Fortran for 1980s–1990s Constrained Game Development: Low-Level Optimization, Simulation Architecture, and Modern Player Experience</td></tr><tr><th>kind</th><td>section-lead</td></tr><tr><th>parent</th><td></td></tr><tr><th>lines</th><td>24-34</td></tr><tr><th>findings</th><td><a class="fid" href="../../findings/index.html#q=D02-C4">D02-C4</a> <a class="fid" href="../../findings/index.html#q=D02-C5">D02-C5</a> <a class="fid" href="../../findings/index.html#q=D02-M4">D02-M4</a> <a class="fid" href="../../findings/index.html#q=D02-m4">D02-m4</a></td></tr></table></details><article class="md"><h1 id="90-day-execution-timelines-and-attainable-milestones">90-Day Execution Timelines and Attainable Milestones</h1>
+<p>The three-month acquisition trajectory differs markedly depending on whether the developer chooses Assembly (such as 16-bit x86 DOS or MOS 6502/68000) or Fortran (such as FORTRAN 77 under DOS or Modern Fortran compiled with retro toolchains)1.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Week Interval</th>
+<th style="text-align: left;">Assembly Pathway (x86 Real Mode / DOS Mode 13h)</th>
+<th style="text-align: left;">Fortran Pathway (FORTRAN 77 / Modern Fortran)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Weeks 1–4</strong></td>
+<td style="text-align: left;">CPU registers, binary logic, stack management; setting up BIOS interrupts (INT 10h for Mode 13h); plotting pixels directly to 0xA000:00008.</td>
+<td style="text-align: left;">Variable typing; DO loop logic; multidimensional arrays; array indexing; basic ASCII graphics and game state structures6.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Weeks 5–8</strong></td>
+<td style="text-align: left;">Fast memory copy (REP MOVSW/MOVSD); fixed-point trigonometry math; double-buffering in conventional RAM; keyboard IRQ (INT 09h) handling1.</td>
+<td style="text-align: left;">Matrix transformations; celestial mechanics; cellular automata loops; procedural map generation; file save/load routines3.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Weeks 9–12</strong></td>
+<td style="text-align: left;">Tile blitting routines; vertical blank synchronization (V-Sync on port 0x3DA); custom fixed-point raycasting or 2D sprite engine1.</td>
+<td style="text-align: left;">Complex deterministic economy/simulation engine; integration with low-level drawing wrappers or ANSI text terminal rendering12.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Attainable Milestone</strong></td>
+<td style="text-align: left;">A fully functional, smooth 60/70 FPS 2D action game, tile scroller, or pseudo-3D raycaster written bare-metal1.</td>
+<td style="text-align: left;">A deep, complex simulation game (e.g., hard-sci-fi flight dynamics, tactical wargame, or procedural roguelike)11.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="review-findings-mapped-to-this-segment">Review findings mapped to this segment</h2>
+<p>Source of truth: <code>../../findings/</code> (pass 1). Mapped by source line range.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Evidence</th>
+<th>Status</th>
+<th>Location</th>
+<th>Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D02-C4</td>
+<td>critical</td>
+<td>KNOW DOC</td>
+<td>open</td>
+<td>L33, L42, L112, L166</td>
+<td><em>Claim:</em> "Locked 60/70 FPS", V-Sync "completely eliminating tearing" in Mode 13h — (a) Mode 13h runs at <strong>70 Hz</strong>, so a vsync-locked game gets 70 or 35 fps, not a locked 60. (b) Mode 13h has <strong>one page</strong>, so there is no page flipping. Copying 64,000 bytes during the ~1–1.5 ms vertical blank is not possible over ISA, so tearing is <em>reduced</em>, not eliminated. Tear-free flipping needs Mode X (which L11 mentions but the roadmap never uses). (c) The document's own figure (L70), 3.84 MB/s, exceeds what many 8/16-bit ISA VGA cards could sustain.</td>
+</tr>
+<tr>
+<td>D02-C5</td>
+<td>critical</td>
+<td>KNOW</td>
+<td>open</td>
+<td>L33</td>
+<td><em>Claim:</em> 90-day milestone: "fully functional, smooth 60/70 FPS … raycaster written bare-metal" — This is unrealistic for someone learning assembly from scratch. Commercial teams using C plus assembly shipped raycasters that ran well below 60 fps on period hardware. There is no evidence for the timeline.</td>
+</tr>
+<tr>
+<td>D02-M4</td>
+<td>major</td>
+<td>KNOW</td>
+<td>open</td>
+<td>L41, L30–31</td>
+<td><em>Claim:</em> 16.16 fixed point "using AX, BX, CX, DX" — These are <strong>16-bit</strong> registers. 16.16 math needs 32-bit registers (EAX…, 386+) or register pairs on 8086. <code>REP MOVSD</code> (L31) is also 386+. The document mixes 8086 and 386 targets without saying so.</td>
+</tr>
+<tr>
+<td>D02-m4</td>
+<td>minor</td>
+<td>VERIFY</td>
+<td>verify</td>
+<td>L26</td>
+<td>"Modern Fortran compiled with retro toolchains": the document names no DOS toolchain that supports modern Fortran. A DJGPP gfortran port may exist, but the document never mentions one.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="review-worksheet">Review worksheet</h2>
+<h3 id="1-goal-objective-of-this-segment">1. Goal / objective of this segment</h3>
+<p><em>What is this segment trying to establish or help the reader decide?</em></p>
+<h3 id="2-key-claims-to-test">2. Key claims to test</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Claim</th>
+<th>Evidence given (citation / data)</th>
+<th>Verifiable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="3-adversarial-review">3. Adversarial review</h3>
+<ul>
+<li><strong>Strongest counter-argument:</strong></li>
+<li><strong>Unsupported, overstated, or outdated claims:</strong></li>
+<li><strong>Source quality (primary vs. blog/forum/marketing):</strong></li>
+<li><strong>Omissions / what a skeptic would ask:</strong></li>
+<li><strong>Internal consistency with other segments:</strong></li>
+</ul>
+<h3 id="4-evaluation">4. Evaluation</h3>
+<ul>
+<li><strong>Does the segment achieve its goal?</strong> (Yes / Partly / No)</li>
+<li><strong>Confidence:</strong> (High / Medium / Low)</li>
+<li><strong>Required fixes:</strong></li>
+</ul></article><nav class="pager"><a href="02-the-retro-engineering-paradigm-1980s-1990s-hardware-ceilings.html">← Previous: The Retro-Engineering Paradigm: 1980s–1990s Hardware Ceilings</a><a href="04-assembly-direct-hardware-authorship.html">Next →: Assembly: Direct Hardware Authorship</a></nav>
+</main>
+<footer class="site">Built 2026-09-27 16:06 from <code>review/</code> by <code>site/build.py</code>.</footer>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

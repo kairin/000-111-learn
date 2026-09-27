@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adversarial review — &quot;Assembly vs. Modern Fortran: Strategic Learning Advisor&quot; (HTML) · Review tracker</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-root="../">
+<header class="site">
+  <a class="brand" href="../index.html">Review tracker</a>
+  <nav class="main"><a href="../index.html">Dashboard</a><a href="../findings/index.html">Findings</a><a href="../segments/index.html">Segments</a><a href="00-SUMMARY.html">Reviews</a><a href="../process.html">Process</a></nav>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off">
+    <div id="search-results" hidden></div>
+    <button id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main class="">
+<nav class="crumbs"><a href="00-SUMMARY.html">Reviews</a> / Adversarial review — &quot;Assembly vs. Modern Fortran: Strategic Learning Advisor&quot; (HTML)</nav>
+<details class="meta" open><summary>Metadata</summary><table><tr><th>target</th><td><a href="../segments/assembly_vs_fortran_learning_advisor.html">../segments/assembly_vs_fortran_learning_advisor.html</a></td></tr><tr><th>derived_from</th><td><a href="../segments/Assembly-Fortran-Comparison.html">../segments/Assembly-Fortran-Comparison.md</a> (see review 01)</td></tr><tr><th>segments</th><td>../segments/assembly-vs-fortran-learning-advisor/</td></tr><tr><th>pass</th><td>1 (adversarial, desk review)</td></tr><tr><th>date</th><td>2026-09-27</td></tr></table></details><article class="md"><h1 id="adversarial-review-assembly-vs-modern-fortran-strategic-learning-advisor-html">Adversarial review — "Assembly vs. Modern Fortran: Strategic Learning Advisor" (HTML)</h1>
+<p>This page is an interactive summary of report 01, so <strong>every content finding in review 01 applies here too</strong>. This review covers only what the page <em>adds or changes</em>: the quiz logic, the charts, drift from the source, and delivery.</p>
+<h2 id="1-goals-and-objectives">1. Goals and objectives</h2>
+<ol>
+<li>Give a personalised recommendation through a 4-question quiz.</li>
+<li>Show the 12-week roadmap, pedagogical yield, the market and ecosystem, and the ISA choice at a glance.</li>
+<li>Send the user to a starting toolchain (the Compiler Explorer and fortran-lang links).</li>
+</ol>
+<h2 id="2-verdict-pass-1">2. Verdict (pass 1)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Objective</th>
+<th>Met?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Personalised recommendation</td>
+<td><strong>No</strong></td>
+<td>The quiz is tautological and leading, and it issues a verdict after one answer (C1, C2).</td>
+</tr>
+<tr>
+<td>2. At-a-glance summary</td>
+<td><strong>Partly</strong></td>
+<td>It faithfully condenses report 01 except that the charts <strong>misstate or invent numbers</strong> (C3, C4), and it drops every citation.</td>
+</tr>
+<tr>
+<td>3. Starting point</td>
+<td><strong>Yes</strong></td>
+<td>The links are relevant.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-findings">3. Findings</h2>
+<h3 id="critical">Critical</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Location</th>
+<th>Problem</th>
+<th>Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Quiz, L176–268; logic L551–593</td>
+<td><strong>The quiz is tautological.</strong> All four questions ask the same thing ("Assembly-flavoured or Fortran-flavoured?"). Option <strong>A is always Assembly, B always Fortran</strong>, so answer-position bias pushes toward Assembly. No question measures anything independent, such as prior languages, available time per week, owned hardware, or career stage. The output is an "affinity score" that just restates the user's choices.</td>
+<td>[DOC]</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>L553</td>
+<td><code>answeredCount</code> is computed but <strong>never used</strong>. After <strong>one</strong> click the result panel appears with <em>"Recommended Choice: Assembly Language — 100%"</em>, even though the placeholder says "Select all options above".</td>
+<td>[DOC] (code)</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>L684–696 vs report L144</td>
+<td><strong>The salary chart contradicts its source.</strong> The Assembly maximum is plotted as <strong>$180k</strong>, while report 01 says senior defense positions exceed <strong>$200k</strong> (image5). The Fortran maximum ($245k) is kept. The chart therefore <em>visually</em> favours Fortran more than the source does. The minimums (112k, 105k) come from the broken, truncated ranges in report 01 (review 01, C1).</td>
+<td>[DOC]</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>L730–756</td>
+<td>The <strong>"Developer Experience &amp; Toolchain Friction Score"</strong> radar chart uses invented numbers (Assembly 20/40/15/10/10/30 vs Fortran 85/80/75/90/85/80). There is no method and no source, yet the section is titled "<strong>Quantitative analysis</strong>".</td>
+<td>[DOC]</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="major">Major</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Location</th>
+<th>Problem</th>
+<th>Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M1</td>
+<td>L635</td>
+<td>Roadmap weeks 9–12 adds "<strong>Deploying parallel PDE solvers on HPC clusters</strong>", which is not in the source report. This goes further than the report's already optimistic milestone: cluster access, schedulers and MPI are not covered.</td>
+<td>[DOC] drift</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>L627</td>
+<td>Roadmap adds "control-flow hijacking concepts" (exploit development), which is not in the source. This is a scope change: exploitation is a separate discipline.</td>
+<td>[DOC] drift</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>L590</td>
+<td>The tie-break text brings in new criteria ("Assembly if your main language is C/Rust, Fortran if in STEM") that the quiz never asked about. They are the <em>right</em> questions, and they should be quiz questions.</td>
+<td>[DOC]</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>whole page</td>
+<td><strong>No citations or data provenance.</strong> The footer says "Based on the Comparative Strategic Analysis", but a reader can't trace any number.</td>
+<td>[DOC]</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="minor-technical">Minor / technical</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Location</th>
+<th>Issue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>m1</td>
+<td>L8</td>
+<td><code>cdn.tailwindcss.com</code> is Tailwind's <strong>development-only</strong> Play CDN, which is not meant for production. It requires a network connection and won't work offline.</td>
+</tr>
+<tr>
+<td>m2</td>
+<td>L10</td>
+<td><code>cdn.jsdelivr.net/npm/chart.js</code> is <strong>unpinned</strong> (always the latest version), so a future major release could break the charts.</td>
+</tr>
+<tr>
+<td>m3</td>
+<td>L540–547</td>
+<td><code>setAnswer</code> uses the implicit global <code>event</code>, which is deprecated. Pass the event explicitly.</td>
+</tr>
+<tr>
+<td>m4</td>
+<td>L488</td>
+<td>Grammar: "Strict load/store model require adjusting" should be "requires".</td>
+</tr>
+<tr>
+<td>m5</td>
+<td>salary chart</td>
+<td>"Min/Max US base" for a <em>language</em> makes no sense; salary belongs to the <em>role</em> (review 01, M9).</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-suggested-fixes-for-a-later-pass">4. Suggested fixes (for a later pass)</h2>
+<ol>
+<li>Replace the quiz with questions that aren't about the answer: prior C experience, hours per week, owned CPU (x86/ARM), end goal (job, hobby, curiosity), and preference for building versus analysing. Randomise the option order, and require all answers before showing a result.</li>
+<li>Delete the salary and radar charts, or source every number and label the radar as "author's opinion".</li>
+<li>Add source footnotes, or link each panel to its segment in <code>segments/</code>.</li>
+</ol></article>
+</main>
+<footer class="site">Built 2026-09-27 16:06 from <code>review/</code> by <code>site/build.py</code>.</footer>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

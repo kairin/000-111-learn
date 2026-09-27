@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adversarial review — &quot;Retro Game Dev Advisor: Assembly vs. Fortran&quot; (HTML) · Review tracker</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-root="../">
+<header class="site">
+  <a class="brand" href="../index.html">Review tracker</a>
+  <nav class="main"><a href="../index.html">Dashboard</a><a href="../findings/index.html">Findings</a><a href="../segments/index.html">Segments</a><a href="00-SUMMARY.html">Reviews</a><a href="../process.html">Process</a></nav>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off">
+    <div id="search-results" hidden></div>
+    <button id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main class="">
+<nav class="crumbs"><a href="00-SUMMARY.html">Reviews</a> / Adversarial review — &quot;Retro Game Dev Advisor: Assembly vs. Fortran&quot; (HTML)</nav>
+<details class="meta" open><summary>Metadata</summary><table><tr><th>target</th><td><a href="../segments/retro_game_dev_language_advisor.html">../segments/retro_game_dev_language_advisor.html</a></td></tr><tr><th>derived_from</th><td><a href="../segments/Assembly-Versus-Fortran-Comparison.html">../segments/Assembly-Versus-Fortran-Comparison.md</a> (see review 02)</td></tr><tr><th>segments</th><td>../segments/retro-game-dev-language-advisor/</td></tr><tr><th>pass</th><td>1 (adversarial, desk review)</td></tr><tr><th>date</th><td>2026-09-27</td></tr></table></details><article class="md"><h1 id="adversarial-review-retro-game-dev-advisor-assembly-vs-fortran-html">Adversarial review — "Retro Game Dev Advisor: Assembly vs. Fortran" (HTML)</h1>
+<p>This page summarises report 02, so <strong>all of review 02 applies</strong> (FORTRAN 77 has no array syntax or SIMD; the Mode 13h 60 fps and tearing claims; Elite/Frontier/M.U.L.E. written in assembly; missing C). This review covers only what the page adds or changes.</p>
+<h2 id="1-goals-and-objectives">1. Goals and objectives</h2>
+<ol>
+<li>Recommend a language from the user's <em>game concept</em> through a 4-question diagnostic.</li>
+<li>Give a 12-week roadmap and a 90-day deliverable per track.</li>
+<li>Show how each language meets modern player expectations, genre fit, and CPU budget.</li>
+<li>Point to a working retro toolchain.</li>
+</ol>
+<h2 id="2-verdict-pass-1">2. Verdict (pass 1)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Objective</th>
+<th>Met?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Concept diagnostic</td>
+<td><strong>Partly</strong></td>
+<td>Better than page 03's quiz, because it asks about the <em>game</em>, not the language. But it keeps the A=Assembly/B=Fortran bias and the one-click verdict (C1). Its "Assembly is mandatory" wording is absolute.</td>
+</tr>
+<tr>
+<td>2. Roadmap</td>
+<td><strong>No</strong></td>
+<td>The Fortran track contradicts itself on dialect (C2). The Assembly deliverable promises an impossible 60 fps V-Sync lock (C3).</td>
+</tr>
+<tr>
+<td>3. UX / genre / CPU analytics</td>
+<td><strong>No</strong></td>
+<td>The charts use invented numbers, and history contradicts them (C4, C5).</td>
+</tr>
+<tr>
+<td>4. Toolchain</td>
+<td><strong>Partly</strong></td>
+<td>Mostly the right tools, with some mislabels (M2, M3).</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-findings">3. Findings</h2>
+<h3 id="critical">Critical</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Location</th>
+<th>Problem</th>
+<th>Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Quiz logic L499–541</td>
+<td>It has the same defects as page 03: <code>answeredCount</code> is unused, so one click gives a 100% verdict, and option A is always Assembly. The Assembly result says "<strong>Assembly is mandatory</strong> for your retro action/arcade title" (L530), which is false: plenty of retro action games were written in C with small amounts of assembly.</td>
+<td>[DOC] + [KNOW]</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>L552 vs track title</td>
+<td>The Fortran track is headed <strong>"OpenWatcom FORTRAN 77"</strong>, but week 1 teaches "<strong>FORTRAN 77 / Modern Fortran free-form syntax</strong>". FORTRAN 77 is <strong>fixed-form</strong>; free-form arrived in Fortran 90. Week 3's "array non-aliasing execution" and loop-unrolling optimisation don't matter on SIMD-less DOS targets.</td>
+<td>[KNOW]</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>L353, L577, summary card</td>
+<td>"Locked <strong>60/70 FPS</strong>", "guaranteeing locked 60 or 70 FPS without tearing", "smooth <strong>60 FPS</strong> DOS executable". VGA Mode 13h refreshes at 70 Hz, so V-Sync locking gives 70 or 35 fps, and 60 fps on a 70 Hz display judders. Mode 13h has no page flipping, so "guaranteed" tear-free is wrong (review 02, C4).</td>
+<td>[KNOW]</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Genre radar L630–656</td>
+<td>Invented scores (Assembly: Orbital Flight Sim <strong>40</strong>, Procedural Universe <strong>45</strong>; Fortran: <strong>95/95</strong>). History says otherwise: <em>Elite</em> and <em>Frontier: Elite II</em>, the landmark procedural universe and orbital flight sims, were assembly. Fortran is given 20–30 for arcade and raycaster, yet the same page's tie-break suggests Fortran plus assembly rendering, which would score higher.</td>
+<td>[KNOW], [VERIFY] per-title language</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>CPU cycle chart L676–715</td>
+<td>Labelled "<strong>Estimated</strong> frame budget". These are invented percentages with no measurement. The chart also mixes up <strong>genre workload with language</strong>: an "Assembly action loop" and a "Fortran simulation loop" are different <em>games</em>, so the chart can't compare the languages.</td>
+<td>[DOC]</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="major">Major</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Location</th>
+<th>Problem</th>
+<th>Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M1</td>
+<td>L125</td>
+<td>"4.77–33 MHz CPUs … direct VGA framebuffer (0xA000)": VGA and Mode 13h on a 4.77 MHz 8088 was a rare combination, and the upper bound leaves out most of the 1990s.</td>
+<td>[KNOW]</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>L432</td>
+<td>Table row "<strong>NASM / WASM</strong> — Netwide Assembler…": NASM and WASM (the Watcom assembler) are different tools, and the description covers only NASM.</td>
+<td>[KNOW]</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>L445</td>
+<td>"DOSBox-X / 86Box — <strong>Cycle-exact</strong>": true for neither in the strict sense, and DOSBox-X is clearly approximate.</td>
+<td>[KNOW]</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>UX cards</td>
+<td>"Fortran: OS/Library Dependent" for V-Sync is presented as a weakness. But polling port 0x3DA needs only one I/O routine, which is trivial to link. The page overstates how hard hybrid development is, even though its own tie-break recommends a hybrid.</td>
+<td>[DOC]</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>whole page</td>
+<td>No citations, and no mention of <strong>C</strong>, the historically dominant choice (review 02, §5).</td>
+<td>[DOC]</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="minor-technical">Minor / technical</h3>
+<p>The Tailwind Play CDN and the unpinned Chart.js problems apply here too, as does the implicit-<code>event</code> usage (L493). See review 03, m1–m3.</p>
+<h2 id="4-suggested-fixes">4. Suggested fixes</h2>
+<ol>
+<li>Fix the Fortran dialect story: either FORTRAN 77, fixed-form, with no array syntax, or Modern Fortran on a modern host, not both.</li>
+<li>Correct the frame-rate language: "70 Hz Mode 13h; tear-free needs Mode X page flipping".</li>
+<li>Replace the invented charts with a sourced table of real retro games and their implementation languages.</li>
+<li>Add a third quiz outcome, "<strong>C with assembly inner loops</strong>", which is the historically correct answer for many concepts.</li>
+</ol></article>
+</main>
+<footer class="site">Built 2026-09-27 16:06 from <code>review/</code> by <code>site/build.py</code>.</footer>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

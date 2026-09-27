@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedagogical Yield: Mental Models &amp; Core Dividends · Review tracker</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-root="../../">
+<header class="site">
+  <a class="brand" href="../../index.html">Review tracker</a>
+  <nav class="main"><a href="../../index.html">Dashboard</a><a href="../../findings/index.html">Findings</a><a href="../index.html">Segments</a><a href="../../adversarial-review-pass1/00-SUMMARY.html">Reviews</a><a href="../../process.html">Process</a></nav>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off">
+    <div id="search-results" hidden></div>
+    <button id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main class="">
+<nav class="crumbs"><a href="../index.html">Segments</a> / <a href="../assembly_vs_fortran_learning_advisor.html">assembly_vs_fortran_learning_advisor.html</a> / Pedagogical Yield: Mental Models &amp; Core Dividends</nav>
+<p class="seg-status"><span class="sev sev-none">not yet challenged</span> · <span class="muted">html-section#pedagogy</span></p><details class="meta" open><summary>Metadata</summary><table><tr><th>source</th><td><a href="../assembly_vs_fortran_learning_advisor.html">../assembly_vs_fortran_learning_advisor.html</a></td></tr><tr><th>document</th><td>Assembly vs. Modern Fortran: Strategic Learning Advisor</td></tr><tr><th>kind</th><td>html-section</td></tr><tr><th>section_id</th><td>pedagogy</td></tr><tr><th>lines</th><td>326-387</td></tr><tr><th>findings</th><td>[]</td></tr></table></details><article class="md"><h1 id="pedagogical-yield-mental-models-core-dividends">Pedagogical Yield: Mental Models &amp; Core Dividends</h1>
+<h4 id="pedagogical-yield-mental-models-core-dividends_1">Pedagogical Yield: Mental Models &amp; Core Dividends</h4>
+<p>How learning each language permanently shapes your software engineering capabilities.</p>
+<p>CPU</p>
+<h5 id="hardware-transparency">Hardware Transparency</h5>
+<p>Unmasking physical machine mechanics</p>
+<ul>
+<li>
+<ol>
+<li>Concrete Memory Topology: Replaces lexical scoping with stack frames, register allocation, pointer displacements, and cache alignment.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Compiler Lowering Visibility: Observe loop unrolling, AVX vectorization, and register spills directly in generated disassembly.</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>System ABI Contracts: Understand calling conventions, interrupts, system calls, and stack preservation rules.</li>
+</ol>
+</li>
+</ul>
+<p>MAT</p>
+<h5 id="numerical-abstraction">Numerical Abstraction</h5>
+<p>Treating data as structured mathematical fields</p>
+<ul>
+<li>
+<ol>
+<li>Non-Aliasing Arrays: Built-in guarantee that parameter arrays do not overlap, enabling compilers to generate aggressive SIMD loops automatically.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>First-Class Array Slicing: Concise matrix slice notation and column-major memory indexing without nested procedural loop boilerplate.</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Native Parallelism (Coarrays): Built-in SPMD distributed-memory abstractions that bypass complex third-party message passing wrappers.</li>
+</ol>
+</li>
+</ul>
+<details><summary>Raw HTML (lines 326-387)</summary><pre><code class="language-html">        &lt;section id=&quot;pedagogy&quot; class=&quot;bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6&quot;&gt;
+            &lt;div&gt;
+                &lt;h3 class=&quot;text-xl font-bold text-slate-900&quot;&gt;Pedagogical Yield: Mental Models &amp; Core Dividends&lt;/h3&gt;
+                &lt;p class=&quot;text-slate-500 text-sm&quot;&gt;How learning each language permanently shapes your software engineering capabilities.&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+                &lt;!-- Assembly Dividend Card --&gt;
+                &lt;div class=&quot;border border-slate-200 rounded-xl p-6 space-y-4 hover:border-blue-300 transition&quot;&gt;
+                    &lt;div class=&quot;flex items-center space-x-3&quot;&gt;
+                        &lt;div class=&quot;w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg&quot;&gt;
+                            CPU
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h4 class=&quot;font-bold text-slate-900&quot;&gt;Hardware Transparency&lt;/h4&gt;
+                            &lt;p class=&quot;text-xs text-slate-500&quot;&gt;Unmasking physical machine mechanics&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;ul class=&quot;text-sm text-slate-600 space-y-2.5&quot;&gt;
+                        &lt;li class=&quot;flex items-start&quot;&gt;
+                            &lt;span class=&quot;text-blue-600 font-bold mr-2&quot;&gt;1.&lt;/span&gt;
+                            &lt;span&gt;&lt;strong&gt;Concrete Memory Topology:&lt;/strong&gt; Replaces lexical scoping with stack frames, register allocation, pointer displacements, and cache alignment.&lt;/span&gt;
+                        &lt;/li&gt;
+                        &lt;li class=&quot;flex items-start&quot;&gt;
+                            &lt;span class=&quot;text-blue-600 font-bold mr-2&quot;&gt;2.&lt;/span&gt;
+                            &lt;span&gt;&lt;strong&gt;Compiler Lowering Visibility:&lt;/strong&gt; Observe loop unrolling, AVX vectorization, and register spills directly in generated disassembly.&lt;/span&gt;
+                        &lt;/li&gt;
+                        &lt;li class=&quot;flex items-start&quot;&gt;
+                            &lt;span class=&quot;text-blue-600 font-bold mr-2&quot;&gt;3.&lt;/span&gt;
+                            &lt;span&gt;&lt;strong&gt;System ABI Contracts:&lt;/strong&gt; Understand calling conventions, interrupts, system calls, and stack preservation rules.&lt;/span&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Fortran Dividend Card --&gt;
+                &lt;div class=&quot;border border-slate-200 rounded-xl p-6 space-y-4 hover:border-teal-300 transition&quot;&gt;
+                    &lt;div class=&quot;flex items-center space-x-3&quot;&gt;
+                        &lt;div class=&quot;w-10 h-10 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg&quot;&gt;
+                            MAT
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h4 class=&quot;font-bold text-slate-900&quot;&gt;Numerical Abstraction&lt;/h4&gt;
+                            &lt;p class=&quot;text-xs text-slate-500&quot;&gt;Treating data as structured mathematical fields&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;ul class=&quot;text-sm text-slate-600 space-y-2.5&quot;&gt;
+                        &lt;li class=&quot;flex items-start&quot;&gt;
+                            &lt;span class=&quot;text-teal-600 font-bold mr-2&quot;&gt;1.&lt;/span&gt;
+                            &lt;span&gt;&lt;strong&gt;Non-Aliasing Arrays:&lt;/strong&gt; Built-in guarantee that parameter arrays do not overlap, enabling compilers to generate aggressive SIMD loops automatically.&lt;/span&gt;
+                        &lt;/li&gt;
+                        &lt;li class=&quot;flex items-start&quot;&gt;
+                            &lt;span class=&quot;text-teal-600 font-bold mr-2&quot;&gt;2.&lt;/span&gt;
+                            &lt;span&gt;&lt;strong&gt;First-Class Array Slicing:&lt;/strong&gt; Concise matrix slice notation and column-major memory indexing without nested procedural loop boilerplate.&lt;/span&gt;
+                        &lt;/li&gt;
+                        &lt;li class=&quot;flex items-start&quot;&gt;
+                            &lt;span class=&quot;text-teal-600 font-bold mr-2&quot;&gt;3.&lt;/span&gt;
+                            &lt;span&gt;&lt;strong&gt;Native Parallelism (Coarrays):&lt;/strong&gt; Built-in SPMD distributed-memory abstractions that bypass complex third-party message passing wrappers.&lt;/span&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;</code></pre></details>
+
+<hr />
+<h2 id="review-findings-mapped-to-this-segment">Review findings mapped to this segment</h2>
+<p><em>No findings in pass 1. That means <strong>not yet challenged</strong>, not verified correct.</em></p>
+<hr />
+<h2 id="review-worksheet">Review worksheet</h2>
+<h3 id="1-goal-objective-of-this-segment">1. Goal / objective of this segment</h3>
+<p><em>What is this segment trying to establish or help the reader decide?</em></p>
+<h3 id="2-key-claims-to-test">2. Key claims to test</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Claim</th>
+<th>Evidence given (citation / data)</th>
+<th>Verifiable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="3-adversarial-review">3. Adversarial review</h3>
+<ul>
+<li><strong>Strongest counter-argument:</strong></li>
+<li><strong>Unsupported, overstated, or outdated claims:</strong></li>
+<li><strong>Source quality (primary vs. blog/forum/marketing):</strong></li>
+<li><strong>Omissions / what a skeptic would ask:</strong></li>
+<li><strong>Internal consistency with other segments:</strong></li>
+</ul>
+<h3 id="4-evaluation">4. Evaluation</h3>
+<ul>
+<li><strong>Does the segment achieve its goal?</strong> (Yes / Partly / No)</li>
+<li><strong>Confidence:</strong> (High / Medium / Low)</li>
+<li><strong>Required fixes:</strong></li>
+</ul></article><nav class="pager"><a href="03-12-week-acquisition-roadmap-milestones.html">← Previous: 12-Week Acquisition Roadmap &amp; Milestones</a><a href="05-labor-market-realities-toolchain-ecosystem.html">Next →: Labor Market Realities &amp; Toolchain Ecosystem</a></nav>
+</main>
+<footer class="site">Built 2026-09-27 16:06 from <code>review/</code> by <code>site/build.py</code>.</footer>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
