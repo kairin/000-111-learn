@@ -137,6 +137,7 @@ What the site has:
   - status and note drafts saved in your browser.
 - **Every page from `review/`**: plan, decisions, session records, reviews, sources and all 56 segments, in a sidebar. Each page has an "Edit page" link that opens its source file in `review/` on GitHub.
 - Built-in full-text search (Pagefind), light/dark/auto themes, and a mobile layout.
+- **Link previews** (Facebook, LinkedIn, X, chat apps): every page has Open Graph tags, and `site/scripts/og-image.mjs` redraws the 1200×630 preview image (stats and heatmap) on every build. After a deploy, run the URL through Facebook's [Sharing Debugger](https://developers.facebook.com/tools/debug/) and click **Scrape Again** to refresh Facebook's cached preview.
 
 **Tracking statuses on a static site:**
 1. **Permanent:** on the findings page, click **edit `review/findings/status.json` on GitHub**. Add or change an entry, for example:

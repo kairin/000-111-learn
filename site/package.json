@@ -3,10 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "sync": "node scripts/sync-content.mjs",
-    "predev": "node scripts/sync-content.mjs",
+    "sync": "node scripts/sync-content.mjs && node scripts/og-image.mjs",
+    "predev": "npm run sync",
     "dev": "astro dev",
-    "prebuild": "node scripts/sync-content.mjs",
+    "prebuild": "npm run sync",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

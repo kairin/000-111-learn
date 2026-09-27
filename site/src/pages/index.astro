@@ -28,6 +28,19 @@ const cards = [
 	frontmatter={{
 		title: 'Review dashboard',
 		description: 'Progress of the adversarial review and the plan to learn Assembly and Fortran.',
+		// Nicer link preview for the homepage (overrides Starlight's per-page defaults).
+		head: [
+			{ tag: 'title', content: 'Learning Assembly & Fortran — review tracker' },
+			{ tag: 'meta', attrs: { property: 'og:title', content: 'Learning Assembly & Fortran, the hard way' } },
+			{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
+			{
+				tag: 'meta',
+				attrs: {
+					property: 'og:description',
+					content: `Adversarial review of 4 AI-generated guides (${findings.length} findings), then a tiny retro-constrained game you can play in the browser.`,
+				},
+			},
+		],
 		tableOfContents: false,
 		editUrl: false,
 	}}
