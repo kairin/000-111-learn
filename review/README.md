@@ -166,6 +166,12 @@ GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub sti
 - `git commit --no-verify` skips regeneration, and the site can then lag behind. Run `site/regenerate.sh` and commit to catch up.
 - **Never commit to `gh-pages` by hand.** The pre-push hook owns it.
 
+## Plan and decisions
+
+- **[plan/PLAN.md](plan/PLAN.md):** the roadmap, including Assembly and Fortran running in the browser (WebAssembly and emulators) and the 90-day learning track.
+- **[plan/DECISIONS.md](plan/DECISIONS.md):** decided, superseded and **open** decisions.
+- **[plan/sessions/2026-09-27.md](plan/sessions/2026-09-27.md):** the record of the first working session.
+
 ## Status and next steps
 
 - [x] Split the documents into segments (56)
@@ -174,7 +180,9 @@ GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub sti
 - [x] Build the review-tracker website into `serve/`
 - [x] Create the public GitHub repository and enable Pages
 - [x] Replace the Actions deployment with local hooks and a `gh-pages` branch
-- [ ] **Decide the primary goal: career skill or retro game.** This decides which document is worth revising.
+- [ ] **Decide the primary goal: career skill or retro game** (decision O1). This decides which document is worth revising.
+- [ ] Move the build to GitHub Actions (D10), after choosing the site tool (O2)
+- [ ] Browser-run Assembly and Fortran demos (PLAN.md, Phase 4)
 - [ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
   - OpenCoarrays' dependency on MPI,
@@ -196,3 +204,4 @@ GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub sti
 | 2026-09-27 | Built the review-tracker static site and GitHub Pages workflow | `site/`, `serve/`, `.github/` |
 | 2026-09-27 | Published public repo and enabled GitHub Pages (Actions) | https://kairin.github.io/000-111-learn/ |
 | 2026-09-27 | Removed the Actions workflow; the site is now built locally by git hooks and served from `gh-pages` | `.githooks/`, `site/regenerate.sh` |
+| 2026-09-27 | Wrote the plan (including in-browser Assembly/Fortran), the decision log, and the session record | `plan/` |

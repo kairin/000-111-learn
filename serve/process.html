@@ -296,6 +296,12 @@
 - The build is <strong>deterministic</strong>: there are no timestamps and <code>markdown</code> is pinned. Commits that don't touch <code>review/</code> or <code>site/</code> therefore produce no site changes.
 - <code>git commit --no-verify</code> skips regeneration, and the site can then lag behind. Run <code>site/regenerate.sh</code> and commit to catch up.
 - <strong>Never commit to <code>gh-pages</code> by hand.</strong> The pre-push hook owns it.</p>
+<h2 id="plan-and-decisions">Plan and decisions</h2>
+<ul>
+<li><strong><a href="plan/PLAN.html">plan/PLAN.md</a>:</strong> the roadmap, including Assembly and Fortran running in the browser (WebAssembly and emulators) and the 90-day learning track.</li>
+<li><strong><a href="plan/DECISIONS.html">plan/DECISIONS.md</a>:</strong> decided, superseded and <strong>open</strong> decisions.</li>
+<li><strong><a href="plan/sessions/2026-09-27.html">plan/sessions/2026-09-27.md</a>:</strong> the record of the first working session.</li>
+</ul>
 <h2 id="status-and-next-steps">Status and next steps</h2>
 <ul>
 <li>[x] Split the documents into segments (56)</li>
@@ -304,7 +310,9 @@
 <li>[x] Build the review-tracker website into <code>serve/</code></li>
 <li>[x] Create the public GitHub repository and enable Pages</li>
 <li>[x] Replace the Actions deployment with local hooks and a <code>gh-pages</code> branch</li>
-<li>[ ] <strong>Decide the primary goal: career skill or retro game.</strong> This decides which document is worth revising.</li>
+<li>[ ] <strong>Decide the primary goal: career skill or retro game</strong> (decision O1). This decides which document is worth revising.</li>
+<li>[ ] Move the build to GitHub Actions (D10), after choosing the site tool (O2)</li>
+<li>[ ] Browser-run Assembly and Fortran demos (PLAN.md, Phase 4)</li>
 <li>[ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):</li>
 <li>the LANL Fortran report,</li>
 <li>OpenCoarrays' dependency on MPI,</li>
@@ -363,6 +371,11 @@
 <td>2026-09-27</td>
 <td>Removed the Actions workflow; the site is now built locally by git hooks and served from <code>gh-pages</code></td>
 <td><code>.githooks/</code>, <code>site/regenerate.sh</code></td>
+</tr>
+<tr>
+<td>2026-09-27</td>
+<td>Wrote the plan (including in-browser Assembly/Fortran), the decision log, and the session record</td>
+<td><code>plan/</code></td>
 </tr>
 </tbody>
 </table></div></article>

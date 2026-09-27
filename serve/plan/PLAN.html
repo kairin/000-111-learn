@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan: learning Assembly or Fortran in the rest of 2026, with a public review tracker · Review tracker</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-root="../">
+<header class="site">
+  <a class="brand" href="../index.html">Review tracker</a>
+  <nav class="main"><a href="../index.html">Dashboard</a><a href="../findings/index.html">Findings</a><a href="../segments/index.html">Segments</a><a href="../adversarial-review-pass1/00-SUMMARY.html">Reviews</a><a href="../process.html">Process</a></nav>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off">
+    <div id="search-results" hidden></div>
+    <button id="theme" type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main class="">
+
+<article class="md"><h1 id="plan-learning-assembly-or-fortran-in-the-rest-of-2026-with-a-public-review-tracker">Plan: learning Assembly or Fortran in the rest of 2026, with a public review tracker</h1>
+<p><strong>Last updated:</strong> 2026-09-27 · <strong>Decisions:</strong> <a href="DECISIONS.html">DECISIONS.md</a> · <strong>Session record:</strong> <a href="sessions/2026-09-27.html">sessions/2026-09-27.md</a></p>
+<h2 id="goal">Goal</h2>
+<p>Pick <strong>one</strong> language, Assembly or Fortran, and learn it in the roughly 90 days left in 2026 (October to December). Four Gemini-generated guides frame the choice. They are being reviewed adversarially before anyone relies on them. This repository holds:
+- the review,
+- the evidence for it (including code that runs in the browser),
+- the learning work itself,</p>
+<p>all published as a static website on GitHub Pages.</p>
+<ul>
+<li>Repository: https://github.com/kairin/000-111-learn</li>
+<li>Live site: https://kairin.github.io/000-111-learn/</li>
+</ul>
+<h2 id="phases">Phases</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>What</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Segment the 4 documents, adversarial review pass 1, tracker site, public repo and Pages</td>
+<td><strong>Done</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Decide the primary learning goal (career or retro game)</td>
+<td><strong>Open</strong> (decision O1)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Review pass 2: check the sources, and challenge the untested segments</td>
+<td>Not started</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Move the site to GitHub Actions with the chosen tool</td>
+<td>Actions decided; tool <strong>open</strong> (O2)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Interactive evidence: Assembly and Fortran running in the browser</td>
+<td>Planned; order <strong>open</strong> (O3)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The 90-day learning track itself, publishing a runnable artifact per milestone</td>
+<td>Depends on O1</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="phase-0-done-2026-09-27">Phase 0: done (2026-09-27)</h2>
+<ul>
+<li>4 source documents split into 56 segments (22 + 20 + 7 + 7). See <code>review/segments/</code>.</li>
+<li>Adversarial review pass 1: 61 findings (17 critical, 28 major, 16 minor). See <code>review/adversarial-review-pass1/</code>.</li>
+<li>Findings stored as data (<code>review/findings/pass1.json</code>) and mapped onto segments (<code>review/findings/segment-map.md</code>).</li>
+<li>Tracker site built by <code>site/build.py</code> into <code>serve/</code>, published from the public repo.</li>
+<li>Currently the site is <strong>built locally by git hooks</strong> and served from the <code>gh-pages</code> branch. This is being replaced by GitHub Actions (Phase 3).</li>
+</ul>
+<h2 id="phase-1-decide-the-learning-goal">Phase 1: decide the learning goal</h2>
+<p>The two reports answer different questions and point to different languages:
+- <strong>Report 01, career and skills:</strong> leans toward <strong>Fortran</strong>, to ship numerical software.
+- <strong>Report 02, 80s/90s retro game:</strong> ends on <strong>Assembly</strong>, and overrides its own decision tree to do so.</p>
+<p>The pass-1 review found report 02 much weaker. Neither report considers <strong>C</strong>. This decision determines:
+- which report is worth revising,
+- which browser demos matter most (Phase 4),
+- what the 90-day track looks like (Phase 5).</p>
+<h2 id="phase-2-review-pass-2">Phase 2: review pass 2</h2>
+<ul>
+<li>[ ] Check the high-stakes sources (the checklists are at the end of each pass-1 review):</li>
+<li>the LANL Fortran report,</li>
+<li>whether OpenCoarrays depends on MPI,</li>
+<li>LFortran's release status,</li>
+<li>the Microsoft FORTRAN 5.x graphics library,</li>
+<li>the implementation language of <em>Elite</em>, <em>Frontier: Elite II</em> and <em>M.U.L.E.</em></li>
+<li>[ ] Challenge the 15 segments no finding has touched yet:</li>
+<li>doc 01, segments 01, 09, 12, 18, 19, 20, 22,</li>
+<li>doc 02, segments 01, 09, 13, 20,</li>
+<li>doc 03, segments 01, 04, 07,</li>
+<li>doc 04, segment 07.</li>
+<li>[ ] Update statuses in the findings data: <code>verify</code> becomes <code>confirmed</code> or <code>disputed</code>.</li>
+</ul>
+<h2 id="phase-3-move-the-site-to-github-actions">Phase 3: move the site to GitHub Actions</h2>
+<p>Decided: the repository is public, so GitHub Actions is free and does the build. Consequences:
+- remove the local git hooks (<code>.githooks/</code>) and the <code>gh-pages</code> branch,
+- <code>serve/</code> stops being committed and becomes build output,
+- Pages source switches back to "GitHub Actions".</p>
+<p>The <strong>site tool is still open</strong> (O2). Candidates, all of which produce static pages that show data and are interactive in the browser:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Best at</th>
+<th>Main cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Astro + Starlight</strong> (recommended)</td>
+<td>Many document pages (sidebar, full-text search, dark mode) plus interactive components ("islands") for the dashboard, heatmap and findings table. Checks the findings JSON against a schema at build time.</td>
+<td>Node packages; the interactive components still have to be written</td>
+</tr>
+<tr>
+<td>Observable Framework</td>
+<td>Data dashboards: reactive Markdown, charts, filter and table inputs, SQL in the browser</td>
+<td>Less suited to 56 document pages; check how actively it is maintained</td>
+</tr>
+<tr>
+<td>Quarto</td>
+<td>Report-style pages with interactive figures; Python-friendly</td>
+<td>Less flexible navigation and custom interactivity</td>
+</tr>
+<tr>
+<td>Keep <code>site/build.py</code>, run it in Actions</td>
+<td>No migration; all current features stay</td>
+<td>About 450 lines of custom site code to maintain</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Status tracking on a static site</strong> (O4): the recommendation is an <strong>"Edit on GitHub"</strong> link on each finding. It opens <code>review/findings/status.json</code> in GitHub's web editor; you commit in the browser and Actions rebuilds the site. The alternatives are one GitHub Issue per finding, or keeping the current export-a-file step.</p>
+<h2 id="phase-4-assembly-and-fortran-running-in-the-browser">Phase 4: Assembly and Fortran running in the browser</h2>
+<p>A static page can run compiled code in the visitor's browser through <strong>WebAssembly (Wasm)</strong>. The code is compiled during the GitHub Actions build. The page loads the result, and a small JavaScript file connects it to sliders, buttons and charts. No server is involved.</p>
+<h3 id="fortran-compile-to-webassembly">Fortran: compile to WebAssembly</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Route</th>
+<th>How it works</th>
+<th>Maturity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LFortran</strong> (<code>--backend=wasm</code>)</td>
+<td>Compiles Fortran straight to Wasm. LFortran's own compiler also runs in the browser, so visitors could type and run Fortran.</td>
+<td>Beta, supports a subset of Fortran. Test early.</td>
+</tr>
+<tr>
+<td><strong>LLVM Flang + Emscripten</strong></td>
+<td>The LLVM Fortran compiler produces Wasm; Emscripten supplies the runtime. The Pyodide project uses this route for scientific Fortran libraries such as LAPACK.</td>
+<td>Works; more setup. Best for serious numerical code.</td>
+</tr>
+<tr>
+<td><strong>f2c + Emscripten</strong></td>
+<td>Converts FORTRAN 77 to C, then compiles the C to Wasm.</td>
+<td>Old but reliable; FORTRAN 77 only.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="assembly-depends-on-the-target">Assembly: depends on the target</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Route</th>
+<th>How it works</th>
+<th>Fit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Emulate the original machine</strong></td>
+<td>NASM builds a DOS <code>.COM</code>/<code>.EXE</code> at build time; <strong>js-dos</strong> (DOSBox compiled to Wasm) runs it inside the page. For a full PC, <strong>v86</strong> emulates x86. There are 6502 and RISC-V emulators in JavaScript too.</td>
+<td><strong>Best fit for report 02.</strong> A real Mode 13h demo lets readers see the "70 Hz" and "tearing" claims for themselves.</td>
+</tr>
+<tr>
+<td><strong>Write WebAssembly text directly</strong></td>
+<td>WebAssembly's own assembly-like text format (<code>.wat</code>) runs natively, with no emulator.</td>
+<td>Teaches assembly concepts (stack machine, locals, linear memory), but it isn't x86 or ARM.</td>
+</tr>
+<tr>
+<td><strong>Assembler and emulator in the page</strong></td>
+<td>The assembler and CPU emulator ship as Wasm or JavaScript, so readers edit and run assembly live (e.g. a RISC-V simulator, or small 6502 environments).</td>
+<td>Good for interactive lessons; larger download.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="how-it-fits-the-build">How it fits the build</h3>
+<ol>
+<li><strong>Build (GitHub Actions):</strong> install NASM, LFortran or Emscripten; compile <code>.f90</code> and <code>.asm</code> sources to <code>.wasm</code> or <code>.com</code>; copy them into the site with a loader script.</li>
+<li><strong>Browser:</strong> the static page loads and runs them.</li>
+<li><strong>With Astro:</strong> each demo is one interactive component, placed next to the review finding it proves or disproves. It loads only on that page.</li>
+</ol>
+<h3 id="limits">Limits</h3>
+<ul>
+<li><strong>Threads:</strong> multithreaded Wasm (Emscripten pthreads, parallel Fortran) needs server settings GitHub Pages can't set. The workaround is the small <code>coi-serviceworker</code> script. Single-threaded code needs nothing extra.</li>
+<li><strong>Size:</strong> js-dos, v86 and in-browser compilers add a few MB. Load them only on demo pages.</li>
+</ul>
+<h3 id="first-two-demos-proofs-of-concept">First two demos (proofs of concept)</h3>
+<ol>
+<li><strong>Fortran:</strong> a small numerical kernel (e.g. a 1-D heat equation) compiled to Wasm, with a slider for the grid size and a live chart. It also tests LFortran against report 01's claims about modern Fortran tooling.</li>
+<li><strong>Assembly:</strong> a NASM Mode 13h program running in js-dos. It tests report 02's frame-rate and tearing claims directly.</li>
+</ol>
+<p>If both work, they become <strong>interactive evidence</strong> in the review, not just text.</p>
+<h2 id="phase-5-the-90-day-learning-track-october-to-december-2026">Phase 5: the 90-day learning track (October to December 2026)</h2>
+<p>This phase is shaped by O1. Whichever language is chosen:
+- Each milestone produces a <strong>small program that runs in the browser</strong>, using the Phase 4 routes, and is published on the site next to the milestone notes.
+- The track's goals are taken from the reviewed report, <strong>after</strong> pass-2 corrections. Overclaims flagged in pass 1 are not treated as targets, e.g. "production-ready PDE solver" or "locked 60/70 fps raycaster".
+- Progress is tracked the same way as the review findings: data in the repository, rendered on the site, updated by commits.</p></article>
+</main>
+<footer class="site">Generated from <code>review/</code> by <code>site/build.py</code>.</footer>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
