@@ -78,6 +78,8 @@ export default defineConfig({
 						{ label: 'Test 1: the dot on a flat plane', link: '/game/test1/' },
 						{ label: 'Test 2a: the dot in 3D', link: '/game/test2a/' },
 						{ label: 'Test 2b: wrong values, and the check', link: '/game/test2b/' },
+						{ label: 'Test 3a: the wave turns', link: '/game/test3a/' },
+						{ label: 'Test 3b: a wrong quarter turn', link: '/game/test3b/' },
 					],
 				},
 				{ label: 'Plan and decisions', items: [{ autogenerate: { directory: 'plan' } }] },

@@ -67,6 +67,11 @@ The owner asked for the same movement of the dot, but in a world with depth. The
 5. **Test 2b:** the same program with one wrong word (`SHR`, not `SAR`), on the page `/game/test2b/`. The check finds 128 wrong points. The build requires this check to fail.
 6. **The hub:** the page `/game/` lists all tests, with the result of each check.
 
+## Phase 4c: test 3, the wave turns (done)
+
+1. **Test 3a:** the wave goes from the back to the front, and turns around the center of the 3D space. `src/spin3d.asm` uses double buffering. The check agrees on 4096 of 4096 points. The page is `/game/test3a/`.
+2. **Test 3b:** the same program with one wrong value (`QUARTER_TURN equ 90`, not 64). The ring on the floor becomes a tilted oval. The check finds 3759 wrong points. The page is `/game/test3b/`.
+
 ## Decision D19 (was O7): how the two languages share the game
 
 The only free compiler that makes DOS programs from Fortran (OpenWatcom) knows only FORTRAN 77. That is the dialect of 1977, not modern Fortran.

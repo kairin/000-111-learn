@@ -37,6 +37,8 @@ None at this time. The next choices come with the game design (see [PLAN.md](PLA
 | **D22** | **The second test puts the dot in 3D.** The same sine movement. The curve starts at the back and ends at the front, and its middle point is the center of the 3D space. The A side does a perspective division. The B side makes no new table. It checks the screen positions. | Decided by the owner, done | The two sides agree on 256 of 256 points. See `game/README.md` and the page `/game/test2a/`. |
 | **D23** | **Show a wrong program next to the right one (test 2b).** One wrong word (`SHR`, not `SAR`) makes half of the values wrong. The build requires the check to fail on it, so the check itself is tested. Each test has its own page under `/game/`. | Decided by the owner, done | 128 of 256 points wrong. See the page `/game/test2b/`. |
 
+| **D24** | **Test 3 turns the wave around the center.** The wave goes from the back to the front and turns like a record on a turntable. Test 3b uses one wrong value (90, a quarter turn in degrees, not 64, a quarter turn in 256 steps). | Decided by the owner, done | 4096 of 4096 points agree in test 3a. The check finds 3759 wrong points in test 3b. |
+
 ## Why some decisions changed
 
 - **D6 to D12:** the custom builder worked. Astro with Starlight gives menus, search and themes without custom code.

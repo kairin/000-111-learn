@@ -272,3 +272,17 @@ body:has(.duet) { --sl-content-width: 90rem; }
 .angle-strip span.ok { background: #2e9d57; }
 .angle-strip span.bad { background: #d9433b; }
 .angle-strip span.now { outline: 2px solid var(--sl-color-white); outline-offset: 1px; }
+
+/* Test 3: the turning wave, seen from above, and the wrong points for each turn. */
+.view3d .v-ring { fill: none; stroke: #c040c0; stroke-width: 3; }
+.view3d .v-axis { stroke: var(--sl-color-gray-5); stroke-width: 1; stroke-dasharray: 4 4; }
+.view3d .v-start { stroke: var(--sl-color-gray-5); stroke-width: 2; stroke-dasharray: 6 6; }
+.view3d .v-ring-right { fill: none; stroke: #2e9d57; stroke-width: 3; stroke-dasharray: 8 5; }
+.view3d .v-ring-wrong { fill: none; stroke: #d9433b; stroke-width: 3; }
+.view3d .v-wave-right { stroke: #2e9d57; stroke-width: 4; stroke-dasharray: 10 6; }
+.view3d .v-wave-wrong { stroke: #d9433b; stroke-width: 4; }
+.view3d .v-dot-right { fill: none; stroke: #2e9d57; stroke-width: 3; }
+.turn-bars { display: grid; grid-template-columns: repeat(16, 1fr); gap: 4px; height: 8rem; max-width: 40rem; align-items: end; }
+.turn-bar { display: grid; grid-template-rows: 1fr auto; height: 100%; margin: 0; }
+.turn-bar .bar { align-self: end; background: #d9433b; border-radius: 2px 2px 0 0; }
+.turn-bar .lbl { font-size: 0.65rem; text-align: center; color: var(--sl-color-gray-3); font-family: var(--__sl-font-mono); }

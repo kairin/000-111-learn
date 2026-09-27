@@ -36,9 +36,9 @@ GitHub Actions runs `game/build.sh` for each push to `main`. If the check fails,
 ## The steps in build.sh
 
 1. The B side makes `sine.bin`.
-2. NASM assembles `SPIKE.COM`, `DOT3D.COM` and `WRONG3D.COM` (the games), and `CHECK.COM`, `CHECK3D.COM` and `CHECK3DW.COM` (the tests).
-3. DOSBox runs the three tests without a screen. They write `Y.BIN`, `P3D.BIN` and `P3DW.BIN`.
-4. The B side compares the files with its own answers and writes `check.json`, `check3d.json` and `check3d-wrong.json`. The first two checks must pass. The check of `P3DW.BIN` must fail.
+2. NASM assembles the games (`SPIKE.COM`, `DOT3D.COM`, `WRONG3D.COM`, `SPIN3D.COM` and `WRONGSP.COM`) and the tests (`CHECK.COM`, `CHECK3D.COM`, `CHECK3DW.COM`, `CHECK3R.COM` and `CHECK3RW.COM`).
+3. DOSBox runs the five tests without a screen. They write `Y.BIN`, `P3D.BIN`, `P3DW.BIN`, `R3D.BIN` and `R3DW.BIN`.
+4. The B side compares the files with its own answers. The checks of tests 1, 2a and 3a must pass. The checks of the wrong programs (tests 2b and 3b) must fail.
 5. A Python step packs each game into a `.jsdos` file, the file that js-dos plays.
 
 ## Results of the first test
@@ -103,10 +103,48 @@ Test 2b shows why each test needs a check. It is the program of test 2a with one
 - `build.sh` requires this check to **fail**. If the check accepts the wrong program, the check itself is broken, and the build stops.
 - The page `/game/test2b/` runs the wrong program. It shows the wrong word, the bits of SAR and SHR for the dot now, the correct and the wrong screen position, and the report of the check.
 
+## Test 3a: the wave turns
+
+The wave of test 2 goes from the back to the front. In test 3, it goes straight from the back to the front, through the center of the world. Then it turns around the center, like a record on a turntable, and the dot moves along it. The wave turns one step for each two steps of the dot. A full turn has 256 steps.
+
+| File | Side | What it does |
+|---|---|---|
+| `lab/sine_table.f90` | B | The same table as test 1. |
+| `src/spin3d.inc` | A | The routine `spin_point`: one angle along the wave and one turn in, one 3D point out. It uses `project` from `path3d.inc`. |
+| `src/spin3d.asm` | A | Draws the floor and a ring (the circle that the ends of the wave follow). For each step, it draws the wave, its footprint, and the dot with its pole and shadow. |
+| `src/common.inc` | A | The routines that tests 2 and 3 share: the keys, the pixel address and the screen refresh. |
+| `test/check3r.asm` | A | Runs the routines for 16 turns (0, 16, 32 … 240) and all 256 angles: 4096 points. It writes three numbers for each point to `R3D.BIN`. |
+| `lab/check_spin.f90` | B | Calculates the 4096 points again and compares them with `R3D.BIN`. |
+
+### The maths of the turn
+
+- d = 128 - angle is the place of a point on the wave.
+- Before the turn: X = 0, Z = d. The wave goes from the back to the front.
+- After the turn T: X = d * sin(T), Z = d * cos(T). Y = 64 * sin(angle), as before.
+- The cosine is the sine a quarter turn later. A full turn has 256 steps, so a quarter turn is 64 steps: `QUARTER_TURN equ 64`.
+- d * sin(T) can be 128 * 256 = 32768. That number does not fit in AX with a sign. The program keeps the middle two bytes of DX:AX.
+
+### Double buffering
+
+The whole picture changes at each step. If the program draws on the screen, you see the wave go away and come back. Thus the program uses two buffers of 64000 bytes in the memory after the program: the background (the floor and the ring, drawn once) and the work buffer. For each step, it copies the background into the work buffer (`REP MOVSW`), draws the wave and the dot there, waits for the screen refresh, and copies the work buffer to the screen.
+
+### Results of test 3a
+
+- The two sides agree on 4096 of 4096 points. The largest difference from exact maths is 1 pixel.
+- `SPIN3D.COM` is 1219 bytes.
+
+## Test 3b: a wrong quarter turn
+
+Test 3b is the program of test 3a with one wrong value: `QUARTER_TURN equ 90`. A quarter turn is 90 degrees, but this circle has 256 steps, not 360 degrees. With 90, the program reads the cosine 26 steps too late.
+
+- NASM builds it from the same files, with the switch `-dWRONG_TURN`. The files are `WRONGSP.COM` (the game) and `CHECK3RW.COM` (the test, which writes `R3DW.BIN`).
+- On the screen, the ring is a tilted oval, not a circle. The wave grows and shrinks while it turns, and it turns at a speed that changes.
+- The checker finds 3759 of 4096 points wrong, with wrong points at each of the 16 turns. `build.sh` requires this check to fail.
+
 ## The game pages
 
 - `/game/`: all tests, with the result of each check.
-- `/game/test1/`, `/game/test2a/` and `/game/test2b/`: one page for each test.
+- `/game/test1/`, `/game/test2a/`, `/game/test2b/`, `/game/test3a/` and `/game/test3b/`: one page for each test.
 
 ## The game page: A and B working together
 
