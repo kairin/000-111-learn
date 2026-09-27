@@ -1,0 +1,6 @@
+node_modules/
+.astro/
+# generated from ../review by scripts/sync-content.mjs
+src/content/docs/
+src/data/
+public/sources/

@@ -1,0 +1,25 @@
+{
+  "name": "review-tracker-site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "sync": "node scripts/sync-content.mjs",
+    "predev": "node scripts/sync-content.mjs",
+    "dev": "astro dev",
+    "prebuild": "node scripts/sync-content.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.4",
+    "astro": "^7.2.10",
+    "sharp": "^0.35.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

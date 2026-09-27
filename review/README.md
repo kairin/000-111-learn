@@ -29,15 +29,15 @@ The four documents live in `segments/`.
 │   │   └── <doc-slug>/NN-*.md       ← (generated) 22 + 20 + 7 + 7 segment files
 │   ├── findings/
 │   │   ├── pass1.json               ← SOURCE OF TRUTH: the 61 pass-1 findings
-│   │   ├── status.json              ← (optional) status/notes exported from the website
+│   │   ├── status.json              ← status/note overrides per finding (edit on GitHub)
 │   │   ├── documents.json           ← per-document verdicts per pass
 │   │   └── segment-map.md           ← (generated) segments vs. findings comparison
 │   └── adversarial-review-pass1/    ← the pass-1 write-ups (narrative)
 │       ├── 00-SUMMARY.md
 │       └── 01-…review.md … 04-…review.md
-├── site/                            ← website generator (build.py + assets/)
-├── serve/                           ← (generated) static website; copied to the gh-pages branch on push
-└── .githooks/                       ← pre-commit: regenerate + stage; pre-push: publish gh-pages
+├── site/                            ← Astro + Starlight website (reads review/)
+├── serve/                           ← (generated, not committed) build output
+└── .github/workflows/pages.yml      ← GitHub Actions: build site/ → serve/ → GitHub Pages
 ```
 
 Files marked **(generated)** are overwritten on every run, so don't hand-edit them.
@@ -115,56 +115,52 @@ What the comparison shows:
 - **Spanning findings**: several findings attack a claim repeated across segments. The largest is D02-C4 ("locked 60/70 fps"), which spans 4 segments. That reflects how often the documents repeat the claim, not a segmentation problem.
 - **"Not yet challenged" is not "verified correct".** Those segments (mostly introductions, decision tables and works-cited lists) are the targets for pass 2.
 
-## Step 4: Review-tracker website (`site/` → `serve/`)
+## Step 4: Review-tracker website (`site/`, Astro + Starlight)
 
-`site/build.py` turns `review/` into a static website in `serve/`. It needs no framework: it uses Python plus the `markdown` package, which `uv` fetches automatically. The output is plain HTML, CSS and JavaScript that runs with no server code, so GitHub Pages can host it for free.
+`site/` is an [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) project. It reads `review/` and produces a static site, so GitHub Pages can host it for free.
 
-**Build:** from `000-111-learn/` run `uv run site/build.py`. **Preview:** `python3 -m http.server -d serve 8000`, then open `http://localhost:8000`.
+`site/scripts/sync-content.mjs` runs automatically before every build. It:
+- turns each `review/**.md` file into a Starlight page, rewriting the links between them,
+- copies the two original Gemini HTML pages unchanged (their quizzes and charts still work),
+- writes the data the dashboard and findings explorer use, from `findings/*.json`, `segments/manifest.json`, and this README's status list and log.
+
+The generated folders (`site/src/content/docs`, `site/src/data`, `site/public/sources`) are git-ignored.
+
+**Build locally** (optional): `cd site && npm ci && npm run build` writes to `serve/`. Then `npx astro preview` serves it at `http://localhost:4321/000-111-learn/`. For live editing, use `npm run dev`. You need Node 22.12 or later.
 
 What the site has:
-- **Dashboard** (`index.html`):
-  - progress cards and a resolved-findings bar,
-  - the document scorecard,
-  - a clickable **segment heatmap** (colour = worst finding, dashed = not yet challenged),
-  - this README's status checklist and log.
-- **Findings** (`findings/index.html`):
-  - filter by document, severity, evidence and status, plus free-text search,
-  - sortable columns,
-  - shareable filter URLs (e.g. `#doc=02&severity=critical`),
+- **Dashboard** (`/`): progress cards, the resolved-findings bar, the document scorecard, a clickable **segment heatmap**, and this README's status checklist and log.
+- **Findings explorer** (`/findings/`):
+  - filters by document, severity, evidence and status, plus free-text search,
+  - sortable columns and shareable filter URLs (e.g. `#doc=02&severity=critical`),
   - links to the affected segments,
-  - an **editable status and note on each finding**.
-- **Segments**: every segment as a page, with metadata, mapped findings, worksheet, and previous/next navigation.
-- **Reviews** and **Process**: the pass-1 write-ups and this README, rendered.
-- **Original documents**: the reports rendered, and the two HTML advisors copied unchanged, so their quizzes and charts still work.
-- Site-wide search (press `/`) and a light/dark toggle.
+  - status and note drafts saved in your browser.
+- **Every page from `review/`**: plan, decisions, session records, reviews, sources and all 56 segments, in a sidebar. Each page has an "Edit page" link that opens its source file in `review/` on GitHub.
+- Built-in full-text search (Pagefind), light/dark/auto themes, and a mobile layout.
 
-**How tracking works on a static site.** GitHub Pages can't save anything, so status changes follow a commit loop:
-1. On the Findings page, change statuses and notes. They are saved in your browser only.
-2. Click **Export status.json** and save it as `review/findings/status.json`.
-3. `git add review/findings/status.json && git commit && git push`. The hooks rebuild and publish the site, and git history becomes the audit trail.
+**Tracking statuses on a static site:**
+1. **Permanent:** on the findings page, click **edit `review/findings/status.json` on GitHub**. Add or change an entry, for example:
+   ```json
+   "D02-C3": {"status": "confirmed", "note": "…", "updated": "2026-10-01"}
+   ```
+   Commit in the browser, and Actions rebuilds the site in about a minute.
+2. **Drafting:** change statuses in the table. Then click **Copy status.json** to get the complete file, ready to paste into the GitHub editor.
 
-## Publishing to GitHub Pages (local build, no Actions)
+## Publishing to GitHub Pages (GitHub Actions)
 
 - **Repository (public):** https://github.com/kairin/000-111-learn
 - **Live site:** https://kairin.github.io/000-111-learn/
 
-Nothing is built on GitHub, and the repository has no Actions workflow. Two local git hooks in `.githooks/` do the work:
+Every push to `main` runs `.github/workflows/pages.yml` on GitHub. It:
+1. re-splits the segments (`review/segments/split_documents.py`),
+2. builds the site (`site/`, `npm ci && npm run build`),
+3. deploys `serve/` to GitHub Pages (Settings → Pages → Source: **GitHub Actions**).
 
-| Hook | Runs on | What it does |
-|---|---|---|
-| `pre-commit` | every `git commit` | Runs `site/regenerate.sh`, which takes a snapshot of the **staged** files, re-splits the segments, re-maps the findings, rebuilds `serve/`, and **stages the regenerated files into the same commit**. If the build fails, the commit is aborted. |
-| `pre-push` | `git push` of `main` | Copies the pushed commit's `serve/` folder into a new commit on the **`gh-pages`** branch and pushes `gh-pages` too. It skips this if the site is unchanged. |
+Actions is free for public repositories. **Daily use:** edit `review/…` (locally or in the GitHub web editor), then commit and push. Nothing needs building locally.
 
-GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub still runs its own built-in publish step after `gh-pages` changes; every Pages site gets this, and it can't be disabled. That step only copies the files, because `.nojekyll` switches off Jekyll processing.
+**Note:** the workflow regenerates the segment files for the site only; it doesn't commit them back. If you change `findings/*.json` locally and want the repository's segment files to match, run `python3 review/segments/split_documents.py` before committing.
 
-**Daily use:** edit `review/…`, then `git add … && git commit && git push`. That's all.
-
-**Rules:**
-- **New clone:** hooks aren't cloned. Enable them once with `git config core.hooksPath .githooks`. You also need `uv`, `python3` and `rsync`.
-- **Don't edit generated files by hand** (`serve/`, segment files, `manifest.json`, `segment-map.md`). Each commit overwrites them.
-- The build is **deterministic**: there are no timestamps and `markdown` is pinned. Commits that don't touch `review/` or `site/` therefore produce no site changes.
-- `git commit --no-verify` skips regeneration, and the site can then lag behind. Run `site/regenerate.sh` and commit to catch up.
-- **Never commit to `gh-pages` by hand.** The pre-push hook owns it.
+(Earlier on 2026-09-27 the site was built by local git hooks and served from a `gh-pages` branch. That setup was replaced by this one. See [plan/DECISIONS.md](plan/DECISIONS.md), D9 and D10.)
 
 ## Plan and decisions
 
@@ -180,8 +176,9 @@ GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub sti
 - [x] Build the review-tracker website into `serve/`
 - [x] Create the public GitHub repository and enable Pages
 - [x] Replace the Actions deployment with local hooks and a `gh-pages` branch
-- [ ] **Decide the primary goal: career skill or retro game** (decision O1). This decides which document is worth revising.
-- [ ] Move the build to GitHub Actions (D10), after choosing the site tool (O2)
+- [x] Decide the primary goal: **learn both**, for usefulness and fun, through a constrained game playable on this site (D11)
+- [ ] **Choose how the two languages share the game** (decision O7), then the game concept and constraints (O8)
+- [x] Move the site to Astro + Starlight, built and deployed by GitHub Actions (D10, D12)
 - [ ] Browser-run Assembly and Fortran demos (PLAN.md, Phase 4)
 - [ ] Pass 2: fetch and check the high-stakes citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
@@ -205,3 +202,4 @@ GitHub Pages is set to **Deploy from a branch: `gh-pages` / (root)**. GitHub sti
 | 2026-09-27 | Published public repo and enabled GitHub Pages (Actions) | https://kairin.github.io/000-111-learn/ |
 | 2026-09-27 | Removed the Actions workflow; the site is now built locally by git hooks and served from `gh-pages` | `.githooks/`, `site/regenerate.sh` |
 | 2026-09-27 | Wrote the plan (including in-browser Assembly/Fortran), the decision log, and the session record | `plan/` |
+| 2026-09-27 | Goal decided: learn both via a constrained browser-playable game. Site moved to Astro + Starlight on GitHub Actions; hooks and `gh-pages` removed | `site/`, `.github/`, `plan/` |

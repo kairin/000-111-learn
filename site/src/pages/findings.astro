@@ -1,0 +1,198 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import findings from '../data/findings.json';
+import site from '../data/site.json';
+import { SEVERITIES, STATUSES } from '../lib/inline';
+
+const docs = [...new Set(findings.map((f) => f.doc))].sort();
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Findings explorer',
+		description: 'Filter, search and track the status of every adversarial-review finding.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page">
+		<p class="lead">
+			All {findings.length} findings from the adversarial review. Filter and search them, and click a segment link to see the claim in context.
+		</p>
+
+		<details class="howto">
+			<summary>How to record a status change</summary>
+			<ol>
+				<li>
+					<strong>Permanent (recommended):</strong> <a href={site.statusEditUrl} target="_blank" rel="noopener">edit <code>{site.statusFile}</code> on GitHub ↗</a>.
+					Add or change an entry, e.g. <code>{'"D02-C3": {"status": "confirmed", "note": "Frontier was 68000 asm", "updated": "2026-10-01"}'}</code>,
+					then commit. GitHub Actions rebuilds the site in about a minute.
+				</li>
+				<li>
+					<strong>Draft in this browser:</strong> change the status or note in the table below. Edits are kept only in this browser.
+					<em>Copy status.json</em> copies the complete file, ready to paste into the GitHub editor.
+				</li>
+			</ol>
+		</details>
+
+		<div class="filters" id="filters">
+			<label>Document <select data-f="doc"><option value="">All</option>{docs.map((d) => <option>{d}</option>)}</select></label>
+			<label>Severity <select data-f="severity"><option value="">All</option>{SEVERITIES.map((s) => <option>{s}</option>)}</select></label>
+			<label>Evidence <select data-f="tag"><option value="">All</option><option>DOC</option><option>KNOW</option><option>VERIFY</option></select></label>
+			<label>Status <select data-f="status"><option value="">All</option>{STATUSES.map((s) => <option>{s}</option>)}</select></label>
+			<label class="grow">Search <input type="search" data-f="q" placeholder="ID, text, location…" /></label>
+		</div>
+		<div class="bar">
+			<span id="count"></span>
+			<span class="spacer"></span>
+			<span id="dirty" hidden></span>
+			<button type="button" id="copy">Copy status.json</button>
+			<button type="button" id="download" class="ghost">Download</button>
+			<button type="button" id="reset" class="ghost">Discard local edits</button>
+		</div>
+		<div class="table-wrap">
+			<table class="findings" id="ftable">
+				<thead>
+					<tr>
+						<th data-sort="id">ID</th><th data-sort="severity">Severity</th><th>Evidence</th><th data-sort="status">Status</th>
+						<th>Location / segments</th><th>Problem</th><th>Note</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+	<script is:inline type="application/json" id="findings-data" set:html={JSON.stringify({ findings, statuses: STATUSES })} />
+</StarlightPage>
+
+<script>
+	import { esc, inline } from '../lib/inline';
+
+	type Seg = { n: string; title: string; href: string | null };
+	type Finding = {
+		id: string; doc: string; source: string; docHref: string; severity: string; location: string; claim: string;
+		problem: string; tags: string[]; status: string; note: string; updated: string; segments: Seg[];
+	};
+	const { findings: FINDINGS, statuses: STATUSES } = JSON.parse(document.getElementById('findings-data')!.textContent!) as {
+		findings: Finding[]; statuses: string[];
+	};
+	const SEV: Record<string, number> = { critical: 0, major: 1, minor: 2 };
+	const KEY = 'findings-edits-v1';
+	const table = document.getElementById('ftable') as HTMLTableElement;
+	const filters: Record<string, string> = { doc: '', severity: '', tag: '', status: '', q: '' };
+	let sortKey = 'severity', sortDir = 1;
+
+	let edits: Record<string, { status?: string; note?: string }> = {};
+	try { edits = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { edits = {}; }
+	const save = () => { try { localStorage.setItem(KEY, JSON.stringify(edits)); } catch { /* storage unavailable */ } };
+	const cur = (f: Finding) => ({ status: edits[f.id]?.status ?? f.status, note: edits[f.id]?.note ?? f.note });
+	const isEdited = (f: Finding) => { const c = cur(f); return c.status !== f.status || c.note !== f.note; };
+
+	function readHash() {
+		for (const kv of location.hash.slice(1).split('&')) {
+			const [k, v] = kv.split('=');
+			if (k in filters) filters[k] = decodeURIComponent(v || '');
+		}
+		document.querySelectorAll<HTMLInputElement>('#filters [data-f]').forEach((el) => (el.value = filters[el.dataset.f!]));
+	}
+	function writeHash() {
+		const h = Object.keys(filters).filter((k) => filters[k]).map((k) => `${k}=${encodeURIComponent(filters[k])}`).join('&');
+		history.replaceState(null, '', h ? `#${h}` : location.pathname);
+	}
+
+	function render() {
+		const q = filters.q.toLowerCase();
+		const rows = FINDINGS.filter((f) => {
+			const c = cur(f);
+			if (filters.doc && f.doc !== filters.doc) return false;
+			if (filters.severity && f.severity !== filters.severity) return false;
+			if (filters.tag && !f.tags.includes(filters.tag)) return false;
+			if (filters.status && c.status !== filters.status) return false;
+			if (q) {
+				const hay = [f.id, f.location, f.claim, f.problem, f.source, c.note].join(' ').toLowerCase();
+				if (q.split(/\s+/).some((t) => !hay.includes(t))) return false;
+			}
+			return true;
+		}).sort((a, b) => {
+			const v = (f: Finding) => (sortKey === 'severity' ? SEV[f.severity] : sortKey === 'status' ? STATUSES.indexOf(cur(f).status) : f.id);
+			const va = v(a), vb = v(b);
+			return (va < vb ? -1 : va > vb ? 1 : a.id < b.id ? -1 : 1) * sortDir;
+		});
+		table.tBodies[0].innerHTML = rows.map((f) => {
+			const c = cur(f);
+			const segs = f.segments.length
+				? f.segments.map((s) => `<a href="${esc(s.href)}" title="${esc(s.title)}">seg ${s.n}</a>`).join(' ')
+				: '<span class="muted">document-level</span>';
+			return `<tr id="${f.id}"${isEdited(f) ? ' class="edited"' : ''}>
+				<td class="mono">${esc(f.id)}</td>
+				<td><span class="sev sev-${f.severity}">${f.severity}</span></td>
+				<td>${f.tags.map((t) => `<span class="tag">${t}</span>`).join(' ')}</td>
+				<td><select data-id="${f.id}" aria-label="Status of ${f.id}">${STATUSES.map((s) => `<option${s === c.status ? ' selected' : ''}>${s}</option>`).join('')}</select></td>
+				<td class="loc"><a href="${esc(f.docHref)}">${esc(f.source)}</a><br><span class="muted">${inline(f.location)}</span><br>${segs}</td>
+				<td class="prob">${f.claim ? `<span class="claim">Claim: ${inline(f.claim)}</span>` : ''}${inline(f.problem)}</td>
+				<td><input class="note" data-id="${f.id}" value="${esc(c.note)}" placeholder="note…" aria-label="Note for ${f.id}"></td>
+			</tr>`;
+		}).join('');
+		document.getElementById('count')!.textContent = `${rows.length} of ${FINDINGS.length} findings`;
+		const n = FINDINGS.filter(isEdited).length;
+		const dirty = document.getElementById('dirty')!;
+		dirty.hidden = !n;
+		dirty.textContent = `${n} local edit${n === 1 ? '' : 's'} — copy status.json into GitHub to keep`;
+	}
+
+	table.addEventListener('change', (e) => {
+		const el = e.target as HTMLInputElement | HTMLSelectElement;
+		const id = el.dataset.id;
+		if (!id) return;
+		(edits[id] ??= {})[el.tagName === 'SELECT' ? 'status' : 'note'] = el.value;
+		save();
+		render();
+	});
+	table.tHead!.addEventListener('click', (e) => {
+		const k = (e.target as HTMLElement).dataset.sort;
+		if (!k) return;
+		sortDir = sortKey === k ? -sortDir : 1;
+		sortKey = k;
+		render();
+	});
+	document.getElementById('filters')!.addEventListener('input', (e) => {
+		const el = e.target as HTMLInputElement;
+		if (!el.dataset.f) return;
+		filters[el.dataset.f] = el.value;
+		writeHash();
+		render();
+	});
+
+	function statusJson() {
+		const today = new Date().toISOString().slice(0, 10);
+		const out: Record<string, { status: string; note: string; updated: string }> = {};
+		for (const f of FINDINGS) {
+			const c = cur(f);
+			if (c.status === f.status && c.note === f.note && !f.updated) continue; // untouched: keep pass default
+			out[f.id] = { status: c.status, note: c.note, updated: isEdited(f) ? today : f.updated };
+		}
+		return JSON.stringify(out, null, 1) + '\n';
+	}
+	document.getElementById('copy')!.addEventListener('click', async (e) => {
+		const btn = e.currentTarget as HTMLButtonElement;
+		try { await navigator.clipboard.writeText(statusJson()); btn.textContent = 'Copied ✓'; }
+		catch { btn.textContent = 'Copy failed — use Download'; }
+		setTimeout(() => (btn.textContent = 'Copy status.json'), 2000);
+	});
+	document.getElementById('download')!.addEventListener('click', () => {
+		const a = document.createElement('a');
+		a.href = URL.createObjectURL(new Blob([statusJson()], { type: 'application/json' }));
+		a.download = 'status.json';
+		document.body.append(a);
+		a.click();
+		a.remove();
+		setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+	});
+	document.getElementById('reset')!.addEventListener('click', () => { edits = {}; save(); render(); });
+
+	readHash();
+	render();
+	const m = location.hash.match(/q=([A-Za-z0-9-]+)/);
+	if (m) document.getElementById(m[1])?.scrollIntoView({ block: 'center' });
+	window.addEventListener('hashchange', () => { readHash(); render(); });
+</script>

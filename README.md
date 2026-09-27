@@ -1,6 +1,6 @@
 # 000-111-learn
 
-Choosing, and then learning, **Assembly or Fortran** in the roughly 90 days left in 2026. Four Gemini-generated guides frame the choice. They are adversarially reviewed here before anyone relies on them, and the review is published as an interactive static site.
+Learning **both Assembly and Fortran** in the roughly 90 days left in 2026, for usefulness and fun, by building a small, deliberately constrained game that can be played on this repository's GitHub Pages site. Four Gemini-generated guides shaped the starting point. They are adversarially reviewed here before anyone relies on them, and the review is published as an interactive static site.
 
 - **Live site:** https://kairin.github.io/000-111-learn/
 - **Plan:** [review/plan/PLAN.md](review/plan/PLAN.md)
@@ -16,5 +16,5 @@ Choosing, and then learning, **Assembly or Fortran** in the roughly 90 days left
 | `review/adversarial-review-pass1/` | Pass-1 adversarial reviews |
 | `review/findings/` | Findings data (`pass1.json`, the source of truth), verdicts, and the segment map |
 | `review/plan/` | Plan, decision log, session records |
-| `site/` | Static-site builder |
-| `serve/` | Generated site (currently committed; see decision D10 on moving to GitHub Actions) |
+| `site/` | Astro + Starlight site (reads `review/`) |
+| `.github/workflows/pages.yml` | Builds and deploys the site on every push to `main` |
