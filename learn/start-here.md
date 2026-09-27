@@ -12,6 +12,8 @@ A cassette tape has two sides. This site has two sides too.
 
 - **B side: Fortran.** This language speaks maths. It lets you write formulas that a machine can run.
 
+  ![A cassette tape with a handwritten label: "B Side. Fortran, the language that speaks maths."](images/b-side-cassette.jpg)
+
 ## Your own languages are the model
 
 Think about the languages that you already know.

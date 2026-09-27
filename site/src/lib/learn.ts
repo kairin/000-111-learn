@@ -4,8 +4,9 @@ import parts from '../data/parts-of-speech.json';
 import vocabA from '../data/vocab-a.json';
 import vocabB from '../data/vocab-b.json';
 import aSideCassette from '../assets/learn/a-side-cassette.jpg';
+import bSideCassette from '../assets/learn/b-side-cassette.jpg';
 
-/** A photo for a side. The B side has no photo yet: add one to learn/images/ and here. */
+/** A photo for a side (the owner's cassette photos in learn/images/). */
 export type SideImage = { src: ImageMetadata; alt: string };
 
 export type Side = 'a' | 'b';
@@ -26,7 +27,17 @@ export const SIDES: Record<
 			alt: 'A cassette tape with a handwritten label: "A Side. Assembly, the first language of the machine."',
 		},
 	},
-	b: { letter: 'B', name: 'Fortran', label: 'B side', tagline: 'The language that speaks maths', vocab: vocabB },
+	b: {
+		letter: 'B',
+		name: 'Fortran',
+		label: 'B side',
+		tagline: 'The language that speaks maths',
+		vocab: vocabB,
+		image: {
+			src: bSideCassette,
+			alt: 'A cassette tape with a handwritten label: "B Side. Fortran, the language that speaks maths."',
+		},
+	},
 };
 export const other = (side: Side): Side => (side === 'a' ? 'b' : 'a');
 export const codeLang = (side: Side) => (side === 'a' ? 'nasm' : 'fortran-free-form');

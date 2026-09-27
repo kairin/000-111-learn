@@ -49,22 +49,23 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 	<text x="${W - 64}" y="${H - 28}" text-anchor="end" font-size="18" fill="${C.muted}" font-family="${FONT}">Small dictionary, long sentences · Large dictionary, short sentences</text>
 </svg>`;
 
-// The A side uses the owner's cassette photo, when it exists. A caption strip shows the dictionary size.
-const photoPath = path.join(SITE_DIR, 'src/assets/learn/a-side-cassette.jpg');
+// Each side uses the owner's cassette photo, when it exists. A caption strip shows the dictionary size.
 const layers = [];
-if (fs.existsSync(photoPath)) {
-	const card = { x: 64, y: 150, w: 520, h: 380, r: 18 };
+for (const { key, x } of [{ key: 'a', x: 64 }, { key: 'b', x: 616 }]) {
+	const photoPath = path.join(SITE_DIR, `src/assets/learn/${key}-side-cassette.jpg`);
+	if (!fs.existsSync(photoPath)) continue;
+	const card = { x, y: 150, w: 520, h: 380, r: 18 };
 	const mask = Buffer.from(`<svg width="${card.w}" height="${card.h}"><rect width="${card.w}" height="${card.h}" rx="${card.r}"/></svg>`);
 	const photo = await sharp(photoPath)
 		.resize(card.w, card.h, { fit: 'cover' })
 		.composite([{ input: mask, blend: 'dest-in' }])
 		.png()
 		.toBuffer();
-	const size = vocab.a.size[0];
+	const size = vocab[key].size[0];
 	const caption = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-	<rect x="${card.x}" y="${card.y}" width="${card.w}" height="${card.h}" rx="${card.r}" fill="none" stroke="${C.a}" stroke-width="3"/>
+	<rect x="${card.x}" y="${card.y}" width="${card.w}" height="${card.h}" rx="${card.r}" fill="none" stroke="${C[key]}" stroke-width="3"/>
 	<rect x="${card.x + 16}" y="${card.y + card.h - 58}" width="${card.w - 32}" height="42" rx="10" fill="${C.bg}" fill-opacity="0.85"/>
-	<text x="${card.x + 32}" y="${card.y + card.h - 29}" font-size="24" font-weight="700" fill="${C.a}" font-family="${FONT}">${esc(size.value)}<tspan dx="10" font-size="18" font-weight="400" fill="${C.text}">${esc(size.label)}</tspan></text>
+	<text x="${card.x + 32}" y="${card.y + card.h - 29}" font-size="24" font-weight="700" fill="${C[key]}" font-family="${FONT}">${esc(size.value)}<tspan dx="10" font-size="18" font-weight="400" fill="${C.text}">${esc(size.label)}</tspan></text>
 </svg>`);
 	layers.push({ input: photo, left: card.x, top: card.y }, { input: caption, left: 0, top: 0 });
 }
