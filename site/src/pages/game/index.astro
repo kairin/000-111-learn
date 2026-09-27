@@ -1,284 +1,81 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import game from '../../data/game.json';
-import { SIDES, segmentTitle } from '../../lib/learn';
-import partsData from '../../data/parts-of-speech.json';
-import { Image } from 'astro:assets';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const info = game.info;
-const partName = (id: string) => partsData.find((p) => p.id === id)?.name ?? id;
+type Check = { values: number; agree: number; max_error_px: number; passed: boolean };
+const info = game.info as (Record<string, unknown> & { check?: Check; check3d?: Check; check3d_wrong?: Check }) | null;
+
+const tests = [
+	{
+		id: 'test1',
+		name: 'Test 1',
+		title: 'The dot on a flat plane',
+		text: 'Fortran makes a table of 256 sine values. 8086 Assembly draws the curve and moves a yellow dot along it: left to right, and up and down.',
+		check: info?.check,
+		expect: 'pass',
+	},
+	{
+		id: 'test2a',
+		name: 'Test 2a',
+		title: 'The dot in 3D',
+		text: 'The same movement, with depth. The curve starts at the back and ends at the front, and its middle point is the center of the 3D space. The A side divides by the distance from the eye.',
+		check: info?.check3d,
+		expect: 'pass',
+	},
+	{
+		id: 'test2b',
+		name: 'Test 2b',
+		title: 'Wrong values, and the check',
+		text: 'The program of test 2a with one wrong word: SHR, not SAR. Half of the dots go to wrong places. The check finds each wrong point, so a wrong program cannot get onto the site.',
+		check: info?.check3d_wrong,
+		expect: 'fail',
+	},
+];
 ---
 
 <StarlightPage
 	frontmatter={{
-		title: 'The game: first test',
-		description: 'The first program of the game. Fortran makes a table, 8086 Assembly draws with it in a copy of a 1980s PC, and a check proves that the two sides agree.',
+		title: 'The game: all tests',
+		description: 'The tests of the game, one step at a time. Each test is a small 8086 program that runs in the browser, and a Fortran check that proves that its answers are correct.',
 		tableOfContents: false,
 		editUrl: false,
 	}}
 >
 	<div class="wide-page game-page">
 		<p class="lead">
-			This is the first program of the game. The two sides work together: Fortran (the B side) calculates, and Assembly
-			(the A side) draws. The panels show the work for the yellow dot, at the moment it is on the line.
+			The game grows one test at a time. In each test, Fortran (the B side) does the maths, and 8086 Assembly (the A
+			side) draws in a copy of a 1980s PC. A check then compares the answers of the two sides. GitHub Actions runs all
+			checks for each change. If a check fails, the site does not change.
 		</p>
 
-		{game.built ? (
-			<>
-				<div class="duet" data-version={info?.version ?? ''}>
-					<section class="duet-panel side-a" aria-labelledby="a-title">
-						<header>
-							{SIDES.a.image && <Image class="duet-photo" src={SIDES.a.image.src} alt={SIDES.a.image.alt} widths={[160, 320]} sizes="160px" />}
-							<h3 id="a-title"><span class="side-letter">A</span> What the machine does</h3>
-							<p class="muted small">The routine <code>sine_y</code> and the pixel write, for the dot on the screen now.</p>
-						</header>
-						<ol class="duet-steps" id="a-steps"></ol>
-						<p class="small" id="a-bytes"></p>
-					</section>
-
-					<div class="duet-screen">
-						<iframe
-							class="dos-screen"
-							src={`${base}/game/player.html?v=${info?.version ?? ''}`}
-							title="A copy of a 1980s PC that runs the A-side program"
-							allow="fullscreen; autoplay"
-						></iframe>
-						<p class="duet-now" id="duet-now" aria-live="off">Waiting for the copy of the PC to start…</p>
-						<div class="duet-controls" role="group" aria-label="Speed of the dot">
-							<span class="small muted">Speed:</span>
-							<button type="button" data-key="49" title="Key 1">Fastest</button>
-							<button type="button" data-key="50" title="Key 2">Fast</button>
-							<button type="button" data-key="51" title="Key 3">Medium</button>
-							<button type="button" data-key="52" title="Key 4" aria-pressed="true">Slow</button>
-							<button type="button" data-key="53" title="Key 5">Slowest</button>
-							<span class="spacer"></span>
-							<button type="button" data-key="32" title="Space" id="btn-pause">Pause</button>
-							<button type="button" data-key="78" title="Key N">One step</button>
-							<button type="button" id="btn-restart" class="ghost">Restart</button>
-						</div>
-						<p class="muted small">
-							The buttons press the keys of the program: 1 to 5 for the speed, Space for pause, N for one step. The panels
-							follow the yellow dot at each speed.
+		<ol class="test-list">
+			{tests.map((t) => (
+				<li class={`test-card ${t.expect === 'fail' ? 'is-wrong' : ''}`}>
+					<a href={`${base}/game/${t.id}/`}>
+						<span class="test-name">{t.name}</span>
+						<span class="test-title">{t.title}</span>
+					</a>
+					<p class="small">{t.text}</p>
+					{t.check ? (
+						<p class="small test-result">
+							{t.expect === 'pass' ? (
+								<><span class="ok">✓ The check passes:</span> {t.check.agree} of {t.check.values} answers agree.</>
+							) : (
+								<><span class="bad">✗ The check fails, as it must:</span> only {t.check.agree} of {t.check.values} answers agree.</>
+							)}
 						</p>
-					</div>
-
-					<section class="duet-panel side-b" aria-labelledby="b-title">
-						<header>
-							{SIDES.b.image && <Image class="duet-photo" src={SIDES.b.image.src} alt={SIDES.b.image.alt} widths={[160, 320]} sizes="160px" />}
-							<h3 id="b-title"><span class="side-letter">B</span> The maths behind it</h3>
-							<p class="muted small">What the Fortran laboratory calculated for this angle, before the game ran.</p>
-						</header>
-						<svg class="duet-circle" viewBox="-120 -120 240 240" role="img" aria-label="The unit circle with the angle of the dot">
-							<circle r="100" class="c-ring" />
-							<line x1="-110" y1="0" x2="110" y2="0" class="c-axis" />
-							<line x1="0" y1="-110" x2="0" y2="110" class="c-axis" />
-							<line id="c-radius" x1="0" y1="0" x2="100" y2="0" class="c-radius" />
-							<line id="c-sine" x1="100" y1="0" x2="100" y2="0" class="c-sine" />
-							<circle id="c-point" cx="100" cy="0" r="6" class="c-point" />
-						</svg>
-						<ol class="duet-steps" id="b-steps"></ol>
-					</section>
-				</div>
-			</>
-		) : (
-			<p class="notice">
-				The game build is missing on this computer. Run <code>game/dev.sh</code>, or read the published site. GitHub
-				Actions makes the build for each push.
-			</p>
-		)}
-
-		<h2>How it works</h2>
-		<ol class="steps-list">
-			<li>
-				<span class="pill side-b">B</span> <strong>The laboratory</strong> (<code>lab/sine_table.f90</code>)
-				calculates 256 sine values. The 8086 has no verbs for decimal-point numbers. Thus, Fortran changes each value
-				into a whole number: 256 means 1.0.
-			</li>
-			<li>
-				<span class="pill side-a">A</span> <strong>The game</strong> (<code>src/spike.asm</code>) reads the table,
-				draws the curve, and moves a yellow dot along it. It waits for each screen refresh, so the dot does not tear. The keys 1 to 5 change the speed, Space pauses, N moves one step, and Esc stops the program.
-			</li>
-			<li>
-				<span class="pill side-a">A</span> <strong>The test</strong> (<code>test/check.asm</code>) runs the same
-				routine (<code>src/sine_y.inc</code>) for all 256 angles in DOSBox without a screen. It writes the answers to
-				a file.
-			</li>
-			<li>
-				<span class="pill side-b">B</span> <strong>The checker</strong> (<code>lab/check_y.f90</code>) calculates
-				the same answers again and compares them. If one answer is different, GitHub Actions stops and does not
-				publish the site.
-			</li>
+					) : (
+						<p class="small muted">The game build is missing on this computer. Run <code>game/dev.sh</code>.</p>
+					)}
+				</li>
+			))}
 		</ol>
 
-		{info && (
-			<div class="cards">
-				<div class="card"><div class="k">The two sides agree</div><div class="v">{info.check.agree} / {info.check.values}</div><div class="s">answers from the check</div></div>
-				<div class="card"><div class="k">Error from exact maths</div><div class="v">{info.check.max_error_px} px</div><div class="s">the cost of whole-number arithmetic</div></div>
-				<div class="card"><div class="k">Size of the game</div><div class="v">{info.spike_com_bytes} bytes</div><div class="s">SPIKE.COM, 8086 instructions only</div></div>
-				<div class="card"><div class="k">Size of the table</div><div class="v">{info.sine_bin_bytes} bytes</div><div class="s">256 values, 2 bytes each</div></div>
-			</div>
-		)}
-
+		<h2>Next</h2>
 		<p>
-			<strong>Next:</strong> the <a href={`${base}/game/3d/`}>second test</a> gives the same dot a third direction,
-			depth.
-		</p>
-
-		<h2>The words that each program uses</h2>
-		<p>
-			Each program is a text in its language. The pills show the words that the <a href={`${base}/dictionary/`}>dictionary</a>
-			already has. "New words" are real words of the language that the dictionary does not have yet: they are good
-			words to learn next.
-		</p>
-		{game.programs.filter((p) => p.test === 1).map((p) => (
-			<section class={`program side-${p.side}`}>
-				<h3>
-					<span class="side-letter">{SIDES[p.side as 'a' | 'b'].letter}</span> <a href={p.url}><code>{p.file}</code></a>
-					<span class="muted small">· {p.lines} lines · {p.role}</span>
-				</h3>
-				<p class="small">
-					<strong>{p.matched.length} dictionary words:</strong>{' '}
-					{p.matched.map((w) => (
-						<a class="pill word-pill" href={`${base}/dictionary/#side=${p.side}&q=${encodeURIComponent(w.word.split(' ')[0].toLowerCase())}`} title={`${partName(w.pos)} · ${segmentTitle(w.segment)}`}>
-							{w.word}
-						</a>
-					))}
-				</p>
-				{p.fresh.length > 0 && (
-					<p class="small"><strong>New words ({p.fresh.length}):</strong> {p.fresh.map((w) => <code class="new-word">{w}</code>)}</p>
-				)}
-			</section>
-		))}
-
-		<h2>The copy of the PC</h2>
-		<p class="small">
-			The page uses js-dos {game.jsdosVersion}, a copy of DOSBox that runs in the browser. This site keeps its own copy
-			of the files, so the player does not load code from other servers. The side menu of the player is hidden. js-dos
-			uses the GNU General Public License version 2: see the <a href={`${base}/js-dos/NOTICE.txt`}>notice</a> and the
-			<a href={`${base}/js-dos/LICENSE.txt`}>license</a>.
+			The game is a small lander game (decision D20). The tests come first, so that each new part of the maths has a
+			check before the game uses it. The files are in the folder <a href="https://github.com/kairin/000-111-learn/tree/main/game"><code>game/</code></a>.
 		</p>
 	</div>
-
 </StarlightPage>
-
-<script>
-	/*
-	 * Follow the yellow dot. The page reads the screen of the emulator (js-dos: ci.screenshot()),
-	 * finds the yellow pixel, and changes its x position into the angle number: i = x - 32.
-	 * Then it shows the A-side steps (the same 16-bit arithmetic as sine_y) and the B-side maths.
-	 */
-	const base = document.querySelector<HTMLAnchorElement>('a.site-title')?.getAttribute('href')?.replace(/\/$/, '') ?? '';
-	const frame = document.querySelector<HTMLIFrameElement>('iframe.dos-screen');
-	const aSteps = document.getElementById('a-steps');
-	const aBytes = document.getElementById('a-bytes');
-	const bSteps = document.getElementById('b-steps');
-	const now = document.getElementById('duet-now');
-
-	if (frame && aSteps && aBytes && bSteps && now) {
-		const hex = (v: number, w = 4) => '0x' + ((v & (w === 2 ? 0xff : 0xffff)) >>> 0).toString(16).toUpperCase().padStart(w, '0');
-		const s16 = (v: number) => ((v & 0xffff) << 16) >> 16; // a 16-bit value with its sign
-		let table: DataView | null = null;
-		const version = document.querySelector<HTMLElement>('.duet')?.dataset.version ?? '';
-		fetch(`${base}/game/sine.bin?v=${version}`).then((r) => r.arrayBuffer()).then((b) => (table = new DataView(b)));
-
-		function aSide(i: number) {
-			const t = table!.getInt16(i * 2, true); // the word that mov ax, [sine_table + bx] reads
-			const product = t * 80; // imul cx: DX:AX
-			const sar = s16(product) >> 8; // sar ax, cl (CL = 8): divide by 256, keep the sign
-			const y = s16(-sar + 100); // neg ax, then add ax, 100
-			const di = y * 320 + 32 + i; // pixel_offset
-			return { t, product, sar, y, di, lo: t & 0xff, hi: (t >> 8) & 0xff };
-		}
-
-		function row(code: string, result: string, note = '') {
-			return `<li><code>${code}</code><span class="val">${result}</span>${note ? `<span class="note">${note}</span>` : ''}</li>`;
-		}
-
-		function render(i: number) {
-			if (!table) return;
-			const a = aSide(i);
-			const theta = (2 * Math.PI * i) / 256;
-			const sin = Math.sin(theta);
-			const exact = 100 - 80 * sin;
-			now!.textContent = `Angle ${i} of 256 · screen x = ${32 + i}, y = ${a.y}`;
-			aSteps!.innerHTML = [
-				row('mov bx, si', `BX = ${i}`, 'the angle number'),
-				row('shl bx, 1', `BX = ${i * 2}`, '2 bytes for each value'),
-				row('mov ax, [sine_table + bx]', `AX = ${hex(a.t)} = ${a.t}`, 'read from the table'),
-				row('mov cx, 80', 'CX = 80', 'the amplitude'),
-				row('imul cx', `DX:AX = ${a.product}`, 'multiply, with the sign'),
-				row('mov cl, 8', 'CL = 8', ''),
-				row('sar ax, cl', `AX = ${a.sar}`, 'divide by 256'),
-				row('neg ax', `AX = ${-a.sar}`, 'rows count down'),
-				row('add ax, 100', `AX = ${a.y}`, 'the screen row y'),
-				row('mul dx (320), add 32 + SI', `DI = ${a.di}`, 'the pixel address'),
-				row('mov byte [es:di], 14', `A000:${hex(a.di)} ← 14`, 'a yellow pixel'),
-			].join('');
-			aBytes!.innerHTML = `Bytes ${i * 2} and ${i * 2 + 1} of <code>sine.bin</code>: <code>${hex(a.lo, 2).slice(2)} ${hex(a.hi, 2).slice(2)}</code> (the low byte comes first).`;
-			bSteps!.innerHTML = [
-				row('θ = 2π · i / 256', `θ = ${theta.toFixed(4)} rad = ${((360 * i) / 256).toFixed(2)}°`, 'the angle'),
-				row('sin(θ)', `${sin.toFixed(5)}`, 'the height on the circle'),
-				row('nint(256 * sin(θ))', `${Math.round(256 * sin)}`, 'the whole number in sine.bin'),
-				row('100 - 80 * sin(θ)', `${exact.toFixed(3)}`, 'the exact screen row'),
-				row('A-side row', `${a.y}`, `difference ${Math.abs(a.y - exact).toFixed(3)} pixel`),
-			].join('');
-			const cx = 100 * Math.cos(theta), cy = -100 * sin;
-			document.getElementById('c-radius')?.setAttribute('x2', String(cx));
-			document.getElementById('c-radius')?.setAttribute('y2', String(cy));
-			const sn = document.getElementById('c-sine');
-			sn?.setAttribute('x1', String(cx)); sn?.setAttribute('x2', String(cx)); sn?.setAttribute('y2', String(cy));
-			document.getElementById('c-point')?.setAttribute('cx', String(cx));
-			document.getElementById('c-point')?.setAttribute('cy', String(cy));
-		}
-
-		// Find the yellow dot (VGA color 14) in the 320 x 200 screen.
-		let lastX = -1, busy = false;
-		async function follow() {
-			const ci = (frame!.contentWindow as any)?.ci;
-			if (ci && !busy && table) {
-				busy = true;
-				try {
-					const img: ImageData = await ci.screenshot();
-					const d = img.data;
-					for (let p = 0; p < d.length; p += 4) {
-						if (d[p] > 200 && d[p + 1] > 200 && d[p + 2] < 120) {
-							const x = (p / 4) % img.width;
-							if (x !== lastX && x >= 32 && x < 288) { lastX = x; render(x - 32); }
-							break;
-						}
-					}
-				} catch { /* the emulator is not ready yet */ }
-				busy = false;
-			}
-			setTimeout(follow, 30);
-		}
-		follow();
-
-		// The buttons press keys of the program.
-		document.querySelectorAll<HTMLButtonElement>('.duet-controls button[data-key]').forEach((btn) =>
-			btn.addEventListener('click', () => {
-				const ci = (frame.contentWindow as any)?.ci;
-				if (!ci) return;
-				ci.simulateKeyPress(Number(btn.dataset.key));
-				const key = Number(btn.dataset.key);
-				if (key >= 49 && key <= 53) {
-					document.querySelectorAll('.duet-controls button[data-key]').forEach((b) => {
-						const k = Number((b as HTMLElement).dataset.key);
-						if (k >= 49 && k <= 53) b.setAttribute('aria-pressed', String(b === btn));
-					});
-				}
-				if (key === 32) {
-					const pause = document.getElementById('btn-pause')!;
-					const on = pause.getAttribute('aria-pressed') === 'true';
-					pause.setAttribute('aria-pressed', String(!on));
-					pause.textContent = on ? 'Pause' : 'Continue';
-				}
-			}),
-		);
-		document.getElementById('btn-restart')?.addEventListener('click', () => {
-			lastX = -1;
-			frame.src = frame.src;
-		});
-	}
-</script>

@@ -52,7 +52,7 @@ The first test works. The files are in `game/`, and the steps are in `game/READM
 1. **B side:** `lab/sine_table.f90` calculates 256 sine values as whole numbers.
 2. **A side:** `src/spike.asm` draws the curve and moves a dot along it. It is 655 bytes and uses 8086 instructions only.
 3. **The check:** DOSBox runs the A-side test without a screen. The B-side checker agrees with the answers on 256 of 256 values.
-4. **The website:** js-dos runs the game on the page `/game/`. The player files come from this site only. The page also shows the dictionary words that each program uses, and the new words to learn next.
+4. **The website:** js-dos runs the game on the page `/game/test1/`. The player files come from this site only. The page also shows the dictionary words that each program uses, and the new words to learn next.
 
 GitHub Actions does these steps for each push. If the check fails, the website does not change.
 
@@ -63,7 +63,9 @@ The owner asked for the same movement of the dot, but in a world with depth. The
 1. **B side:** the same `sine.bin`. The curve starts at the back and ends at the front. Its middle point is the center of the 3D space.
 2. **A side:** `src/dot3d.asm` draws a floor and moves the dot in perspective, with a pole to its shadow. It is 1103 bytes and uses 8086 instructions only.
 3. **The check:** the B-side checker agrees with the A-side test on 256 of 256 points.
-4. **The website:** the page `/game/3d/`.
+4. **The website:** the page `/game/test2a/`.
+5. **Test 2b:** the same program with one wrong word (`SHR`, not `SAR`), on the page `/game/test2b/`. The check finds 128 wrong points. The build requires this check to fail.
+6. **The hub:** the page `/game/` lists all tests, with the result of each check.
 
 ## Decision D19 (was O7): how the two languages share the game
 

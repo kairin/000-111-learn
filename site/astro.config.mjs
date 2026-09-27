@@ -74,8 +74,10 @@ export default defineConfig({
 				{
 					label: 'The game',
 					items: [
-						{ label: 'First test: the two sides together', link: '/game/' },
-						{ label: 'Second test: the dot in 3D', link: '/game/3d/' },
+						{ label: 'All tests', link: '/game/' },
+						{ label: 'Test 1: the dot on a flat plane', link: '/game/test1/' },
+						{ label: 'Test 2a: the dot in 3D', link: '/game/test2a/' },
+						{ label: 'Test 2b: wrong values, and the check', link: '/game/test2b/' },
 					],
 				},
 				{ label: 'Plan and decisions', items: [{ autogenerate: { directory: 'plan' } }] },

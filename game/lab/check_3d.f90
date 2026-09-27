@@ -5,6 +5,10 @@
 ! the screen x and y of the dot, and the screen y of its shadow on the floor.
 ! This program calculates the same numbers again, in the same whole-number steps,
 ! and compares them. It also compares them with the exact maths.
+!
+! Arguments (both are optional): the A-side file (default P3D.BIN) and the
+! result file (default check3d.json). Test 2b gives P3DW.BIN, the answers of
+! the wrong program, to prove that the check finds the wrong points.
 program check_3d
   use, intrinsic :: iso_fortran_env, only: int16, real64
   implicit none
@@ -15,13 +19,19 @@ program check_3d
   real(real64), parameter :: pi = acos(-1.0_real64)
   integer(int16) :: table(0:n - 1), a_side(3, 0:n - 1)
   integer :: expected(3, 0:n - 1), exact(3, 0:n - 1)
-  integer :: i, unit, mismatches, worst, x, y, z
+  integer :: i, unit, mismatches, worst, x, y, z, first
   real(real64) :: theta, xr, yr, zr
+  character(len=256) :: in_file, out_file
+
+  in_file = 'P3D.BIN'
+  out_file = 'check3d.json'
+  if (command_argument_count() >= 1) call get_command_argument(1, in_file)
+  if (command_argument_count() >= 2) call get_command_argument(2, out_file)
 
   open (newunit=unit, file='sine.bin', access='stream', form='unformatted', status='old')
   read (unit) table
   close (unit)
-  open (newunit=unit, file='P3D.BIN', access='stream', form='unformatted', status='old')
+  open (newunit=unit, file=trim(in_file), access='stream', form='unformatted', status='old')
   read (unit) a_side
   close (unit)
 
@@ -50,12 +60,22 @@ program check_3d
   mismatches = count(any(int(a_side) /= expected, dim=1))
   worst = maxval(abs(int(a_side) - exact))
 
+  print '(a, a)', 'File: ', trim(in_file)
   print '(a, i0, a, i0, a)', 'A side and B side agree on ', n - mismatches, ' of ', n, ' points'
   print '(a, i0, a)', 'Largest difference from the exact maths: ', worst, ' pixel(s)'
 
-  open (newunit=unit, file='check3d.json', status='replace')
-  write (unit, '(a, i0, a, i0, a, i0, a, a, a)') '{"values": ', n, ', "agree": ', n - mismatches, &
-    ', "max_error_px": ', worst, ', "passed": ', trim(merge('true ', 'false', mismatches == 0)), '}'
+  ! The result, with the list of the angles that do not agree.
+  open (newunit=unit, file=trim(out_file), status='replace')
+  write (unit, '(a, i0, a, i0, a, i0, a, a, a)', advance='no') '{"values": ', n, ', "agree": ', n - mismatches, &
+    ', "max_error_px": ', worst, ', "passed": ', trim(merge('true ', 'false', mismatches == 0)), ', "wrong": ['
+  first = 1
+  do i = 0, n - 1
+    if (all(int(a_side(:, i)) == expected(:, i))) cycle
+    if (first == 0) write (unit, '(a)', advance='no') ', '
+    write (unit, '(i0)', advance='no') i
+    first = 0
+  end do
+  write (unit, '(a)') ']}'
   close (unit)
 
   if (mismatches /= 0) error stop 'The A side and the B side disagree.'

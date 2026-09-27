@@ -36,10 +36,10 @@ GitHub Actions runs `game/build.sh` for each push to `main`. If the check fails,
 ## The steps in build.sh
 
 1. The B side makes `sine.bin`.
-2. NASM assembles `SPIKE.COM` and `DOT3D.COM` (the games), and `CHECK.COM` and `CHECK3D.COM` (the tests).
-3. DOSBox runs `CHECK.COM` and `CHECK3D.COM` without a screen. The programs write `Y.BIN` and `P3D.BIN`.
-4. The B side compares the two files with its own answers and writes `check.json` and `check3d.json`.
-5. A Python step packs `SPIKE.COM` into `spike.jsdos` and `DOT3D.COM` into `dot3d.jsdos`, the files that js-dos plays.
+2. NASM assembles `SPIKE.COM`, `DOT3D.COM` and `WRONG3D.COM` (the games), and `CHECK.COM`, `CHECK3D.COM` and `CHECK3DW.COM` (the tests).
+3. DOSBox runs the three tests without a screen. They write `Y.BIN`, `P3D.BIN` and `P3DW.BIN`.
+4. The B side compares the files with its own answers and writes `check.json`, `check3d.json` and `check3d-wrong.json`. The first two checks must pass. The check of `P3DW.BIN` must fail.
+5. A Python step packs each game into a `.jsdos` file, the file that js-dos plays.
 
 ## Results of the first test
 
@@ -86,11 +86,31 @@ The second test gives the dot of the first test a third direction: depth. The do
 - The largest difference from exact maths is 1 pixel.
 - `DOT3D.COM` is 1103 bytes. It uses the same `sine.bin` of 512 bytes.
 
-The page `/game/3d/` shows the program between the two panels, as the first page does. The B panel has two drawings: the world from above and the world from the side. In each drawing, the line from the eye to the dot crosses the screen at the screen position of the dot.
+The page `/game/test2a/` shows the program between the two panels, as the first page does. The B panel has two drawings: the world from above and the world from the side. In each drawing, the line from the eye to the dot crosses the screen at the screen position of the dot.
+
+## Test 2b: wrong values, and the check
+
+Test 2b shows why each test needs a check. It is the program of test 2a with one wrong word, in `path_point`:
+
+| | Word | What it does with a negative number |
+|---|---|---|
+| Right (test 2a) | `sar dx, 1` | Keeps the sign. -100 becomes -50. |
+| Wrong (test 2b) | `shr dx, 1` | Puts a 0 in the top bit (the sign bit). -100 becomes 32718. |
+
+- NASM builds the wrong program from the same files, with the switch `-dWRONG_SIGN`. The files are `WRONG3D.COM` (the game) and `CHECK3DW.COM` (the test, which writes `P3DW.BIN`).
+- On the screen, the front half of the path is correct. The back half (angles 0 to 127, where angle - 128 is negative) is dots all over the screen.
+- The checker gets the file names as arguments: `check_3d P3DW.BIN check3d-wrong.json`. It finds 128 of 256 points wrong and names each wrong angle.
+- `build.sh` requires this check to **fail**. If the check accepts the wrong program, the check itself is broken, and the build stops.
+- The page `/game/test2b/` runs the wrong program. It shows the wrong word, the bits of SAR and SHR for the dot now, the correct and the wrong screen position, and the report of the check.
+
+## The game pages
+
+- `/game/`: all tests, with the result of each check.
+- `/game/test1/`, `/game/test2a/` and `/game/test2b/`: one page for each test.
 
 ## The game page: A and B working together
 
-The page `/game/` shows the program between two panels:
+The page `/game/test1/` shows the program between two panels:
 
 - **A side, left:** the steps of `sine_y` and the pixel write for the dot on the screen now, with the values in the registers. It also shows the two bytes that the program reads from `sine.bin`.
 - **B side, right:** the maths for the same angle: the angle, its sine, the whole number that Fortran wrote to `sine.bin`, the exact screen row, and the difference from the A-side row. A unit circle shows the angle.

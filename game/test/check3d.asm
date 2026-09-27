@@ -5,6 +5,7 @@
 ; The B-side program lab/check_3d.f90 then compares them with its own answers.
 ;
 ; Build: nasm -f bin -i ../src/ -o CHECK3D.COM check3d.asm
+; With -dWRONG_SIGN, NASM builds the wrong program of test 2b. It writes P3DW.BIN.
 cpu 8086
 bits 16
 org 100h
@@ -49,6 +50,10 @@ failed:
 
 %include "path3d.inc"
 
+%ifdef WRONG_SIGN
+file_name   db 'P3DW.BIN', 0    ; test 2b: the answers of the wrong program
+%else
 file_name   db 'P3D.BIN', 0
+%endif
 points      times 256 * 3 dw 0
 sine_table: incbin "sine.bin"

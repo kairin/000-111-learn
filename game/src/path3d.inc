@@ -43,7 +43,13 @@ path_point:
     mov ax, si
     sub ax, 128                 ; AX = angle - 128
     mov dx, ax
-    sar dx, 1                   ; DX = half of it (rounded down)
+%ifdef WRONG_SIGN
+    ; Test 2b: the wrong program. SHR forgets the sign: it puts a 0 in the top bit.
+    ; A negative number (the back half of the path) becomes a large positive number.
+    shr dx, 1
+%else
+    sar dx, 1                   ; DX = half of it (rounded down). SAR keeps the sign.
+%endif
     add ax, dx                  ; AX = X = 1.5 * (angle - 128)
     ret
 

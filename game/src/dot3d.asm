@@ -11,6 +11,7 @@
 ;        Esc     stop the program
 ;
 ; Build: nasm -f bin -o DOT3D.COM dot3d.asm   (sine.bin must be in the same folder)
+; With -dWRONG_SIGN, NASM builds the wrong program of test 2b (see path3d.inc).
 cpu 8086                        ; the assembler refuses words that are newer than the 8086
 bits 16
 org 100h                        ; a DOS .COM program starts at address 100h

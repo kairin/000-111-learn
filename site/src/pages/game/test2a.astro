@@ -20,15 +20,15 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 
 <StarlightPage
 	frontmatter={{
-		title: 'The game: second test, the dot in 3D',
-		description: 'The dot of the first test gets depth. It moves from the back to the front. Fortran makes the same table, 8086 Assembly adds a third direction and a perspective division, and a check proves that the two sides agree.',
+		title: 'Test 2a: the dot in 3D',
+		description: 'The dot of test 1 gets depth. It moves from the back to the front. Fortran makes the same table, 8086 Assembly adds a third direction and a perspective division, and a check proves that the two sides agree.',
 		tableOfContents: false,
 		editUrl: false,
 	}}
 >
 	<div class="wide-page game-page">
 		<p class="lead">
-			In the <a href={`${base}/game/`}>first test</a>, the dot moved on a flat plane: left to right, and up and down.
+			In <a href={`${base}/game/test1/`}>test 1</a>, the dot moved on a flat plane: left to right, and up and down.
 			This test gives the world a third direction: <strong>depth</strong>. The dot still goes up and down with the sine.
 			It now also moves from the back to the front. The curve starts far away and ends near you. Its middle point is
 			the center of the 3D space. A near dot is larger, and a far dot comes nearer to the center of the screen.
@@ -123,11 +123,11 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 			</p>
 		)}
 
-		<h2>What is new in the second test</h2>
+		<h2>What is new in test 2a</h2>
 		<ol class="steps-list">
 			<li>
 				<span class="pill side-b">B</span> <strong>The same table.</strong> The laboratory (<code>lab/sine_table.f90</code>)
-				makes no new file. The height of the dot is the sine, as in the first test.
+				makes no new file. The height of the dot is the sine, as in test 1.
 			</li>
 			<li>
 				<span class="pill side-a">A</span> <strong>A third direction.</strong> The routine <code>path_point</code>
@@ -161,7 +161,7 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 				<div class="card"><div class="k">The two sides agree</div><div class="v">{info.check3d.agree} / {info.check3d.values}</div><div class="s">points from the check (3 numbers each)</div></div>
 				<div class="card"><div class="k">Error from exact maths</div><div class="v">{info.check3d.max_error_px} px</div><div class="s">the cost of whole-number arithmetic</div></div>
 				<div class="card"><div class="k">Size of the game</div><div class="v">{info.dot3d_com_bytes} bytes</div><div class="s">DOT3D.COM, 8086 instructions only</div></div>
-				<div class="card"><div class="k">Size of the table</div><div class="v">{info.sine_bin_bytes} bytes</div><div class="s">the same sine.bin as the first test</div></div>
+				<div class="card"><div class="k">Size of the table</div><div class="v">{info.sine_bin_bytes} bytes</div><div class="s">the same sine.bin as test 1</div></div>
 			</div>
 		)}
 
@@ -191,7 +191,9 @@ const sidePath = path.map((p) => `${p.z.toFixed(1)},${(-p.y).toFixed(1)}`).join(
 		))}
 
 		<p class="small">
-			The copy of the PC is js-dos {game.jsdosVersion}, the same as on the <a href={`${base}/game/`}>first test</a> page.
+			<strong>Next:</strong> <a href={`${base}/game/test2b/`}>test 2b</a> runs this program with one wrong word, and
+			shows how the check finds the error. The copy of the PC is js-dos {game.jsdosVersion}, the same as on the
+			<a href={`${base}/game/test1/`}>test 1</a> page.
 		</p>
 	</div>
 </StarlightPage>
