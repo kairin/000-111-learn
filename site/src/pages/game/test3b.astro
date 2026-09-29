@@ -1,0 +1,222 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import game from '../../data/game.json';
+import { SIDES } from '../../lib/learn';
+import { Image } from 'astro:assets';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+type Check = { values: number; agree: number; max_error_px: number; passed: boolean; wrong_by_turn: number[] };
+const info = game.info as (Record<string, unknown> & { version?: string; check3r_wrong?: Check }) | null;
+const wrongByTurn = info?.check3r_wrong?.wrong_by_turn ?? [];
+const circle = (quarter: number) =>
+	Array.from({ length: 257 }, (_, k) => {
+		const a = (2 * Math.PI * k) / 256, b = (2 * Math.PI * (k + quarter)) / 256;
+		return `${(128 * Math.sin(a)).toFixed(1)},${(-128 * Math.sin(b)).toFixed(1)}`;
+	}).join(' ');
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Test 3b: a wrong quarter turn',
+		description: 'The turning wave of test 3a with one wrong value: 90, not 64. See how one wrong number breaks the picture of the game, and how the Fortran check finds it.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page game-page">
+		<p class="lead">
+			This is the program of <a href={`${base}/game/test3a/`}>test 3a</a> with <strong>one wrong value</strong>. A
+			quarter turn is 90 degrees, so a programmer wrote 90. But in this program, a full turn has 256 steps, not 360
+			degrees. A quarter turn is 64 steps. With 90, the ring on the floor is a tilted oval, not a circle. The wave grows
+			and shrinks while it turns, and it turns at a speed that changes.
+		</p>
+
+		{game.built && info?.check3r_wrong ? (
+			<>
+				<div class="duet" data-version={info?.version ?? ''}>
+					<section class="duet-panel side-a" aria-labelledby="a-title">
+						<header>
+							{SIDES.a.image && <Image class="duet-photo" src={SIDES.a.image.src} alt={SIDES.a.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="a-title"><span class="side-letter">A</span> The wrong value</h3>
+							<p class="muted small">In <code>src/spin3d.inc</code>, the program reads the cosine of the turn a quarter turn after the sine.</p>
+						</header>
+						<ul class="diff">
+							<li class="del"><code>QUARTER_TURN equ 64</code> <span class="small">right: 256 steps / 4</span></li>
+							<li class="add"><code>QUARTER_TURN equ 90</code> <span class="small">wrong: 360 degrees / 4</span></li>
+						</ul>
+						<p class="small">
+							With 90, the program reads the "cosine" 26 steps too late. X and Z are then not at a right angle. The
+							assembler cannot know this: 64 and 90 are both good numbers.
+						</p>
+						<ol class="duet-steps" id="a-steps"></ol>
+					</section>
+
+					<div class="duet-screen">
+						<iframe
+							class="dos-screen"
+							src={`${base}/game/player-spin-wrong.html?v=${info?.version ?? ''}`}
+							title="A copy of a 1980s PC that runs the wrong A-side program of test 3b"
+							allow="fullscreen; autoplay"
+						></iframe>
+						<p class="duet-now" id="duet-now" aria-live="off">Waiting for the copy of the PC to start…</p>
+						<div class="duet-controls" role="group" aria-label="Speed of the dot">
+							<span class="small muted">Speed:</span>
+							<button type="button" data-key="49" title="Key 1">Fastest</button>
+							<button type="button" data-key="50" title="Key 2">Fast</button>
+							<button type="button" data-key="51" title="Key 3">Medium</button>
+							<button type="button" data-key="52" title="Key 4" aria-pressed="true">Slow</button>
+							<button type="button" data-key="53" title="Key 5">Slowest</button>
+							<span class="spacer"></span>
+							<button type="button" data-key="32" title="Space" id="btn-pause">Pause</button>
+							<button type="button" data-key="78" title="Key N">One step</button>
+							<button type="button" id="btn-restart" class="ghost">Restart</button>
+						</div>
+						<p class="muted small">
+							Compare with the correct program in <a href={`${base}/game/test3a/`}>test 3a</a>. Look at the magenta ring:
+							it must be a circle (a flat oval in perspective, left to right). Here it is tilted. Look at the wave: it
+							must keep its length.
+						</p>
+					</div>
+
+					<section class="duet-panel side-b" aria-labelledby="b-title">
+						<header>
+							{SIDES.b.image && <Image class="duet-photo" src={SIDES.b.image.src} alt={SIDES.b.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="b-title"><span class="side-letter">B</span> What the check sees</h3>
+							<p class="muted small">From above: the right wave (green) and the wrong wave (red), for the turn now.</p>
+						</header>
+						<figure class="view3d">
+							<svg viewBox="-160 -160 320 320" role="img" aria-label="The world from above. Green: the right ring and wave. Red: the wrong ring, a tilted oval, and the wrong wave.">
+								<polyline points={circle(64)} class="v-ring-right" />
+								<polyline points={circle(90)} class="v-ring-wrong" />
+								<line id="top-right" x1="0" y1="-128" x2="0" y2="128" class="v-wave-right" />
+								<line id="top-wrong" x1="0" y1="-128" x2="0" y2="128" class="v-wave-wrong" />
+								<circle id="top-dot-right" cx="0" cy="0" r="7" class="v-dot-right" />
+								<circle id="top-dot" cx="0" cy="0" r="9" class="v-dot" />
+								<text x="6" y="-140" class="v-label">back</text>
+								<text x="6" y="152" class="v-label">front</text>
+							</svg>
+						</figure>
+						<ol class="duet-steps" id="b-steps"></ol>
+						<p class="small" id="b-verdict"></p>
+					</section>
+				</div>
+
+				<h2>The check report</h2>
+				<p>
+					The test program runs the wrong routine for 16 turns and 256 angles, and writes the answers to
+					<code>R3DW.BIN</code>. The checker (<code>lab/check_spin.f90</code>) compares them with its own answers:
+				</p>
+				<pre class="check-output"><code>File: R3DW.BIN
+A side and B side agree on {info.check3r_wrong.agree} of {info.check3r_wrong.values} points
+Largest difference from the exact maths: {info.check3r_wrong.max_error_px} pixel(s)
+ERROR STOP The A side and the B side disagree.</code></pre>
+				<p class="small">The wrong points for each of the 16 turns that the check tests (256 points for each turn):</p>
+				<div class="turn-bars" role="img" aria-label={`Wrong points for each turn: ${wrongByTurn.join(', ')}.`}>
+					{wrongByTurn.map((w, k) => (
+						<div class="turn-bar" title={`Turn ${k * 16}: ${w} of 256 points wrong`}>
+							<span class="bar" style={`height: ${(w / 256) * 100}%`}></span>
+							<span class="lbl">{k * 16}</span>
+						</div>
+					))}
+				</div>
+			</>
+		) : (
+			<p class="notice">
+				The game build is missing on this computer. Run <code>game/dev.sh</code>, or read the published site. GitHub
+				Actions makes the build for each push.
+			</p>
+		)}
+
+		<h2>How one wrong value breaks the game</h2>
+		<ol class="steps-list">
+			<li>
+				<strong>The shapes change.</strong> A turn must keep each shape the same. With 90, the wave is longer at some
+				turns and shorter at others. In the lander game, the ship would stretch and shrink when it turns.
+			</li>
+			<li>
+				<strong>The speed changes.</strong> The wave must turn at the same speed all the time. With 90, it turns
+				quickly for some steps and slowly for others. The player would see a jump in each turn.
+			</li>
+			<li>
+				<strong>The game logic uses wrong places.</strong> A game uses the same numbers to find out if the ship touches
+				the ground. With wrong numbers, the ship can land in the air or go through the ground.
+			</li>
+			<li>
+				<strong>The picture can hide the error.</strong> At some turns, the wrong wave is near the right wave, and the
+				error is small. A person who looks at one picture can miss it. The check compares each number at 16 turns and
+				finds wrong points at each turn.
+			</li>
+			<li>
+				<strong>The check guards the site.</strong> The build requires the check to fail on this wrong program. If the
+				check does not find the error, the check itself is broken, and the build stops.
+			</li>
+		</ol>
+		<p class="small">
+			The wrong program comes from the same files as test 3a. NASM builds it with the switch <code>-dWRONG_TURN</code>,
+			which changes only the one value (see <a href="https://github.com/kairin/000-111-learn/blob/main/game/src/spin3d.inc"><code>src/spin3d.inc</code></a>).
+			The panels of this page calculate the wrong program in the browser with the same steps. The check report comes
+			from the real test in DOSBox.
+		</p>
+	</div>
+</StarlightPage>
+
+<script>
+	import { followDot, wireControls, row, spinPoint, stepAngle, stepTurn, type SpinPoint } from '../../lib/spin';
+
+	const base = document.querySelector<HTMLAnchorElement>('a.site-title')?.getAttribute('href')?.replace(/\/$/, '') ?? '';
+	const frame = document.querySelector<HTMLIFrameElement>('iframe.dos-screen');
+	const aSteps = document.getElementById('a-steps');
+	const bSteps = document.getElementById('b-steps');
+	const verdict = document.getElementById('b-verdict');
+	const now = document.getElementById('duet-now');
+
+	if (frame && aSteps && bSteps && verdict && now) {
+		const version = document.querySelector<HTMLElement>('.duet')?.dataset.version ?? '';
+		let right: SpinPoint[] = [], wrong: SpinPoint[] = [];
+		fetch(`${base}/game/sine.bin?v=${version}`)
+			.then((r) => r.arrayBuffer())
+			.then((b) => {
+				const table = new DataView(b);
+				right = Array.from({ length: 512 }, (_, s) => spinPoint(table, stepAngle(s), stepTurn(s), 64));
+				wrong = Array.from({ length: 512 }, (_, s) => spinPoint(table, stepAngle(s), stepTurn(s), 90));
+			});
+		const set = (id: string, attrs: Record<string, number>) => {
+			const el = document.getElementById(id);
+			for (const [k, v] of Object.entries(attrs)) el?.setAttribute(k, v.toFixed(1));
+		};
+
+		function render(s: number) {
+			const r = right[s], w = wrong[s];
+			const turn = (2 * Math.PI * w.t) / 256, late = (2 * Math.PI * (w.t + 90)) / 256;
+			const length = 255 * Math.hypot(Math.sin(turn), Math.sin(late));
+			now!.textContent = `Turn ${w.t} of 256 · angle ${w.i} · the wrong program: screen x = ${w.sx}, y = ${w.sy}`;
+			aSteps!.innerHTML = [
+				row('mov bx, bp', `T = ${w.t}`, 'the turn'),
+				row('add bx, 64 (right)', `step ${r.ci}`, `the cosine = ${r.turnCosine}`),
+				row('add bx, 90 (wrong)', `step ${w.ci}`, `reads ${w.turnCosine}`, r.ci === w.ci ? '' : 'is-bad'),
+				row('imul cx · keep the middle bytes', `Z = ${w.z}`, r.z === w.z ? 'the same as the right Z' : `the right Z is ${r.z}`, r.z === w.z ? '' : 'is-bad'),
+				row('X (the sine: no change)', `X = ${w.x}`, 'the same as the right X'),
+			].join('');
+			const cmp = (name: string, want: number, have: number) =>
+				row(name, `${have}`, want === have ? `correct (${want})` : `wrong: the right value is ${want}, difference ${Math.abs(have - want)}`, want === have ? 'is-ok' : 'is-bad');
+			bSteps!.innerHTML = [
+				cmp('screen x of the dot', r.sx, w.sx),
+				cmp('screen y of the dot', r.sy, w.sy),
+				cmp('screen y of the shadow', r.shadowY, w.shadowY),
+				row('the length of the wave', `${length.toFixed(0)}`, 'it must be 255 at each turn', Math.abs(length - 255) < 1 ? 'is-ok' : 'is-bad'),
+			].join('');
+			const ok = r.sx === w.sx && r.sy === w.sy && r.shadowY === w.shadowY;
+			verdict!.innerHTML = ok
+				? '<span class="ok">✓ The check accepts this point.</span> Here the wrong value gives the same pixel. Other points are wrong.'
+				: '<span class="bad">✗ The check rejects this point.</span> One wrong point is enough to stop the build.';
+			const rx = Math.sin(turn), rz = Math.cos(turn);
+			set('top-right', { x1: 128 * rx, y1: -128 * rz, x2: -127 * rx, y2: 127 * rz });
+			set('top-wrong', { x1: 128 * Math.sin(turn), y1: -128 * Math.sin(late), x2: -127 * Math.sin(turn), y2: 127 * Math.sin(late) });
+			set('top-dot-right', { cx: r.d * rx, cy: -r.d * rz });
+			set('top-dot', { cx: w.d * Math.sin(turn), cy: -w.d * Math.sin(late) });
+		}
+
+		const reset = followDot(frame, (s) => (wrong.length ? wrong[s].di : null), render);
+		wireControls(frame, reset);
+	}
+</script>

@@ -4,7 +4,7 @@ import game from '../../data/game.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 type Check = { values: number; agree: number; max_error_px: number; passed: boolean };
-const info = game.info as (Record<string, unknown> & { check?: Check; check3d?: Check; check3d_wrong?: Check }) | null;
+const info = game.info as (Record<string, unknown> & { check?: Check; check3d?: Check; check3d_wrong?: Check; check3r?: Check; check3r_wrong?: Check }) | null;
 
 const tests = [
 	{
@@ -29,6 +29,22 @@ const tests = [
 		title: 'Wrong values, and the check',
 		text: 'The program of test 2a with one wrong word: SHR, not SAR. Half of the dots go to wrong places. The check finds each wrong point, so a wrong program cannot get onto the site.',
 		check: info?.check3d_wrong,
+		expect: 'fail',
+	},
+	{
+		id: 'test3a',
+		name: 'Test 3a',
+		title: 'The wave turns',
+		text: 'The wave of test 2 goes from the back to the front. Now it turns around the center of the 3D space, and the dot moves along it. The A side turns each point with the sine and the cosine of the turn.',
+		check: info?.check3r,
+		expect: 'pass',
+	},
+	{
+		id: 'test3b',
+		name: 'Test 3b',
+		title: 'A wrong quarter turn',
+		text: 'The program of test 3a with one wrong value: 90 (a quarter turn in degrees), not 64 (a quarter turn in 256 steps). The ring becomes a tilted oval, and the wave grows and shrinks as it turns.',
+		check: info?.check3r_wrong,
 		expect: 'fail',
 	},
 ];

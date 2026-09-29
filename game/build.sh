@@ -24,9 +24,14 @@ nasm -f bin -i "$here/src/" -o CHECK3D.COM "$here/test/check3d.asm"
 # Test 2b: the same files with one wrong word (SHR, not SAR), to show why the check is necessary.
 nasm -f bin -i "$here/src/" -dWRONG_SIGN -o WRONG3D.COM "$here/src/dot3d.asm"
 nasm -f bin -i "$here/src/" -dWRONG_SIGN -o CHECK3DW.COM "$here/test/check3d.asm"
-ls -l SPIKE.COM CHECK.COM DOT3D.COM CHECK3D.COM WRONG3D.COM CHECK3DW.COM
+# Test 3a: the wave turns around the center. Test 3b: the same files with one wrong value (90, not 64).
+nasm -f bin -i "$here/src/" -o SPIN3D.COM "$here/src/spin3d.asm"
+nasm -f bin -i "$here/src/" -o CHECK3R.COM "$here/test/check3r.asm"
+nasm -f bin -i "$here/src/" -dWRONG_TURN -o WRONGSP.COM "$here/src/spin3d.asm"
+nasm -f bin -i "$here/src/" -dWRONG_TURN -o CHECK3RW.COM "$here/test/check3r.asm"
+ls -l *.COM
 
-echo "== 3. A side: run the three tests in DOSBox, without a screen"
+echo "== 3. A side: run the five tests in DOSBox, without a screen"
 cat > dosbox-test.conf <<'EOF'
 [sdl]
 output=surface
@@ -38,10 +43,12 @@ c:
 CHECK.COM
 CHECK3D.COM
 CHECK3DW.COM
+CHECK3R.COM
+CHECK3RW.COM
 exit
 EOF
 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout 120 dosbox -conf dosbox-test.conf >dosbox.log 2>&1 || true
-for f in Y.BIN P3D.BIN P3DW.BIN; do
+for f in Y.BIN P3D.BIN P3DW.BIN R3D.BIN R3DW.BIN; do
   if [ ! -s "$f" ]; then
     echo "DOSBox did not write $f. The DOSBox log follows:" >&2
     cat dosbox.log >&2
@@ -62,6 +69,16 @@ if ./check_3d P3DW.BIN check3d-wrong.json >check3d-wrong.log 2>&1; then
 fi
 grep -E "^(File|A side|Largest)" check3d-wrong.log
 echo "Good: the check found the wrong program (test 2b)."
+gfortran -std=f2018 -Wall -Wextra -O2 -o check_spin "$here/lab/check_spin.f90"
+./check_spin
+# Test 3b: the check must find the wrong program.
+if ./check_spin R3DW.BIN check3r-wrong.json >check3r-wrong.log 2>&1; then
+  cat check3r-wrong.log
+  echo "The check did not find the errors of the wrong program (test 3b)." >&2
+  exit 1
+fi
+grep -E "^(File|A side|Largest)" check3r-wrong.log
+echo "Good: the check found the wrong program (test 3b)."
 
 echo "== 5. Make the bundles for the browser (js-dos)"
 python3 - <<'PY'
@@ -77,7 +94,8 @@ mount c .
 c:
 {program}
 """
-for program, bundle in [("SPIKE.COM", "spike.jsdos"), ("DOT3D.COM", "dot3d.jsdos"), ("WRONG3D.COM", "wrong3d.jsdos")]:
+for program, bundle in [("SPIKE.COM", "spike.jsdos"), ("DOT3D.COM", "dot3d.jsdos"), ("WRONG3D.COM", "wrong3d.jsdos"),
+                         ("SPIN3D.COM", "spin3d.jsdos"), ("WRONGSP.COM", "wrongsp.jsdos")]:
     with zipfile.ZipFile(f"site/{bundle}", "w", zipfile.ZIP_DEFLATED) as z:
         z.write(program, program)
         z.writestr(".jsdos/dosbox.conf", conf.format(program=program))
@@ -89,9 +107,12 @@ info = {
     "check3d": json.loads(pathlib.Path("check3d.json").read_text()),
     "wrong3d_com_bytes": pathlib.Path("WRONG3D.COM").stat().st_size,
     "check3d_wrong": json.loads(pathlib.Path("check3d-wrong.json").read_text()),
+    "spin3d_com_bytes": pathlib.Path("SPIN3D.COM").stat().st_size,
+    "check3r": json.loads(pathlib.Path("check3r.json").read_text()),
+    "check3r_wrong": json.loads(pathlib.Path("check3r-wrong.json").read_text()),
 }
 pathlib.Path("site/game.json").write_text(json.dumps(info, indent=1))
 print(json.dumps(info))
 PY
-cp SPIKE.COM DOT3D.COM WRONG3D.COM sine.bin P3DW.BIN site/
+cp SPIKE.COM DOT3D.COM WRONG3D.COM SPIN3D.COM WRONGSP.COM sine.bin P3DW.BIN site/
 echo "== Done: $out/site"
