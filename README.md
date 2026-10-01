@@ -3,8 +3,7 @@
 <!-- key-information:start -->
 ## Key information
 
-- **Goal:** Write very small, fast programs that run close to the hardware.
-- **Objective:** Learn Assembly and Fortran as real languages, through small game tutorials.
+- **Description:** Teaches Assembly and Fortran through small game tutorials to build fast programs that run close to the hardware.
 - **Tier:** `111`. Learning. Practice and learning projects. They follow the core rules.
 - **Needs:** The core rules, especially the STE writing rules. Later, the knowledge database of 000-0-tables.
 - **Gives:** Tutorials and a small retro game on its website.
