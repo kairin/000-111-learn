@@ -1,0 +1,7 @@
+{"source": "snes_hardware_breakdown.html", "moments": {
+ "01": {"t": "09:01", "note": "The video gives the three memories here: 128K for the CPU, 64K for the PPU and 64K for the APU. It gives no 256 kB total, no 129 KB ROM and no 63 kB bank."},
+ "02": {"t": "00:46", "note": "The video lists its own plan here: graphics, world, music, a music engine, enemies, animations, sound effects and cartridges. The nine chapters of the page are not in the video order and have no timestamps."},
+ "03": {"t": "05:50", "note": "The tile lookup for collision starts here. The BCD counter is at 31:44, the HDMA parallax at 35:11 and the voice split at 18:18. The video gives no formula, no cycle counts and no voice stealing."},
+ "04": {"t": "28:34", "note": "The sprite limit segment: transparent tile-zero sprites still count, so he moves them offscreen. The page gives the reversed fix and the rejected priority rotation."},
+ "05": {"note": "The video does not cover this idea. It shows no emulator comparison and no test on a console. The cartridge is not finished at 46:55."}
+}}
