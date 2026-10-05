@@ -101,6 +101,38 @@ Source video: [FORTRAN in 100 Seconds](https://www.youtube.com/watch?v=NMWzgy8Fs
 | [12](fortran-video-breakdown/12-conclusion.md) | Conclusion | section-lead | 87-90 | 2 | |
 | [13](fortran-video-breakdown/13-works-cited.md) | Works cited | references | 91-107 | 1 | |
 
+## `Video_Breakdown_and_Concepts.md`
+
+_Technical Architecture and Systems Deconstruction of Inkbox's "It Took Every SNES Hardware Trick To Make My Game"_ · 25 document parts
+
+| Part | Title | Kind | Source lines | Findings | Goal met? |
+|---|---|---|---|---|---|
+| [01](video-breakdown-and-concepts/01-architectural-foundations-and-project-scope.md) | Architectural Foundations and Project Scope | section-lead | 3-8 | 0 | |
+| [02](video-breakdown-and-concepts/02-video-structure-and-narrative-progression.md) | Video Structure and Narrative Progression | section-lead | 9-12 | 0 | |
+| [03](video-breakdown-and-concepts/03-bare-metal-hardware-baseline-and-computational-limitations.md) | Bare-Metal Hardware Baseline and Computational Limitations | subsection | 13-16 | 0 | |
+| [04](video-breakdown-and-concepts/04-work-ram-topology-and-procedural-dungeon-generation.md) | Work RAM Topology and Procedural Dungeon Generation | subsection | 17-20 | 0 | |
+| [05](video-breakdown-and-concepts/05-picture-processing-unit-configuration-and-hardware-decimal-h.md) | Picture Processing Unit Configuration and Hardware Decimal HUD Arithmetic | subsection | 21-24 | 0 | |
+| [06](video-breakdown-and-concepts/06-raster-manipulation-via-horizontal-blank-direct-memory-acces.md) | Raster Manipulation via Horizontal Blank Direct Memory Access | subsection | 25-28 | 0 | |
+| [07](video-breakdown-and-concepts/07-object-attribute-memory-partitioning-and-scanline-saturation.md) | Object Attribute Memory Partitioning and Scanline Saturation | subsection | 29-32 | 0 | |
+| [08](video-breakdown-and-concepts/08-spatial-hashing-and-entity-collision-architecture.md) | Spatial Hashing and Entity Collision Architecture | subsection | 33-36 | 0 | |
+| [09](video-breakdown-and-concepts/09-real-time-color-arithmetic-and-visual-effects.md) | Real-Time Color Arithmetic and Visual Effects | subsection | 37-40 | 0 | |
+| [10](video-breakdown-and-concepts/10-independent-audio-subsystem-and-custom-spc700-driver-enginee.md) | Independent Audio Subsystem and Custom SPC700 Driver Engineering | subsection | 41-44 | 0 | |
+| [11](video-breakdown-and-concepts/11-physical-manufacturing-and-silicon-verification.md) | Physical Manufacturing and Silicon Verification | subsection | 45-48 | 0 | |
+| [12](video-breakdown-and-concepts/12-detailed-structural-mapping-of-video-content.md) | Detailed Structural Mapping of Video Content | section-lead | 49-64 | 0 | |
+| [13](video-breakdown-and-concepts/13-systematic-decomposition-of-core-architectural-concepts.md) | Systematic Decomposition of Core Architectural Concepts | section-lead | 65-96 | 0 | |
+| [14](video-breakdown-and-concepts/14-work-ram-banking-and-procedural-playfield-synthesis.md) | Work RAM Banking and Procedural Playfield Synthesis | subsection | 97-101 | 0 | |
+| [15](video-breakdown-and-concepts/15-picture-processing-unit-configuration-and-hardware-decimal-h.md) | Picture Processing Unit Configuration and Hardware Decimal HUD Arithmetic | subsection | 102-107 | 0 | |
+| [16](video-breakdown-and-concepts/16-scanline-manipulation-via-horizontal-blank-direct-memory-acc.md) | Scanline Manipulation via Horizontal Blank Direct Memory Access | subsection | 108-134 | 0 | |
+| [17](video-breakdown-and-concepts/17-object-attribute-memory-management-and-scanline-saturation-c.md) | Object Attribute Memory Management and Scanline Saturation Controls | subsection | 135-139 | 0 | |
+| [18](video-breakdown-and-concepts/18-constant-time-spatial-hashing-and-entity-collision-architect.md) | Constant-Time Spatial Hashing and Entity Collision Architecture | subsection | 140-148 | 0 | |
+| [19](video-breakdown-and-concepts/19-hardware-color-arithmetic-for-dynamic-visual-feedback.md) | Hardware Color Arithmetic for Dynamic Visual Feedback | subsection | 149-158 | 0 | |
+| [20](video-breakdown-and-concepts/20-subsystem-isolation-and-custom-spc700-audio-driver-implement.md) | Subsystem Isolation and Custom SPC700 Audio Driver Implementation | subsection | 159-163 | 0 | |
+| [21](video-breakdown-and-concepts/21-physical-hardware-realization-and-real-silicon-divergence.md) | Physical Hardware Realization and Real-Silicon Divergence | section-lead | 164-169 | 0 | |
+| [22](video-breakdown-and-concepts/22-comparative-architectural-and-resource-budgeting-matrix.md) | Comparative Architectural and Resource Budgeting Matrix | section-lead | 170-185 | 0 | |
+| [23](video-breakdown-and-concepts/23-engineering-implications-for-constrained-systems-development.md) | Engineering Implications for Constrained Systems Development | section-lead | 186-191 | 0 | |
+| [24](video-breakdown-and-concepts/24-synthesis-and-conclusions.md) | Synthesis and Conclusions | section-lead | 192-204 | 0 | |
+| [25](video-breakdown-and-concepts/25-works-cited.md) | Works cited | references | 205-234 | 0 | |
+
 ## `YouTube Video Breakdown.md`
 
 _Performance Analysis and Architectural Breakdown: C++ vs. Fortran vs. COBOL (Dave's Garage Episode 04)_ · 15 document parts
@@ -174,6 +206,24 @@ Findings about the full document (not one part): `D03-M4`
 | [06](assembly-vs-fortran-learning-advisor/06-instruction-set-architecture-isa-tradeoff-matrix.md) | Instruction Set Architecture (ISA) Tradeoff Matrix | html-section#isa | 454-510 | 1 | |
 | [07](assembly-vs-fortran-learning-advisor/07-ready-to-start-your-90-day-learning-track.md) | Ready to Start Your 90-Day Learning Track? | html-section#call-to-action | 513-526 | 0 | |
 
+## `deep-research-report.md`
+
+_Deep Research Report: It Took Every SNES Hardware Trick To Make My Game — Inkbox_ · 11 document parts
+
+| Part | Title | Kind | Source lines | Findings | Goal met? |
+|---|---|---|---|---|---|
+| [01](deep-research-report/01-executive-summary.md) | Executive summary | section-lead | 3-10 | 0 | |
+| [02](deep-research-report/02-identified-video.md) | Identified video | subsection | 13-30 | 0 | |
+| [03](deep-research-report/03-transcript-and-quotation-status.md) | Transcript and quotation status | subsection | 31-42 | 0 | |
+| [04](deep-research-report/04-evidence-hierarchy.md) | Evidence hierarchy | subsection | 43-54 | 0 | |
+| [05](deep-research-report/05-segment-map-and-timeline.md) | Segment map and timeline | section-lead | 55-82 | 0 | |
+| [06](deep-research-report/06-detailed-segment-breakdown.md) | Detailed segment breakdown | section-lead | 83-271 | 0 | |
+| [07](deep-research-report/07-main-concepts-and-how-they-connect.md) | Main concepts and how they connect | section-lead | 272-295 | 0 | |
+| [08](deep-research-report/08-factual-cross-check-and-caveats.md) | Factual cross-check and caveats | section-lead | 296-316 | 0 | |
+| [09](deep-research-report/09-the-two-most-significant-corrections.md) | The two most significant corrections | subsection | 317-322 | 0 | |
+| [10](deep-research-report/10-what-remains-genuinely-unsupported.md) | What remains genuinely unsupported | subsection | 323-326 | 0 | |
+| [11](deep-research-report/11-sources-and-methodological-notes.md) | Sources and methodological notes | section-lead | 327-349 | 0 | |
+
 ## `fortran_technical_deconstruction.html`
 
 _Fortran Technical Deconstruction & Interactive Analysis_ · 6 document parts
@@ -219,6 +269,18 @@ Findings about the full document (not one part): `D04-M5`
 | [05](retro-game-dev-language-advisor/05-retro-game-engine-genre-suitability-analytics.md) | Retro Game Engine & Genre Suitability Analytics | html-section#analytics | 379-408, 621-731 | 2 | |
 | [06](retro-game-dev-language-advisor/06-retro-toolchain-emulation-workstation.md) | Retro Toolchain & Emulation Workstation | html-section#toolchains | 411-458 | 2 | |
 | [07](retro-game-dev-language-advisor/07-ready-to-author-your-retro-engine.md) | Ready to Author Your Retro Engine? | html-section#call-to-action | 461-474 | 0 | |
+
+## `snes_hardware_breakdown.html`
+
+_Zero Star: SNES Hardware Architecture Deconstruction_ · 5 document parts
+
+| Part | Title | Kind | Source lines | Findings | Goal met? |
+|---|---|---|---|---|---|
+| [01](snes-hardware-breakdown/01-snes-hardware-architecture-memory-allocation.md) | SNES Hardware Architecture & Memory Allocation | html-section#tab-topology | 140-227, 711-711, 817-847, 991-1042 | 0 | |
+| [02](snes-hardware-breakdown/02-video-structure-technical-chapter-roadmap.md) | Video Structure & Technical Chapter Roadmap | html-section#tab-roadmap | 232-259, 594-677, 755-801, 802-816 | 0 | |
+| [03](snes-hardware-breakdown/03-dynamic-snes-hardware-calculators-interactive-simulators.md) | Dynamic SNES Hardware Calculators & Interactive Simulators | html-section#tab-simulators | 264-466, 712-712, 713-717, 848-865, 866-908, 909-911, 912-916, 917-921, 922-938, 939-950, 951-972, 973-990, 1043-1088, 1089-1139 | 0 | |
+| [04](snes-hardware-breakdown/04-snes-hardware-bottlenecks-vs-low-level-software-solutions.md) | SNES Hardware Bottlenecks vs Low-Level Software Solutions | html-section#tab-matrix | 471-499, 678-710, 1140-1159 | 0 | |
+| [05](snes-hardware-breakdown/05-physical-silicon-verification-engineering-principles.md) | Physical Silicon Verification & Engineering Principles | html-section#tab-silicon | 504-575 | 0 | |
 
 ## `software_drag_race_breakdown.html`
 

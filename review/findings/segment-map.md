@@ -107,6 +107,41 @@ The script `segments/split_documents.py` writes this file. It shows where the re
 | 12 | Conclusion | 2 | 2 | D07-C1, D07-C2 |
 | 13 | Works cited | 1 | 1 | D07-C1 |
 
+## `Video_Breakdown_and_Concepts.md`
+
+- Document parts: **25**. Parts with findings: **0**. Parts that nobody challenged yet: **25**.
+- Findings about the full document: none
+- Findings in more than one part: none
+- Findings outside every part: none
+
+| Part | Title | Critical | Total | IDs |
+|---|---|---|---|---|
+| 01 | Architectural Foundations and Project Scope |  |  |  |
+| 02 | Video Structure and Narrative Progression |  |  |  |
+| 03 | Bare-Metal Hardware Baseline and Computational Limitations |  |  |  |
+| 04 | Work RAM Topology and Procedural Dungeon Generation |  |  |  |
+| 05 | Picture Processing Unit Configuration and Hardware Decimal HUD Arithmetic |  |  |  |
+| 06 | Raster Manipulation via Horizontal Blank Direct Memory Access |  |  |  |
+| 07 | Object Attribute Memory Partitioning and Scanline Saturation |  |  |  |
+| 08 | Spatial Hashing and Entity Collision Architecture |  |  |  |
+| 09 | Real-Time Color Arithmetic and Visual Effects |  |  |  |
+| 10 | Independent Audio Subsystem and Custom SPC700 Driver Engineering |  |  |  |
+| 11 | Physical Manufacturing and Silicon Verification |  |  |  |
+| 12 | Detailed Structural Mapping of Video Content |  |  |  |
+| 13 | Systematic Decomposition of Core Architectural Concepts |  |  |  |
+| 14 | Work RAM Banking and Procedural Playfield Synthesis |  |  |  |
+| 15 | Picture Processing Unit Configuration and Hardware Decimal HUD Arithmetic |  |  |  |
+| 16 | Scanline Manipulation via Horizontal Blank Direct Memory Access |  |  |  |
+| 17 | Object Attribute Memory Management and Scanline Saturation Controls |  |  |  |
+| 18 | Constant-Time Spatial Hashing and Entity Collision Architecture |  |  |  |
+| 19 | Hardware Color Arithmetic for Dynamic Visual Feedback |  |  |  |
+| 20 | Subsystem Isolation and Custom SPC700 Audio Driver Implementation |  |  |  |
+| 21 | Physical Hardware Realization and Real-Silicon Divergence |  |  |  |
+| 22 | Comparative Architectural and Resource Budgeting Matrix |  |  |  |
+| 23 | Engineering Implications for Constrained Systems Development |  |  |  |
+| 24 | Synthesis and Conclusions |  |  |  |
+| 25 | Works cited |  |  |  |
+
 ## `YouTube Video Breakdown.md`
 
 - Document parts: **15**. Parts with findings: **12**. Parts that nobody challenged yet: **3**.
@@ -184,6 +219,27 @@ The script `segments/split_documents.py` writes this file. It shows where the re
 | 06 | Instruction Set Architecture (ISA) Tradeoff Matrix |  | 1 | D03-m4 |
 | 07 | Ready to Start Your 90-Day Learning Track? |  |  |  |
 
+## `deep-research-report.md`
+
+- Document parts: **11**. Parts with findings: **0**. Parts that nobody challenged yet: **11**.
+- Findings about the full document: none
+- Findings in more than one part: none
+- Findings outside every part: none
+
+| Part | Title | Critical | Total | IDs |
+|---|---|---|---|---|
+| 01 | Executive summary |  |  |  |
+| 02 | Identified video |  |  |  |
+| 03 | Transcript and quotation status |  |  |  |
+| 04 | Evidence hierarchy |  |  |  |
+| 05 | Segment map and timeline |  |  |  |
+| 06 | Detailed segment breakdown |  |  |  |
+| 07 | Main concepts and how they connect |  |  |  |
+| 08 | Factual cross-check and caveats |  |  |  |
+| 09 | The two most significant corrections |  |  |  |
+| 10 | What remains genuinely unsupported |  |  |  |
+| 11 | Sources and methodological notes |  |  |  |
+
 ## `fortran_technical_deconstruction.html`
 
 - Document parts: **6**. Parts with findings: **6**. Parts that nobody challenged yet: **0**.
@@ -232,6 +288,21 @@ The script `segments/split_documents.py` writes this file. It shows where the re
 | 05 | Retro Game Engine & Genre Suitability Analytics | 2 | 2 | D04-C4, D04-C5 |
 | 06 | Retro Toolchain & Emulation Workstation |  | 2 | D04-M2, D04-M3 |
 | 07 | Ready to Author Your Retro Engine? |  |  |  |
+
+## `snes_hardware_breakdown.html`
+
+- Document parts: **5**. Parts with findings: **0**. Parts that nobody challenged yet: **5**.
+- Findings about the full document: none
+- Findings in more than one part: none
+- Findings outside every part: none
+
+| Part | Title | Critical | Total | IDs |
+|---|---|---|---|---|
+| 01 | SNES Hardware Architecture & Memory Allocation |  |  |  |
+| 02 | Video Structure & Technical Chapter Roadmap |  |  |  |
+| 03 | Dynamic SNES Hardware Calculators & Interactive Simulators |  |  |  |
+| 04 | SNES Hardware Bottlenecks vs Low-Level Software Solutions |  |  |  |
+| 05 | Physical Silicon Verification & Engineering Principles |  |  |  |
 
 ## `software_drag_race_breakdown.html`
 
