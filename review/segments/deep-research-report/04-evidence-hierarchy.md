@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: subsection
 parent: "Video metadata, evidence base, and transcript status"
 lines: 43-54
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-M8, D13-m1]
 ---
 
 # Evidence hierarchy
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 19:07](https://www.youtube.com/watch?v=j_2bo7ng65E&t=1147s). The video promises the open-source sound engine here. That engine is the first-party code of this part.
 
 > Parent section: **Video metadata, evidence base, and transcript status**
 
@@ -26,7 +29,12 @@ Finally, the unusually detailed **VETAU24H synopsis** is used only to reconstruc
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-M8 | major | VERIFY DOC | verify | L53, L347 | _Claim:_ VETAU24H holds "the most detailed text synopsis found" and is a "derivative" source. _Problem:_ The VETAU24H page is a copy of the techeblog article "Zero Star Climbs Out of Two Years of Pure SNES Assembly" by Bill Smith, 11 September 2026 (both fetched). The image links of the copy point to images.techeblog.com. The document cites the copy and not the origin. Document 14 cites the techeblog page. The copy shows a date of 5 October 2026, which may be a page-view date. |
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
 
 ---
 

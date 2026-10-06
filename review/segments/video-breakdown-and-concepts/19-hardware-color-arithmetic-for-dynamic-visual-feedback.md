@@ -4,10 +4,13 @@ document: "Technical Architecture and Systems Deconstruction of Inkbox's "It Too
 kind: subsection
 parent: "Systematic Decomposition of Core Architectural Concepts"
 lines: 149-158
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D14-C6, D14-M4]
 ---
 
 # Hardware Color Arithmetic for Dynamic Visual Feedback
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 40:37](https://www.youtube.com/watch?v=j_2bo7ng65E&t=2437s). Hit stop pauses the game a few frames and darkens the background with the add-half trick. Talisman colors are four palette colors of one cloud (42:39).
 
 > Parent section: **Systematic Decomposition of Core Architectural Concepts**
 
@@ -24,7 +27,12 @@ The game’s four collectible talismans rely on this color arithmetic pipeline f
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D14-C6 | critical | DOC VERIFY | verify | L5-203 (all citations) | _Claim:_ Each sentence cites "1", and the text names the video as the subject. _Problem:_ Source 1 is the techeblog news article, not the video. The video is source 3, and the text cites it only three times together with 1 (L62, L63, L184). The reviewer fetched source 1. It is a short summary that mentions HDMA, mode 1, 128 sprites and five plus three voices. It says nothing about spatial hashing, color math, priority cycling, emulator divergence or compilers. So most citations point to a source that does not hold the claim. A "video breakdown" that cites a news article for the video is not a breakdown of the video. |
+| D14-M4 | major | VIDEO | open | L39, L61, L86, L152-157, L182 | _Claim:_ Hit stop is a "single-frame black flash". The engine writes $2132 and enables subtraction in $2131, "inverting the display". The talismans use color math: fire trails, ice "shifts color palettes", gold and peach give "screen-wide color flashes". _Problem:_ The video describes one trick: layer 3 holds black tiles, layer 1 leaves the subscreen, and "add and divide by two" halves the brightness (37:13 to 37:34). That is addition, not subtraction, and no inversion. The same trick darkens the background during hit stop, which pauses the game "for a few frames" (40:37). The four talisman effects are four palette colors of the same cloud animation (42:39). Three talismans spawn new objects (42:59). The video never says that the ice talisman freezes anything or that a screen flashes. |
 
 ---
 

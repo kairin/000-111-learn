@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: subsection
 parent: "Video metadata, evidence base, and transcript status"
 lines: 31-42
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-m1]
 ---
 
 # Transcript and quotation status
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14). The video does not cover this idea. The captions exist, and this review used them.
 
 > Parent section: **Video metadata, evidence base, and transcript status**
 
@@ -26,7 +29,11 @@ A full verbatim reproduction of a copyrighted YouTube transcript would in any ev
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
 
 ---
 

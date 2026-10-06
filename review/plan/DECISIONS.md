@@ -1,10 +1,12 @@
 # Decision log
 
-**Status values:** Decided · Adopted (the recommendation, open to change) · Replaced (a later decision took its place) · Open (waits for the owner). All dates are 2026-09-27.
+**Status values:** Decided · Adopted (the recommendation, open to change) · Replaced (a later decision took its place) · Open (waits for the owner). The dates are 2026-09-27 for D1 to D24, and 2026-10-05 for D25 and D26.
 
 ## Open decisions
 
-None at this time. The next choices come with the game design (see [PLAN.md](PLAN.md), phase 5).
+| ID | Question | Recommendation |
+|---|---|---|
+| O9 | Which PC speed does the lander target: a 4.77 MHz 8086, or a 386? One frame at 70 Hz gives the 8086 about 68,000 clock cycles, and a full-screen copy costs about 544,000. | Decide with the game design (see [PLAN.md](PLAN.md), phase 5). Until then, the tests keep `cpu 8086` and the 70 Hz refresh. |
 
 ## Decided
 
@@ -38,6 +40,9 @@ None at this time. The next choices come with the game design (see [PLAN.md](PLA
 | **D23** | **Show a wrong program next to the right one (test 2b).** One wrong word (`SHR`, not `SAR`) makes half of the values wrong. The build requires the check to fail on it, so the check itself is tested. Each test has its own page under `/game/`. | Decided by the owner, done | 128 of 256 points wrong. See the page `/game/test2b/`. |
 
 | **D24** | **Test 3 turns the wave around the center.** The wave goes from the back to the front and turns like a record on a turntable. Test 3b uses one wrong value (90, a quarter turn in degrees, not 64, a quarter turn in 256 steps). | Decided by the owner, done | 4096 of 4096 points agree in test 3a. The check finds 3759 wrong points in test 3b. |
+
+| **D25** | **Review the three SNES video guides** (documents 13 to 15, one video by Inkbox) in the same way as the eight video guides (D21). The captions stay on the computer of the owner. The reviews quote no more than 10 words from the video at one time, with a timestamp. | Decided by the owner, done | 41 document parts, 80 findings (14 critical, 34 major, 32 minor). See `adversarial-review-pass1/00-SUMMARY-snes-video-guides.md`. |
+| **D26** | **The SNES lessons live on the existing segment pages, not on a new page.** The video is a source of ideas, not of words. The 65C816 and the SPC700 are other dialects, and the VGA has no sprites, no HDMA and no color math. Eight learning units become strengths, limits and "Watch out" notes on the seven segments. Three new laboratory tests go into the plan (Phase 4d), not into the code. | Adopted | The table of units and pages is in [PLAN.md](PLAN.md). The dictionaries got the words that the laboratory code already used. |
 
 ## Why some decisions changed
 

@@ -6,11 +6,13 @@
   "a": {
    "strengths": [
     "You choose the exact place for each value: a register inside the processor, or an address in memory.",
-    "You control every byte. A complete DOS program can be smaller than 1 KB."
+    "You control every byte. A complete DOS program can be smaller than 1 KB.",
+    "A segment register (DS, ES, CS, SS) selects a window of 64 KB. A small .COM program keeps all four on one value, so it lives in one window."
    ],
    "limits": [
     "The 8086 has only eight general registers. You must remember what each one holds.",
-    "A value has no type. A byte is only a number until your code gives it a meaning."
+    "A value has no type. A byte is only a number until your code gives it a meaning.",
+    "An address is the segment times 16 plus the offset. Segments overlap every 16 bytes, so one byte has 4,096 names: A000:0000 is also 9FFF:0010. A SNES bank is one byte of the address, and banks do not overlap. The idea is the same, but the arithmetic is not."
    ],
    "example": { "code": "mov ax, 100", "says": "Put the number 100 in register AX." }
   },
@@ -24,7 +26,7 @@
    ],
    "example": { "code": "integer :: lives = 3", "says": "Make a whole-number name, lives, with the value 3." }
   },
-  "findings": ["D02-M4"]
+  "findings": ["D02-M4", "D13-M4"]
  },
  {
   "id": "calculate",
@@ -33,25 +35,31 @@
   "a": {
    "strengths": [
     "Each verb is one exact processor step. You know the cost of each step.",
-    "Whole-number and fixed-point arithmetic is very fast."
+    "Whole-number and fixed-point arithmetic is very fast.",
+    "A table in memory replaces a slow verb. MUL by 320 costs about 120 cycles on the 8086. One indexed MOV from a table of row starts costs about 20. The B side makes the table.",
+    "A byte register wraps at 256 by itself: add al, 64 turns a sine into a cosine. The A side wraps for free."
    ],
    "limits": [
     "One formula needs many verbs and many registers.",
-    "The 8086 has no verbs for decimal-point numbers. It needs an extra maths chip (the 8087) or slow software."
+    "The 8086 has no verbs for decimal-point numbers. It needs an extra maths chip (the 8087) or slow software.",
+    "The 8086 has no decimal flag. After ADD or ADC on packed decimal bytes, write DAA. After SUB or SBB, write DAS. If you forget it, 09 + 1 becomes 0A, not 10.",
+    "y * 320 = (y << 8) + (y << 6), because 320 = 256 + 64. Join the two shifts with ADD, never with OR. An OR loses every carry."
    ],
    "example": { "code": "mov ax, [speed]\nadd ax, [boost]\nmov [speed], ax", "says": "Make speed equal to speed plus boost. This takes three verbs." }
   },
   "b": {
    "strengths": [
     "You write the formula as maths: v = v + a*dt.",
-    "Fortran has many ready-made maths idioms, for example SQRT, SIN and ATAN2."
+    "Fortran has many ready-made maths idioms, for example SQRT, SIN and ATAN2.",
+    "Fortran can do the same whole-number steps as the 8086: SHIFTA keeps the sign in a shift, and IAND cuts a value to one byte. Thus, the laboratory can repeat the A-side arithmetic exactly and compare the answers."
    ],
    "limits": [
-    "On old hardware without a maths chip, decimal-point arithmetic is slow."
+    "On old hardware without a maths chip, decimal-point arithmetic is slow.",
+    "A whole number does not wrap by itself. For the quarter turn, the B side must say modulo(t + 64, 256). MOD is different: mod(-1, 256) is -1, but modulo(-1, 256) is 255."
    ],
    "example": { "code": "speed = speed + boost", "says": "The same idea in one sentence." }
   },
-  "findings": ["D02-C2", "D01-M2", "D01-m1"]
+  "findings": ["D02-C2", "D01-M2", "D01-m1", "D14-C3", "D14-M3"]
  },
  {
   "id": "decide",
@@ -85,24 +93,27 @@
   "a": {
    "strengths": [
     "String verbs with the REP adverb copy or fill memory very fast: one sentence, done CX times.",
-    "This is the best tool to move screen pixels in a retro game."
+    "This is the best tool to move screen pixels in a retro game.",
+    "The lander does not search for the ground. It reads one byte: the height of the ground in the column of the ship. The B side makes that table."
    ],
    "limits": [
-    "You write each loop yourself. There is no ready-made word for sum or average."
+    "You write each loop yourself. There is no ready-made word for sum or average.",
+    "REP MOVSW copies every byte, also the bytes that did not change. A black pixel costs the same as a yellow one. The machine counts work that you cannot see."
    ],
    "example": { "code": "mov ax, 0A000h\nmov es, ax\nxor di, di\nmov al, 1\nmov cx, 64000\nrep stosb", "says": "Fill all 64,000 screen pixels with color 1." }
   },
   "b": {
    "strengths": [
     "One line does arithmetic on a full array: x = x + v*dt.",
-    "Idioms such as SUM, MAXVAL and MATMUL do a full job in one word."
+    "Idioms such as SUM, MAXVAL and MATMUL do a full job in one word.",
+    "When a routine has few inputs, the laboratory checks all of them in one line: count(got /= expected). The game checks 256 of 256 angles and 4096 of 4096 points. A decimal counter has 10,000 values, and the check can run all of them."
    ],
    "limits": [
     "FORTRAN 77, the old dialect of DOS compilers, does not have full-array arithmetic."
    ],
    "example": { "code": "screen = 1", "says": "Make every value in the array screen equal to 1." }
   },
-  "findings": ["D02-C1", "D01-M4", "D01-m2"]
+  "findings": ["D02-C1", "D01-M4", "D01-m2", "D14-C2", "D14-M9"]
  },
  {
   "id": "organize",
@@ -110,24 +121,27 @@
   "question": "How do you divide a long text into parts with names?",
   "a": {
    "strengths": [
-    "Labels and macros give names to groups of instructions."
+    "Labels and macros give names to groups of instructions.",
+    "One routine serves the game and the test. The test runs the same words as the game, so the check tests the real code."
    ],
    "limits": [
-    "The program is one long list. The language does not enforce a structure. You must keep the order yourself."
+    "The program is one long list. The language does not enforce a structure. You must keep the order yourself.",
+    "A table from the B side is a promise between the two sides. The A side cannot check the format. Write the size, the byte order, the kind and the rounding rule next to the table: sine.bin has 256 values, 2 bytes each, low byte first, NINT(256 * sin)."
    ],
    "example": { "code": "%macro wait_key 0\n    mov ah, 0\n    int 16h\n%endmacro", "says": "Give the name wait_key to two instructions that wait for a key." }
   },
   "b": {
    "strengths": [
     "Modules, subroutines, functions and INTENT keep large programs clear.",
-    "The compiler makes sure that each call matches the procedure."
+    "The compiler makes sure that each call matches the procedure.",
+    "Each table that the B side makes gets a wrong twin: the same program with one wrong word or value. The build requires the check to fail on the twin, so the check itself is tested."
    ],
    "limits": [
     "You write more words before the first result."
    ],
    "example": { "code": "module physics\n  implicit none\ncontains\n  pure function next_speed(v, a, dt)\n    real, intent(in) :: v, a, dt\n    real :: next_speed\n    next_speed = v + a*dt\n  end function\nend module", "says": "A module named physics with one function that calculates the next speed." }
   },
-  "findings": ["D01-M5", "D01-M7"]
+  "findings": ["D01-M5", "D01-M7", "D15-C4"]
  },
  {
   "id": "talk",
@@ -138,21 +152,23 @@
     "You call BIOS and DOS services directly: show text, read a key, change the screen mode."
    ],
    "limits": [
-    "No number formatting. To show a number, you change it to text, one digit at a time."
+    "No number formatting. To show a number, you change it to text, one digit at a time.",
+    "A packed decimal counter is the smallest answer. Two bytes hold 0000 to 9999. Add with ADD and ADC, then DAA after each byte. AAM divides AL by 10 and gives the two digits in AH and AL."
    ],
    "example": { "code": "mov ah, 09h\nmov dx, msg\nint 21h\n...\nmsg db 'Hello$'", "says": "Ask DOS to show the text at msg. The $ marks the end of the text." }
   },
   "b": {
    "strengths": [
     "PRINT and WRITE format numbers for you.",
-    "The same text works on Linux, macOS and Windows."
+    "The same text works on Linux, macOS and Windows.",
+    "The format I4.4 keeps the leading zeros for a countdown, for example fuel 0042. The format I0 removes them for a score. The B side writes the number that the A side must show."
    ],
    "limits": [
     "Standard Fortran has no words for graphics, sound, or one key press without Enter."
    ],
    "example": { "code": "print *, \"Hello\"", "says": "Show the word Hello on the screen." }
   },
-  "findings": ["D02-M5", "D02-M10"]
+  "findings": ["D02-M5", "D02-M10", "D13-M11", "D15-M7"]
  },
  {
   "id": "hardware",
@@ -161,22 +177,26 @@
   "a": {
    "strengths": [
     "This is the native tongue of the processor. Ports, interrupts and screen memory are all in reach.",
-    "It is the best tool to make a retro game fast and responsive."
+    "It is the best tool to make a retro game fast and responsive.",
+    "The helper chips of the PC speak through ports, and the order of the writes is the protocol. To play a note: the command byte B6h to port 43h, then the two bytes of the divisor to port 42h, then bits 0 and 1 of port 61h. A wrong order gives a wrong note or silence."
    ],
    "limits": [
-    "Each processor family speaks a different dialect. 8086 words do not work on an ARM processor."
+    "Each processor family speaks a different dialect. 8086 words do not work on an ARM processor.",
+    "One frame at 70 Hz gives a 4.77 MHz 8086 about 68,000 clock cycles. A fill of the full screen with REP STOSB costs about 640,000. Plan the picture before you draw it.",
+    "The VGA has no HDMA, no sprites and no color math. Mode 13h has one page. Mode X has more than one page (four at 200 lines, three at 240 lines), a start address for page flips, and a line compare for a fixed status bar. A per-line effect is work for the 8086 itself, or it does not happen."
    ],
    "example": { "code": "mov dx, 3DAh\nvsync: in al, dx\ntest al, 8\njz vsync", "says": "Wait until the screen beam starts its return to the top (vertical retrace)." }
   },
   "b": {
    "strengths": [
-    "Fortran does not depend on one machine. The same text works on many processors."
+    "Fortran does not depend on one machine. The same text works on many processors.",
+    "Fortran makes the numbers that the hardware needs, before the game runs. For sound, the divisor of each note is nint(1193182.0_real64 / f). The B side also reports the error of each note in cents."
    ],
    "limits": [
     "Fortran cannot talk to the hardware directly. It needs help from C or from assembly (through ISO_C_BINDING)."
    ],
    "example": { "code": "! Standard Fortran has no word for this.\nuse iso_c_binding", "says": "Fortran asks a C or assembly routine to do the hardware work." }
   },
-  "findings": ["D02-C4", "D02-M8", "D02-M1"]
+  "findings": ["D02-C4", "D02-M8", "D02-M1", "D15-C3", "D14-M5"]
  }
 ]

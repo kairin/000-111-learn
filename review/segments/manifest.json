@@ -1019,7 +1019,13 @@
        8
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M1",
+      "D14-m2",
+      "D14-m3",
+      "D14-m11"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/02-video-structure-and-narrative-progression.md",
@@ -1031,7 +1037,11 @@
        12
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M7",
+      "D14-m7"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/03-bare-metal-hardware-baseline-and-computational-limitations.md",
@@ -1043,7 +1053,12 @@
        16
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M6",
+      "D14-M7",
+      "D14-m2"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/04-work-ram-topology-and-procedural-dungeon-generation.md",
@@ -1055,7 +1070,12 @@
        20
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M1",
+      "D14-M2",
+      "D14-M7"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/05-picture-processing-unit-configuration-and-hardware-decimal-h.md",
@@ -1067,7 +1087,14 @@
        24
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M1",
+      "D14-M3",
+      "D14-M7",
+      "D14-M8",
+      "D14-m2"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/06-raster-manipulation-via-horizontal-blank-direct-memory-acces.md",
@@ -1079,7 +1106,12 @@
        28
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C1",
+      "D14-C6",
+      "D14-M7",
+      "D14-M8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/07-object-attribute-memory-partitioning-and-scanline-saturation.md",
@@ -1091,7 +1123,12 @@
        32
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C2",
+      "D14-C6",
+      "D14-M7",
+      "D14-M9"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/08-spatial-hashing-and-entity-collision-architecture.md",
@@ -1103,7 +1140,12 @@
        36
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C3",
+      "D14-C6",
+      "D14-M7",
+      "D14-m8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/09-real-time-color-arithmetic-and-visual-effects.md",
@@ -1115,7 +1157,11 @@
        40
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M4",
+      "D14-M7"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/10-independent-audio-subsystem-and-custom-spc700-driver-enginee.md",
@@ -1127,7 +1173,13 @@
        44
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C4",
+      "D14-C6",
+      "D14-M5",
+      "D14-M7",
+      "D14-M10"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/11-physical-manufacturing-and-silicon-verification.md",
@@ -1139,7 +1191,11 @@
        48
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C5",
+      "D14-C6",
+      "D14-M7"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/12-detailed-structural-mapping-of-video-content.md",
@@ -1151,7 +1207,21 @@
        64
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C1",
+      "D14-C2",
+      "D14-C3",
+      "D14-C4",
+      "D14-C5",
+      "D14-C6",
+      "D14-M2",
+      "D14-M3",
+      "D14-M4",
+      "D14-M9",
+      "D14-M10",
+      "D14-m2",
+      "D14-m8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/13-systematic-decomposition-of-core-architectural-concepts.md",
@@ -1163,7 +1233,14 @@
        96
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C1",
+      "D14-C4",
+      "D14-C6",
+      "D14-M4",
+      "D14-M5",
+      "D14-M8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/14-work-ram-banking-and-procedural-playfield-synthesis.md",
@@ -1175,7 +1252,12 @@
        101
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M1",
+      "D14-M2",
+      "D14-m5"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/15-picture-processing-unit-configuration-and-hardware-decimal-h.md",
@@ -1187,7 +1269,12 @@
        107
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M1",
+      "D14-M3",
+      "D14-M8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/16-scanline-manipulation-via-horizontal-blank-direct-memory-acc.md",
@@ -1199,7 +1286,12 @@
        134
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C1",
+      "D14-C6",
+      "D14-M8",
+      "D14-m1"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/17-object-attribute-memory-management-and-scanline-saturation-c.md",
@@ -1211,7 +1303,13 @@
        139
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C2",
+      "D14-C6",
+      "D14-M9",
+      "D14-m4",
+      "D14-m8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/18-constant-time-spatial-hashing-and-entity-collision-architect.md",
@@ -1223,7 +1321,11 @@
        148
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C3",
+      "D14-C6",
+      "D14-m8"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/19-hardware-color-arithmetic-for-dynamic-visual-feedback.md",
@@ -1235,7 +1337,10 @@
        158
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M4"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/20-subsystem-isolation-and-custom-spc700-audio-driver-implement.md",
@@ -1247,7 +1352,13 @@
        163
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C4",
+      "D14-C6",
+      "D14-M5",
+      "D14-M10",
+      "D14-m6"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/21-physical-hardware-realization-and-real-silicon-divergence.md",
@@ -1259,7 +1370,10 @@
        169
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C5",
+      "D14-C6"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/22-comparative-architectural-and-resource-budgeting-matrix.md",
@@ -1271,7 +1385,21 @@
        185
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C1",
+      "D14-C2",
+      "D14-C3",
+      "D14-C4",
+      "D14-C5",
+      "D14-C6",
+      "D14-M2",
+      "D14-M3",
+      "D14-M4",
+      "D14-M8",
+      "D14-M9",
+      "D14-m8",
+      "D14-m11"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/23-engineering-implications-for-constrained-systems-development.md",
@@ -1283,7 +1411,11 @@
        191
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C6",
+      "D14-M6",
+      "D14-m7"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/24-synthesis-and-conclusions.md",
@@ -1295,7 +1427,13 @@
        204
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-C2",
+      "D14-C6",
+      "D14-M1",
+      "D14-M7",
+      "D14-m10"
+     ]
     },
     {
      "file": "video-breakdown-and-concepts/25-works-cited.md",
@@ -1307,7 +1445,9 @@
        234
       ]
      ],
-     "findings": []
+     "findings": [
+      "D14-m9"
+     ]
     }
    ],
    "document_findings": [],
@@ -2006,7 +2146,11 @@
        10
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-m1",
+      "D13-m8",
+      "D13-m12"
+     ]
     },
     {
      "file": "deep-research-report/02-identified-video.md",
@@ -2018,7 +2162,12 @@
        30
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-m1",
+      "D13-m2",
+      "D13-m3",
+      "D13-m12"
+     ]
     },
     {
      "file": "deep-research-report/03-transcript-and-quotation-status.md",
@@ -2030,7 +2179,9 @@
        42
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-m1"
+     ]
     },
     {
      "file": "deep-research-report/04-evidence-hierarchy.md",
@@ -2042,7 +2193,10 @@
        54
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-M8",
+      "D13-m1"
+     ]
     },
     {
      "file": "deep-research-report/05-segment-map-and-timeline.md",
@@ -2054,7 +2208,14 @@
        82
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-C1",
+      "D13-C2",
+      "D13-M1",
+      "D13-M6",
+      "D13-m1",
+      "D13-m2"
+     ]
     },
     {
      "file": "deep-research-report/06-detailed-segment-breakdown.md",
@@ -2066,7 +2227,30 @@
        271
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-C1",
+      "D13-C2",
+      "D13-C3",
+      "D13-M1",
+      "D13-M2",
+      "D13-M3",
+      "D13-M4",
+      "D13-M5",
+      "D13-M6",
+      "D13-M7",
+      "D13-M9",
+      "D13-M10",
+      "D13-M11",
+      "D13-m1",
+      "D13-m2",
+      "D13-m5",
+      "D13-m6",
+      "D13-m7",
+      "D13-m8",
+      "D13-m9",
+      "D13-m10",
+      "D13-m11"
+     ]
     },
     {
      "file": "deep-research-report/07-main-concepts-and-how-they-connect.md",
@@ -2078,7 +2262,12 @@
        295
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-M3",
+      "D13-M4",
+      "D13-m1",
+      "D13-m5"
+     ]
     },
     {
      "file": "deep-research-report/08-factual-cross-check-and-caveats.md",
@@ -2090,7 +2279,14 @@
        316
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-C3",
+      "D13-M1",
+      "D13-M7",
+      "D13-m1",
+      "D13-m9",
+      "D13-m10"
+     ]
     },
     {
      "file": "deep-research-report/09-the-two-most-significant-corrections.md",
@@ -2102,7 +2298,10 @@
        322
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-C3",
+      "D13-m1"
+     ]
     },
     {
      "file": "deep-research-report/10-what-remains-genuinely-unsupported.md",
@@ -2114,7 +2313,10 @@
        326
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-M1",
+      "D13-m1"
+     ]
     },
     {
      "file": "deep-research-report/11-sources-and-methodological-notes.md",
@@ -2126,7 +2328,14 @@
        349
       ]
      ],
-     "findings": []
+     "findings": [
+      "D13-M7",
+      "D13-M8",
+      "D13-m1",
+      "D13-m3",
+      "D13-m4",
+      "D13-m5"
+     ]
     }
    ],
    "document_findings": [],
@@ -2612,7 +2821,21 @@
        1042
       ]
      ],
-     "findings": []
+     "findings": [
+      "D15-C2",
+      "D15-C4",
+      "D15-C5",
+      "D15-M1",
+      "D15-M3",
+      "D15-M4",
+      "D15-M6",
+      "D15-M11",
+      "D15-M12",
+      "D15-m1",
+      "D15-m2",
+      "D15-m3",
+      "D15-m8"
+     ]
     },
     {
      "file": "snes-hardware-breakdown/02-video-structure-technical-chapter-roadmap.md",
@@ -2636,7 +2859,23 @@
        816
       ]
      ],
-     "findings": []
+     "findings": [
+      "D15-C1",
+      "D15-C2",
+      "D15-C3",
+      "D15-C4",
+      "D15-C5",
+      "D15-M1",
+      "D15-M3",
+      "D15-M5",
+      "D15-M6",
+      "D15-M7",
+      "D15-M8",
+      "D15-M10",
+      "D15-M12",
+      "D15-M13",
+      "D15-m8"
+     ]
     },
     {
      "file": "snes-hardware-breakdown/03-dynamic-snes-hardware-calculators-interactive-simulators.md",
@@ -2700,7 +2939,19 @@
        1139
       ]
      ],
-     "findings": []
+     "findings": [
+      "D15-C1",
+      "D15-C2",
+      "D15-C3",
+      "D15-C4",
+      "D15-M7",
+      "D15-M8",
+      "D15-M11",
+      "D15-m2",
+      "D15-m4",
+      "D15-m5",
+      "D15-m7"
+     ]
     },
     {
      "file": "snes-hardware-breakdown/04-snes-hardware-bottlenecks-vs-low-level-software-solutions.md",
@@ -2720,7 +2971,16 @@
        1159
       ]
      ],
-     "findings": []
+     "findings": [
+      "D15-C2",
+      "D15-C3",
+      "D15-C4",
+      "D15-C5",
+      "D15-M1",
+      "D15-M8",
+      "D15-M12",
+      "D15-m1"
+     ]
     },
     {
      "file": "snes-hardware-breakdown/05-physical-silicon-verification-engineering-principles.md",
@@ -2732,11 +2992,22 @@
        575
       ]
      ],
-     "findings": []
+     "findings": [
+      "D15-M2",
+      "D15-M3",
+      "D15-M5",
+      "D15-M6",
+      "D15-M13",
+      "D15-m2"
+     ]
     }
    ],
    "document_findings": [],
-   "unmapped_findings": []
+   "unmapped_findings": [
+    "D15-M9",
+    "D15-m6",
+    "D15-m9"
+   ]
   },
   {
    "source": "software_drag_race_breakdown.html",

@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: subsection
 parent: "Factual cross-check and caveats"
 lines: 323-326
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-M1, D13-m1]
 ---
 
 # What remains genuinely unsupported
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 06:53](https://www.youtube.com/watch?v=j_2bo7ng65E&t=413s). The video states 192 by 168 tiles and 63K of RAM here. This part calls the numbers unverified.
 
 > Parent section: **Factual cross-check and caveats**
 
@@ -18,7 +21,12 @@ Nothing uncovered suggests a major technical fabrication in the video. The uncer
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-M1 | major | VIDEO | open | L64, L190, L313, L323-325 | _Claim:_ "192×168 tiles" and "~63 kB" are "provisionally reported" and "unverified game-specific detail". _Problem:_ The video states these numbers itself: "a 192x 168 tile world", "a 12x12 grid" of screens, "3072x 2688 pixel image", and "fills up 63K of RAM" (06:53). The primary source confirms the secondary source. The row at L313 and the list at L325 are now out of date. |
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
 
 ---
 

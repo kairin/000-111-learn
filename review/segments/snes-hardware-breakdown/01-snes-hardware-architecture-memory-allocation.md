@@ -4,10 +4,13 @@ document: "Zero Star: SNES Hardware Architecture Deconstruction"
 kind: html-section
 section_id: tab-topology
 lines: 140-227, 711-711, 817-847, 991-1042
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D15-C2, D15-C4, D15-C5, D15-M1, D15-M3, D15-M4, D15-M6, D15-M11, D15-M12, D15-m1, D15-m2, D15-m3, D15-m8]
 ---
 
 # SNES Hardware Architecture & Memory Allocation
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 09:01](https://www.youtube.com/watch?v=j_2bo7ng65E&t=541s). The video gives the three memories here: 128K for the CPU, 64K for the PPU and 64K for the APU. It gives no 256 kB total, no 129 KB ROM and no 63 kB bank.
 
 ###  🏛️ SNES Hardware Architecture & Memory Allocation
 
@@ -269,7 +272,23 @@ The recommendation logic / numbers below are claims too; review them.
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D15-C2 | critical | VIDEO DOC | open | L428-433, L664-665, L707, L840, L973-986, L1106 | _Claim:_ "SPC700 Dynamic Sound Stealing": when a sound effect fires, the driver "steals music channels cleanly". The simulator marks voice 4, 3 or 2 as "SFX STEAL".. _Problem:_ The video says the opposite. The first five voices play music and the last three play sound effects [18:18]. The three wait for the CPU to name a voice and an effect [18:38]. Object sounds use "the second to last sound effect channel" so that they do not disturb the player sounds or the music [39:35]. The code steals voices 4, 3 and 2 (measured: voice 4 after a sword press). All of these are music voices. The simulator teaches a design that the developer avoided on purpose. |
+| D15-C4 | critical | VIDEO KNOW VERIFY | verify | L681, L824, L386, L618, L1052-1063 | _Claim:_ "No hardware division or multiplication unit". Software division costs "~320 cycles" for the HUD and 480 cycles for collision. The optimized versions cost 14 and 12 cycles.. _Problem:_ The 5A22 has a hardware multiplier at $4202/$4203 (8 x 8, result at $4216/$4217, 8 cycles) and a divider at $4204 to $4206 (16 / 8, quotient at $4214/$4215). The reviewer fetched the nesdev "Multiplication" page for the multiplier. A binary to decimal conversion is a few hardware divisions, not 320 cycles. The video says only that BCD "makes the math so much easier" [31:44] and that INC and DEC ignore the decimal flag [32:05]. None of the four chart values is in the video or in report 14. The chart is a picture of an invention. |
+| D15-C5 | critical | VIDEO | open | L636-638, L693-695, L832 | _Claim:_ The limit is "32 sprite tiles" per scanline. The fixes are "viewport culling, dummy tile zero relocation, and alternating priority frame cycling" and "dynamic entity sorting".. _Problem:_ The video gives two limits: 32 sprites per line [28:34] and 34 8-pixel slivers per line [29:38]. The nesdev "Sprites" page confirms both. Tile zero was the problem, not the fix: the PPU "still counts those transparent sprites" [28:34], so he moves them to an offscreen Y [28:55]. The video names the registers that rotate sprites, then says "leave it as is" [30:21]. The page gives the rejected option as the fix. The objects are "not organized by X or Y" [30:42], so there is no entity sorting. |
+| D15-M1 | major | VIDEO VERIFY | verify | L84, L104, L609, L689, L826 | _Claim:_ A "2-year project" with "9,999" floors.. _Problem:_ The goal is "level 10,000" or 10,000 chickens [03:50]. A 16-bit packed BCD counter "fits exactly the 10,000" he needs [32:05]. The number 9,999 is the largest value of the counter, not the number of floors. The video gives no development time. The recap jokes about "two weeks" [00:00]. The "two-year" claim comes from report 14, L5, which cites the video for it. |
+| D15-M11 | major | DOC | open | L114-130, L220, L293-298, L342, L418, L460, L966-967 | _Claim:_ Accessibility.. _Problem:_ The five tab buttons have no `role="tab"` and no `aria-selected`. The three canvases have no text alternative and no data table. The two labels have no `for`, so a screen reader does not link them to the inputs (measured). The range slider has no `aria-label`. The voice grid text is 9 and 10 pixels. Stolen voices show only by color and a pulse. Emoji are the only icons. |
+| D15-M12 | major | VIDEO DOC | open | L169, L217, L223, L610-611, L687-689, L825, L1008 | _Claim:_ Bank $7F is "63 kB" and holds the map "explicitly". Bank $7E is "isolated for stack and system state". The chart totals "256 kB". The split "prevents heap fragmentation".. _Problem:_ Each WRAM bank is 64 kB. The map is 63 kB of bank $7F, and he names the last 1 kB too [21:18]. The chart puts 63 for the bank and 1 for OAM plus CGRAM, so 64 + 63 + 64 + 64 + 1 = 256 only by this error. The video keeps the objects in the first bank through the 8 kB mirror, to avoid changing the data bank register [21:38 to 21:59]. The banks are not "isolated". There is no heap in this game, so nothing fragments. |
+| D15-M3 | major | DOC VIDEO | open | L100, L146, L560-562, L601 | _Claim:_ "CO-PROCESSORS: NONE (0)".. _Problem:_ The page contradicts itself. L146 says the console has "dedicated coprocessors". L560 calls the HDMA unit, the PPU color math and the SPC700 "coprocessor offloading". The video says he did not use Mode 7 or the "extra in cartridge processing chips" [50:53]. So "no cartridge enhancement chip" is right, "zero coprocessors" is wrong. |
+| D15-M4 | major | KNOW VIDEO | open | L824 | _Claim:_ The 65c816 is a "16-bit processor with 8-bit registers".. _Problem:_ The accumulator and the index registers switch between 8 and 16 bits with the M and X flags. The video uses the 16-bit mode for the BCD counter [32:05]. The data bus is 8 bits wide. The sentence is reversed. |
+| D15-M6 | major | VIDEO VERIFY | verify | L539, L655-656, L833 | _Claim:_ "Sub-screen color subtraction ($2131/$2132)" gives "single-frame hit-stop black flashes" and "elemental spell bursts", and a "Color Math Hardware Inversion".. _Problem:_ $2131 is CGADSUB (add or subtract, half, layer enable) and $2132 is COLDATA (the fixed color). The reviewer fetched the nesdev "PPU registers" page. The video uses add and halve, not subtract: BG3 has black tiles, BG1 leaves the subscreen, and the result is half brightness [37:34]. The hit stop pauses "for a few frames" and darkens the background [40:37], not a single black frame. The talisman clouds use four palette colors [42:39], not color math. Nothing inverts. |
+| D15-m1 | minor | VIDEO | open | L199, L706, L839 | _Claim:_ "4x I/O Registers ($2140-$2143)", a "4-port bidirectional" handshake.. _Problem:_ There are four addresses but "eight separate registers", so a write by one side does not erase the other [12:28 to 12:48]. The page loses the point that the video makes. |
+| D15-m2 | minor | DOC | open | L146, L287, L313, L525, L569, L584 | _Claim:_ `*Zero Star*`, `` `$7F` `` and `$O(n^2)$`.. _Problem:_ The page is HTML. The reader sees raw asterisks, backticks and dollar signs (measured in six elements). |
+| D15-m3 | minor | VIDEO | open | L831 | _Claim:_ "Layer 3 = 2bpp parallax mountain background" in the game.. _Problem:_ In the game, BG3 is black tiles for the darkening effect [37:13]. The mountains on BG3 are on the title screen only [34:28]. |
+| D15-m8 | minor | KNOW | open | L96, L164, L599-600 | _Claim:_ The CPU runs at 3.58 MHz.. _Problem:_ That is the fast clock. Access to WRAM and to slow ROM runs at 2.68 MHz. A "strict 3.58 MHz cycle budget" (L600) overstates the budget. The video does not give a clock for the main CPU. |
 
 ---
 

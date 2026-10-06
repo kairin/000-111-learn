@@ -4,10 +4,13 @@ document: "Technical Architecture and Systems Deconstruction of Inkbox's "It Too
 kind: references
 parent: ""
 lines: 205-234
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D14-m9]
 ---
 
 # Works cited
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14). The video does not cover this idea. The citations point to a news article, not to the video.
 
 > 1. Zero Star Climbs Out of Two Years of Pure SNES Assembly, [https\://www\.techeblog.com/zero-star-homebrew-snes-game-assembly-language/](https://www.techeblog.com/zero-star-homebrew-snes-game-assembly-language/)  
 > 2. [https\://hackaday.com/2026/09/11/hand-coded-asm-powers-homebrew-snes-game/](https://hackaday.com/2026/09/11/hand-coded-asm-powers-homebrew-snes-game/)  
@@ -44,7 +47,11 @@ findings: []
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D14-m9 | minor | DOC VERIFY | verify | L205-216 | _Claim:_ Ten works cited. _Problem:_ Sources 5, 6 and 10 are a video about a different topic, a live stream and a video about Unity. They have no link to this video. Source 2 (Hackaday) has one sentence about the game (checked by WebFetch), but the text cites it for the structure and the lessons of the video. |
 
 ---
 

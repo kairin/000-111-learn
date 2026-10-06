@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: section-lead
 parent: ""
 lines: 296-316
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-C3, D13-M1, D13-M7, D13-m1, D13-m9, D13-m10]
 ---
 
 # Factual cross-check and caveats
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 20:58](https://www.youtube.com/watch?v=j_2bo7ng65E&t=1258s). The video says 'my 4 megabyte cartridge ROM' here. It never claims a hardware limit or a 3.58 MHz 6502.
 
 | Claim or theme associated with the video | Assessment | Cross-check |
 |---|---|---|
@@ -32,7 +35,16 @@ findings: []
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-C3 | critical | VIDEO VERIFY | verify | L121-125, L300, L302, L317-321 | _Claim:_ The "two most significant corrections": the "3.58 MHz 6502" of the video and "4 MB cartridge limit" need qualification. _Problem:_ The video makes neither claim. It never says "3.58 MHz". It says "6502" only about the SPC700, which was "heavily inspired by the 6502" (11:47). It says "an NES cartridges 4 megabyte ROM chip" (03:08) and "My 4 megabyte cartridge ROM" (20:58). Both describe his own cartridge, not a hardware limit. The Hackaday article says "3.58 MHz Ricoh 6502-based CPU" (fetched). So the document corrects Hackaday and presents the result as a correction of the video. The ExHiROM fact itself is correct (SNESdev Memory_map, fetched). |
+| D13-M1 | major | VIDEO | open | L64, L190, L313, L323-325 | _Claim:_ "192×168 tiles" and "~63 kB" are "provisionally reported" and "unverified game-specific detail". _Problem:_ The video states these numbers itself: "a 192x 168 tile world", "a 12x12 grid" of screens, "3072x 2688 pixel image", and "fills up 63K of RAM" (06:53). The primary source confirms the secondary source. The row at L313 and the list at L325 are now out of date. |
+| D13-M7 | major | VIDEO VERIFY | verify | L266, L315, L347 | _Claim:_ Credits: "Hornests for background graphics" and "Mouse Bite Labs" are "secondary-source attribution only". _Problem:_ Mouse Bite Labs is in the captions: thanks "for making these SNES cartridge designs open source" (45:58). The music is by "my friend Dr. Matt" (19:07, 44:42). The document never names Dr. Matt. Hornests is not in the captions. The credit roll (47:35 to 50:10) has no captions, so Hornests stays open. |
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
+| D13-m10 | minor | VIDEO | open | L224-226, L306-308 | _Claim:_ S-SMP, S-DSP, 64 KiB audio RAM, eight voices, BRR of nine bytes for 16 samples. _Problem:_ Correct, and the video confirms it: 64K APU RAM (09:01), eight voices (10:02), "9 byt sample blocks" with a control byte and 16 nibbles (10:45 to 11:05). |
+| D13-m9 | minor | VIDEO | open | L112, L301 | _Claim:_ 128 KiB of WRAM in banks $7E to $7F. _Problem:_ Correct, and the video confirms it: "128K of CPU RAM", world in "bank 2" (06:31), objects planned for $7F0000 (21:18). |
 
 ---
 

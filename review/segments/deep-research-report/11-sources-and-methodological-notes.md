@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: section-lead
 parent: ""
 lines: 327-349
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-M7, D13-M8, D13-m1, D13-m3, D13-m4, D13-m5]
 ---
 
 # Sources and methodological notes
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 45:58](https://www.youtube.com/watch?v=j_2bo7ng65E&t=2758s). The video thanks Mouse Bite Labs here. Dr. Matt is named at 19:07 and 44:42. Hornests is not in the captions.
 
 The most important source is the original [YouTube video by Inkbox](https://www.youtube.com/watch?v=j_2bo7ng65E). Its search metadata verifies the title, channel and broad description, but the watch page itself was throttled in this research environment. citeturn35search0turn31view0
 
@@ -35,7 +38,16 @@ Finally, [VETAU24H’s *Zero Star Climbs Out of Two Years of Pure SNES Assembly*
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-M7 | major | VIDEO VERIFY | verify | L266, L315, L347 | _Claim:_ Credits: "Hornests for background graphics" and "Mouse Bite Labs" are "secondary-source attribution only". _Problem:_ Mouse Bite Labs is in the captions: thanks "for making these SNES cartridge designs open source" (45:58). The music is by "my friend Dr. Matt" (19:07, 44:42). The document never names Dr. Matt. Hornests is not in the captions. The credit roll (47:35 to 50:10) has no captions, so Hornests stays open. |
+| D13-M8 | major | VERIFY DOC | verify | L53, L347 | _Claim:_ VETAU24H holds "the most detailed text synopsis found" and is a "derivative" source. _Problem:_ The VETAU24H page is a copy of the techeblog article "Zero Star Climbs Out of Two Years of Pure SNES Assembly" by Bill Smith, 11 September 2026 (both fetched). The image links of the copy point to images.techeblog.com. The document cites the copy and not the origin. Document 14 cites the techeblog page. The copy shows a date of 5 October 2026, which may be a page-view date. |
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
+| D13-m3 | minor | VERIFY | verify | L22, L331 | _Claim:_ The game "was published on 5 September 2026". _Problem:_ The fetched itch.io page shows version 1.01 and "updated 12 days ago". It does not show the date 5 September. Pass 2 must check the page metadata. |
+| D13-m4 | minor | DOC VERIFY | verify | L339 | _Claim:_ "SNESdev Backgrounds documentation" links to `snes.nesdev.org/wiki/Mode_7`. _Problem:_ The link label and the URL do not match. The fetched Mode_7 URL serves the page of all eight modes, so the content is correct. |
+| D13-m5 | minor | DOC VIDEO | open | L241, L294, L333 | _Claim:_ `fileciteturn7file0L2-L2` supports the voices 0 to 4 and 5 to 7 split. _Problem:_ The marker points to one line of the source file. One line cannot hold eight voice constants and eight pointers. The claim itself is correct: the fetched file has `SONGPOINTER0` to `SONGPOINTER4` and `EFFECTPOINTER5` to `EFFECTPOINTER7`. The video says the same at 18:18. |
 
 ---
 

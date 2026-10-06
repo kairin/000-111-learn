@@ -214,6 +214,10 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 - [x] Write all documents in ASD-STE100 (D17)
 - [x] Make the first test of the game: the two sides agree on 256 of 256 values (D19, D20)
 - [x] Review the eight video guides: 71 document parts, 169 findings, each part linked to its source video (D21)
+- [x] Review the three SNES video guides (documents 13 to 15): 41 document parts, 80 findings, 34 parts linked to a moment of the video (D25)
+- [x] Position the eight SNES learning units on the segment pages, and add the laboratory words to the dictionaries (D26)
+- [ ] Tests 4 to 6 of the game: the decimal counter, the row-start table and the terrain (PLAN.md, Phase 4d)
+- [ ] Decide the PC speed that the lander targets (decision O9)
 - [ ] Browser-run Assembly and Fortran demos (PLAN.md, Phase 4)
 - [ ] Pass 2: get and examine the high-risk citations (the checklist is at the end of each pass-1 review):
   - the LANL Fortran report,
@@ -244,3 +248,6 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 | 2026-09-27 | The B-side cassette photo on all B-side pages. The link preview shows the two cassettes | `learn/images/`, `site/` |
 | 2026-09-27 | Split and reviewed eight video guides (documents 05 to 12). Each part shows its source video and moment | `segments/`, `adversarial-review-pass1/`, `findings/` |
 | 2026-09-27 | Game page: A and B panels in step with the dot; program keys for speed, pause and step | `game/`, `site/` |
+| 2026-10-05 | Added three SNES video guides (documents 13 to 15) and split them into 41 document parts | `segments/` |
+| 2026-10-05 | Adversarial review, pass 1, of documents 13 to 15 against the captions: 80 findings, with the moment of each part in the video | `adversarial-review-pass1/`, `findings/` |
+| 2026-10-05 | Consolidated the three reviews into eight learning units. Put each unit on a segment page. Planned tests 4 to 6 for the laboratory. Added 21 entries to the dictionaries | `learn/`, `plan/` |

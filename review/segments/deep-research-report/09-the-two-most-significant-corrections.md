@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: subsection
 parent: "Factual cross-check and caveats"
 lines: 317-322
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-C3, D13-m1]
 ---
 
 # The two most significant corrections
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 11:47](https://www.youtube.com/watch?v=j_2bo7ng65E&t=707s). The only 6502 remark of the video is here, about the SPC700. The two corrections of this part correct Hackaday, not the video.
 
 > Parent section: **Factual cross-check and caveats**
 
@@ -20,7 +23,12 @@ The **CPU description** deserves similar precision. Hackaday calls it a “3.58 
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-C3 | critical | VIDEO VERIFY | verify | L121-125, L300, L302, L317-321 | _Claim:_ The "two most significant corrections": the "3.58 MHz 6502" of the video and "4 MB cartridge limit" need qualification. _Problem:_ The video makes neither claim. It never says "3.58 MHz". It says "6502" only about the SPC700, which was "heavily inspired by the 6502" (11:47). It says "an NES cartridges 4 megabyte ROM chip" (03:08) and "My 4 megabyte cartridge ROM" (20:58). Both describe his own cartridge, not a hardware limit. The Hackaday article says "3.58 MHz Ricoh 6502-based CPU" (fetched). So the document corrects Hackaday and presents the result as a correction of the video. The ExHiROM fact itself is correct (SNESdev Memory_map, fetched). |
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
 
 ---
 

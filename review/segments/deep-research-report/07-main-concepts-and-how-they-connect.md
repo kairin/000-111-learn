@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: section-lead
 parent: ""
 lines: 272-295
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-M3, D13-M4, D13-m1, D13-m5]
 ---
 
 # Main concepts and how they connect
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 20:35](https://www.youtube.com/watch?v=j_2bo7ng65E&t=1235s). The video explains the 24-bit address and the data bank register here. This is the memory lesson that the concept table misses.
 
 The video is most coherent when understood not as a collection of unrelated retro-programming curiosities, but as an **engineering dependency chain**:
 
@@ -35,7 +38,14 @@ A second recurring idea is **specialisation rather than abstraction**. A modern 
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-M3 | major | VIDEO | open | L195-218, L284 | _Claim:_ The lesson of the sprite segment is "culling": restrict work to on-screen entities. _Problem:_ The lesson of the video is different. The PPU counts transparent sprites toward the limit of 32 sprites per line (28:34). The fix moves tile-zero sprites to an off-screen Y (28:55). Then the "34 sliver per line rule" cuts 24 objects to 17 (29:38 to 29:59). He chose not to use the OAM rotation registers (30:21). The document names none of these. Its on-screen check exists in the video (22:19), but as a render step, not as a collision step. |
+| D13-M4 | major | VIDEO | open | L105-126, L280 | _Claim:_ Segment 2 teaches "LoROM/HiROM cartridge mapping" and "what address ranges are fast". _Problem:_ The video names neither LoROM nor HiROM, and it does not discuss fast or slow ROM. Its memory lesson is the data bank register: ROM from bank $C0, code in the second half of each bank, so the mirror reaches the hardware registers and "the first 8K of low RAM" (20:35 to 21:59). It moved the objects from bank $7F to the first RAM bank to avoid bank switches. The document misses this lesson, which is the closest SNES parallel to the 8086 segment registers. |
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
+| D13-m5 | minor | DOC VIDEO | open | L241, L294, L333 | _Claim:_ `fileciteturn7file0L2-L2` supports the voices 0 to 4 and 5 to 7 split. _Problem:_ The marker points to one line of the source file. One line cannot hold eight voice constants and eight pointers. The claim itself is correct: the fetched file has `SONGPOINTER0` to `SONGPOINTER4` and `EFFECTPOINTER5` to `EFFECTPOINTER7`. The video says the same at 18:18. |
 
 ---
 

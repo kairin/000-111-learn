@@ -4,10 +4,13 @@ document: "Deep Research Report: It Took Every SNES Hardware Trick To Make My Ga
 kind: subsection
 parent: "Video metadata, evidence base, and transcript status"
 lines: 13-30
-findings: []
+video: https://www.youtube.com/watch?v=j_2bo7ng65E
+findings: [D13-m1, D13-m2, D13-m3, D13-m12]
 ---
 
 # Identified video
+
+> **Source video:** [It Took Every SNES Hardware Trick To Make My Game](https://www.youtube.com/watch?v=j_2bo7ng65E) (Inkbox, 51:14) · [at 00:46](https://www.youtube.com/watch?v=j_2bo7ng65E&t=46s). The video names the game Zero Star here. The itch.io page writes it as 〇 Star.
 
 > Parent section: **Video metadata, evidence base, and transcript status**
 
@@ -32,7 +35,14 @@ The indexed YouTube description begins by framing the subject as programming the
 
 ## Review findings for this part
 
-_Pass 1 found nothing in this part. This does not mean that the part is correct. Nobody challenged it yet._
+The findings come from `../../findings/` (pass 1). The script matches them to this part by source line.
+
+| ID | Severity | Evidence | Status | Location | Problem |
+|---|---|---|---|---|---|
+| D13-m1 | minor | DOC | open | L5-349 | _Claim:_ 107 `citeturn` and 16 `fileciteturn` markers. _Problem:_ These are generation artifacts with hidden control characters. 94 lines of the document carry them. They are not citations. A reader cannot follow them. |
+| D13-m12 | minor | VIDEO | open | L5, L21, L24 | _Claim:_ The game is "〇 Star". _Problem:_ The itch.io page uses the symbol. The captions say "Zero Star" (00:46). Both names are in use. The document could say so once. |
+| D13-m2 | minor | VERIFY | verify | L23, L29, L57, L270 | _Claim:_ Working duration 51:15, with one snapshot at 51:55. _Problem:_ yt-dlp reports 51:14. The last caption block starts at 50:53. The 51:55 value is wrong. The difference of one second has no effect on the review. |
+| D13-m3 | minor | VERIFY | verify | L22, L331 | _Claim:_ The game "was published on 5 September 2026". _Problem:_ The fetched itch.io page shows version 1.01 and "updated 12 days ago". It does not show the date 5 September. Pass 2 must check the page metadata. |
 
 ---
 
