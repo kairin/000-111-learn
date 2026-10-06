@@ -1,0 +1,219 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import game from '../../data/game.json';
+import { SIDES } from '../../lib/learn';
+import { Image } from 'astro:assets';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+type Check = {
+	values: number; agree: number; passed: boolean; wrap_ok: boolean; after: number; carry: number;
+	first_wrong: number; wrong_by_thousand: number[];
+};
+const info = game.info as (Record<string, unknown> & { version?: string; check_bcd_wrong?: Check }) | null;
+const wrong = info?.check_bcd_wrong;
+const hex4 = (v: number) => v.toString(16).toUpperCase().padStart(4, '0');
+const packed = (n: number) => (Math.trunc(n / 1000) << 12) + ((Math.trunc(n / 100) % 10) << 8) + ((Math.trunc(n / 10) % 10) << 4) + (n % 10);
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Test 4b: the counter without DAA',
+		description: 'The decimal counter of test 4a without the word DAA. After 0009 it shows 000A, not 0010. The Fortran check finds 9,990 wrong values of 10,000.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page game-page">
+		<p class="lead">
+			This is the program of <a href={`${base}/game/test4a/`}>test 4a</a> <strong>without the word DAA</strong>. The
+			8086 then adds in binary, and nothing makes the byte decimal again. The counter shows 0000 to 0009 correctly. Then
+			it shows 000A, 000B … 000F, and only then 0010. The letters come from the digit table: the program shows each
+			nibble as it is.
+		</p>
+
+		{game.built && wrong ? (
+			<>
+				<div class="duet" data-version={info?.version ?? ''}>
+					<section class="duet-panel side-a" aria-labelledby="a-title">
+						<header>
+							{SIDES.a.image && <Image class="duet-photo" src={SIDES.a.image.src} alt={SIDES.a.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="a-title"><span class="side-letter">A</span> The missing word</h3>
+							<p class="muted small">In <code>src/bcd.inc</code>, the switch <code>-dWRONG_DECIMAL</code> removes the two DAA words.</p>
+						</header>
+						<ul class="diff">
+							<li class="del"><code>add al, 1</code> then <code>daa</code> <span class="small">right</span></li>
+							<li class="add"><code>add al, 1</code> only <span class="small">wrong: the byte stays binary</span></li>
+						</ul>
+						<p class="small">
+							The assembler cannot see this error. Without DAA, the program is still a correct binary counter. It is only
+							wrong for a person who reads the digits.
+						</p>
+						<ol class="duet-steps" id="a-steps"></ol>
+					</section>
+
+					<div class="duet-screen">
+						<iframe
+							class="dos-screen"
+							src={`${base}/game/player-count-wrong.html?v=${info?.version ?? ''}`}
+							title="A copy of a 1980s PC that runs the wrong A-side program of test 4b"
+							allow="fullscreen; autoplay"
+						></iframe>
+						<p class="duet-now" id="duet-now" aria-live="off">Waiting for the copy of the PC to start…</p>
+						<div class="duet-controls" role="group" aria-label="Speed of the counter">
+							<span class="small muted">Speed:</span>
+							<button type="button" data-key="49" title="Key 1">Fastest</button>
+							<button type="button" data-key="50" title="Key 2">Fast</button>
+							<button type="button" data-key="51" title="Key 3">Medium</button>
+							<button type="button" data-key="52" title="Key 4" aria-pressed="true">Slow</button>
+							<button type="button" data-key="53" title="Key 5">Slowest</button>
+							<span class="spacer"></span>
+							<button type="button" data-key="32" title="Space" id="btn-pause">Pause</button>
+							<button type="button" data-key="78" title="Key N">One step</button>
+							<button type="button" data-key="74" title="Key J">Jump to 9990</button>
+							<button type="button" id="btn-restart" class="ghost">Restart</button>
+						</div>
+						<p class="muted small">
+							Compare with the correct program in <a href={`${base}/game/test4a/`}>test 4a</a>. Watch the step after
+							0009. <strong>Jump to 9990</strong> goes to the value that 9990 steps give here: 2706, because the counter
+							counts in binary. After 9999 steps it shows 270F, not 9999, and the carry cell stays gray.
+						</p>
+					</div>
+
+					<section class="duet-panel side-b" aria-labelledby="b-title">
+						<header>
+							{SIDES.b.image && <Image class="duet-photo" src={SIDES.b.image.src} alt={SIDES.b.image.alt} widths={[160, 320]} sizes="160px" />}
+							<h3 id="b-title"><span class="side-letter">B</span> What the check sees</h3>
+							<p class="muted small">The value that the check expects after the same number of steps.</p>
+						</header>
+						<ol class="duet-steps" id="b-steps"></ol>
+						<p class="small" id="b-verdict"></p>
+					</section>
+				</div>
+
+				<h2>The check report</h2>
+				<p>
+					The test program runs the wrong routine 10,000 times and writes each value to <code>BCDW.BIN</code>. The checker
+					(<code>lab/check_bcd.f90</code>) compares them with its own answers:
+				</p>
+				<pre class="check-output"><code>File: BCDW.BIN
+A side and B side agree on {wrong.agree} of {wrong.values} values
+After 9999: {hex4(wrong.after)}, carry {wrong.carry} (must be 0000, carry 1): {wrong.wrap_ok ? 'right' : 'wrong'}
+First wrong value: step {wrong.first_wrong}: A side {hex4(wrong.first_wrong)}, B side {hex4(packed(wrong.first_wrong))}
+ERROR STOP The A side and the B side disagree.</code></pre>
+				<p class="small">The wrong values in each group of 1,000 steps:</p>
+				<div class="turn-bars bcd-bars" role="img" aria-label={`Wrong values in each group of 1,000 steps: ${wrong.wrong_by_thousand.join(', ')}.`}>
+					{wrong.wrong_by_thousand.map((w, k) => (
+						<div class="turn-bar" title={`Steps ${k * 1000} to ${k * 1000 + 999}: ${w} of 1000 values wrong`}>
+							<span class="bar" style={`height: ${(w / 1000) * 100}%`}></span>
+							<span class="lbl">{k * 1000}</span>
+						</div>
+					))}
+				</div>
+			</>
+		) : (
+			<p class="notice">
+				The game build is missing on this computer. Run <code>game/dev.sh</code>, or read the published site. GitHub
+				Actions makes the build for each push.
+			</p>
+		)}
+
+		<h2>How one missing word breaks the game</h2>
+		<ol class="steps-list">
+			<li>
+				<strong>The first ten values are right.</strong> 0 to 9 look the same in binary and in packed decimal. A person
+				who tests the counter for a few seconds sees nothing wrong.
+			</li>
+			<li>
+				<strong>Then the digits show letters.</strong> After 0009, the binary sum 0Ah stays 0Ah. The digit table turns
+				it into the letter A. In the lander game, the fuel would show 00A0.
+			</li>
+			<li>
+				<strong>The end of the count is wrong.</strong> After 9999 steps, the wrong counter is 270Fh, the binary form of
+				9999. It never shows 9999, and it gives no carry at the end. A game that waits for 9999 never sees it.
+			</li>
+			<li>
+				<strong>The check guards the site.</strong> Only 10 of 10,000 values agree, and the step after 9999 is wrong.
+				The build requires this check to fail. If the check accepts the wrong program, the check itself is broken, and
+				the build stops.
+			</li>
+		</ol>
+
+		<h2>Where this twin comes from</h2>
+		<p>
+			Test 4a lists the full path from the video to the test (<a href={`${base}/game/test4a/#origin`}>where this test
+			comes from</a>). The wrong twin has two more sources:
+		</p>
+		<ul>
+			<li>
+				The rule of <a href={`${base}/plan/`}>PLAN.md, Phase 4d</a>: each new routine gets a wrong twin, and the build
+				requires its check to fail. Phase 4d names this twin: the switch <code>-dWRONG_DECIMAL</code> removes DAA, and
+				the check must find 9,990 wrong values. The check found {wrong ? wrong.values - wrong.agree : 9990}.
+			</li>
+			<li>
+				The <a href={`${base}/a/calculate/`}>Doing arithmetic</a> page of the A side: "If you forget it, 09 + 1 becomes
+				0A, not 10". This page shows that sentence in a running program.
+			</li>
+			<li>
+				The same pattern as <a href={`${base}/game/test2b/`}>test 2b</a> (one wrong word) and
+				<a href={`${base}/game/test3b/`}>test 3b</a> (one wrong value), decisions D23 and D24.
+			</li>
+		</ul>
+		<p class="small">
+			The wrong program comes from the same files as test 4a. NASM builds it with the switch <code>-dWRONG_DECIMAL</code>
+			(see <a href="https://github.com/kairin/000-111-learn/blob/main/game/src/bcd.inc"><code>src/bcd.inc</code></a>). The
+			panels of this page calculate the steps in the browser. The check report comes from the real test in DOSBox.
+		</p>
+	</div>
+</StarlightPage>
+
+<script>
+	import { wireControls, row } from '../../lib/spin';
+	import { bcdInc, followCounter, hex2, hex4, packed } from '../../lib/bcd';
+
+	const frame = document.querySelector<HTMLIFrameElement>('iframe.dos-screen');
+	const aSteps = document.getElementById('a-steps');
+	const bSteps = document.getElementById('b-steps');
+	const verdict = document.getElementById('b-verdict');
+	const now = document.getElementById('duet-now');
+
+	if (frame && aSteps && bSteps && verdict && now) {
+		function render(v: number) {
+			const n = v; // without DAA, the counter is the number of steps in binary
+			if (n === 0) {
+				now!.textContent = 'Step 0 · the counter starts at 0000';
+				aSteps!.innerHTML = row('counter dw 0', '0000', 'two bytes, both 00h');
+				bSteps!.innerHTML = row('n = 0', '0000', 'no steps yet');
+				verdict!.textContent = '';
+				return;
+			}
+			const s = bcdInc(v - 1, true);
+			const right = bcdInc(n <= 10000 ? packed((n - 1) % 10000) : 0);
+			now!.textContent = `Step ${n} · the wrong counter is ${hex4(v)} · the right counter is ${n < 10000 ? hex4(packed(n)) : '—'}`;
+			aSteps!.innerHTML = [
+				row('mov al, [counter]', hex2(s.lo), `the low byte of ${hex4(v - 1)}`),
+				row('add al, 1', hex2(s.addLo.al), `binary sum · CF = ${s.addLo.cf}`),
+				row('(no daa)', hex2(s.addLo.al), (s.addLo.al & 15) > 9 ? 'a nibble above 9: not a digit' : 'by chance, still a digit', (s.addLo.al & 15) > 9 ? 'is-bad' : ''),
+				row('adc al, 0', hex2(s.adcHi.al), 'the high byte, binary too'),
+				row('xlat (4 times)', hex4(v), 'the characters on the screen'),
+			].join('');
+			if (n >= 10000) {
+				bSteps!.innerHTML = row('n ≥ 10000', '—', 'the right counter has only 10,000 values');
+				verdict!.textContent = 'The check counts only the first 10,000 values and the step after 9999.';
+				return;
+			}
+			const want = packed(n);
+			const ok = want === v;
+			bSteps!.innerHTML = [
+				row('n (the steps)', `${n}`, ''),
+				row('mod and ishft', hex4(want), 'the right packed decimal value', 'is-ok'),
+				row('A side', hex4(v), ok ? 'the same' : 'different', ok ? 'is-ok' : 'is-bad'),
+				row('right A side (test 4a)', hex4(right.next), 'with DAA'),
+			].join('');
+			verdict!.innerHTML = ok
+				? '<strong>Agree.</strong> For 0 to 9, binary and packed decimal are the same.'
+				: '<strong>Disagree.</strong> The check counts this value as wrong.';
+		}
+		const reset = followCounter(frame, (v) => render(v));
+		wireControls(frame, reset);
+	}
+</script>

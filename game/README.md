@@ -36,9 +36,9 @@ GitHub Actions runs `game/build.sh` for each push to `main`. If the check fails,
 ## The steps in build.sh
 
 1. The B side makes `sine.bin`.
-2. NASM assembles the games (`SPIKE.COM`, `DOT3D.COM`, `WRONG3D.COM`, `SPIN3D.COM` and `WRONGSP.COM`) and the tests (`CHECK.COM`, `CHECK3D.COM`, `CHECK3DW.COM`, `CHECK3R.COM` and `CHECK3RW.COM`).
-3. DOSBox runs the five tests without a screen. They write `Y.BIN`, `P3D.BIN`, `P3DW.BIN`, `R3D.BIN` and `R3DW.BIN`.
-4. The B side compares the files with its own answers. The checks of tests 1, 2a and 3a must pass. The checks of the wrong programs (tests 2b and 3b) must fail.
+2. NASM assembles the games (`SPIKE.COM`, `DOT3D.COM`, `WRONG3D.COM`, `SPIN3D.COM`, `WRONGSP.COM`, `COUNTER.COM` and `WRONGCT.COM`) and the tests (`CHECK.COM`, `CHECK3D.COM`, `CHECK3DW.COM`, `CHECK3R.COM`, `CHECK3RW.COM`, `CHECKBCD.COM` and `CHECKBCW.COM`).
+3. DOSBox runs the seven tests without a screen. They write `Y.BIN`, `P3D.BIN`, `P3DW.BIN`, `R3D.BIN`, `R3DW.BIN`, `BCD.BIN` and `BCDW.BIN`.
+4. The B side compares the files with its own answers. The checks of tests 1, 2a, 3a and 4a must pass. The checks of the wrong programs (tests 2b, 3b and 4b) must fail.
 5. A Python step packs each game into a `.jsdos` file, the file that js-dos plays.
 
 ## Results of the first test
@@ -141,10 +141,44 @@ Test 3b is the program of test 3a with one wrong value: `QUARTER_TURN equ 90`. A
 - On the screen, the ring is a tilted oval, not a circle. The wave grows and shrinks while it turns, and it turns at a speed that changes.
 - The checker finds 3759 of 4096 points wrong, with wrong points at each of the 16 turns. `build.sh` requires this check to fail.
 
+## Test 4a: the decimal counter
+
+A game shows numbers to a person: the score, the fuel, the level. Test 4 keeps a counter in packed decimal (BCD): one decimal digit in each nibble (half of a byte). Two bytes hold 0000 to 9999. The number 1234 is the two bytes 12h and 34h, and the low byte comes first in memory. The digits are then ready to show, with no division by 10.
+
+| File | Side | What it does |
+|---|---|---|
+| `src/bcd.inc` | A | Two routines. `bcd_inc` adds 1 to the counter with `ADD`, `DAA`, `ADC` and `DAA`. After 9999 comes 0000, with CF = 1. `bcd_digits` changes the 4 nibbles into 4 characters with `XLAT` on the table "0123456789ABCDEF". The game and the test use these same routines. |
+| `src/counter.asm` | A | Shows the counter as four large digits (the 8 x 8 font of the BIOS, each dot 7 x 7 pixels). Under each digit, it shows the 4 bits of its nibble: yellow is 1, gray is 0. The cell C on the left is red after a carry. The keys are the same as in the other tests, and J jumps to 9990. |
+| `test/checkbcd.asm` | A | Runs `bcd_inc` 10,000 times from 0000. It writes each value (2 bytes, the low byte first), then the value after 9999 and the carry, to `BCD.BIN` (20,003 bytes). It has no graphics. |
+| `lab/check_bcd.f90` | B | Makes each value again from the number of steps with `MOD` and `ISHFT`, and compares all 10,000 values with `COUNT` and `ANY`. It also requires 0000 and a carry of 1 after 9999. |
+
+### Three new ideas on the A side
+
+- **ADD, then DAA.** The 8086 has no decimal flag. It always adds in binary: 09h + 1 = 0Ah. `DAA` (decimal adjust after addition) then corrects AL: 0Ah becomes 10h, and 9Ah becomes 00h with CF = 1. `DAA` works only on AL, so the routine does one byte at a time.
+- **ADD, not INC.** `INC` does not change CF. The routine needs the carry of the low byte, so it uses `add al, 1`, and then `adc al, 0` on the high byte. `MOV` does not change the flags, so CF stays between the two bytes.
+- **A digit is a table lookup.** `bcd_digits` puts each nibble in AL and reads its character with `XLAT`. The 8086 shifts by more than 1 bit only with CL: `mov cl, 4` then `shr al, cl`.
+
+### Results of test 4a
+
+- The two sides agree on 10,000 of 10,000 values. After 9999, the counter is 0000 and the carry is 1.
+- `COUNTER.COM` is 623 bytes.
+
+## Test 4b: the counter without DAA
+
+Test 4b is the program of test 4a without the two `DAA` words. The counter then counts in binary.
+
+- NASM builds it from the same files, with the switch `-dWRONG_DECIMAL`. The files are `WRONGCT.COM` (the game) and `CHECKBCW.COM` (the test, which writes `BCDW.BIN`).
+- On the screen, 0000 to 0009 are right. Then come 000A to 000F, and only then 0010. The key J goes to 2706, the value of 9990 steps in binary.
+- The checker finds 9,990 of 10,000 values wrong: only 0 to 9 agree. After 9999 steps the counter is 2710h with no carry, not 0000 with a carry. `build.sh` requires this check to fail.
+
+### Where test 4 comes from
+
+Test 4 is the first test from the review of the SNES video guides (decisions D25 and D26). The video shows a packed decimal counter at 32:05. The review findings D13-M11 and D15-M7 show what the guides got wrong about it: the interactive page used a decimal string that stops at 9999. Learning unit U3 moved the idea to the 8086 word `DAA`. PLAN.md, Phase 4d, gave the design and the wrong twin. The page `/game/test4a/` shows the full path, with links.
+
 ## The game pages
 
 - `/game/`: all tests, with the result of each check.
-- `/game/test1/`, `/game/test2a/`, `/game/test2b/`, `/game/test3a/` and `/game/test3b/`: one page for each test.
+- `/game/test1/`, `/game/test2a/`, `/game/test2b/`, `/game/test3a/`, `/game/test3b/`, `/game/test4a/` and `/game/test4b/`: one page for each test.
 
 ## The game page: A and B working together
 

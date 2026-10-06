@@ -4,7 +4,7 @@ import game from '../../data/game.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 type Check = { values: number; agree: number; max_error_px: number; passed: boolean };
-const info = game.info as (Record<string, unknown> & { check?: Check; check3d?: Check; check3d_wrong?: Check; check3r?: Check; check3r_wrong?: Check }) | null;
+const info = game.info as (Record<string, unknown> & { check?: Check; check3d?: Check; check3d_wrong?: Check; check3r?: Check; check3r_wrong?: Check; check_bcd?: Check; check_bcd_wrong?: Check }) | null;
 
 const tests = [
 	{
@@ -45,6 +45,22 @@ const tests = [
 		title: 'A wrong quarter turn',
 		text: 'The program of test 3a with one wrong value: 90 (a quarter turn in degrees), not 64 (a quarter turn in 256 steps). The ring becomes a tilted oval, and the wave grows and shrinks as it turns.',
 		check: info?.check3r_wrong,
+		expect: 'fail',
+	},
+	{
+		id: 'test4a',
+		name: 'Test 4a',
+		title: 'The decimal counter',
+		text: 'A counter from 0000 to 9999 in two packed decimal bytes. The A side adds with ADD and ADC, and DAA makes each byte decimal again. The check tests all 10,000 values and the step after 9999.',
+		check: info?.check_bcd,
+		expect: 'pass',
+	},
+	{
+		id: 'test4b',
+		name: 'Test 4b',
+		title: 'The counter without DAA',
+		text: 'The program of test 4a without the word DAA. After 0009 comes 000A, not 0010. The check finds 9,990 wrong values.',
+		check: info?.check_bcd_wrong,
 		expect: 'fail',
 	},
 ];

@@ -29,9 +29,14 @@ nasm -f bin -i "$here/src/" -o SPIN3D.COM "$here/src/spin3d.asm"
 nasm -f bin -i "$here/src/" -o CHECK3R.COM "$here/test/check3r.asm"
 nasm -f bin -i "$here/src/" -dWRONG_TURN -o WRONGSP.COM "$here/src/spin3d.asm"
 nasm -f bin -i "$here/src/" -dWRONG_TURN -o CHECK3RW.COM "$here/test/check3r.asm"
+# Test 4a: a packed decimal counter (ADD, ADC and DAA). Test 4b: the same files without DAA.
+nasm -f bin -i "$here/src/" -o COUNTER.COM "$here/src/counter.asm"
+nasm -f bin -i "$here/src/" -o CHECKBCD.COM "$here/test/checkbcd.asm"
+nasm -f bin -i "$here/src/" -dWRONG_DECIMAL -o WRONGCT.COM "$here/src/counter.asm"
+nasm -f bin -i "$here/src/" -dWRONG_DECIMAL -o CHECKBCW.COM "$here/test/checkbcd.asm"
 ls -l *.COM
 
-echo "== 3. A side: run the five tests in DOSBox, without a screen"
+echo "== 3. A side: run the seven tests in DOSBox, without a screen"
 cat > dosbox-test.conf <<'EOF'
 [sdl]
 output=surface
@@ -45,10 +50,12 @@ CHECK3D.COM
 CHECK3DW.COM
 CHECK3R.COM
 CHECK3RW.COM
+CHECKBCD.COM
+CHECKBCW.COM
 exit
 EOF
 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout 120 dosbox -conf dosbox-test.conf >dosbox.log 2>&1 || true
-for f in Y.BIN P3D.BIN P3DW.BIN R3D.BIN R3DW.BIN; do
+for f in Y.BIN P3D.BIN P3DW.BIN R3D.BIN R3DW.BIN BCD.BIN BCDW.BIN; do
   if [ ! -s "$f" ]; then
     echo "DOSBox did not write $f. The DOSBox log follows:" >&2
     cat dosbox.log >&2
@@ -79,6 +86,16 @@ if ./check_spin R3DW.BIN check3r-wrong.json >check3r-wrong.log 2>&1; then
 fi
 grep -E "^(File|A side|Largest)" check3r-wrong.log
 echo "Good: the check found the wrong program (test 3b)."
+gfortran -std=f2018 -Wall -Wextra -O2 -o check_bcd "$here/lab/check_bcd.f90"
+./check_bcd
+# Test 4b: the check must find the counter without DAA.
+if ./check_bcd BCDW.BIN check-bcd-wrong.json >check-bcd-wrong.log 2>&1; then
+  cat check-bcd-wrong.log
+  echo "The check did not find the errors of the wrong program (test 4b)." >&2
+  exit 1
+fi
+grep -E "^(File|A side|After|First)" check-bcd-wrong.log
+echo "Good: the check found the wrong program (test 4b)."
 
 echo "== 5. Make the bundles for the browser (js-dos)"
 python3 - <<'PY'
@@ -95,7 +112,8 @@ c:
 {program}
 """
 for program, bundle in [("SPIKE.COM", "spike.jsdos"), ("DOT3D.COM", "dot3d.jsdos"), ("WRONG3D.COM", "wrong3d.jsdos"),
-                         ("SPIN3D.COM", "spin3d.jsdos"), ("WRONGSP.COM", "wrongsp.jsdos")]:
+                         ("SPIN3D.COM", "spin3d.jsdos"), ("WRONGSP.COM", "wrongsp.jsdos"),
+                         ("COUNTER.COM", "counter.jsdos"), ("WRONGCT.COM", "wrongct.jsdos")]:
     with zipfile.ZipFile(f"site/{bundle}", "w", zipfile.ZIP_DEFLATED) as z:
         z.write(program, program)
         z.writestr(".jsdos/dosbox.conf", conf.format(program=program))
@@ -110,6 +128,10 @@ info = {
     "spin3d_com_bytes": pathlib.Path("SPIN3D.COM").stat().st_size,
     "check3r": json.loads(pathlib.Path("check3r.json").read_text()),
     "check3r_wrong": json.loads(pathlib.Path("check3r-wrong.json").read_text()),
+    "counter_com_bytes": pathlib.Path("COUNTER.COM").stat().st_size,
+    "check_bcd": json.loads(pathlib.Path("check-bcd.json").read_text()),
+    "wrongct_com_bytes": pathlib.Path("WRONGCT.COM").stat().st_size,
+    "check_bcd_wrong": json.loads(pathlib.Path("check-bcd-wrong.json").read_text()),
 }
 pathlib.Path("site/game.json").write_text(json.dumps(info, indent=1))
 print(json.dumps(info))

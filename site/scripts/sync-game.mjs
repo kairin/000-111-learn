@@ -57,7 +57,7 @@ if (fs.existsSync(path.join(BUILD, 'game.json'))) {
 	// A fingerprint of the game files. The page adds it to their addresses (?v=...), so a browser
 	// never plays an older copy that it keeps in its cache or in the js-dos local storage.
 	const hash = crypto.createHash('sha256');
-	for (const f of ['spike.jsdos', 'dot3d.jsdos', 'wrong3d.jsdos', 'spin3d.jsdos', 'wrongsp.jsdos', 'sine.bin', 'P3DW.BIN']) hash.update(fs.readFileSync(path.join(BUILD, f)));
+	for (const f of ['spike.jsdos', 'dot3d.jsdos', 'wrong3d.jsdos', 'spin3d.jsdos', 'wrongsp.jsdos', 'counter.jsdos', 'wrongct.jsdos', 'sine.bin', 'P3DW.BIN']) hash.update(fs.readFileSync(path.join(BUILD, f)));
 	info.version = hash.digest('hex').slice(0, 12);
 }
 
@@ -98,6 +98,8 @@ if (info) {
 	fs.writeFileSync(path.join(GAME_OUT, 'player-3d-wrong.html'), playerPage('wrong3d.jsdos')); // test 2b: the wrong program
 	fs.writeFileSync(path.join(GAME_OUT, 'player-spin.html'), playerPage('spin3d.jsdos')); // test 3a
 	fs.writeFileSync(path.join(GAME_OUT, 'player-spin-wrong.html'), playerPage('wrongsp.jsdos')); // test 3b: the wrong program
+	fs.writeFileSync(path.join(GAME_OUT, 'player-count.html'), playerPage('counter.jsdos')); // test 4a
+	fs.writeFileSync(path.join(GAME_OUT, 'player-count-wrong.html'), playerPage('wrongct.jsdos')); // test 4b: the wrong program
 }
 
 // ------------------------------------------------------------ the words of each program (the lens)
@@ -169,7 +171,7 @@ function analyzeFortran(file) {
 }
 
 // The number is the test: 1 is the dot on a flat plane, 2 is the dot in 3D (tests 2a and 2b),
-// 3 is the turning wave (tests 3a and 3b).
+// 3 is the turning wave (tests 3a and 3b), 4 is the decimal counter (tests 4a and 4b).
 const programs = [
 	[1, 'src/spike.asm', 'a', 'The game (test 1): draws the curve and moves the dot'],
 	[1, 'src/sine_y.inc', 'a', 'The shared routine: one angle in, one screen row out'],
@@ -186,6 +188,10 @@ const programs = [
 	[3, 'src/common.inc', 'a', 'The shared routines of tests 2 and 3: the keys, the pixels and the screen refresh'],
 	[3, 'test/check3r.asm', 'a', 'The test: runs the routines for 16 turns and 256 angles, and writes the positions to a file'],
 	[3, 'lab/check_spin.f90', 'b', 'The checker: compares the A-side positions with its own answers'],
+	[4, 'src/counter.asm', 'a', 'The game (test 4a): shows the counter as four large digits and its 16 bits'],
+	[4, 'src/bcd.inc', 'a', 'The shared routines: add 1 with ADD, ADC and DAA, and change the nibbles into digits'],
+	[4, 'test/checkbcd.asm', 'a', 'The test: runs bcd_inc 10,000 times and writes each value to a file'],
+	[4, 'lab/check_bcd.f90', 'b', 'The checker: makes each value again with MOD and ISHFT, and compares all 10,000'],
 ].map(([test, rel, side, role]) => ({
 	test,
 	file: rel,

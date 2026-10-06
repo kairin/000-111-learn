@@ -286,3 +286,4 @@ body:has(.duet) { --sl-content-width: 90rem; }
 .turn-bar { display: grid; grid-template-rows: 1fr auto; height: 100%; margin: 0; }
 .turn-bar .bar { align-self: end; background: #d9433b; border-radius: 2px 2px 0 0; }
 .turn-bar .lbl { font-size: 0.65rem; text-align: center; color: var(--sl-color-gray-3); font-family: var(--__sl-font-mono); }
+.turn-bars.bcd-bars { grid-template-columns: repeat(10, 1fr); }
