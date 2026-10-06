@@ -44,6 +44,7 @@
   { "word": "DW", "pos": "note", "segment": "store", "meaning": "Define words. Put these 16-bit numbers in the program file.", "example": "score dw 0" },
   { "word": "RESB", "pos": "note", "segment": "store", "meaning": "Reserve bytes. Keep this much empty space.", "example": "buffer resb 64000" },
   { "word": "EQU", "pos": "note", "segment": "store", "meaning": "Give a name to a number.", "example": "WIDTH equ 320" },
+  { "word": "XLAT", "pos": "verb", "segment": "store", "meaning": "Table lookup: replace AL with the byte at [BX + AL]. One verb reads one entry of a table.", "example": "mov bx, speeds\nxlat" },
 
   { "word": "ADD", "pos": "verb", "segment": "calculate", "meaning": "Add a value.", "example": "add ax, bx" },
   { "word": "SUB", "pos": "verb", "segment": "calculate", "meaning": "Subtract a value.", "example": "sub ax, 1" },
@@ -61,6 +62,12 @@
   { "word": "OR", "pos": "verb", "segment": "calculate", "meaning": "Set each bit that is 1 in one value or the other.", "example": "or al, 80h" },
   { "word": "XOR", "pos": "verb", "segment": "calculate", "meaning": "Flip the bits where the two values differ. xor ax, ax sets AX to 0.", "example": "xor ax, ax" },
   { "word": "NOT", "pos": "verb", "segment": "calculate", "meaning": "Flip every bit.", "example": "not al" },
+  { "word": "ADC", "pos": "verb", "segment": "calculate", "meaning": "Add, plus the carry flag. It joins the high bytes of a number that is longer than one register.", "example": "adc al, 0" },
+  { "word": "SBB", "pos": "verb", "segment": "calculate", "meaning": "Subtract, minus the carry flag (the borrow). The partner of ADC.", "example": "sbb al, 0" },
+  { "word": "DAA", "pos": "verb", "segment": "calculate", "meaning": "Decimal adjust after an ADD or ADC of two packed decimal bytes in AL. It makes 09h + 1 into 10h and sets CF after 99.", "example": "add al, 1\ndaa" },
+  { "word": "DAS", "pos": "verb", "segment": "calculate", "meaning": "Decimal adjust after a SUB or SBB of two packed decimal bytes in AL. The partner of DAA.", "example": "sub al, 1\ndas" },
+  { "word": "AAM", "pos": "verb", "segment": "calculate", "meaning": "Divide AL by 10. The tens go to AH, the units stay in AL: a ready-made step to show a number under 100.", "example": "aam" },
+  { "word": "CBW / CWD", "pos": "verb", "segment": "calculate", "meaning": "Make a signed number longer: CBW copies the sign of AL into AH. CWD copies the sign of AX into DX, before IDIV.", "example": "cwd\nidiv cx" },
   { "word": "CF", "pos": "noun", "segment": "calculate", "meaning": "Carry flag. It is 1 when a result is too large for its size.", "example": "" },
 
   { "word": "CMP", "pos": "verb", "segment": "decide", "meaning": "Compare two values. It subtracts but keeps only the flags.", "example": "cmp ax, 10" },
@@ -93,6 +100,7 @@
   { "word": "%macro", "pos": "note", "segment": "organize", "meaning": "Give a name to a group of instructions. Then use the name as one word.", "example": "%macro wait_key 0" },
   { "word": "%include", "pos": "note", "segment": "organize", "meaning": "Read a different file at this point.", "example": "%include \"vga.inc\"" },
   { "word": "TIMES", "pos": "note", "segment": "organize", "meaning": "Do the rest of the line again, a number of times.", "example": "times 10 db 0" },
+  { "word": "INCBIN", "pos": "note", "segment": "organize", "meaning": "Put the bytes of a file into the program at this place. This is how the A side reads a table that the B side made.", "example": "sine_table: incbin \"sine.bin\"" },
   { "word": ";", "pos": "grammar", "segment": "organize", "meaning": "Starts a comment. The assembler ignores the rest of the line.", "example": "; draw the ship" },
   { "word": ",", "pos": "grammar", "segment": "organize", "meaning": "Separates the destination (first) from the source (second).", "example": "mov ax, bx" },
   { "word": "h", "pos": "grammar", "segment": "organize", "meaning": "At the end of a number, h marks base 16 (hexadecimal). 10h is 16.", "example": "mov ax, 13h" },

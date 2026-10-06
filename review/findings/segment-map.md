@@ -107,6 +107,41 @@ The script `segments/split_documents.py` writes this file. It shows where the re
 | 12 | Conclusion | 2 | 2 | D07-C1, D07-C2 |
 | 13 | Works cited | 1 | 1 | D07-C1 |
 
+## `Video_Breakdown_and_Concepts.md`
+
+- Document parts: **25**. Parts with findings: **25**. Parts that nobody challenged yet: **0**.
+- Findings about the full document: none
+- Findings in more than one part: D14-C6 in parts 01+02+03+04+05+06+07+08+09+10+11+12+13+14+15+16+17+18+19+20+21+22+23+24, D14-M1 in parts 01+04+05+14+15+24, D14-m2 in parts 01+03+05+12, D14-m11 in parts 01+22, D14-M7 in parts 02+03+04+05+06+07+08+09+10+11+24, D14-m7 in parts 02+23, D14-M6 in parts 03+23, D14-M2 in parts 04+12+14+22, D14-M3 in parts 05+12+15+22, D14-M8 in parts 05+06+13+15+16+22, D14-C1 in parts 06+12+13+16+22, D14-C2 in parts 07+12+17+22+24, D14-M9 in parts 07+12+17+22, D14-C3 in parts 08+12+18+22, D14-m8 in parts 08+12+17+18+22, D14-M4 in parts 09+12+13+19+22, D14-C4 in parts 10+12+13+20+22, D14-M5 in parts 10+13+20, D14-M10 in parts 10+12+20, D14-C5 in parts 11+12+21+22
+- Findings outside every part: none
+
+| Part | Title | Critical | Total | IDs |
+|---|---|---|---|---|
+| 01 | Architectural Foundations and Project Scope | 1 | 5 | D14-C6, D14-M1, D14-m2, D14-m3, D14-m11 |
+| 02 | Video Structure and Narrative Progression | 1 | 3 | D14-C6, D14-M7, D14-m7 |
+| 03 | Bare-Metal Hardware Baseline and Computational Limitations | 1 | 4 | D14-C6, D14-M6, D14-M7, D14-m2 |
+| 04 | Work RAM Topology and Procedural Dungeon Generation | 1 | 4 | D14-C6, D14-M1, D14-M2, D14-M7 |
+| 05 | Picture Processing Unit Configuration and Hardware Decimal HUD Arithmetic | 1 | 6 | D14-C6, D14-M1, D14-M3, D14-M7, D14-M8, D14-m2 |
+| 06 | Raster Manipulation via Horizontal Blank Direct Memory Access | 2 | 4 | D14-C1, D14-C6, D14-M7, D14-M8 |
+| 07 | Object Attribute Memory Partitioning and Scanline Saturation | 2 | 4 | D14-C2, D14-C6, D14-M7, D14-M9 |
+| 08 | Spatial Hashing and Entity Collision Architecture | 2 | 4 | D14-C3, D14-C6, D14-M7, D14-m8 |
+| 09 | Real-Time Color Arithmetic and Visual Effects | 1 | 3 | D14-C6, D14-M4, D14-M7 |
+| 10 | Independent Audio Subsystem and Custom SPC700 Driver Engineering | 2 | 5 | D14-C4, D14-C6, D14-M5, D14-M7, D14-M10 |
+| 11 | Physical Manufacturing and Silicon Verification | 2 | 3 | D14-C5, D14-C6, D14-M7 |
+| 12 | Detailed Structural Mapping of Video Content | 6 | 13 | D14-C1, D14-C2, D14-C3, D14-C4, D14-C5, D14-C6, D14-M2, D14-M3, D14-M4, D14-M9, D14-M10, D14-m2, D14-m8 |
+| 13 | Systematic Decomposition of Core Architectural Concepts | 3 | 6 | D14-C1, D14-C4, D14-C6, D14-M4, D14-M5, D14-M8 |
+| 14 | Work RAM Banking and Procedural Playfield Synthesis | 1 | 4 | D14-C6, D14-M1, D14-M2, D14-m5 |
+| 15 | Picture Processing Unit Configuration and Hardware Decimal HUD Arithmetic | 1 | 4 | D14-C6, D14-M1, D14-M3, D14-M8 |
+| 16 | Scanline Manipulation via Horizontal Blank Direct Memory Access | 2 | 4 | D14-C1, D14-C6, D14-M8, D14-m1 |
+| 17 | Object Attribute Memory Management and Scanline Saturation Controls | 2 | 5 | D14-C2, D14-C6, D14-M9, D14-m4, D14-m8 |
+| 18 | Constant-Time Spatial Hashing and Entity Collision Architecture | 2 | 3 | D14-C3, D14-C6, D14-m8 |
+| 19 | Hardware Color Arithmetic for Dynamic Visual Feedback | 1 | 2 | D14-C6, D14-M4 |
+| 20 | Subsystem Isolation and Custom SPC700 Audio Driver Implementation | 2 | 5 | D14-C4, D14-C6, D14-M5, D14-M10, D14-m6 |
+| 21 | Physical Hardware Realization and Real-Silicon Divergence | 2 | 2 | D14-C5, D14-C6 |
+| 22 | Comparative Architectural and Resource Budgeting Matrix | 6 | 13 | D14-C1, D14-C2, D14-C3, D14-C4, D14-C5, D14-C6, D14-M2, D14-M3, D14-M4, D14-M8, D14-M9, D14-m8, D14-m11 |
+| 23 | Engineering Implications for Constrained Systems Development | 1 | 3 | D14-C6, D14-M6, D14-m7 |
+| 24 | Synthesis and Conclusions | 2 | 5 | D14-C2, D14-C6, D14-M1, D14-M7, D14-m10 |
+| 25 | Works cited |  | 1 | D14-m9 |
+
 ## `YouTube Video Breakdown.md`
 
 - Document parts: **15**. Parts with findings: **12**. Parts that nobody challenged yet: **3**.
@@ -184,6 +219,27 @@ The script `segments/split_documents.py` writes this file. It shows where the re
 | 06 | Instruction Set Architecture (ISA) Tradeoff Matrix |  | 1 | D03-m4 |
 | 07 | Ready to Start Your 90-Day Learning Track? |  |  |  |
 
+## `deep-research-report.md`
+
+- Document parts: **11**. Parts with findings: **11**. Parts that nobody challenged yet: **0**.
+- Findings about the full document: none
+- Findings in more than one part: D13-m1 in parts 01+02+03+04+05+06+07+08+09+10+11, D13-m8 in parts 01+06, D13-m12 in parts 01+02, D13-m2 in parts 02+05+06, D13-m3 in parts 02+11, D13-M8 in parts 04+11, D13-C1 in parts 05+06, D13-C2 in parts 05+06, D13-M1 in parts 05+06+08+10, D13-M6 in parts 05+06, D13-C3 in parts 06+08+09, D13-M3 in parts 06+07, D13-M4 in parts 06+07, D13-M7 in parts 06+08+11, D13-m5 in parts 06+07+11, D13-m9 in parts 06+08, D13-m10 in parts 06+08
+- Findings outside every part: none
+
+| Part | Title | Critical | Total | IDs |
+|---|---|---|---|---|
+| 01 | Executive summary |  | 3 | D13-m1, D13-m8, D13-m12 |
+| 02 | Identified video |  | 4 | D13-m1, D13-m2, D13-m3, D13-m12 |
+| 03 | Transcript and quotation status |  | 1 | D13-m1 |
+| 04 | Evidence hierarchy |  | 2 | D13-M8, D13-m1 |
+| 05 | Segment map and timeline | 2 | 6 | D13-C1, D13-C2, D13-M1, D13-M6, D13-m1, D13-m2 |
+| 06 | Detailed segment breakdown | 3 | 22 | D13-C1, D13-C2, D13-C3, D13-M1, D13-M2, D13-M3, D13-M4, D13-M5, D13-M6, D13-M7, D13-M9, D13-M10, D13-M11, D13-m1, D13-m2, D13-m5, D13-m6, D13-m7, D13-m8, D13-m9, D13-m10, D13-m11 |
+| 07 | Main concepts and how they connect |  | 4 | D13-M3, D13-M4, D13-m1, D13-m5 |
+| 08 | Factual cross-check and caveats | 1 | 6 | D13-C3, D13-M1, D13-M7, D13-m1, D13-m9, D13-m10 |
+| 09 | The two most significant corrections | 1 | 2 | D13-C3, D13-m1 |
+| 10 | What remains genuinely unsupported |  | 2 | D13-M1, D13-m1 |
+| 11 | Sources and methodological notes |  | 6 | D13-M7, D13-M8, D13-m1, D13-m3, D13-m4, D13-m5 |
+
 ## `fortran_technical_deconstruction.html`
 
 - Document parts: **6**. Parts with findings: **6**. Parts that nobody challenged yet: **0**.
@@ -232,6 +288,21 @@ The script `segments/split_documents.py` writes this file. It shows where the re
 | 05 | Retro Game Engine & Genre Suitability Analytics | 2 | 2 | D04-C4, D04-C5 |
 | 06 | Retro Toolchain & Emulation Workstation |  | 2 | D04-M2, D04-M3 |
 | 07 | Ready to Author Your Retro Engine? |  |  |  |
+
+## `snes_hardware_breakdown.html`
+
+- Document parts: **5**. Parts with findings: **5**. Parts that nobody challenged yet: **0**.
+- Findings about the full document: none
+- Findings in more than one part: D15-C2 in parts 01+02+03+04, D15-C4 in parts 01+02+03+04, D15-C5 in parts 01+02+04, D15-M1 in parts 01+02+04, D15-M3 in parts 01+02+05, D15-M6 in parts 01+02+05, D15-M11 in parts 01+03, D15-M12 in parts 01+02+04, D15-m1 in parts 01+04, D15-m2 in parts 01+03+05, D15-m8 in parts 01+02, D15-C1 in parts 02+03, D15-C3 in parts 02+03+04, D15-M5 in parts 02+05, D15-M7 in parts 02+03, D15-M8 in parts 02+03+04, D15-M13 in parts 02+05
+- Findings outside every part: D15-M9, D15-m6, D15-m9
+
+| Part | Title | Critical | Total | IDs |
+|---|---|---|---|---|
+| 01 | SNES Hardware Architecture & Memory Allocation | 3 | 13 | D15-C2, D15-C4, D15-C5, D15-M1, D15-M3, D15-M4, D15-M6, D15-M11, D15-M12, D15-m1, D15-m2, D15-m3, D15-m8 |
+| 02 | Video Structure & Technical Chapter Roadmap | 5 | 15 | D15-C1, D15-C2, D15-C3, D15-C4, D15-C5, D15-M1, D15-M3, D15-M5, D15-M6, D15-M7, D15-M8, D15-M10, D15-M12, D15-M13, D15-m8 |
+| 03 | Dynamic SNES Hardware Calculators & Interactive Simulators | 4 | 11 | D15-C1, D15-C2, D15-C3, D15-C4, D15-M7, D15-M8, D15-M11, D15-m2, D15-m4, D15-m5, D15-m7 |
+| 04 | SNES Hardware Bottlenecks vs Low-Level Software Solutions | 4 | 8 | D15-C2, D15-C3, D15-C4, D15-C5, D15-M1, D15-M8, D15-M12, D15-m1 |
+| 05 | Physical Silicon Verification & Engineering Principles |  | 6 | D15-M2, D15-M3, D15-M5, D15-M6, D15-M13, D15-m2 |
 
 ## `software_drag_race_breakdown.html`
 

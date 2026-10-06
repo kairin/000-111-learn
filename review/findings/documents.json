@@ -192,5 +192,54 @@
    }
   ],
   "derived_from": "11"
+ },
+ {
+  "doc": "13",
+  "source": "deep-research-report.md",
+  "short": "SNES research report",
+  "question": "What does the video \"It Took Every SNES Hardware Trick To Make My Game\" (Inkbox) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/13-deep-research-report.review.md",
+  "video": "j_2bo7ng65E",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "Partly",
+    "confidence": "Medium-low",
+    "headline": "The hardware facts hold up, but the segment map puts the audio section 28 minutes late, and the two headline corrections correct a news article, not the video."
+   }
+  ]
+ },
+ {
+  "doc": "14",
+  "source": "Video_Breakdown_and_Concepts.md",
+  "short": "SNES breakdown report",
+  "question": "What does the video \"It Took Every SNES Hardware Trick To Make My Game\" (Inkbox) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/14-Video_Breakdown_and_Concepts.review.md",
+  "video": "j_2bo7ng65E",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "The report reverses the sprite fix, the sound design and the parallax, invents a wrong address formula, and cites a news article for the video."
+   }
+  ]
+ },
+ {
+  "doc": "15",
+  "source": "snes_hardware_breakdown.html",
+  "short": "SNES explorer page",
+  "question": "What does the video \"It Took Every SNES Hardware Trick To Make My Game\" (Inkbox) teach, and is this breakdown of it correct?",
+  "review": "adversarial-review-pass1/15-snes_hardware_breakdown.review.md",
+  "video": "j_2bo7ng65E",
+  "passes": [
+   {
+    "pass": 1,
+    "goal_met": "No",
+    "confidence": "Low",
+    "headline": "The simulators teach designs that the developer rejected, the address calculator halves every address, and every chart number is invented."
+   }
+  ],
+  "derived_from": "14"
  }
 ]

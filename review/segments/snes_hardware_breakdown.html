@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Star: SNES Hardware Architecture Deconstruction</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom chart container styling strictly enforcing responsive boundaries */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 340px;
+            }
+        }
+        /* Custom scrollbar for dense data panels */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .retro-grid {
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<!-- Chosen Palette: Retro Amber & Slate Neutral (Warm neutral background #fcfbf7, Slate headers, Amber/Teal accents) -->
+<!-- Application Structure Plan: 
+     1. Header & Technical Scope Summary: Instant architectural key metrics (ROM size, clock speed, co-processors).
+     2. Main Navigation Tabs:
+        - Architecture Topology & Memory Inspector: Explores physical subsystems and RAM banking ($7E/$7F).
+        - Video Chapters Roadmap: Comprehensive filterable grid of all 9 video segments with target hardware and implementations.
+        - Interactive Deep-Dive Simulators: Hands-on calculators for Spatial Hashing, HDMA Scanline Parallax, BCD Arithmetic, and SPC700 Voice Stealing.
+        - Bottlenecks & Solutions Matrix: Structured side-by-side engineering comparison.
+        - Silicon Reality & Takeaways: Real hardware divergence vs modern compiler lessons.
+     WHY THIS STRUCTURE: Converts a linear 9-chapter video essay into an explorable interactive workbench, allowing users to test low-level assembly concepts dynamically instead of passively reading raw technical notes. -->
+<!-- Visualization & Content Choices:
+     - Memory Distribution: Doughnut Chart (Chart.js) -> Breaks down WRAM, VRAM, and ARAM isolation.
+     - Cycle Benchmark: Bar Chart (Chart.js) -> Visualizes CPU savings of BCD vs Division, and O(1) Hashing vs Bounding Boxes.
+     - Audio Voice Budget: Horizontal Stacked Bar Chart (Chart.js) -> Shows 8-channel DSP allocation.
+     - Parallax Scanline Visualizer: Custom HTML/JS interactive Beam Slider -> Dynamic CRT scanline simulation showing register updates.
+     - Spatial Hash Calculator: Interactive Form -> Real-time binary shift address computation.
+     - NO SVG graphics or Mermaid JS used. HTML/CSS structural shapes and Unicode icons used exclusively. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<body class="bg-[#fcfbf7] text-slate-800 font-sans antialiased min-h-screen flex flex-col retro-grid">
+
+    <!-- TOP HEADER / BRANDING BAR -->
+    <header class="bg-slate-900 text-stone-100 border-b border-amber-600/40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-amber-500 text-slate-950 font-mono font-bold text-xs px-2 py-0.5 rounded uppercase tracking-wider">SNES Assembly</span>
+                        <span class="text-xs font-mono text-amber-400">Bare-Metal Deconstruction</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1 text-white">
+                        "Zero Star" Hardware Systems Explorer
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+                        Interactive deconstruction of Inkbox's 2-year project: crafting a procedurally generated 9,999-floor action RPG in pure 65c816 & SPC700 assembly.
+                    </p>
+                </div>
+                
+                <!-- KEY METRICS BANNER -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-800/80 p-3 rounded-lg border border-slate-700 font-mono text-xs text-center">
+                    <div class="p-1">
+                        <div class="text-slate-400">ROM SIZE</div>
+                        <div class="text-amber-400 font-bold text-base">129 KB</div>
+                    </div>
+                    <div class="p-1 border-l border-slate-700">
+                        <div class="text-slate-400">CPU SPEED</div>
+                        <div class="text-teal-400 font-bold text-base">3.58 MHz</div>
+                    </div>
+                    <div class="p-1 border-l border-slate-700">
+                        <div class="text-slate-400">CO-PROCESSORS</div>
+                        <div class="text-rose-400 font-bold text-base">NONE (0)</div>
+                    </div>
+                    <div class="p-1 border-l border-slate-700">
+                        <div class="text-slate-400">FLOORS</div>
+                        <div class="text-amber-300 font-bold text-base">9,999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP NAVIGATION -->
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-1 sm:space-x-4 overflow-x-auto py-2 scrollbar-none" id="tabContainer">
+                <button onclick="switchTab('topology')" id="btn-topology" class="nav-btn bg-amber-500 text-slate-950 px-3 py-2 rounded-md font-semibold text-xs sm:text-sm whitespace-nowrap transition-colors">
+                    🏛️ System Topology & Memory
+                </button>
+                <button onclick="switchTab('roadmap')" id="btn-roadmap" class="nav-btn text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md font-medium text-xs sm:text-sm whitespace-nowrap transition-colors">
+                    📹 Video Chapter Roadmap
+                </button>
+                <button onclick="switchTab('simulators')" id="btn-simulators" class="nav-btn text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md font-medium text-xs sm:text-sm whitespace-nowrap transition-colors">
+                    ⚡ Dynamic Calculators & Simulators
+                </button>
+                <button onclick="switchTab('matrix')" id="btn-matrix" class="nav-btn text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md font-medium text-xs sm:text-sm whitespace-nowrap transition-colors">
+                    📊 Bottlenecks Matrix
+                </button>
+                <button onclick="switchTab('silicon')" id="btn-silicon" class="nav-btn text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md font-medium text-xs sm:text-sm whitespace-nowrap transition-colors">
+                    🔌 Silicon Reality & Insights
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+        <!-- ==================================================================== -->
+        <!-- TAB 1: SYSTEM TOPOLOGY & MEMORY ARCHITECTURE -->
+        <!-- ==================================================================== -->
+        <section id="tab-topology" class="space-y-6">
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>🏛️</span> SNES Hardware Architecture & Memory Allocation
+                </h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    The Super Nintendo operates as a multi-domain architecture with isolated processing cores, non-uniform memory maps, and dedicated coprocessors. Developing *Zero Star* required splitting memory workloads precisely between Work RAM Banks, Video RAM, and Audio RAM without software abstractions.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Interactive Subsystem Inspector -->
+                <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-900 mb-3 flex items-center justify-between">
+                        <span>Hardware Domain Diagram</span>
+                        <span class="text-xs text-slate-500 font-normal">Click any block to inspect technical specs</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono text-xs">
+                        <!-- MAIN CPU DOMAIN -->
+                        <div class="border-2 border-teal-600/60 bg-teal-50/50 rounded-lg p-3 flex flex-col justify-between hover:border-teal-600 cursor-pointer transition-all" onclick="inspectHardware('cpu')">
+                            <div>
+                                <div class="font-bold text-teal-900 text-sm mb-1">MAIN CPU DOMAIN</div>
+                                <div class="text-teal-800">Ricoh 5A22 Core</div>
+                                <div class="text-slate-600 text-[11px] mt-1">65c816 @ 3.58 MHz</div>
+                            </div>
+                            <div class="mt-3 bg-white p-2 rounded border border-teal-200 space-y-1">
+                                <div class="text-slate-700 font-semibold">Allocated Memory:</div>
+                                <div class="text-teal-700 font-bold">WRAM Bank $7E (64 kB)</div>
+                                <div class="text-amber-700 font-bold">WRAM Bank $7F (63 kB)</div>
+                            </div>
+                        </div>
+
+                        <!-- DISPLAY PPU DOMAIN -->
+                        <div class="border-2 border-amber-600/60 bg-amber-50/50 rounded-lg p-3 flex flex-col justify-between hover:border-amber-600 cursor-pointer transition-all" onclick="inspectHardware('ppu')">
+                            <div>
+                                <div class="font-bold text-amber-900 text-sm mb-1">DISPLAY DOMAIN</div>
+                                <div class="text-amber-800">Dual PPUs (PPU1 / PPU2)</div>
+                                <div class="text-slate-600 text-[11px] mt-1">Background Mode 1</div>
+                            </div>
+                            <div class="mt-3 bg-white p-2 rounded border border-amber-200 space-y-1">
+                                <div class="text-slate-700 font-semibold">Dedicated Graphics:</div>
+                                <div class="text-amber-800">64 kB Video RAM (VRAM)</div>
+                                <div class="text-amber-800">544 B Sprite Metadata (OAM)</div>
+                                <div class="text-amber-800">512 B Palette Memory (CGRAM)</div>
+                            </div>
+                        </div>
+
+                        <!-- AUDIO APU DOMAIN -->
+                        <div class="border-2 border-indigo-600/60 bg-indigo-50/50 rounded-lg p-3 flex flex-col justify-between hover:border-indigo-600 cursor-pointer transition-all" onclick="inspectHardware('apu')">
+                            <div>
+                                <div class="font-bold text-indigo-900 text-sm mb-1">AUDIO SUBSYSTEM</div>
+                                <div class="text-indigo-800">Sony SPC700 Core</div>
+                                <div class="text-slate-600 text-[11px] mt-1">8-Bit CPU @ 1.024 MHz</div>
+                            </div>
+                            <div class="mt-3 bg-white p-2 rounded border border-indigo-200 space-y-1">
+                                <div class="text-slate-700 font-semibold">Isolated Audio:</div>
+                                <div class="text-indigo-800">64 kB Audio RAM (ARAM)</div>
+                                <div class="text-indigo-800">16-Bit 8-Voice DSP</div>
+                                <div class="text-indigo-800">4x I/O Registers ($2140-$2143)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HARDWARE INSPECTOR DETAILS DISPLAY PANEL -->
+                    <div id="inspectorPanel" class="mt-4 p-4 bg-slate-900 text-slate-100 rounded-lg border border-slate-700 font-mono text-xs leading-relaxed">
+                        <div class="text-amber-400 font-bold mb-1" id="inspectorTitle">👉 SELECT A DOMAIN ABOVE TO INSPECT TECHNICAL SPECS</div>
+                        <div class="text-slate-300" id="inspectorBody">
+                            Click on the Main CPU Domain, Display Domain, or Audio Subsystem block to analyze memory layout, bus boundaries, and core hardware register allocations.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart container for RAM Distribution -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 mb-1">Console Memory Budget</h3>
+                        <p class="text-xs text-slate-500 mb-3">Total addressable hardware RAM distribution (256 kB Total)</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="memoryChart"></canvas>
+                    </div>
+                    <div class="text-[11px] text-slate-500 text-center mt-2 font-mono">
+                        Bank $7F explicitly holds the uncompressed 63 kB dungeon playfield.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- TAB 2: VIDEO CHAPTER ROADMAP -->
+        <!-- ==================================================================== -->
+        <section id="tab-roadmap" class="space-y-6 hidden">
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <span>📹</span> Video Structure & Technical Chapter Roadmap
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            The video deconstructs nine core engineering stages, mapping each gameplay design goal to specific SNES hardware registers and assembly routines.
+                        </p>
+                    </div>
+
+                    <!-- SUBSYSTEM FILTER BUTTONS -->
+                    <div class="flex flex-wrap gap-1 font-mono text-xs">
+                        <button onclick="filterChapters('all')" class="chapter-filter-btn px-2.5 py-1 rounded bg-slate-800 text-white font-bold">ALL (9)</button>
+                        <button onclick="filterChapters('cpu')" class="chapter-filter-btn px-2.5 py-1 rounded bg-stone-100 text-slate-700 hover:bg-stone-200">CPU/ASM</button>
+                        <button onclick="filterChapters('memory')" class="chapter-filter-btn px-2.5 py-1 rounded bg-stone-100 text-slate-700 hover:bg-stone-200">WRAM</button>
+                        <button onclick="filterChapters('ppu')" class="chapter-filter-btn px-2.5 py-1 rounded bg-stone-100 text-slate-700 hover:bg-stone-200">PPU/HDMA</button>
+                        <button onclick="filterChapters('audio')" class="chapter-filter-btn px-2.5 py-1 rounded bg-stone-100 text-slate-700 hover:bg-stone-200">SPC700</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER CARDS CONTAINER -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="chaptersGrid">
+                <!-- Dynamic cards populated via JavaScript -->
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- TAB 3: DYNAMIC CALCULATORS & SIMULATORS -->
+        <!-- ==================================================================== -->
+        <section id="tab-simulators" class="space-y-6 hidden">
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>⚡</span> Dynamic SNES Hardware Calculators & Interactive Simulators
+                </h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    Interact directly with the math and register manipulations used in *Zero Star* to bypass hardware limits. Test spatial hashing, CRT scanline HDMA parallax, packed BCD math, and sound channel stealing in real time.
+                </p>
+            </div>
+
+            <!-- SIMULATORS GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- SIMULATOR 1: SPATIAL HASH ADDRESS CALCULATOR -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                                <span class="text-teal-600">01.</span> Constant-Time O(1) Spatial Hash Grid
+                            </h3>
+                            <span class="font-mono text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">Bank $7F Map</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-4">
+                            Traditional pairwise collision ($O(n^2)$) exhausts the 3.58 MHz CPU. *Zero Star* treats the 63 kB uncompressed tilemap in Bank `$7F` as a direct spatial hash grid, using fast bit shifts to resolve terrain collisions in $O(1)$ constant time.
+                        </p>
+
+                        <!-- INPUT CONTROLS -->
+                        <div class="grid grid-cols-2 gap-3 bg-stone-50 p-3 rounded-lg border border-stone-200 font-mono text-xs mb-4">
+                            <div>
+                                <label class="block text-slate-600 mb-1 font-bold">X Tile Coordinate (0-191):</label>
+                                <input type="number" id="hashX" value="48" min="0" max="191" oninput="calculateSpatialHash()" class="w-full bg-white border border-stone-300 rounded px-2 py-1 font-bold text-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 mb-1 font-bold">Y Tile Coordinate (0-167):</label>
+                                <input type="number" id="hashY" value="32" min="0" max="167" oninput="calculateSpatialHash()" class="w-full bg-white border border-stone-300 rounded px-2 py-1 font-bold text-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500">
+                            </div>
+                        </div>
+
+                        <!-- MATHEMATICAL DERIVATION BREAKDOWN -->
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-xs space-y-2 border border-slate-700">
+                            <div class="text-slate-400 text-[11px]">FORMULA: Base ($7F:0000) + (Y × 192) + X</div>
+                            <div class="text-amber-400 font-bold" id="hashBitwiseResult">
+                                Bitwise Shift: (32 << 7) + (32 << 6) + 48
+                            </div>
+                            <div class="flex justify-between items-center pt-2 border-t border-slate-800 text-sm">
+                                <span class="text-slate-300">Absolute RAM Address:</span>
+                                <span class="text-teal-400 font-bold text-base" id="hashAddressOut">$7F:1830</span>
+                            </div>
+                            <div class="text-[11px] text-slate-400 text-right">
+                                Execution Cost: <span class="text-teal-300 font-bold">12 Clock Cycles ($O(1)$)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-slate-500 mt-4 italic bg-amber-50 p-2.5 rounded border border-amber-200 text-amber-900">
+                        💡 <strong>Why 192 tiles width?</strong> $192 = 128 + 64 = (2^7 + 2^6)$. Multiplying by 192 reduces to two fast bitwise arithmetic shifts (`ASL`), eliminating runtime multiplication instructions entirely!
+                    </div>
+                </div>
+
+                <!-- SIMULATOR 2: HDMA CRT SCANLINE PARALLAX SIMULATOR -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                                <span class="text-amber-600">02.</span> HDMA Scanline Parallax Modulation
+                            </h3>
+                            <span class="font-mono text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Register $2111 (BG3HOFS)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">
+                            Standard V-Blank DMA shifts entire layers uniformly. Horizontal Blank DMA (HDMA) executes micro-transfers during the 15µs scanline gaps, updating scroll offsets line-by-line with zero CPU overhead.
+                        </p>
+
+                        <!-- INTERACTIVE SCANLINE SLIDER -->
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200 mb-4 space-y-2">
+                            <div class="flex justify-between items-center text-xs font-mono font-bold">
+                                <span class="text-slate-700">CRT Beam Scanline Position:</span>
+                                <span class="bg-slate-800 text-amber-400 px-2 py-0.5 rounded" id="scanlineDisplay">Scanline 110 / 224</span>
+                            </div>
+                            <input type="range" id="scanlineSlider" min="1" max="224" value="110" oninput="updateScanlineSim(this.value)" class="w-full accent-amber-600 cursor-pointer">
+                            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                                <span>Scanline 1 (Sky)</span>
+                                <span>120 (Peaks)</span>
+                                <span>160 (Playfield)</span>
+                                <span>224 (HUD)</span>
+                            </div>
+                        </div>
+
+                        <!-- SIMULATED PPU RASTER STATUS PANEL -->
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-xs space-y-2 border border-slate-700">
+                            <div class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-slate-400">Active Display Layer:</span>
+                                <span class="text-amber-300 font-bold" id="hdmaLayerText">BG3: Mountain Peaks (2bpp)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-slate-400">HDMA Register Injection:</span>
+                                <span class="text-teal-400 font-bold" id="hdmaRegText">$2111 Write Value = 12 px</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-slate-400">Visual Parallax Offset:</span>
+                                <span class="text-amber-400 font-bold text-sm" id="hdmaSpeedText">dx × 0.25 (Slow Scroll)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SCANLINE VISUAL REPRESENTATION -->
+                    <div class="mt-4 bg-slate-950 p-2 rounded-lg border border-slate-800 relative h-12 overflow-hidden flex items-center justify-center">
+                        <div id="parallaxVisualBox" class="text-xs font-mono text-amber-400 text-center font-bold tracking-widest transition-all duration-75">
+                            [ ▲▲▲▲ MOUNTAIN PEAKS PARALLAX SHIFT: 12px ▲▲▲▲ ]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIMULATOR 3: PACKED BCD VS DIVISION BENCHMARK -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                                <span class="text-rose-600">03.</span> Packed BCD Hardware Decimal HUD
+                            </h3>
+                            <span class="font-mono text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-bold">SED Flag Arithmetic</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">
+                            Converting raw binary integers to base-10 strings via software division requires ~320 cycles. By storing HUD tallies (chickens killed, level depth) in Packed BCD and setting the 65c816 decimal flag (`SED`), standard `ADC` operations handle multi-digit carries automatically in zero extra cycles.
+                        </p>
+
+                        <!-- COUNTER CONTROLS -->
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200 mb-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-mono text-slate-600 font-bold">Chicken Kills Metrics:</div>
+                                <div class="text-2xl font-mono font-extrabold text-slate-900" id="bcdDisplay">0482</div>
+                            </div>
+                            <div class="flex gap-2 font-mono">
+                                <button onclick="addBcdKills(1)" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-3 py-1.5 rounded font-bold text-xs">+1 Kill</button>
+                                <button onclick="addBcdKills(25)" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded font-bold text-xs">+25 Kills</button>
+                                <button onclick="resetBcdKills()" class="bg-stone-200 hover:bg-stone-300 text-slate-700 px-2 py-1.5 rounded font-bold text-xs">Reset</button>
+                            </div>
+                        </div>
+
+                        <!-- BCD BYTE REGISTER REPRESENTATION -->
+                        <div class="bg-slate-900 text-slate-100 p-3 rounded-lg font-mono text-xs space-y-1.5 border border-slate-700">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Packed BCD Bytes:</span>
+                                <span class="text-amber-400 font-bold" id="bcdHexVal">$04 $82</span>
+                            </div>
+                            <div class="flex justify-between text-[11px]">
+                                <span class="text-slate-400">Hardware Nibble Encoding:</span>
+                                <span class="text-teal-300" id="bcdBinaryVal">0000 0100 | 1000 0010</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Chart Component -->
+                    <div class="mt-4">
+                        <div class="chart-container">
+                            <canvas id="cyclesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIMULATOR 4: AUDIO SUBSYSTEM VOICE ALLOCATION ENGINE -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                                <span class="text-indigo-600">04.</span> SPC700 Dynamic Sound Stealing
+                            </h3>
+                            <span class="font-mono text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-bold">8 DSP Channels</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3">
+                            The SPC700 audio processor runs independently with 64 kB ARAM. Dr. Matt's music engine uses 5 polyphonic voices, leaving 3 channels reserved for dynamic gameplay sound effects. When dynamic SFX fire, the custom driver steals music channels cleanly and restores them post-playback without audio clicks.
+                        </p>
+
+                        <!-- SFX TRIGGER CONTROLS -->
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200 mb-3 font-mono text-xs">
+                            <div class="text-slate-700 font-bold mb-2">Trigger Gameplay Sound Effect:</div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="triggerSfx('sword')" class="bg-teal-700 hover:bg-teal-800 text-white px-2.5 py-1 rounded font-bold">⚔️ Sword Slash</button>
+                                <button onclick="triggerSfx('talisman')" class="bg-amber-600 hover:bg-amber-700 text-white px-2.5 py-1 rounded font-bold">✨ Talisman Burst</button>
+                                <button onclick="triggerSfx('chicken')" class="bg-rose-700 hover:bg-rose-800 text-white px-2.5 py-1 rounded font-bold">🐔 Chicken Strike</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VOICE MAP VISUALIZER -->
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-xs border border-slate-700 space-y-2">
+                        <div class="text-slate-400 text-[11px] border-b border-slate-800 pb-1">
+                            8-VOICE DSP HARMONIC CHANNEL MATRIX
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 text-center text-[11px]" id="voiceGrid">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Chart Container for Audio Voice Allocation -->
+                    <div class="mt-3">
+                        <div class="chart-container">
+                            <canvas id="audioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- TAB 4: BOTTLENECKS MATRIX -->
+        <!-- ==================================================================== -->
+        <section id="tab-matrix" class="space-y-6 hidden">
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>📊</span> SNES Hardware Bottlenecks vs Low-Level Software Solutions
+                </h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    A comprehensive matrix detailing how physical hardware limits were bypassed through custom assembly engineering and mechanical sympathy for the console's architecture.
+                </p>
+            </div>
+
+            <!-- COMPARATIVE MATRIX TABLE -->
+            <div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-900 text-slate-100 font-mono">
+                                <th class="p-3 font-bold border-b border-slate-800">Hardware Subsystem</th>
+                                <th class="p-3 font-bold border-b border-slate-800">Physical Silicon Bottleneck</th>
+                                <th class="p-3 font-bold border-b border-slate-800">Software Assembly Solution</th>
+                                <th class="p-3 font-bold border-b border-slate-800">Engineering Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200 font-sans text-slate-700" id="matrixTableBody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- TAB 5: SILICON REALITY & INSIGHTS -->
+        <!-- ==================================================================== -->
+        <section id="tab-silicon" class="space-y-6 hidden">
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>🔌</span> Physical Silicon Verification & Engineering Principles
+                </h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    Moving from high-accuracy software emulators (Mesen, bsnes) to real hardware cartridges exposes physical electrical quirks, cold-boot states, and critical lessons for modern constrained engineering.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- REAL SILICON VS EMULATOR DIVERGENCE -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="text-rose-600">⚠️</span> Real Silicon Hardware Divergence
+                    </h3>
+                    
+                    <div class="space-y-3 text-xs leading-relaxed">
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <div class="font-bold text-slate-900 mb-1">1. Power-On Uninitialized SRAM Noise</div>
+                            <p class="text-slate-600">
+                                Modern emulators often default uninitialized RAM to clean zero states (`$00`). On authentic retail consoles, powering on SRAM cells creates random garbage bit patterns. *Zero Star* required an explicit boot-clearing loop to wipe WRAM before executing game logic.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <div class="font-bold text-slate-900 mb-1">2. Bus Floats & Ungrounded Lines</div>
+                            <p class="text-slate-600">
+                                Unconnected or floating data lines on physical cartridge PCBs can read ghost register values or produce phantom inputs during CPU reads. Thorough hardware testing on Mouse Bite Labs PCBs ensured strict line grounding and signal stabilization.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                            <div class="font-bold text-slate-900 mb-1">3. Color Math Hardware Inversion</div>
+                            <p class="text-slate-600">
+                                Direct sub-screen color subtraction registers (`$2131`/`$2132`) allowed single-frame hit-stop black flashes and elemental spell bursts (Fire, Ice, Gold, Peach) without wasting precious V-Blank bandwidth to reload CGRAM palettes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAKEAWAYS FOR CONSTRAINED SYSTEMS DEVELOPMENT -->
+                <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="text-teal-600">💡</span> Key Embedded Engineering Takeaways
+                    </h3>
+
+                    <div class="space-y-3 text-xs leading-relaxed">
+                        <div class="p-3 bg-teal-50/50 rounded-lg border border-teal-200">
+                            <div class="font-bold text-teal-900 mb-1">Compiler Limits on Non-Orthogonal CPUs</div>
+                            <p class="text-slate-700">
+                                Modern compilers target architectures with broad, uniform register sets (ARM, RISC-V). Compiling high-level C for accumulator-bound CPUs like the 65c816 introduces severe register thrashing and stack bloat. Hand-assembly unlocks platform-specific features like the `SED` decimal flag.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-amber-50/50 rounded-lg border border-amber-200">
+                            <div class="font-bold text-amber-900 mb-1">Mechanical Sympathy & Coprocessor Offloading</div>
+                            <p class="text-slate-700">
+                                High performance on constrained silicon is achieved by delegating workloads to hardware sub-units: HDMA handles raster scrolling, PPU color math executes screen FX, and the SPC700 APU runs 8 audio channels completely independently of the gameplay loop.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-slate-100 rounded-lg border border-slate-300">
+                            <div class="font-bold text-slate-900 mb-1">Deterministic Memory Isolation</div>
+                            <p class="text-slate-700">
+                                Separating procedural playfields (Bank `$7F`) from stack frames and entity arrays (Bank `$7E`) prevents heap fragmentation and guarantees infinite procedural dungeon scaling within 129 KB ROM bounds.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center font-mono text-xs space-y-2">
+            <div>Based on Inkbox's technical documentary: <em>"It Took Every SNES Hardware Trick To Make My Game"</em></div>
+            <div class="text-slate-500">
+                Game: 〇 Star (*Zero Star*) | Assembly Code & Audio Driver Deconstruction | Single-Page Systems Explorer
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC & INTERACTIVITY ENGINE -->
+    <script>
+        /* ====================================================================
+           1. DATA STRUCTURES & CHAPTER CONTENT
+           ==================================================================== */
+        const chaptersData = [
+            {
+                id: 1,
+                title: "1. Architecture Baseline & Constraints",
+                subsystem: "cpu",
+                hardware: "Ricoh 5A22 CPU (3.58 MHz)",
+                challenge: "Strict 3.58 MHz cycle budget, lack of OS or MMU, non-uniform memory maps.",
+                solution: "Written entirely in bare-metal 65c816 assembly without auxiliary expansion coprocessors.",
+                keyConcept: "Hand-crafted assembly eliminates modern compiler register thrashing and stack bloat on vintage accumulator-bound hardware."
+            },
+            {
+                id: 2,
+                title: "2. WRAM Banking & Procedural Maps",
+                subsystem: "memory",
+                hardware: "128 kB WRAM (Banks $7E/$7F)",
+                challenge: "Generating massive dynamic dungeons across 9,999 levels without memory fragmentation.",
+                solution: "Bank $7F dedicated to a 63 kB uncompressed tile grid (192x168); Bank $7E isolated for stack and system state.",
+                keyConcept: "Deterministic memory isolation prevents stack corruption and allows scalable procedural dungeon generation."
+            },
+            {
+                id: 3,
+                title: "3. PPU Configuration & BCD HUD",
+                subsystem: "ppu",
+                hardware: "Dual PPUs & Background Mode 1",
+                challenge: "High cycle cost (~320 cycles) of runtime integer division for 5-digit base-10 HUD tallies.",
+                solution: "Packed Binary-Coded Decimal (BCD) arithmetic using the 65c816 hardware decimal flag (SED).",
+                keyConcept: "Hardware decimal mode propagates carries automatically during addition (ADC), updating HUD displays in zero extra cycles."
+            },
+            {
+                id: 4,
+                title: "4. HDMA Scanline Modulation",
+                subsystem: "ppu",
+                hardware: "DMA Controller & Register $2111",
+                challenge: "Creating 3D multi-plane background parallax scrolling without consuming CPU frame cycles.",
+                solution: "Horizontal Blank DMA (HDMA) injects scroll updates line-by-line into register $2111 during 15µs scanline gaps.",
+                keyConcept: "Automated hardware micro-transfers execute in parallel with display rasterization at full 60 FPS."
+            },
+            {
+                id: 5,
+                title: "5. OAM Management & Sprite Limits",
+                subsystem: "ppu",
+                hardware: "Object Attribute Memory (OAM)",
+                challenge: "PPU line buffer drops sprites if more than 32 sprite tiles occupy a single horizontal scanline.",
+                solution: "Dynamic entity sorting, viewport culling, dummy tile zero relocation, and alternating priority frame cycling.",
+                keyConcept: "Alternating sprite rendering priority converts missing invisible entities into manageable 30 Hz transparency flicker."
+            },
+            {
+                id: 6,
+                title: "6. Spatial Hashing & Collision",
+                subsystem: "cpu",
+                hardware: "65c816 Math & Bank $7F Array",
+                challenge: "Pairwise bounding box collision (O(n²)) exhausts CPU cycle budget with multiple active actors.",
+                solution: "Direct O(1) spatial memory address hashing: Address = Base + (Y << 7) + (Y << 6) + X.",
+                keyConcept: "Fixed playfield tile width (192 tiles = 128 + 64) reduces address multiplication to two instant bitwise shifts."
+            },
+            {
+                id: 7,
+                title: "7. Hardware Color Arithmetic",
+                subsystem: "ppu",
+                hardware: "PPU Color Math Engine",
+                challenge: "Modifying CGRAM palettes during active frame cycles causes severe bus contention.",
+                solution: "Sub-screen color subtraction ($2131/$2132) for hit-stop black flashes and elemental talisman spell effects.",
+                keyConcept: "Real-time hardware screen blending avoids rewriting palette tables in Color Graphics RAM during gameplay."
+            },
+            {
+                id: 8,
+                title: "8. SPC700 Subsystem & Audio Engine",
+                subsystem: "audio",
+                hardware: "Sony SPC700 & 64 kB ARAM",
+                challenge: "Asynchronous communication with isolated audio system; lack of modular open-source drivers.",
+                solution: "Custom SPC700 driver in assembly; Bit Rate Reduction (BRR) audio compression; 5 music voices + 3 preemptive SFX voices.",
+                keyConcept: "Dynamic sound effects steal music voices cleanly and restore them post-playback without audio clicks."
+            },
+            {
+                id: 9,
+                title: "9. Physical Synthesis & Verification",
+                subsystem: "memory",
+                hardware: "Physical Cartridge Mask ROM PCB",
+                challenge: "Physical console behavioral divergences from high-accuracy software emulators.",
+                solution: "Power-on SRAM clearing loops; floating line stabilization; Mouse Bite Labs open hardware PCB verification.",
+                keyConcept: "Authentic silicon requires strict initialization loops to wipe random electrical cold-boot RAM bit patterns."
+            }
+        ];
+
+        const matrixData = [
+            {
+                subsystem: "Main CPU (Ricoh 5A22)",
+                bottleneck: "Slow 3.58 MHz speed; no hardware division or multiplication unit.",
+                solution: "Packed BCD arithmetic via SED flag; bitwise spatial hashing for collisions.",
+                impact: "Reduces cycle consumption by >90% during HUD updates and terrain physics."
+            },
+            {
+                subsystem: "Work RAM (WRAM)",
+                bottleneck: "128 kB split into isolated 64 kB Bank $7E and Bank $7F.",
+                solution: "Dedicated Bank $7F to uncompressed 63 kB dungeon map grid.",
+                impact: "Prevents memory fragmentation and supports 9,999 procedurally generated floors."
+            },
+            {
+                subsystem: "PPU Scanline Buffers",
+                bottleneck: "Strict limit of 32 sprite tiles per single horizontal scanline.",
+                solution: "Viewport entity sorting; dynamic OAM priority table cycling.",
+                impact: "Eliminates game-breaking sprite dropouts during intense multi-enemy combat."
+            },
+            {
+                subsystem: "Display Parallax",
+                bottleneck: "V-Blank window (1.3 ms) is too brief for multi-plane background shifts.",
+                solution: "HDMA transfers to scroll register $2111 during 15µs scanline gaps.",
+                impact: "Achieves smooth 60 FPS multi-plane mountain parallax with 0% CPU overhead."
+            },
+            {
+                subsystem: "Audio Subsystem",
+                bottleneck: "SPC700 APU is physically isolated from main CPU bus.",
+                solution: "Custom 8-voice assembly sound driver with 4-port I/O handshake ($2140-$2143).",
+                impact: "Enables independent BRR music playback and dynamic SFX voice stealing."
+            }
+        ];
+
+        let memoryChartInstance = null;
+        let cyclesChartInstance = null;
+        let audioChartInstance = null;
+
+        /* ====================================================================
+           2. TAB SWITCHING LOGIC
+           ==================================================================== */
+        function switchTab(tabId) {
+            // Hide all tab panels
+            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+            
+            // Show selected tab
+            const activeSection = document.getElementById(`tab-${tabId}`);
+            if (activeSection) activeSection.classList.remove('hidden');
+
+            // Reset tab button highlights
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-slate-950', 'font-semibold');
+                btn.classList.add('text-slate-300', 'hover:bg-slate-700');
+            });
+
+            // Highlight active button
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-300', 'hover:bg-slate-700');
+                activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'font-semibold');
+            }
+
+            // Trigger chart re-render if switching to tabs containing charts
+            if (tabId === 'simulators') {
+                setTimeout(() => {
+                    renderCyclesChart();
+                    renderAudioChart();
+                }, 50);
+            } else if (tabId === 'topology') {
+                setTimeout(() => {
+                    renderMemoryChart();
+                }, 50);
+            }
+        }
+
+        /* ====================================================================
+           3. ROADMAP CHAPTER RENDERING & FILTERING
+           ==================================================================== */
+        function renderChapters(filter = 'all') {
+            const grid = document.getElementById('chaptersGrid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? chaptersData 
+                : chaptersData.filter(c => c.subsystem === filter);
+
+            filtered.forEach(ch => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:border-amber-500 transition-all flex flex-col justify-between space-y-3";
+                
+                let badgeColor = "bg-slate-100 text-slate-800";
+                if (ch.subsystem === 'cpu') badgeColor = "bg-teal-100 text-teal-800";
+                if (ch.subsystem === 'memory') badgeColor = "bg-amber-100 text-amber-800";
+                if (ch.subsystem === 'ppu') badgeColor = "bg-rose-100 text-rose-800";
+                if (ch.subsystem === 'audio') badgeColor = "bg-indigo-100 text-indigo-800";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-mono text-[10px] font-bold uppercase px-2 py-0.5 rounded ${badgeColor}">
+                                ${ch.subsystem}
+                            </span>
+                            <span class="font-mono text-xs text-slate-400">Ch. 0${ch.id}</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">${ch.title}</h3>
+                        <div class="text-[11px] font-mono text-amber-800 font-semibold mb-2">📍 Hardware: ${ch.hardware}</div>
+                        
+                        <div class="space-y-2 text-xs text-slate-600">
+                            <div>
+                                <strong class="text-slate-800">Challenge:</strong> ${ch.challenge}
+                            </div>
+                            <div>
+                                <strong class="text-slate-800">Assembly Fix:</strong> ${ch.solution}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-stone-100 text-[11px] text-slate-500 italic bg-stone-50 p-2 rounded">
+                        💡 ${ch.keyConcept}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterChapters(subsystem) {
+            // Update filter button styling
+            document.querySelectorAll('.chapter-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white', 'font-bold');
+                btn.classList.add('bg-stone-100', 'text-slate-700');
+            });
+            event.target.classList.remove('bg-stone-100', 'text-slate-700');
+            event.target.classList.add('bg-slate-800', 'text-white', 'font-bold');
+
+            renderChapters(subsystem);
+        }
+
+        /* ====================================================================
+           4. HARDWARE INSPECTOR INTERACTIVITY
+           ==================================================================== */
+        function inspectHardware(domain) {
+            const title = document.getElementById('inspectorTitle');
+            const body = document.getElementById('inspectorBody');
+
+            if (domain === 'cpu') {
+                title.innerText = "🖥️ MAIN CPU DOMAIN: Ricoh 5A22 Core (65c816 @ 3.58 MHz)";
+                body.innerHTML = `
+                    <p class="mb-2"><strong>Core Specs:</strong> 16-bit processor with 8-bit registers, 24-bit linear addressing space, zero hardware division/multiplication coprocessor.</p>
+                    <p class="mb-2"><strong>WRAM Bank $7E:</strong> System call stack, gamepad input buffers, active entity descriptors, and zero-page pointers.</p>
+                    <p><strong>WRAM Bank $7F:</strong> Dedicated 63 kB uncompressed map buffer representing a 192×168 tile playfield across 9,999 dungeon levels.</p>
+                `;
+            } else if (domain === 'ppu') {
+                title.innerText = "🖼️ DISPLAY PPU DOMAIN: Dual PPUs (Background Mode 1)";
+                body.innerHTML = `
+                    <p class="mb-2"><strong>Layer Allocation:</strong> Layer 1 = 4bpp dynamic playfield; Layer 2 = 4bpp static HUD overlay; Layer 3 = 2bpp parallax mountain background.</p>
+                    <p class="mb-2"><strong>OAM Limits:</strong> 128 total hardware sprites; max 32 sprite tiles per single horizontal scanline before line-buffer dropping.</p>
+                    <p><strong>Color Math Engine:</strong> Direct hardware sub-screen color subtraction ($2131/$2132) yields real-time hit-stop black flashes without rewriting CGRAM.</p>
+                `;
+            } else if (domain === 'apu') {
+                title.innerText = "🔊 AUDIO SUBSYSTEM: Sony SPC700 Core & 8-Voice DSP";
+                body.innerHTML = `
+                    <p class="mb-2"><strong>System Isolation:</strong> Completely autonomous 8-bit CPU running at 1.024 MHz with 64 kB Audio RAM (ARAM). Cannot access main CPU bus.</p>
+                    <p class="mb-2"><strong>Communication:</strong> High-speed 4-port bidirectional I/O registers ($2140-$2143).</p>
+                    <p><strong>Voice Allocation:</strong> 5 voices dedicated to polyphonic music score; 3 preemptive voices reserved for gameplay sound effects.</p>
+                `;
+            }
+        }
+
+        /* ====================================================================
+           5. INTERACTIVE SIMULATOR COMPUTATIONS
+           ==================================================================== */
+        // SIM 1: SPATIAL HASHING
+        function calculateSpatialHash() {
+            let x = parseInt(document.getElementById('hashX').value) || 0;
+            let y = parseInt(document.getElementById('hashY').value) || 0;
+
+            // Clamp coordinates to playfield bounds
+            x = Math.max(0, Math.min(191, x));
+            y = Math.max(0, Math.min(167, y));
+
+            const yShift7 = y << 7;
+            const yShift6 = y << 6;
+            const offset = yShift7 + yShift6 + x;
+            const hexOffset = offset.toString(16).toUpperCase().padStart(4, '0');
+
+            document.getElementById('hashBitwiseResult').innerText = `Bitwise Shift: (${y} << 7) + (${y} << 6) + ${x} = ${yShift7} + ${yShift6} + ${x}`;
+            document.getElementById('hashAddressOut').innerText = `$7F:${hexOffset}`;
+        }
+
+        // SIM 2: HDMA SCANLINE PARALLAX
+        function updateScanlineSim(line) {
+            line = parseInt(line);
+            document.getElementById('scanlineDisplay').innerText = `Scanline ${line} / 224`;
+
+            let layerText = "";
+            let regVal = 0;
+            let speedText = "";
+            let visualText = "";
+
+            if (line <= 60) {
+                layerText = "BG3: Static Sky & Cloud Plane (2bpp)";
+                regVal = 0;
+                speedText = "dx × 0.00 (Static)";
+                visualText = "[ ☁️ STATIC DISTANT SKY PLANE ☁️ ]";
+            } else if (line <= 120) {
+                layerText = "BG3: Distant Mountain Peaks (2bpp)";
+                regVal = Math.floor((line - 60) * 0.25);
+                speedText = "dx × 0.25 (Slow Parallax)";
+                visualText = `[ ▲▲ MOUNTAIN PEAKS PARALLAX SHIFT: ${regVal}px ▲▲ ]`;
+            } else if (line <= 160) {
+                layerText = "BG3: Near Mountain Foothills (2bpp)";
+                regVal = Math.floor((line - 120) * 0.60) + 15;
+                speedText = "dx × 0.60 (Fast Parallax)";
+                visualText = `[ ⛰️ FOOTHILLS FAST PARALLAX SHIFT: ${regVal}px ⛰️ ]`;
+            } else if (line <= 210) {
+                layerText = "BG1: Interactive Terrain Playfield (4bpp)";
+                regVal = 0;
+                speedText = "Fixed Camera Viewport Scroll";
+                visualText = "[ 🛡️ ACTIVE PLAYFIELD TERRAIN & SPRITES 🛡️ ]";
+            } else {
+                layerText = "BG2: Static HUD Overlay Plane (4bpp)";
+                regVal = 0;
+                speedText = "dx × 0.00 (Locked HUD)";
+                visualText = "[ 🪙 HUD OVERLAY: CHICKENS / COINS / DEPTH 🪙 ]";
+            }
+
+            document.getElementById('hdmaLayerText').innerText = layerText;
+            document.getElementById('hdmaRegText').innerText = `$2111 Write Value = ${regVal} px`;
+            document.getElementById('hdmaSpeedText').innerText = speedText;
+            document.getElementById('parallaxVisualBox').innerText = visualText;
+        }
+
+        // SIM 3: PACKED BCD HUD ARITHMETIC
+        let bcdKillCounter = 482;
+
+        function addBcdKills(amount) {
+            bcdKillCounter = Math.min(9999, bcdKillCounter + amount);
+            updateBcdDisplay();
+        }
+
+        function resetBcdKills() {
+            bcdKillCounter = 0;
+            updateBcdDisplay();
+        }
+
+        function updateBcdDisplay() {
+            const strVal = bcdKillCounter.toString().padStart(4, '0');
+            document.getElementById('bcdDisplay').innerText = strVal;
+
+            const highByte = strVal.substring(0, 2);
+            const lowByte = strVal.substring(2, 4);
+
+            document.getElementById('bcdHexVal').innerText = `$${highByte} $${lowByte}`;
+
+            const bin1 = parseInt(highByte[0]).toString(2).padStart(4, '0');
+            const bin2 = parseInt(highByte[1]).toString(2).padStart(4, '0');
+            const bin3 = parseInt(lowByte[0]).toString(2).padStart(4, '0');
+            const bin4 = parseInt(lowByte[1]).toString(2).padStart(4, '0');
+
+            document.getElementById('bcdBinaryVal').innerText = `${bin1} ${bin2} | ${bin3} ${bin4}`;
+        }
+
+        // SIM 4: AUDIO VOICE ALLOCATION
+        let activeVoices = [
+            { id: 0, role: 'Music (Bass)', stolen: false },
+            { id: 1, role: 'Music (Chords)', stolen: false },
+            { id: 2, role: 'Music (Melody)', stolen: false },
+            { id: 3, role: 'Music (Harmony)', stolen: false },
+            { id: 4, role: 'Music (Percussion)', stolen: false },
+            { id: 5, role: 'SFX Ch 1 (Reserved)', stolen: false },
+            { id: 6, role: 'SFX Ch 2 (Reserved)', stolen: false },
+            { id: 7, role: 'SFX Ch 3 (Reserved)', stolen: false }
+        ];
+
+        function renderVoiceGrid() {
+            const grid = document.getElementById('voiceGrid');
+            grid.innerHTML = '';
+
+            activeVoices.forEach(v => {
+                const item = document.createElement('div');
+                let colorClass = "bg-indigo-950 text-indigo-300 border-indigo-800";
+                if (v.stolen) {
+                    colorClass = "bg-rose-900 text-rose-200 border-rose-600 animate-pulse";
+                } else if (v.id >= 5) {
+                    colorClass = "bg-teal-950 text-teal-300 border-teal-800";
+                }
+
+                item.className = `p-2 rounded border ${colorClass} flex flex-col justify-between font-mono`;
+                item.innerHTML = `
+                    <div class="font-bold text-[10px]">VOICE 0${v.id}</div>
+                    <div class="text-[9px] mt-1">${v.stolen ? '🔥 SFX STEAL' : v.role}</div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function triggerSfx(type) {
+            // Temporarily steal a musical channel for dynamic SFX
+            let targetVoice = 4; // Steal percussion melody first
+            if (type === 'talisman') targetVoice = 3;
+            if (type === 'chicken') targetVoice = 2;
+
+            activeVoices[targetVoice].stolen = true;
+            renderVoiceGrid();
+
+            setTimeout(() => {
+                activeVoices[targetVoice].stolen = false;
+                renderVoiceGrid();
+            }, 1200);
+        }
+
+        /* ====================================================================
+           6. CHART.JS INITIALIZATION
+           ==================================================================== */
+        function renderMemoryChart() {
+            const ctx = document.getElementById('memoryChart');
+            if (!ctx) return;
+
+            if (memoryChartInstance) memoryChartInstance.destroy();
+
+            memoryChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'WRAM Bank $7E (System/Stack)',
+                        'WRAM Bank $7F (Procedural Map)',
+                        'Video RAM (VRAM)',
+                        'Audio RAM (ARAM)',
+                        'Sprite/Palette (OAM/CGRAM)'
+                    ],
+                    datasets: [{
+                        data: [64, 63, 64, 64, 1],
+                        backgroundColor: [
+                            '#0d9488', // Teal
+                            '#f59e0b', // Amber
+                            '#e11d48', // Rose
+                            '#6366f1', // Indigo
+                            '#64748b'  // Slate
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { size: 10, family: 'monospace' },
+                                boxWidth: 12
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.label}: ${context.raw} kB`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderCyclesChart() {
+            const ctx = document.getElementById('cyclesChart');
+            if (!ctx) return;
+
+            if (cyclesChartInstance) cyclesChartInstance.destroy();
+
+            cyclesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['HUD Decimal Update', 'Terrain Collision Check'],
+                    datasets: [
+                        {
+                            label: 'Standard Assembly / Division',
+                            data: [320, 480],
+                            backgroundColor: '#f43f5e'
+                        },
+                        {
+                            label: 'Zero Star Optimized Assembly',
+                            data: [14, 12],
+                            backgroundColor: '#10b981'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '65c816 CPU Clock Cycles', font: { size: 10, family: 'monospace' } },
+                            ticks: { font: { size: 10, family: 'monospace' } }
+                        },
+                        x: {
+                            ticks: { font: { size: 10, family: 'monospace' } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { size: 10, family: 'monospace' }, boxWidth: 12 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderAudioChart() {
+            const ctx = document.getElementById('audioChart');
+            if (!ctx) return;
+
+            if (audioChartInstance) audioChartInstance.destroy();
+
+            audioChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['SPC700 Voice Allocation (8 Channels Total)'],
+                    datasets: [
+                        {
+                            label: 'Polyphonic Music (Dr. Matt)',
+                            data: [5],
+                            backgroundColor: '#6366f1'
+                        },
+                        {
+                            label: 'Dynamic SFX (Preemptive)',
+                            data: [3],
+                            backgroundColor: '#14b8a6'
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            max: 8,
+                            ticks: { stepSize: 1, font: { size: 10, family: 'monospace' } }
+                        },
+                        y: {
+                            stacked: true,
+                            ticks: { font: { size: 10, family: 'monospace' } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { size: 10, family: 'monospace' }, boxWidth: 12 }
+                        }
+                    }
+                }
+            });
+        }
+
+        /* ====================================================================
+           7. MATRIX TABLE POPULATION
+           ==================================================================== */
+        function renderMatrixTable() {
+            const tbody = document.getElementById('matrixTableBody');
+            tbody.innerHTML = '';
+
+            matrixData.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = idx % 2 === 0 ? 'bg-white' : 'bg-stone-50/60';
+                tr.innerHTML = `
+                    <td class="p-3 font-mono font-bold text-amber-900 border-b border-stone-200">${row.subsystem}</td>
+                    <td class="p-3 border-b border-stone-200">${row.bottleneck}</td>
+                    <td class="p-3 font-mono text-teal-800 font-semibold border-b border-stone-200">${row.solution}</td>
+                    <td class="p-3 border-b border-stone-200 text-slate-600">${row.impact}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        /* ====================================================================
+           8. APPLICATION INITIALIZATION
+           ==================================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
+            renderChapters('all');
+            renderVoiceGrid();
+            renderMatrixTable();
+            calculateSpatialHash();
+            updateScanlineSim(110);
+            updateBcdDisplay();
+
+            // Render memory chart initially
+            renderMemoryChart();
+        });
+    </script>
+</body>
+</html>

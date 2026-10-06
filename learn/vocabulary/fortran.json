@@ -34,6 +34,8 @@
   { "word": "TARGET", "pos": "adjective", "segment": "store", "meaning": "A pointer can point to this value.", "example": "real, target :: t" },
   { "word": "SAVE", "pos": "adjective", "segment": "store", "meaning": "Keep this value between calls.", "example": "integer, save :: count" },
   { "word": "KIND", "pos": "adjective", "segment": "store", "meaning": "Select the precision: how many digits a number keeps.", "example": "real(kind=real64) :: t" },
+  { "word": "INT8 / INT16", "pos": "adjective", "segment": "store", "meaning": "A kind name from ISO_FORTRAN_ENV: a whole number of exactly 1 or 2 bytes. The same size as a BYTE or a WORD on the A side.", "example": "integer(int16) :: table(0:255)" },
+  { "word": "REAL64", "pos": "adjective", "segment": "store", "meaning": "A kind name from ISO_FORTRAN_ENV: a decimal-point number of 8 bytes (double precision).", "example": "real(real64) :: theta" },
   { "word": "ALLOCATE", "pos": "verb", "segment": "store", "meaning": "Make space for an ALLOCATABLE array.", "example": "allocate(x(n))" },
   { "word": "DEALLOCATE", "pos": "verb", "segment": "store", "meaning": "Release the space of an array.", "example": "deallocate(x)" },
 
@@ -52,6 +54,10 @@
   { "word": "FLOOR", "pos": "idiom", "segment": "calculate", "meaning": "Round down to a whole number.", "example": "row = floor(y)" },
   { "word": "REAL( )", "pos": "idiom", "segment": "calculate", "meaning": "Change a whole number into a REAL.", "example": "avg = real(total) / n" },
   { "word": "INT( )", "pos": "idiom", "segment": "calculate", "meaning": "Change a REAL into a whole number. It drops the fraction.", "example": "i = int(x)" },
+  { "word": "MODULO", "pos": "idiom", "segment": "calculate", "meaning": "The remainder that wraps around, never negative: modulo(-1, 256) is 255. MOD keeps the sign: mod(-1, 256) is -1. A byte register on the A side wraps like MODULO.", "example": "z = table(modulo(t + 64, 256))" },
+  { "word": "IAND", "pos": "idiom", "segment": "calculate", "meaning": "Bitwise AND: keep only the bits that are 1 in both numbers. The same job as AND on the A side.", "example": "byte = iand(v, 255)" },
+  { "word": "ISHFT / SHIFTA", "pos": "idiom", "segment": "calculate", "meaning": "Move the bits of a whole number. SHIFTA moves right and keeps the sign, as SAR does. ISHFT fills with zeros, as SHL and SHR do.", "example": "y = shifta(s * 64, 8)" },
+  { "word": "RANDOM_NUMBER", "pos": "idiom", "segment": "calculate", "meaning": "Fill a value or an array with random numbers from 0 to 1. The laboratory uses it to make a terrain.", "example": "call random_number(r)" },
 
   { "word": "IF ... THEN ... END IF", "pos": "verb", "segment": "decide", "meaning": "Do a block only if a condition is true.", "example": "if (fuel <= 0.0) then" },
   { "word": "ELSE", "pos": "grammar", "segment": "decide", "meaning": "Starts the block to do when the condition is false.", "example": "else" },
@@ -61,6 +67,9 @@
   { "word": "EXIT", "pos": "verb", "segment": "decide", "meaning": "Stop the loop now.", "example": "exit" },
   { "word": "CYCLE", "pos": "verb", "segment": "decide", "meaning": "Go to the next turn of the loop.", "example": "cycle" },
   { "word": "STOP", "pos": "verb", "segment": "decide", "meaning": "Stop the program.", "example": "stop" },
+  { "word": "ERROR STOP", "pos": "verb", "segment": "decide", "meaning": "Stop the program and report a failure. The build script sees the failure and stops. This is how a check says no.", "example": "if (mismatches /= 0) error stop 'The A side and the B side disagree.'" },
+  { "word": "BTEST", "pos": "idiom", "segment": "decide", "meaning": "Is one bit of a whole number 1? The same question as TEST on the A side.", "example": "if (btest(flags, 3)) then" },
+  { "word": "MERGE", "pos": "idiom", "segment": "decide", "meaning": "Choose the first value when the condition is true, or the second when it is false. One idiom replaces an IF block.", "example": "merge('true ', 'false', ok)" },
   { "word": "== /= < > <= >=", "pos": "grammar", "segment": "decide", "meaning": "Compare two values: equal, not equal, less, greater, less or equal, greater or equal.", "example": "if (x /= 0) then" },
   { "word": ".and. .or. .not.", "pos": "grammar", "segment": "decide", "meaning": "Join or reverse conditions.", "example": "if (a .and. .not. b) then" },
 
@@ -102,6 +111,10 @@
   { "word": "READ", "pos": "verb", "segment": "talk", "meaning": "Read values from the keyboard or from a file.", "example": "read *, thrust" },
   { "word": "OPEN", "pos": "verb", "segment": "talk", "meaning": "Connect a file to a unit number.", "example": "open(newunit=u, file='map.dat')" },
   { "word": "CLOSE", "pos": "verb", "segment": "talk", "meaning": "Disconnect a file.", "example": "close(u)" },
+  { "word": "NEWUNIT=", "pos": "grammar", "segment": "talk", "meaning": "In OPEN: let the compiler choose a free unit number and put it in the name.", "example": "open(newunit=u, file='sine.bin')" },
+  { "word": "ACCESS='STREAM'", "pos": "grammar", "segment": "talk", "meaning": "In OPEN: read or write the raw bytes of a file, with no record marks. This is how the B side writes a table for the A side.", "example": "open(newunit=u, file='sine.bin', access='stream', form='unformatted')" },
+  { "word": "'(I4.4)' / '(I0)'", "pos": "grammar", "segment": "talk", "meaning": "Two formats for a whole number. I4.4 keeps the leading zeros (0042), for a countdown. I0 removes them (42), for a score.", "example": "print '(i4.4)', fuel" },
+  { "word": "GET_COMMAND_ARGUMENT", "pos": "idiom", "segment": "talk", "meaning": "Read one word that the person typed after the program name. The checker gets the file name this way.", "example": "call get_command_argument(1, in_file)" },
   { "word": "*", "pos": "grammar", "segment": "talk", "meaning": "In PRINT and READ: let Fortran choose the layout.", "example": "print *, x" },
   { "word": "'(F8.2)'", "pos": "grammar", "segment": "talk", "meaning": "A layout pattern. F8.2 is a number 8 characters wide with 2 decimals.", "example": "write(*, '(F8.2)') x" },
 

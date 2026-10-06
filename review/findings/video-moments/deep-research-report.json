@@ -1,0 +1,13 @@
+{"source": "deep-research-report.md", "moments": {
+ "01": {"t": "03:08", "note": "The video gives its main idea here: the ROM is read only, so the world is generated in RAM. It never says constraint-driven design."},
+ "02": {"t": "00:46", "note": "The video names the game Zero Star here. The itch.io page writes it as 〇 Star."},
+ "03": {"note": "The video does not cover this idea. The captions exist, and this review used them."},
+ "04": {"t": "19:07", "note": "The video promises the open-source sound engine here. That engine is the first-party code of this part."},
+ "05": {"t": "08:40", "note": "The audio section starts here, not at 36:15 as the segment map says. Four of the seven segments are at the wrong time."},
+ "06": {"t": "04:10", "note": "The tile engine and the scrolling start here. The document puts graphics at 10:45."},
+ "07": {"t": "20:35", "note": "The video explains the 24-bit address and the data bank register here. This is the memory lesson that the concept table misses."},
+ "08": {"t": "20:58", "note": "The video says 'my 4 megabyte cartridge ROM' here. It never claims a hardware limit or a 3.58 MHz 6502."},
+ "09": {"t": "11:47", "note": "The only 6502 remark of the video is here, about the SPC700. The two corrections of this part correct Hackaday, not the video."},
+ "10": {"t": "06:53", "note": "The video states 192 by 168 tiles and 63K of RAM here. This part calls the numbers unverified."},
+ "11": {"t": "45:58", "note": "The video thanks Mouse Bite Labs here. Dr. Matt is named at 19:07 and 44:42. Hornests is not in the captions."}
+}}

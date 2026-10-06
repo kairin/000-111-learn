@@ -57,7 +57,7 @@ for (const f of listFiles(path.join(REVIEW, 'plan/sessions'), '.md')) {
 for (const f of listFiles(path.join(REVIEW, 'adversarial-review-pass1'), '.md')) {
 	const n = path.basename(f).slice(0, 2);
 	add(f, `reviews/${slugify(path.basename(f, '.md').replace(/\.review$/, ''))}`, {
-		label: n === '00' ? (/video/i.test(f) ? '00 Summary: video guides' : '00 Summary: first four guides') : `${n} ${shortName(path.basename(f)) ?? path.basename(f)}`,
+		label: n === '00' ? (/snes/i.test(f) ? '00 Summary: SNES video guides' : /video/i.test(f) ? '00 Summary: video guides' : '00 Summary: first four guides') : `${n} ${shortName(path.basename(f)) ?? path.basename(f)}`,
 	});
 }
 add(path.join(REVIEW, 'segments/README.md'), 'segments');
