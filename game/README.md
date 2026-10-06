@@ -29,7 +29,7 @@ On this computer, run:
 game/dev.sh
 ```
 
-The script needs Docker only. It runs `game/build.sh` in an Ubuntu 24.04 container with gfortran, NASM and DOSBox. The results go to `game/build/`, which is not in git.
+The script needs Podman or Docker only. On RHEL 10, Podman is installed by default, and the script uses it first. Set `CONTAINER=docker` to use Docker. It runs `game/build.sh` in an Ubuntu 24.04 container with gfortran, NASM and DOSBox. The results go to `game/build/`, which is not in git.
 
 GitHub Actions runs `game/build.sh` for each push to `main`. If the check fails, GitHub Actions stops, and the website does not change.
 
