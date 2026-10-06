@@ -1,6 +1,6 @@
 # Plan: learn two languages, then build a small game
 
-**Last update:** 2026-10-05 · **Decisions:** [DECISIONS.md](DECISIONS.md) · **Session records:** [sessions/2026-09-27.md](sessions/2026-09-27.md), [sessions/2026-10-05.md](sessions/2026-10-05.md)
+**Last update:** 2026-10-06 · **Decisions:** [DECISIONS.md](DECISIONS.md) · **Session records:** [sessions/2026-09-27.md](sessions/2026-09-27.md), [sessions/2026-10-05.md](sessions/2026-10-05.md), [sessions/2026-10-06.md](sessions/2026-10-06.md)
 
 ## The goal
 
@@ -41,7 +41,7 @@ The site has two sides, A and B. Seven segments are common to the two sides. A s
 | 2 | Put the site on Astro and Starlight, built by GitHub Actions | Done |
 | 3 | Make the language lens the center of the site: A side, B side, dictionary | Done |
 | 4 | Toolchain test: build a small program on each side and run it in the browser | Done. See the game page of the site. |
-| 4d | Three planned tests from the SNES review: the decimal counter, the row-start table and the terrain | Planned. See "Phase 4d" below. |
+| 4d | Three tests from the SNES review: the decimal counter, the row-start table and the terrain | Test 4 done (D27). Tests 5 and 6 and the note table are planned. See "Phase 4d" below. |
 | 5 | Game design: the rules of the lander game | Next |
 | 6 | The 12-week course and the game | After phases 4 and 5 |
 | 7 | Second review pass (background research) | Not started. It does not block other work. |
@@ -74,15 +74,15 @@ The owner asked for the same movement of the dot, but in a world with depth. The
 1. **Test 3a:** the wave goes from the back to the front, and turns around the center of the 3D space. `src/spin3d.asm` uses double buffering. The check agrees on 4096 of 4096 points. The page is `/game/test3a/`.
 2. **Test 3b:** the same program with one wrong value (`QUARTER_TURN equ 90`, not 64). The ring on the floor becomes a tilted oval. The check finds 3759 wrong points. The page is `/game/test3b/`.
 
-## Phase 4d: planned tests from the SNES review (not started)
+## Phase 4d: tests from the SNES review (test 4 done, the others planned)
 
-The review of the SNES video guides (documents 13 to 15, decision D25) gave the laboratory three new tests and one rule. Each test keeps the pattern of tests 1 to 3: the B side makes or checks the data, the A side runs the same routine as the game, and a program with one wrong word must fail the check. Nothing in this phase is code yet.
+The review of the SNES video guides (documents 13 to 15, decision D25) gave the laboratory three new tests and one rule. Each test keeps the pattern of tests 1 to 3: the B side makes or checks the data, the A side runs the same routine as the game, and a program with one wrong word must fail the check. Test 4 is code now (decision D27): the pages `/game/test4a/` and `/game/test4b/`. The other tests of this phase are not code yet.
 
 **The rule.** A table from the B side is a contract. Write its size, its byte order, its kind and its rounding rule next to it, as `sine.bin` does (256 values, 2 bytes each, low byte first, `NINT(256 * sin)`). When a routine has few inputs, the check runs all of them. Each new table and each new routine gets a wrong twin, and `build.sh` requires that check to fail.
 
 | Test | A side | B side | The wrong twin |
 |---|---|---|---|
-| 4: the decimal counter | `test/checkbcd.asm` counts from 0000 to 9999 in two packed decimal bytes: `add al, 1` then `daa` on the low byte, `adc al, 0` then `daa` on the high byte. It writes the two bytes after each step (20,000 bytes). | `lab/check_bcd.f90` calculates each value with `MOD` and `ISHFT`, compares all 10,000 pairs with `COUNT` and `ANY`, and prints the agreement. The value after 9999 is 0000 with a carry. | The switch `-dWRONG_DECIMAL` removes `DAA`. The check must find 9,990 wrong values. |
+| 4: the decimal counter | `test/checkbcd.asm` counts from 0000 to 9999 in two packed decimal bytes: `add al, 1` then `daa` on the low byte, `adc al, 0` then `daa` on the high byte. It writes the two bytes after each step (20,000 bytes). | `lab/check_bcd.f90` calculates each value with `MOD` and `ISHFT`, compares all 10,000 pairs with `COUNT` and `ANY`, and prints the agreement. The value after 9999 is 0000 with a carry. | The switch `-dWRONG_DECIMAL` removes `DAA`. The check must find 9,990 wrong values. **Done:** the check found 9,990, and the step after 9999 gives 2710h with no carry. |
 | 5: the row-start table | A routine gives the screen address of a row in three ways: `MUL` by 320, `(y << 8) + (y << 6)`, and one indexed `MOV` from a table. The test writes the three answers for all 200 rows. | `lab/row_table.f90` writes 200 words (`y * 320`) with `ISHFT` and `IAND`, and the checker compares the three A-side answers with the table. | The switch `-dWRONG_OR` joins the two shifts with `OR`. The check must fail on every row that has a carry. |
 | 6: the terrain | The lander draws 320 ground heights, one for each column, and tests the landing with one compare against `[terrain + x]`. | `lab/terrain.f90` makes `terrain.bin` (320 bytes) from a fixed seed with `RANDOM_NUMBER`, with one flat pad of 24 columns. The checker makes sure that every height is inside the screen, that the pad is flat and wide enough, and that no hill is higher than row 20. | A table with no flat pad. The check must fail. |
 | The note table | The A side plays a note with `OUT` to the ports 43h, 42h and 61h. It reads the divisor from `notes.bin` with `INCBIN`. | `lab/note_table.f90` writes one PIT divisor for each semitone from C2 to B5: `NINT(1193182.0_real64 / f)`. It prints the largest error in cents. The check makes sure that the divisor of the octave above is within 1 of the half. | A table with the frequency in place of the divisor. The check must fail. |

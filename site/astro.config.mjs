@@ -80,6 +80,8 @@ export default defineConfig({
 						{ label: 'Test 2b: wrong values, and the check', link: '/game/test2b/' },
 						{ label: 'Test 3a: the wave turns', link: '/game/test3a/' },
 						{ label: 'Test 3b: a wrong quarter turn', link: '/game/test3b/' },
+						{ label: 'Test 4a: the decimal counter', link: '/game/test4a/' },
+						{ label: 'Test 4b: the counter without DAA', link: '/game/test4b/' },
 					],
 				},
 				{ label: 'Plan and decisions', items: [{ autogenerate: { directory: 'plan' } }] },

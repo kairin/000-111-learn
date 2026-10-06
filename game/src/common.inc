@@ -1,4 +1,4 @@
-; Shared routines of the game programs of test 2 and test 3 (dot3d.asm and spin3d.asm):
+; Shared routines of the game programs of tests 2, 3 and 4 (dot3d.asm, spin3d.asm and counter.asm):
 ; the keys, the pixel address and the screen refresh.
 
 ; read_keys: if a key is ready, read it and do its action. Changes: AX, BX.
@@ -21,6 +21,12 @@ read_keys:
     mov byte [step], 1
     ret
 .not_step:
+%ifdef JUMP_KEY                 ; only test 4 has the key J (its routine jump_key)
+    cmp al, 'j'
+    jne .not_jump
+    jmp jump_key
+.not_jump:
+%endif
     sub al, '1'                 ; the keys 1 to 5 become 0 to 4
     cmp al, 4
     ja .done                    ; another key: do nothing

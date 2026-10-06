@@ -69,7 +69,7 @@ The "Watch out" notes that these units use: D13-M4 (the data bank register is th
 
 The laboratory pattern stays the same: a Fortran program makes a table or checks a file from DOSBox, and a program with one wrong word must fail the check. The review adds three planned tests and one rule (PLAN.md, Phase 4d):
 
-- **Test 4, the decimal counter.** The A side counts from 0000 to 9999 with ADD, ADC and DAA, and writes each value. The B side checks all 10,000 values against MOD and ISHFT. The wrong twin has no DAA, and the check must find 9,990 wrong values.
+- **Test 4, the decimal counter.** The A side counts from 0000 to 9999 with ADD, ADC and DAA, and writes each value. The B side checks all 10,000 values against MOD and ISHFT. The wrong twin has no DAA, and the check must find 9,990 wrong values. **Built on 2026-10-06 (D27):** the pages [/game/test4a/](/game/test4a/) and [/game/test4b/](/game/test4b/). The check found 9,990 wrong values, as planned.
 - **Test 5, the row-start table.** The B side writes 200 row starts (y x 320) as 16-bit words. The A side compares MUL, the two shifts and the table lookup for all 200 rows.
 - **Test 6, the terrain.** The B side makes 320 ground heights with one flat landing pad and checks them: inside the screen, pad flat, pad wide enough. The wrong twin has no pad.
 - **The note table.** The B side writes one PIT divisor for each semitone and reports the error in cents. An octave up is the divisor divided by two.

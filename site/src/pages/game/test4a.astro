@@ -1,0 +1,256 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import game from '../../data/game.json';
+import { SIDES, segmentTitle } from '../../lib/learn';
+import partsData from '../../data/parts-of-speech.json';
+import { Image } from 'astro:assets';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+type Check = { values: number; agree: number; passed: boolean; wrap_ok: boolean; after: number; carry: number };
+const info = game.info as (Record<string, unknown> & { version?: string; counter_com_bytes?: number; check_bcd?: Check }) | null;
+const partName = (id: string) => partsData.find((p) => p.id === id)?.name ?? id;
+const video = 'https://www.youtube.com/watch?v=j_2bo7ng65E';
+---
+
+<StarlightPage
+	frontmatter={{
+		title: 'Test 4a: the decimal counter',
+		description: 'A counter from 0000 to 9999 in two packed decimal bytes. 8086 Assembly adds with ADD, ADC and DAA, and a Fortran check proves all 10,000 values and the step after 9999.',
+		tableOfContents: false,
+		editUrl: false,
+	}}
+>
+	<div class="wide-page game-page">
+		<p class="lead">
+			A game shows numbers: the score, the fuel, the level. The 8086 adds in binary, but a person reads decimal digits.
+			This test keeps the counter in <strong>packed decimal</strong>: one digit in each half of a byte. Two bytes hold
+			0000 to 9999. After each <code>ADD</code>, the word <code>DAA</code> makes the byte decimal again. The digits are
+			then ready to show, with no division.
+		</p>
+
+		{game.built && info?.check_bcd ? (
+			<div class="duet" data-version={info?.version ?? ''}>
+				<section class="duet-panel side-a" aria-labelledby="a-title">
+					<header>
+						{SIDES.a.image && <Image class="duet-photo" src={SIDES.a.image.src} alt={SIDES.a.image.alt} widths={[160, 320]} sizes="160px" />}
+						<h3 id="a-title"><span class="side-letter">A</span> What the machine does</h3>
+						<p class="muted small">The routine <code>bcd_inc</code> for the step to the value on the screen now.</p>
+					</header>
+					<ol class="duet-steps" id="a-steps"></ol>
+				</section>
+
+				<div class="duet-screen">
+					<iframe
+						class="dos-screen"
+						src={`${base}/game/player-count.html?v=${info?.version ?? ''}`}
+						title="A copy of a 1980s PC that runs the A-side program of test 4a"
+						allow="fullscreen; autoplay"
+					></iframe>
+					<p class="duet-now" id="duet-now" aria-live="off">Waiting for the copy of the PC to start…</p>
+					<div class="duet-controls" role="group" aria-label="Speed of the counter">
+						<span class="small muted">Speed:</span>
+						<button type="button" data-key="49" title="Key 1">Fastest</button>
+						<button type="button" data-key="50" title="Key 2">Fast</button>
+						<button type="button" data-key="51" title="Key 3">Medium</button>
+						<button type="button" data-key="52" title="Key 4" aria-pressed="true">Slow</button>
+						<button type="button" data-key="53" title="Key 5">Slowest</button>
+						<span class="spacer"></span>
+						<button type="button" data-key="32" title="Space" id="btn-pause">Pause</button>
+						<button type="button" data-key="78" title="Key N">One step</button>
+						<button type="button" data-key="74" title="Key J">Jump to 9990</button>
+						<button type="button" id="btn-restart" class="ghost">Restart</button>
+					</div>
+					<p class="muted small">
+						Under each digit are the 4 bits of its nibble: yellow is 1, gray is 0. The cell C on the left is the carry. It
+						is red after 9999 becomes 0000. Press <strong>Jump to 9990</strong> to see that step soon.
+					</p>
+				</div>
+
+				<section class="duet-panel side-b" aria-labelledby="b-title">
+					<header>
+						{SIDES.b.image && <Image class="duet-photo" src={SIDES.b.image.src} alt={SIDES.b.image.alt} widths={[160, 320]} sizes="160px" />}
+						<h3 id="b-title"><span class="side-letter">B</span> What the check expects</h3>
+						<p class="muted small">The same value, made from the number of steps with <code>MOD</code> and <code>ISHFT</code>, as <code>lab/check_bcd.f90</code> does.</p>
+					</header>
+					<ol class="duet-steps" id="b-steps"></ol>
+				</section>
+			</div>
+		) : (
+			<p class="notice">
+				The game build is missing on this computer. Run <code>game/dev.sh</code>, or read the published site. GitHub
+				Actions makes the build for each push.
+			</p>
+		)}
+
+		<h2>What is new in test 4a</h2>
+		<ol class="steps-list">
+			<li>
+				<span class="pill side-a">A</span> <strong>Packed decimal.</strong> The number 1234 is the two bytes 12h and 34h:
+				each hexadecimal digit of the byte is one decimal digit. A nibble (4 bits) holds 0 to 15, so the values 10 to 15
+				are never used. That is the cost of the method: two bytes hold 0 to 9999, not 0 to 65535.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <strong>ADD, then DAA.</strong> The 8086 has no decimal flag. It always adds
+				in binary: 09h + 1 = 0Ah. The next word, <code>DAA</code> (decimal adjust after addition), corrects AL: 0Ah
+				becomes 10h, and 9Ah becomes 00h with a carry. <code>DAA</code> works only on AL, so the program does one byte at
+				a time.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <strong>ADD, not INC.</strong> <code>INC</code> does not change the carry flag
+				(CF). The program needs the carry from the low byte, so it uses <code>add al, 1</code>. Then
+				<code>adc al, 0</code> adds that carry to the high byte. The SNES developer met the same trap: on the 65C816,
+				INC ignores the decimal flag.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <strong>A digit is a table lookup.</strong> <code>bcd_digits</code> moves each
+				nibble into AL and uses <code>XLAT</code> on the table "0123456789ABCDEF". There is no division by 10.
+			</li>
+			<li>
+				<span class="pill side-a">A</span> <span class="pill side-b">B</span> <strong>The check runs every value.</strong>
+				The counter has only 10,000 values, so the check tests all of them. The test (<code>test/checkbcd.asm</code>)
+				runs <code>bcd_inc</code> 10,000 times and writes each value to <code>BCD.BIN</code>, then the value after 9999
+				and the carry. The checker (<code>lab/check_bcd.f90</code>) makes each value again with <code>MOD</code> and
+				<code>ISHFT</code> and compares them.
+			</li>
+		</ol>
+
+		{info?.check_bcd && (
+			<>
+				<div class="cards">
+					<div class="card"><div class="k">The two sides agree</div><div class="v">{info.check_bcd.agree} / {info.check_bcd.values}</div><div class="s">every value from 0000 to 9999</div></div>
+					<div class="card"><div class="k">After 9999</div><div class="v">{info.check_bcd.after.toString(16).padStart(4, '0')}, C = {info.check_bcd.carry}</div><div class="s">{info.check_bcd.wrap_ok ? 'right: 0000 with a carry' : 'wrong'}</div></div>
+					<div class="card"><div class="k">Size of the game</div><div class="v">{info.counter_com_bytes} bytes</div><div class="s">COUNTER.COM, 8086 instructions only</div></div>
+				</div>
+				<h2>The check report</h2>
+				<pre class="check-output"><code>File: BCD.BIN
+A side and B side agree on {info.check_bcd.agree} of {info.check_bcd.values} values
+After 9999: {info.check_bcd.after.toString(16).toUpperCase().padStart(4, '0')}, carry {info.check_bcd.carry} (must be 0000, carry 1): {info.check_bcd.wrap_ok ? 'right' : 'wrong'}</code></pre>
+			</>
+		)}
+
+		<h2 id="origin">Where this test comes from</h2>
+		<p>
+			Test 4 is the first test that comes from the review of the SNES video guides. Each step below leads to the next.
+		</p>
+		<ol class="steps-list origin-trail">
+			<li>
+				<strong>The video.</strong> In <a href={`${video}&t=1925s`}>"It Took Every SNES Hardware Trick To Make My Game"
+				at 32:05</a>, Inkbox keeps three game counters in packed decimal. The 65C816 has a decimal flag that does the
+				carry. He also warns that INC and DEC ignore that flag, so he adds with ADC. A 16-bit counter "fits exactly the
+				10,000" values that he needs.
+			</li>
+			<li>
+				<strong>The review findings.</strong>
+				<a href={`${base}/findings/#q=D13-M11`}>D13-M11</a>: the research report called the counter an unverified
+				detail, but the video shows it in full.
+				<a href={`${base}/findings/#q=D15-M7`}>D15-M7</a>: the interactive page "simulates" the counter with a decimal
+				string, and it stops at 9999. A real packed decimal counter goes to 0000 with a carry. Thus test 4 checks the
+				step after 9999.
+				<a href={`${base}/findings/#q=D14-M1`}>D14-M1</a> and <a href={`${base}/findings/#q=D15-M1`}>D15-M1</a>: the
+				number 9,999 is the largest value of the counter, not the number of floors.
+			</li>
+			<li>
+				<strong>The concept review.</strong> The 8086 has no decimal flag. The idea moves to a different word:
+				<code>DAA</code> after <code>ADD</code> or <code>ADC</code>. The same trap moves too: <code>INC</code> does not
+				change CF. This is learning unit <strong>U3, digits on the screen</strong>, in the
+				<a href={`${base}/reviews/00-summary-snes-video-guides/`}>summary of the SNES video guides</a>.
+			</li>
+			<li>
+				<strong>The segment pages (decision D26).</strong> <a href={`${base}/a/talk/`}>Showing text and reading keys</a>
+				had the limit "no number formatting". It now says that a packed decimal counter is the smallest answer.
+				<a href={`${base}/a/calculate/`}>Doing arithmetic</a> says: "The 8086 has no decimal flag. After ADD or ADC on
+				packed decimal bytes, write DAA". <a href={`${base}/b/talk/`}>The B side</a> shows the formats I4.4 and I0.
+			</li>
+			<li>
+				<strong>The plan.</strong> <a href={`${base}/plan/`}>PLAN.md, Phase 4d</a> gave the design of test 4: count
+				0000 to 9999 with ADD, ADC and DAA, check all 10,000 values with MOD and ISHFT, and build a wrong twin without
+				DAA that must fail on 9,990 values. This page is that design, built.
+			</li>
+			<li>
+				<strong>The dictionary.</strong> The review added the words that this test uses:
+				<a href={`${base}/dictionary/#side=a&q=daa`}>DAA</a>, <a href={`${base}/dictionary/#side=a&q=adc`}>ADC</a>,
+				<a href={`${base}/dictionary/#side=a&q=xlat`}>XLAT</a> and <a href={`${base}/dictionary/#side=a&q=aam`}>AAM</a> on
+				the A side, and <a href={`${base}/dictionary/#side=b&q=mod`}>MOD</a> and
+				<a href={`${base}/dictionary/#side=b&q=ishft`}>ISHFT</a> on the B side.
+			</li>
+		</ol>
+
+		<h2>The words that each program uses</h2>
+		<p>
+			The pills show the words that the <a href={`${base}/dictionary/`}>dictionary</a> already has. "New words" are real
+			words of the language that the dictionary does not have yet.
+		</p>
+		{game.programs.filter((p) => p.test === 4).map((p) => (
+			<section class={`program side-${p.side}`}>
+				<h3>
+					<span class="side-letter">{SIDES[p.side as 'a' | 'b'].letter}</span> <a href={p.url}><code>{p.file}</code></a>
+					<span class="muted small">· {p.lines} lines · {p.role}</span>
+				</h3>
+				<p class="small">
+					<strong>{p.matched.length} dictionary words:</strong>{' '}
+					{p.matched.map((w) => (
+						<a class="pill word-pill" href={`${base}/dictionary/#side=${p.side}&q=${encodeURIComponent(w.word.split(' ')[0].toLowerCase())}`} title={`${partName(w.pos)} · ${segmentTitle(w.segment)}`}>
+							{w.word}
+						</a>
+					))}
+				</p>
+				{p.fresh.length > 0 && (
+					<p class="small"><strong>New words ({p.fresh.length}):</strong> {p.fresh.map((w) => <code class="new-word">{w}</code>)}</p>
+				)}
+			</section>
+		))}
+
+		<p>
+			<strong>Next:</strong> <a href={`${base}/game/test4b/`}>test 4b</a> runs this program without <code>DAA</code>,
+			and shows how the check finds it.
+		</p>
+	</div>
+</StarlightPage>
+
+<script>
+	import { wireControls, row } from '../../lib/spin';
+	import { bcdInc, followCounter, hex2, hex4, packed, stepsOf } from '../../lib/bcd';
+
+	const frame = document.querySelector<HTMLIFrameElement>('iframe.dos-screen');
+	const aSteps = document.getElementById('a-steps');
+	const bSteps = document.getElementById('b-steps');
+	const now = document.getElementById('duet-now');
+
+	if (frame && aSteps && bSteps && now) {
+		function render(v: number, carry: number) {
+			const n = stepsOf(v);
+			if (n === null) return;
+			if (n === 0 && !carry) {
+				now!.textContent = 'Step 0 · the counter starts at 0000';
+				aSteps!.innerHTML = row('counter dw 0', '0000', 'two bytes, both 00h');
+				bSteps!.innerHTML = row('n = 0', '0000', 'no steps yet');
+				return;
+			}
+			const prevN = carry ? 9999 : (n + 9999) % 10000; // the value before this step
+			const s = bcdInc(packed(prevN));
+			now!.textContent = `Step ${carry ? 10000 : n} · the counter is ${hex4(v)} · the bytes in memory: ${hex2(v & 255)}, ${hex2(v >> 8)}`;
+			aSteps!.innerHTML = [
+				row('mov al, [counter]', hex2(s.lo), `the low byte of ${hex4(packed(prevN))}`),
+				row('add al, 1', hex2(s.addLo.al), `binary sum · CF = ${s.addLo.cf}, AF = ${s.addLo.af}`),
+				row('daa', hex2(s.daaLo.al), `decimal again · CF = ${s.daaLo.cf}`, 'is-ok'),
+				row('mov al, [counter + 1]', hex2(s.hi), 'the high byte'),
+				row('adc al, 0', hex2(s.adcHi.al), `adds the carry ${s.daaLo.cf}`),
+				row('daa', hex2(s.daaHi.al), `CF = ${s.daaHi.cf}${s.daaHi.cf ? ': 9999 became 0000' : ''}`, 'is-ok'),
+				row('xlat (4 times)', hex4(s.next), 'one character for each nibble'),
+			].join('');
+			const d = [Math.trunc(n / 1000), Math.trunc(n / 100) % 10, Math.trunc(n / 10) % 10, n % 10];
+			const same = packed(n) === v;
+			bSteps!.innerHTML = [
+				row('n (the steps)', `${carry ? '10000 → 0' : n}`, carry ? 'mod(10000, 10000) is 0, with a carry' : 'the number of steps from 0000'),
+				row('n / 1000', `${d[0]}`, 'the thousands'),
+				row('mod(n / 100, 10)', `${d[1]}`, 'the hundreds'),
+				row('mod(n / 10, 10)', `${d[2]}`, 'the tens'),
+				row('mod(n, 10)', `${d[3]}`, 'the units'),
+				row('ishft(d, 12) + … + d', hex4(packed(n)), 'one digit in each nibble'),
+				row('A side', hex4(v), same ? 'the same: the check agrees' : 'different', same ? 'is-ok' : 'is-bad'),
+			].join('');
+		}
+		const reset = followCounter(frame, render);
+		wireControls(frame, reset);
+	}
+</script>
