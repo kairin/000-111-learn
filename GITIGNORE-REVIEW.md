@@ -18,6 +18,8 @@ This repository has 1 concern(s).
 |---|---|---|---|---|
 | LN-1 | Medium | The README key block lists the names of five private repositories and the link to the private SOP map. | The repository is public. The same point as STE-1. | Keep it, or remove the folder table from the key block of this README only. |
 
+Update 2026-10-08: LN-1 is closed. The owner decided to keep the key block. Private repository names and their GitHub links are allowed in public repositories, because people without access cannot open them.
+
 ## Severity
 
 | Severity | Meaning |
@@ -40,7 +42,7 @@ This repository has 1 concern(s).
 
 ## For the reviewer
 
-- [ ] LN-1: agree with the severity, and choose: fix as proposed, fix another way, or keep.
+- [x] LN-1: keep (owner decision, 2026-10-08).
 - [ ] Confirm that no other file in this repository must be ignored.
 - [ ] Write your name and the date below. Then close the review.
 
