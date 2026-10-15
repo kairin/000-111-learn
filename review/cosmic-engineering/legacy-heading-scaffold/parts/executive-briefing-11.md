@@ -1,0 +1,5 @@
+##### Sharpening the Fermi Paradox
+
+Reversing the geodesic expansion equations backwards in time reveals the number of external galaxies from which an expanding civilization could have reached Earth by the present day:| Elapsed Time in Past | Reaching Galaxies at  \$0.50c\$ | Reaching Galaxies at  \$0.80c\$ | Reaching Galaxies at  \$0.99c\$ || \------ | \------ | \------ | \------ || **1 Billion Years** | \$2.63 \\times 10^5\$ | \$1.03 \\times 10^6\$ | \$1.89 \\times 10^6\$ || **2 Billion Years** | \$2.57 \\times 10^6\$ | \$9.63 \\times 10^6\$ | \$1.67 \\times 10^7\$ || **3 Billion Years** | \$1.07 \\times 10^7\$ | \$3.80 \\times 10^7\$ | \$6.46 \\times 10^7\$ || **4 Billion Years** | \$3.14 \\times 10^7\$ | \$1.06 \\times 10^8\$ | \$1.74 \\times 10^8\$ || **5 Billion Years** | \$7.69 \\times 10^7\$ | \$2.45 \\times 10^8\$ | \$3.88 \\times 10^8\$ |  
+Because Earth formed relatively late ( \$75\\%\$  of star systems capable of supporting complex life in the Milky Way are older than the Sun), millions of galaxies were in a position to seed Earth long before the present era.
+

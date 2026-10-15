@@ -1,0 +1,43 @@
+# Candidate warp metrics and results
+
+- Unit: `astrophysics-kernels-warp-metrics-u26`
+- Source: [`sources/astrophysics-kernels.md`](../../sources/astrophysics-kernels.md)
+- Characters: `43811:46585`
+- Lines: `151:159`
+- Purposes: claim-review, learning
+- Excerpt SHA-256: `69d0284a8b4de2fb2d524a0d0c2b7d5a0d9939756850eeff0dfa7b2862a14d5e`
+
+Alcubierre, soliton, and positive-energy metric claims.
+
+## Claims
+
+### `astrophysics-kernels-u08-c04`
+
+The source asserts that Alcubierre, Lentz, and positive-energy shell results have the stated energy-condition properties.
+
+Type: `empirical`. Status: `unchecked`. Priority: `high`.
+
+Review methods: primary-source, calculation.
+
+Evidence needed: Metric definitions, parameter choices, and independent stress-energy evaluation.
+
+## Learning goals
+
+### `astrophysics-kernels-warp-metrics-u26-g01`: Computational physics
+
+Compare the stated Alcubierre, Lentz, and shell results under the same domain, resolution, observer, and energy-condition test.
+
+Prerequisites: Numerical methods
+
+Claim dependencies: `astrophysics-kernels-u08-c04`
+
+## Exact source excerpt
+
+#### **Exotic Metrics: Alcubierre, Lenticular Solitons, and Positive-Energy Warp Shells**
+
+In Miguel Alcubierre's classic 1994 metric (\\alpha \= 1, \\gamma\_{ij} \= \\delta\_{ij}, \\beta^x \= \-v\_s(t) f(r\_s)), the Eulerian energy density is strictly negative wherever the shaping function f(r\_s) has a non-zero gradient:  
+\\rho\_{\\text{Alcubierre}} \= T\_{\\hat{0}\\hat{0}} \= \-\\frac{c^4}{32\\pi G} v\_s^2 \\left\[\\left(\\frac{\\partial f}{\\partial y}\\right)^2 \+ \\left(\\frac{\\partial f}{\\partial z}\\right)^2\\right\] \= \-\\frac{c^4}{32\\pi G} \\frac{v\_s^2 (y^2 \+ z^2)}{r\_s^2}\\left(\\frac{df}{dr\_s}\\right)^2 \< 0  
+violating the WEC, NEC, and DEC identically. Even Erik Lentz's hyperbolic positive-energy soliton metric (which replaces the single shift component with a piecewise linear potential generating a rhomboidal/lenticular shift vector configuration) exhibits localized NEC and WEC violations along gradient corners when analyzed under full observer optimization and smoothed C^2 transitions.  
+Crucially, Bobrick & Martire (2021) and Fuchs, Helmerich, et al. (2024) demonstrated via WarpFactory that energy-condition violations in subluminal constant-velocity warp drives can be completely eliminated by abandoning the unit-lapse (\\alpha \= 1\) and flat-spatial-metric (\\gamma\_{ij} \= \\delta\_{ij}) assumptions. The **Fuchs-Helmerich Constant-Velocity Warp Shell** constructs a spherically symmetric positive-ADM-mass matter shell between inner radius R\_1 and outer radius R\_2 (with flat Minkowski interior r \< R\_1 so passengers experience zero tidal forces, \\partial\_i g\_{\\mu\\nu} \= 0, and Schwarzschild-like exterior r \> R\_2), and embeds a smooth C^\\infty shift vector \\beta^x \= \-\\beta\_{\\text{warp}} f(r) inside the massive shell using the non-analytic transition function:  
+f(r) \= \\left( \\exp\\\!\\left\[ (R\_2 \- R\_1)\\left(\\frac{1}{r \- R\_2} \+ \\frac{1}{r \- R\_1}\\right) \\right\] \+ 1 \\right)^{-1} \\quad \\text{for } R\_1 \< r \< R\_2  
+Because the positive mass-energy density \\rho and gravitational pressures P\_i of the shell dominate the quadratic shift-gradient terms (\\rho \\gg \\vert{}p\_i\\vert{}, \\vert{}P\_i\\vert{}) for subluminal shift amplitudes \\beta\_{\\text{warp}} \< 1, all four energy conditions (NEC, WEC, SEC, DEC) remain strictly non-negative across all spacetime points. Furthermore, recent covariant Bondi-Sachs analyses confirm a fundamental *no-reactionless-steering theorem*: while a constant-velocity positive-energy warp shell can coast inertially without violating energy conditions, accelerating the shell at covariant proper acceleration |a| requires radiating Bondi four-momentum to null infinity according to the strict control law \-\\dot{m}\_B \\ge 3 m\_B |a|.

@@ -1,0 +1,4 @@
+## **5\. Propulsion Energy Budgets and Engineering Constraints**
+
+To establish hard-science resource and energy constraints for a simulation backend, the table below synthesizes the exact relativistic rocket performance metrics across five canonical propulsion architectures. All mass ratios R \= M\_0 / M\_f are computed directly via Ackeret's relativistic formula R(\\beta) \= \\exp\\\!\\left(\\frac{c}{v\_e}\\operatorname{artanh}(\\beta)\\right) for a single-stage acceleration from rest to 0.1c (\\operatorname{artanh}(0.1) \= 0.1003353) and 0.5c (\\operatorname{artanh}(0.5) \= 0.5493061) without external braking. Total energy required per kilogram of dry payload (E\_{\\text{tot}} / M\_f) reflects the total nuclear, antimatter, laser, or metric field energy generated or expended to accelerate 1 kg of dry vehicle mass to target velocity.
+

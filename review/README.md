@@ -253,3 +253,20 @@ GitHub Actions is free for public repositories. **Daily use:** edit files in `le
 | 2026-10-05 | Adversarial review, pass 1, of documents 13 to 15 against the captions: 80 findings, with the moment of each part in the video | `adversarial-review-pass1/`, `findings/` |
 | 2026-10-05 | Consolidated the three reviews into eight learning units. Put each unit on a segment page. Planned tests 4 to 6 for the laboratory. Added 21 entries to the dictionaries | `learn/`, `plan/` |
 | 2026-10-06 | Test 4: the decimal counter (10,000 of 10,000 values agree) and test 4b without DAA (9,990 wrong values). Each page shows the path from the review to the test | `game/`, `site/`, `plan/` |
+
+## Cosmic engineering documents
+
+[Cosmic engineering source review](cosmic-engineering/README.md) contains five imported documents.
+It links content-based claim-review units to learning goals and related claims.
+All claims in this collection remain unchecked.
+
+## Latest work record
+
+The [2026-10-16 session](plan/sessions/2026-10-16.md) records the source imports, Astra review, task decomposition, implementation, checks, and Downloads cleanup.
+The [cleanup record](cosmic-engineering/download-cleanup.json) gives the five deletion results and preserved source hashes.
+
+## Repository check findings
+
+The [2026-10-16 findings and repair plan](plan/repository-checks-2026-10-16.md) identifies the existing prose and Python lint failures.
+It distinguishes those failures from incomplete TypeScript checks and tracked-file coverage limits.
+The report proposes repairs. It does not apply them.

@@ -1,6 +1,6 @@
 # Plan: learn two languages, then build a small game
 
-**Last update:** 2026-10-06 · **Decisions:** [DECISIONS.md](DECISIONS.md) · **Session records:** [sessions/2026-09-27.md](sessions/2026-09-27.md), [sessions/2026-10-05.md](sessions/2026-10-05.md), [sessions/2026-10-06.md](sessions/2026-10-06.md)
+**Last update:** 2026-10-16 · **Decisions:** [DECISIONS.md](DECISIONS.md) · **Session records:** [sessions/2026-09-27.md](sessions/2026-09-27.md), [sessions/2026-10-05.md](sessions/2026-10-05.md), [sessions/2026-10-06.md](sessions/2026-10-06.md), [sessions/2026-10-16.md](sessions/2026-10-16.md)
 
 ## The goal
 
@@ -143,3 +143,10 @@ Each two weeks add new words on each side and one playable result on the site.
 - [ ] Examine the 15 document parts that no finding touched.
 - [ ] For the SNES guides: watch the credit roll for the Hornests credit, read the counter limit in the game, and confirm the BG2 scroll register, the divider timing and the V-blank length on the SNESdev wiki. The full list is in `../adversarial-review-pass1/00-SUMMARY-snes-video-guides.md`.
 - [ ] Record the results in `review/findings/status.json`.
+
+## Cosmic engineering research: 2026-10-16
+
+Five more documents now have content-based review units and candidate learning goals.
+The [session record](sessions/2026-10-16.md) documents the work and verified Downloads cleanup.
+The [research index](../cosmic-engineering/README.md) links to the claims, goals, and source records.
+All claims remain unchecked. These research outputs do not change the game plan or course phases.

@@ -1,0 +1,39 @@
+{
+  "source_id": "example",
+  "source": "sources/example.md",
+  "units": [
+    {
+      "id": "example-u01",
+      "title": "Worked catalog record",
+      "source_range": {"start_char": 0, "end_char": 120, "start_line": 1, "end_line": 3},
+      "purposes": ["claim-review", "learning"],
+      "summary": "This record shows the required fields. The source file and range are illustrative.",
+      "claims": [
+        {
+          "id": "example-u01-c01",
+          "proposition": "The source makes one independently testable assertion.",
+          "type": "empirical",
+          "source_range": {"start_char": 20, "end_char": 80, "start_line": 2, "end_line": 2},
+          "assumptions": [{"text": "The stated operating conditions apply.", "basis": "explicit"}],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": ["primary-source", "reproduction"],
+            "evidence_needed": "Find the primary result and reproduce the stated quantity under the source conditions."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "example-u01-g01",
+          "area": "Evidence and research methods",
+          "goal": "Separate the assertion, its assumptions, and the evidence needed to test it.",
+          "prerequisites": ["Basic source evaluation"],
+          "claim_dependencies": ["example-u01-c01"]
+        }
+      ],
+      "notes": ["A generated unit includes the exact source excerpt for the unit range."]
+    }
+  ]
+}

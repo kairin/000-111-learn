@@ -1,0 +1,1587 @@
+{
+  "source_id": "adversarial-research-review",
+  "source": "sources/adversarial-research-review.md",
+  "units": [
+    {
+      "id": "adversarial-research-review-u01",
+      "title": "Review title and scope",
+      "source_range": {
+        "start_char": 0,
+        "end_char": 165,
+        "start_line": 1,
+        "end_line": 2
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "The title identifies this source as an adversarial review of the kernels document.",
+      "context_reason": "This title establishes authorship and scope for the review assertions that follow.",
+      "claims": [],
+      "learning_goals": []
+    },
+    {
+      "id": "adversarial-research-review-u02",
+      "title": "Executive assessment and priority corrections",
+      "source_range": {
+        "start_char": 165,
+        "end_char": 10407,
+        "start_line": 3,
+        "end_line": 59
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "The review attributes strengths and failures to the source, then identifies FAT, Mercury, Phantom-GRAPE, warp, propulsion, dust, and clock issues.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u02-c01",
+          "proposition": "FAT capability claims must be checked against a pinned release because the review reports that current documentation does not implement several named solvers and drag.",
+          "type": "software",
+          "source_range": {
+            "start_char": 165,
+            "end_char": 10407,
+            "start_line": 3,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The review accurately characterizes the cited evidence and the target source version.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "code-inspection",
+              "primary-source"
+            ],
+            "evidence_needed": "A pinned FAT release, module inventory, and executable examples for each asserted solver and force model."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u02-c01"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-u02-c02",
+          "proposition": "The review says Mercury must distinguish Hamiltonian switching from package-level RADAU availability.",
+          "type": "software",
+          "source_range": {
+            "start_char": 165,
+            "end_char": 10407,
+            "start_line": 3,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The review accurately represents the cited source and target version.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Chambers method description and Mercury source."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u04-c01"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-u02-c03",
+          "proposition": "The review identifies a mismatch between the displayed laser-sail equation and the source table values.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 165,
+            "end_char": 10407,
+            "start_line": 3,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The review accurately represents the cited source and target version.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Independent four-momentum calculation and dimensional analysis."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u12-c03"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-u02-c04",
+          "proposition": "The review says warpax percentages require version, domain, and sampling qualifications.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 165,
+            "end_char": 10407,
+            "start_line": 3,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The review accurately represents the cited source and target version.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Matched metric and grid reproduction."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u08-c02"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-u02-c05",
+          "proposition": "The review identifies a weak-field clock-sign problem under negative-potential convention.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 165,
+            "end_char": 10407,
+            "start_line": 3,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The review accurately represents the cited source and target version.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Weak-field and Minkowski limit derivation."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u14-c02"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-u02-c06",
+          "proposition": "The review identifies the White-torus energy and mass-equivalence entry as dimensionally contradictory.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 165,
+            "end_char": 10407,
+            "start_line": 3,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The source table transcribes both quantities correctly.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "A direct conversion of the stated mass equivalent to joules."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u12-c02"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u02-g01",
+          "area": "Technical claim review",
+          "goal": "Distinguish a review assertion from its target claim and record the evidence needed to decide both.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u02-c01",
+            "adversarial-research-review-u02-c02",
+            "adversarial-research-review-u02-c03",
+            "adversarial-research-review-u02-c04",
+            "adversarial-research-review-u02-c05"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-u03",
+      "title": "FAT implementation review",
+      "source_range": {
+        "start_char": 10407,
+        "end_char": 12342,
+        "start_line": 60,
+        "end_line": 69
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Reviews FAT solver and force-model implementation claims.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u03-c01",
+          "proposition": "The review says FAT claims for Nyström, Adams, and drag need a pinned release because the inspected public documentation did not substantiate all of them.",
+          "type": "software",
+          "source_range": {
+            "start_char": 10569,
+            "end_char": 11886,
+            "start_line": 64,
+            "end_line": 67
+          },
+          "assumptions": [
+            {
+              "text": "The review accurately identifies the documentation and version it inspected.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "code-inspection"
+            ],
+            "evidence_needed": "Pin the reviewed FAT release and compare its solver and perturbation inventory with each source claim."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "adversarial-research-review-u03-c02",
+          "proposition": "The review says the common prograde modified-equinoctial formulation remains singular at retrograde inclination i = π, despite the source’s nonsingularity wording.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 11886,
+            "end_char": 12342,
+            "start_line": 68,
+            "end_line": 69
+          },
+          "assumptions": [
+            {
+              "text": "The cited equinoctial convention and retrograde limit apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "primary-source"
+            ],
+            "evidence_needed": "Derive the element-map denominator at inclination π and compare it with the source wording."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u02-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u03-g01",
+          "area": "Scientific software review",
+          "goal": "Pin the FAT release, audit each listed solver, and derive the stated retrograde singularity.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u03-c01",
+            "adversarial-research-review-u03-c02"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-nbody-u09",
+      "title": "NBODY and gyrfalcON review",
+      "source_range": {
+        "start_char": 12342,
+        "end_char": 14098,
+        "start_line": 70,
+        "end_line": 73
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Reviews collisional N-body architecture and conservation claims.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-nbody-u09-c01",
+          "proposition": "NBODY architecture claims need hardware-qualified benchmarks, and gyrfalcON force conservation does not prove all integration invariants.",
+          "type": "software",
+          "source_range": {
+            "start_char": 12342,
+            "end_char": 14098,
+            "start_line": 70,
+            "end_line": 73
+          },
+          "assumptions": [
+            {
+              "text": "The review and target source refer to identifiable releases.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "code-inspection"
+            ],
+            "evidence_needed": "Reproduce benchmarks and isolated-system invariant tests."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u03-c06"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-nbody-u09-g01",
+          "area": "Scientific software review",
+          "goal": "Assess the evidence and limits of nbody and gyrfalcon review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-nbody-u09-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-mercury-u10",
+      "title": "Mercury hybrid review",
+      "source_range": {
+        "start_char": 14098,
+        "end_char": 15492,
+        "start_line": 74,
+        "end_line": 77
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Reviews encounter switching and solver attribution.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-mercury-u10-c01",
+          "proposition": "Mercury must distinguish Chambers Hamiltonian switching from separately available encounter integrators.",
+          "type": "software",
+          "source_range": {
+            "start_char": 14098,
+            "end_char": 15492,
+            "start_line": 74,
+            "end_line": 77
+          },
+          "assumptions": [
+            {
+              "text": "The review and target source refer to identifiable releases.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "code-inspection"
+            ],
+            "evidence_needed": "Compare the Chambers method with Mercury source and encounter tests."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u04-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-mercury-u10-g01",
+          "area": "Scientific software review",
+          "goal": "Assess the evidence and limits of mercury hybrid review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-mercury-u10-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-phantom-u11",
+      "title": "Phantom-GRAPE review",
+      "source_range": {
+        "start_char": 15492,
+        "end_char": 16612,
+        "start_line": 78,
+        "end_line": 79
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Reviews SIMD implementation versus projected AVX-512 claims.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-phantom-u11-c01",
+          "proposition": "Documented AVX2 kernels must be distinguished from projected or architecture-dependent AVX-512 claims.",
+          "type": "software",
+          "source_range": {
+            "start_char": 15492,
+            "end_char": 16612,
+            "start_line": 78,
+            "end_line": 79
+          },
+          "assumptions": [
+            {
+              "text": "The review and target source refer to identifiable releases.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "code-inspection"
+            ],
+            "evidence_needed": "Inspect versioned kernels and measure named CPUs."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u06-c02"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-phantom-u11-g01",
+          "area": "Scientific software review",
+          "goal": "Assess the evidence and limits of phantom-grape review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-phantom-u11-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-einstein-u12",
+      "title": "Einstein Toolkit review",
+      "source_range": {
+        "start_char": 16612,
+        "end_char": 17943,
+        "start_line": 80,
+        "end_line": 83
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Reviews numerical-relativity release and component claims.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-einstein-u12-c01",
+          "proposition": "Einstein Toolkit component claims require release-qualified documentation because its infrastructure evolves.",
+          "type": "software",
+          "source_range": {
+            "start_char": 16800,
+            "end_char": 17943,
+            "start_line": 80,
+            "end_line": 83
+          },
+          "assumptions": [
+            {
+              "text": "The review and target source refer to identifiable releases.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "code-inspection"
+            ],
+            "evidence_needed": "Inspect a pinned thorn inventory and release notes."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u07-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-einstein-u12-g01",
+          "area": "Scientific software review",
+          "goal": "Assess the evidence and limits of einstein toolkit review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-einstein-u12-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-u04",
+      "title": "Warp tooling and statistics review",
+      "source_range": {
+        "start_char": 17943,
+        "end_char": 20952,
+        "start_line": 84,
+        "end_line": 94
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of warp tooling and statistics review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u04-c01",
+          "proposition": "Warp diagnostic percentages require fixed metric, domain, resolution, observer set, and version.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 17943,
+            "end_char": 20952,
+            "start_line": 84,
+            "end_line": 94
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Recompute a matched benchmark."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u08-c02"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u04-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for warp tooling and statistics review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u04-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-warp-shells-u13",
+      "title": "Positive-energy shell review",
+      "source_range": {
+        "start_char": 20952,
+        "end_char": 22505,
+        "start_line": 94,
+        "end_line": 100
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of positive-energy shell review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-warp-shells-u13-c01",
+          "proposition": "Positive-energy shell results are limited to stated constant-velocity subluminal constructions.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 20952,
+            "end_char": 22505,
+            "start_line": 94,
+            "end_line": 100
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Inspect scope, stability, and dynamical assumptions."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u15-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-warp-shells-u13-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for positive-energy shell review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-warp-shells-u13-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-steering-u14",
+      "title": "Warp propulsion and steering scope review",
+      "source_range": {
+        "start_char": 22505,
+        "end_char": 24522,
+        "start_line": 100,
+        "end_line": 113
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of warp propulsion and steering scope review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-steering-u14-c01",
+          "proposition": "Radiative steering is conditional and does not establish reactionless propulsion.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 22505,
+            "end_char": 24522,
+            "start_line": 100,
+            "end_line": 113
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Derive its flux law under stated junction conditions."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u15-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-steering-u14-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for warp propulsion and steering scope review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-steering-u14-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-u05",
+      "title": "Shielding and dust review",
+      "source_range": {
+        "start_char": 24522,
+        "end_char": 28954,
+        "start_line": 114,
+        "end_line": 143
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of shielding and dust review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u05-c01",
+          "proposition": "The review says a 10^-9 kg silicate sphere would have a radius near 49 μm rather than the source’s 5 μm interpretation.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 27195,
+            "end_char": 28154,
+            "start_line": 128,
+            "end_line": 137
+          },
+          "assumptions": [
+            {
+              "text": "The review uses the stated silicate density and spherical-grain model.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Recalculate radius from mass and density, and state whether radius or diameter is compared."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u10-c03"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-u05-c02",
+          "proposition": "The review agrees that a 10^-9 kg grain at 0.5c has kinetic energy about 1.39 × 10^7 J but rejects the associated 5 μm size label.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 27195,
+            "end_char": 28154,
+            "start_line": 128,
+            "end_line": 137
+          },
+          "assumptions": [
+            {
+              "text": "The mass and speed are 10^-9 kg and 0.5c.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Recalculate relativistic kinetic energy and TNT equivalence independently of the size conversion."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u10-c03"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u05-g01",
+          "area": "Technical claim review",
+          "goal": "Recalculate the grain radius, kinetic energy, and TNT equivalent as separate checks.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u05-c01",
+            "adversarial-research-review-u05-c02"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-ramjet-u15",
+      "title": "Ramjet review",
+      "source_range": {
+        "start_char": 28954,
+        "end_char": 29810,
+        "start_line": 144,
+        "end_line": 145
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of ramjet review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-ramjet-u15-c01",
+          "proposition": "Ramjet limits depend on field, plasma, fusion, and momentum assumptions.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 28954,
+            "end_char": 29810,
+            "start_line": 144,
+            "end_line": 145
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Model a stated scoop geometry."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u11-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-ramjet-u15-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for ramjet review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-ramjet-u15-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-sail-u16",
+      "title": "Magnetic sail review",
+      "source_range": {
+        "start_char": 29810,
+        "end_char": 30513,
+        "start_line": 146,
+        "end_line": 147
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of magnetic sail review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-sail-u16-c01",
+          "proposition": "Magnetic-sail braking depends on flow frame and orientation.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 29810,
+            "end_char": 30513,
+            "start_line": 146,
+            "end_line": 147
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Calculate work and momentum in stated frames."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u11-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-sail-u16-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for magnetic sail review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-sail-u16-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-accounting-u17",
+      "title": "Propulsion accounting review",
+      "source_range": {
+        "start_char": 30513,
+        "end_char": 32442,
+        "start_line": 148,
+        "end_line": 173
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of propulsion accounting review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-accounting-u17-c01",
+          "proposition": "Energy comparisons require separate kinetic, onboard, beamed, and heat accounts.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 30513,
+            "end_char": 32442,
+            "start_line": 148,
+            "end_line": 173
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Recompute rows under a common boundary."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u12-c02"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-accounting-u17-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for propulsion accounting review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-accounting-u17-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-u06",
+      "title": "Coordinate precision review",
+      "source_range": {
+        "start_char": 32442,
+        "end_char": 34074,
+        "start_line": 174,
+        "end_line": 185
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of coordinate precision review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u06-c01",
+          "proposition": "Floating origins are one precision design among several alternatives.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 32442,
+            "end_char": 33700,
+            "start_line": 174,
+            "end_line": 184
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Compare range and error of representations."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u13-c02"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u06-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for coordinate precision review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u06-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-handoff-u18",
+      "title": "Regime thresholds and blending review",
+      "source_range": {
+        "start_char": 34074,
+        "end_char": 35359,
+        "start_line": 186,
+        "end_line": 193
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of regime thresholds and blending review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-handoff-u18-c01",
+          "proposition": "Thresholds need error budgets and smooth blends do not guarantee invariants.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 34074,
+            "end_char": 35359,
+            "start_line": 186,
+            "end_line": 193
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Compare switched and reference trajectories."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u14-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-handoff-u18-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for regime thresholds and blending review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-handoff-u18-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-clock-u19",
+      "title": "Force and clock convention review",
+      "source_range": {
+        "start_char": 35359,
+        "end_char": 36827,
+        "start_line": 194,
+        "end_line": 227
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of force and clock convention review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-clock-u19-c01",
+          "proposition": "The review says the weak-field clock correction has the wrong sign if Φ is the conventional negative Newtonian potential.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 36191,
+            "end_char": 36827,
+            "start_line": 206,
+            "end_line": 227
+          },
+          "assumptions": [
+            {
+              "text": "The conventional negative-potential sign is used.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "logical-analysis"
+            ],
+            "evidence_needed": "Evaluate the expression for Φ < 0 and compare it with the standard weak-field proper-time limit."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u14-c05"
+          ]
+        },
+        {
+          "id": "adversarial-research-review-clock-u19-c02",
+          "proposition": "The review requires force-frame labels and limiting-case tests for coordinate and proper acceleration handoffs.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 35359,
+            "end_char": 36191,
+            "start_line": 194,
+            "end_line": 205
+          },
+          "assumptions": [
+            {
+              "text": "The handoff equations mix coordinate and proper quantities.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "reproduction"
+            ],
+            "evidence_needed": "Test zero velocity, zero gravity, and constant proper-acceleration limits with explicit frame labels."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u14-c04"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-clock-u19-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate the weak-field sign and test each acceleration handoff in named frames and limiting cases.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-clock-u19-c01",
+            "adversarial-research-review-clock-u19-c02"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-ks-u20",
+      "title": "Collision and KS regularization review",
+      "source_range": {
+        "start_char": 36827,
+        "end_char": 37865,
+        "start_line": 228,
+        "end_line": 231
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of collision and ks regularization review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-ks-u20-c01",
+          "proposition": "KS regularization must yield to collision geometry for extended bodies.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 37100,
+            "end_char": 37865,
+            "start_line": 228,
+            "end_line": 231
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Test finite-radius encounters."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u03-c10"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-ks-u20-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for collision and ks regularization review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-ks-u20-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-u07",
+      "title": "Reproducibility methods review",
+      "source_range": {
+        "start_char": 37865,
+        "end_char": 43091,
+        "start_line": 232,
+        "end_line": 257
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of reproducibility methods review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u07-c01",
+          "proposition": "Reproducibility needs pinned versions, equations, and decisive tests.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 37865,
+            "end_char": 43091,
+            "start_line": 232,
+            "end_line": 257
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Create a claim-to-test matrix."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u16-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u07-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for reproducibility methods review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u07-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-priorities-u21",
+      "title": "Correction priorities review",
+      "source_range": {
+        "start_char": 43091,
+        "end_char": 44912,
+        "start_line": 257,
+        "end_line": 275
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of correction priorities review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-priorities-u21-c01",
+          "proposition": "Laser, clock, and warp corrections are priority because they alter quantitative conclusions.",
+          "type": "value-judgment",
+          "source_range": {
+            "start_char": 43091,
+            "end_char": 44912,
+            "start_line": 257,
+            "end_line": 275
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Reproduce the numerical inconsistencies."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u16-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-priorities-u21-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for correction priorities review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-priorities-u21-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-u08",
+      "title": "Publication chronology review",
+      "source_range": {
+        "start_char": 44912,
+        "end_char": 48400,
+        "start_line": 276,
+        "end_line": 299
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of publication chronology review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-u08-c01",
+          "proposition": "Chronology shows the source mixes results from different maturity levels.",
+          "type": "historical",
+          "source_range": {
+            "start_char": 44912,
+            "end_char": 48400,
+            "start_line": 276,
+            "end_line": 299
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Verify dates and scope."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u16-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-u08-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for publication chronology review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-u08-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-argument-u22",
+      "title": "Argument and evidence map review",
+      "source_range": {
+        "start_char": 48400,
+        "end_char": 50000,
+        "start_line": 299,
+        "end_line": 333
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of argument and evidence map review.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-argument-u22-c01",
+          "proposition": "A unified design needs explicit evidence-to-handoff links.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 48400,
+            "end_char": 50000,
+            "start_line": 299,
+            "end_line": 333
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Review a traceable dependency map."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u16-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-argument-u22-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for argument and evidence map review.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-argument-u22-c01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adversarial-research-review-sources-u23",
+      "title": "Primary-source recommendations",
+      "source_range": {
+        "start_char": 50000,
+        "end_char": 52157,
+        "start_line": 333,
+        "end_line": 340
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "Focused review of primary-source recommendations.",
+      "claims": [
+        {
+          "id": "adversarial-research-review-sources-u23-c01",
+          "proposition": "Quantitative claims need primary sources, exact versions, and tests.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 50000,
+            "end_char": 52157,
+            "start_line": 333,
+            "end_line": 340
+          },
+          "assumptions": [
+            {
+              "text": "The cited review evidence applies to the source configuration.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "reproduction"
+            ],
+            "evidence_needed": "Replace secondary citations with primary artifacts."
+          },
+          "status": "unchecked",
+          "target_claims": [
+            "astrophysics-kernels-u16-c01"
+          ]
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "adversarial-research-review-sources-u23-g01",
+          "area": "Technical claim review",
+          "goal": "Evaluate evidence and limits for primary-source recommendations.",
+          "prerequisites": [
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "adversarial-research-review-sources-u23-c01"
+          ]
+        }
+      ]
+    }
+  ]
+}

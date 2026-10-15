@@ -1,0 +1,4 @@
+### **NBODY6++GPU: Hermite Schemes, Ahmad-Cohen Splitting, and Kustaanheimo-Stiefel Regularization**
+
+Initiated by Sverre Aarseth and scaled to heterogeneous supercomputers by Spurzem, Nitadori, Wang, and Kamlah, NBODY6++GPU is the premier direct collisional N-body code for evolving million-body star clusters with stellar evolution (SSE/BSE) and relativistic black hole binaries. Because collisional gravitational systems exhibit extreme dynamic ranges—spanning cluster-wide crossing times of megayears down to compact binary orbits of minutes—symplectic fixed-step methods fail. NBODY6++GPU addresses this via a three-tier mathematical architecture: a 4th-order Hermite predictor-corrector integrator with hierarchical block time-steps, the Ahmad-Cohen (AC) neighbor scheme, and Kustaanheimo-Stiefel (KS) plus Mikkola-Aarseth chain regularization.
+

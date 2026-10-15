@@ -1,0 +1,6 @@
+#### **Bremsstrahlung Radiation Flux**
+
+Accompanying the ISM protons is an equal flux of ISM electrons (n\_e \\approx n\_0), each impacting the forward shield with kinetic energy E\_{k,e} \= (\\gamma \- 1)m\_e c^2 (2.61\\text{ keV} at 0.1c; 79.1\\text{ keV} at 0.5c; 661\\text{ keV} at 0.9c). As these electrons decelerate in the Coulomb fields of shield nuclei with atomic number Z, they emit thick-target Bremsstrahlung X-rays and gamma rays. Using the Bethe-Heitler / Koch-Motz thick-target radiative yield \\eta\_{\\text{brem}} \\approx k\_{\\text{BH}} Z \\frac{E\_{k,e}}{m\_e c^2} \= k\_{\\text{BH}} Z (\\gamma \- 1\) (where k\_{\\text{BH}} \\approx 7.0 \\times 10^{-4}), the forward Bremsstrahlung radiation energy flux generated at the shield surface is:  
+\\Phi\_{\\text{brem}} \= \\eta\_{\\text{brem}} \\Phi\_e E\_{k,e} \= k\_{\\text{BH}} Z \\gamma (\\gamma \- 1)^2 n\_e m\_e c^3 \\beta  
+Because Bremsstrahlung scales linearly with atomic number Z, hard-sci-fi starships must construct outer Whipple/erosion shields strictly from low-Z materials such as Lithium Hydride (Z\_{\\text{eff}} \\approx 2), Beryllium (Z \= 4), Boron Carbide (Z \\approx 5.2), or Graphite (Z \= 6\) rather than Tungsten (Z \= 74\) or Lead (Z \= 82).
+
