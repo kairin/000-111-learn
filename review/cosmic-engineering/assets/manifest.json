@@ -1,0 +1,18 @@
+{
+  "assets": [
+    {
+      "id": "image1",
+      "source": "sources/astrophysics-kernels.md",
+      "source_reference": "![Image][image1]",
+      "source_definition_preserved": true,
+      "file": "assets/phantom-grape.png",
+      "media_type": "image/png",
+      "width": 1200,
+      "height": 896,
+      "bytes": 628214,
+      "sha256": "0db6e37f0670be9981f8e2a9eac8ff1154d6be0f1ad970bf044b94f7511c7cd7",
+      "description": "A labeled routing diagram connects spatial decomposition, three numerical solvers, an array buffer, AVX-512 lanes, reciprocal square root, and a force-and-jerk accumulator.",
+      "evidence_status": "The diagram repeats source claims. It is not independent evidence."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+###### *Vacuum Polarization vs. Gravitational Collapse*
+
+In flat Minkowski spacetime, concentrating high-intensity photon beams triggers pair creation via vacuum polarization (the Schwinger effect):\$\$\\gamma \+ \\gamma \\longrightarrow e^- \+ e^+\$\$Critics argue that pair creation scatters incoming energy, preventing horizon formation. However, as demonstrated by Loeb (commenting on Alvarez-Dominguez et al.), when General Relativity and gravitational self-interaction are included, thermal equilibrium in a dense radiation field allows energy density to exceed  \$\\rho\_{\\text{crit}} \= \\frac{3H^2}{8\\pi G}\$ . Under these conditions, the spherical region undergoes gravitational collapse into a Schwarzschild black hole before quantum dissipative scattering can prevent horizon formation.
+

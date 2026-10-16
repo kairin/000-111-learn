@@ -1,0 +1,2795 @@
+{
+  "source_id": "executive-briefing",
+  "source": "sources/executive-briefing.md",
+  "units": [
+    {
+      "id": "executive-briefing-u01",
+      "title": "Executive Briefing: Cosmic Engineering, Theoretical Physics, and Computational Methods",
+      "source_range": {
+        "start_char": 0,
+        "end_char": 92,
+        "start_line": 1,
+        "end_line": 2
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Executive Briefing: Cosmic Engineering, Theoretical Physics, and Computational Methods.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u02",
+      "title": "Executive Summary",
+      "source_range": {
+        "start_char": 92,
+        "end_char": 2867,
+        "start_line": 3,
+        "end_line": 12
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Executive Summary.",
+      "claims": [
+        {
+          "proposition": "Rebuttals to prior claims (\"No Black Holes from Light\") highlight that ignoring gravity via Minkowski metrics invalidates arguments regarding vacuum polarization dissipating energy.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 856,
+            "end_char": 1041,
+            "start_line": 7,
+            "end_line": 7
+          },
+          "assumptions": [
+            {
+              "text": "The equation uses the variables, units, and boundary conditions stated in the passage.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Derive the displayed relation and test its units and limiting cases."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u02-c01"
+        },
+        {
+          "proposition": "Using automated von Neumann probes, planetary disassembly (e.g., harvesting Mercury to construct a Dyson Swarm in \\$\\\\sim 31\\$ years), and fixed electromagnetic launch systems, an advanced star-spanning civilization can initiate the colonisation of every reachable galaxy ( \\$4.13 \\\\times 10^9\\$ galaxies at.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 1487,
+            "end_char": 1990,
+            "start_line": 9,
+            "end_line": 9
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u02-c02"
+        },
+        {
+          "proposition": "Because intergalactic travel requires modest energy on a cosmic scale, the lack of observed alien artifacts or visitations cannot be explained by distance or energy constraints alone.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 1990,
+            "end_char": 2211,
+            "start_line": 10,
+            "end_line": 10
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u02-c03"
+        },
+        {
+          "proposition": "Over 388 million galaxies could have reached Earth if expansion began five billion years ago, severely constraining traditional resolutions to the Fermi Paradox.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 2211,
+            "end_char": 2376,
+            "start_line": 10,
+            "end_line": 10
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u02-c04"
+        },
+        {
+          "proposition": "More than 95% of execution time in astrophysics code is spent in force-evaluation loops, requiring hand-tuned assembly SIMD kernels (AVX-512, NEON) to saturate ALUs.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 2376,
+            "end_char": 2606,
+            "start_line": 11,
+            "end_line": 11
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u02-c05"
+        },
+        {
+          "proposition": "Conversely, adapting complex numerical methods (such as Runge-Kutta 4th Order) to 8-bit, 1 MHz legacy architectures (like the MOS 6510\\) requires algorithmic shifts to simplified Euler integration and optimized display loops to sustain real-time performance.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 2606,
+            "end_char": 2865,
+            "start_line": 11,
+            "end_line": 11
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u02-c06"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u02-g01",
+          "area": "Claim analysis",
+          "goal": "Separate the briefing’s black-hole, colonization, Fermi-paradox, and software claims into independent review questions.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u02-c01",
+            "executive-briefing-u02-c02",
+            "executive-briefing-u02-c03",
+            "executive-briefing-u02-c04",
+            "executive-briefing-u02-c05",
+            "executive-briefing-u02-c06"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u03",
+      "title": "Section 1: Black Hole Dynamics, Radiation Genesis, and Relativistic Propulsion",
+      "source_range": {
+        "start_char": 2867,
+        "end_char": 3632,
+        "start_line": 13,
+        "end_line": 24
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Section 1: Black Hole Dynamics, Radiation Genesis, and Relativistic Propulsion.",
+      "claims": [
+        {
+          "id": "executive-briefing-u03-c01",
+          "proposition": "The diagram describes a sequence from thermal-radiation concentration through gravitational collapse, Hawking emission, and reflector-based momentum transfer.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 2867,
+            "end_char": 3632,
+            "start_line": 13,
+            "end_line": 24
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u03-g01",
+          "area": "Black-hole propulsion",
+          "goal": "Trace the diagram from radiation concentration through collapse and Hawking emission to reflector thrust, and state the evidence needed at each step.",
+          "prerequisites": [
+            "General relativity",
+            "Momentum conservation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u03-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "executive-briefing-u04",
+      "title": "Black Hole Creation from Light",
+      "source_range": {
+        "start_char": 3632,
+        "end_char": 5973,
+        "start_line": 25,
+        "end_line": 34
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Black Hole Creation from Light.",
+      "claims": [
+        {
+          "proposition": "Recent theoretical debate centered on whether an event horizon can be formed purely from concentrated light.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 3670,
+            "end_char": 3778,
+            "start_line": 27,
+            "end_line": 27
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c01"
+        },
+        {
+          "proposition": "Flat-spacetime arguments claim that vacuum polarization prevents enough energy from accumulating to form a black hole.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 3778,
+            "end_char": 4125,
+            "start_line": 27,
+            "end_line": 27
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c02"
+        },
+        {
+          "proposition": "At about 10 μs after the Big Bang, the source places a 150 MeV equilibrium radiation bath at about 2 × 10^16 g/cm³.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 4127,
+            "end_char": 4502,
+            "start_line": 29,
+            "end_line": 29
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c03"
+        },
+        {
+          "proposition": "In this state, pair creation via the Schwinger effect was exactly balanced by pair annihilation.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 4502,
+            "end_char": 4602,
+            "start_line": 29,
+            "end_line": 29
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c04"
+        },
+        {
+          "proposition": "A spherical region of thermal radiation described internally by the Friedmann-Lemaître-Robertson-Walker (FLRW) metric with an overdensity above the critical value ( \\$\\\\frac{3H^2}{8\\\\pi G}\\$ ) collapses into a singularity within a finite time (a local Big Crunch).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 4602,
+            "end_char": 4908,
+            "start_line": 30,
+            "end_line": 30
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c05"
+        },
+        {
+          "proposition": "Applying Birkhoff's and Israel's theorems confirms that the space external to this region is described by the Schwarzschild metric.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 4908,
+            "end_char": 5065,
+            "start_line": 31,
+            "end_line": 31
+          },
+          "assumptions": [
+            {
+              "text": "The equation uses the variables, units, and boundary conditions stated in the passage.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Derive the displayed relation and test its units and limiting cases."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c06"
+        },
+        {
+          "proposition": "A solar-mass Schwarzschild black hole can form by concentrating a thermal radiation bath ( \\$150\\\\text{ MeV}\\$ ) within a spherical volume smaller than the \\$3\\\\text{ km}\\$ cosmic horizon scale present at \\$10\\\\text{ }\\\\mu\\\\text{s}\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 5065,
+            "end_char": 5307,
+            "start_line": 31,
+            "end_line": 31
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c07"
+        },
+        {
+          "proposition": "Extreme light intensity is not strictly required.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 5307,
+            "end_char": 5383,
+            "start_line": 32,
+            "end_line": 32
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c08"
+        },
+        {
+          "proposition": "Filling space with room-temperature ( \\$300\\\\text{ K}\\$ ) blackbody radiation produces no Schwinger pair creation, yet its energy density exceeds the critical collapse density by a factor of \\$\\\\sim 3 \\\\times 10^4\\$ . (Present cosmic microwave background radiation at \\$2.73\\\\text{ K}\\$ is sub-critical by \\$\\\\sim 5 \\\\times 10^3\\$ ).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 5383,
+            "end_char": 5724,
+            "start_line": 32,
+            "end_line": 32
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u04-c09"
+        },
+        {
+          "id": "executive-briefing-u04-c10",
+          "proposition": "The source proposes primordial black holes of 10^17 to 10^22 g as dark-matter candidates formed within the first 10 ps after the Big Bang.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 5724,
+            "end_char": 5971,
+            "start_line": 33,
+            "end_line": 33
+          },
+          "assumptions": [
+            {
+              "text": "The quoted mass window and cosmological formation scenario are evaluated together.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Check the stated formation window and mass range against primordial-black-hole models."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u04-g01",
+          "area": "Black-hole models",
+          "goal": "Check the stated collapse, mass, radius, or Hawking-emission condition against its governing model.",
+          "prerequisites": [
+            "General relativity",
+            "Thermodynamics"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u04-c01",
+            "executive-briefing-u04-c02",
+            "executive-briefing-u04-c03",
+            "executive-briefing-u04-c04",
+            "executive-briefing-u04-c05",
+            "executive-briefing-u04-c06",
+            "executive-briefing-u04-c07",
+            "executive-briefing-u04-c08",
+            "executive-briefing-u04-c09"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u05",
+      "title": "Hawking Radiation and Black Hole Starships",
+      "source_range": {
+        "start_char": 5973,
+        "end_char": 7590,
+        "start_line": 35,
+        "end_line": 44
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Hawking Radiation and Black Hole Starships.",
+      "claims": [
+        {
+          "proposition": "For human interstellar exploration, cosmic radiation shielding demands heavy craft ( \\$\\\\sim 400\\\\text{ metric tons}\\$ of shielding for a single crew capsule; overall ship mass scaling to thousands of tons).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 6023,
+            "end_char": 6231,
+            "start_line": 37,
+            "end_line": 37
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c01"
+        },
+        {
+          "proposition": "Traditional antimatter propulsion for heavily shielded craft requires substantial energy to synthesize its fuel.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 6231,
+            "end_char": 6489,
+            "start_line": 37,
+            "end_line": 37
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c02"
+        },
+        {
+          "proposition": "As a black hole decreases in mass, its Hawking radiation temperature and energy discharge rate increase exponentially.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 6491,
+            "end_char": 6646,
+            "start_line": 39,
+            "end_line": 39
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c03"
+        },
+        {
+          "proposition": "A starship engine could utilize an artificial black hole with a radius measured in attometers ( \\$\\\\text{nm} \\\\times 10^{-9}\\$ ), a mass of roughly \\$10^6\\\\text{ metric tons}\\$ , and a lifetime of several decades.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 6646,
+            "end_char": 6889,
+            "start_line": 40,
+            "end_line": 40
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c04"
+        },
+        {
+          "proposition": "Creating such a black hole requires converging a massive bank of gamma-ray lasers, powered by a Dyson-scale solar collector array orbiting the Sun.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 6889,
+            "end_char": 7070,
+            "start_line": 41,
+            "end_line": 41
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c05"
+        },
+        {
+          "proposition": "Momentum is transferred by scattering emitted particles and photons off a parabolic reflector attached to the vessel.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 7070,
+            "end_char": 7215,
+            "start_line": 42,
+            "end_line": 42
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c06"
+        },
+        {
+          "proposition": "Accurately computing Hawking radiation yields requires a complete model of quantum gravity.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 7215,
+            "end_char": 7348,
+            "start_line": 43,
+            "end_line": 43
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c07"
+        },
+        {
+          "proposition": "Proving Supersymmetry (SUSY)—where every matter particle has a corresponding force partner and vice versa—at particle accelerators such as the Large Hadron Collider (LHC) is a primary prerequisite for refining these quantum gravity models.",
+          "type": "definition",
+          "source_range": {
+            "start_char": 7348,
+            "end_char": 7588,
+            "start_line": 43,
+            "end_line": 43
+          },
+          "assumptions": [
+            {
+              "text": "The source uses the term in the stated technical context.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check"
+            ],
+            "evidence_needed": "Compare the term with an authoritative definition and state any difference in scope."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u05-c08"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u05-g01",
+          "area": "Black-hole models",
+          "goal": "Check the stated collapse, mass, radius, or Hawking-emission condition against its governing model.",
+          "prerequisites": [
+            "General relativity",
+            "Thermodynamics"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u05-c01",
+            "executive-briefing-u05-c02",
+            "executive-briefing-u05-c03",
+            "executive-briefing-u05-c04",
+            "executive-briefing-u05-c05",
+            "executive-briefing-u05-c06",
+            "executive-briefing-u05-c07",
+            "executive-briefing-u05-c08"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u06",
+      "title": "Section 2: Universal Colonisation Architecture and Fermi Paradox Sharpening",
+      "source_range": {
+        "start_char": 7590,
+        "end_char": 7672,
+        "start_line": 45,
+        "end_line": 46
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Section 2: Universal Colonisation Architecture and Fermi Paradox Sharpening.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u07",
+      "title": "Dyson Swarm Construction via Planetary Disassembly",
+      "source_range": {
+        "start_char": 7672,
+        "end_char": 10388,
+        "start_line": 47,
+        "end_line": 81
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Dyson Swarm Construction via Planetary Disassembly.",
+      "claims": [
+        {
+          "proposition": "Launching a universal-scale expansion requires harnessing stellar energy.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 7730,
+            "end_char": 7803,
+            "start_line": 49,
+            "end_line": 49
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u07-c01"
+        },
+        {
+          "proposition": "Constructing a Dyson Swarm (orbiting mirrors and heat engines) around the Sun provides an energy output of \\$3.8 \\\\times 10^{26}\\\\text{ W}\\$ (with \\$\\\\sim 1.8 \\\\times 10^{26}\\\\text{ W}\\$ usable at \\$1/3\\$ overall capture efficiency).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 7803,
+            "end_char": 8043,
+            "start_line": 49,
+            "end_line": 49
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u07-c02"
+        },
+        {
+          "proposition": "A \\$1\\\\text{ km}^2\\$ solar panel array is constructed on Mercury.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 9670,
+            "end_char": 9763,
+            "start_line": 77,
+            "end_line": 77
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u07-c03"
+        },
+        {
+          "proposition": "Material Allocation : \\$10\\\\%\\$ of captured energy drives mass-launchers; \\$90\\\\%\\$ goes to chemical processing and mining.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 9763,
+            "end_char": 9900,
+            "start_line": 78,
+            "end_line": 78
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u07-c04"
+        },
+        {
+          "proposition": "Half of Mercury's mass (metals/silicates) is processed into orbiting reflectors ( \\$0.5\\\\text{ mm}\\$ structural support net with \\$0.001\\\\text{ mm}\\$ thin film, weighing \\$3.92\\\\text{ kg m}^{-2}\\$ at Mercury's orbital radius of \\$5.79 \\\\times 10^{10}\\\\text{ m}\\$ ).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 9900,
+            "end_char": 10199,
+            "start_line": 79,
+            "end_line": 79
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u07-c05"
+        },
+        {
+          "proposition": "Operating in 5-year production cycles, Mercury is completely disassembled in 31 years and 85 days , with the majority of mass converted during the final four years.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10199,
+            "end_char": 10386,
+            "start_line": 80,
+            "end_line": 80
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u07-c06"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u07-g01",
+          "area": "Scientific computing",
+          "goal": "Recompute the stated Mercury mass-processing and power-growth values from the declared efficiencies.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Arrays and data types"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u07-c01",
+            "executive-briefing-u07-c02",
+            "executive-briefing-u07-c03",
+            "executive-briefing-u07-c04",
+            "executive-briefing-u07-c05",
+            "executive-briefing-u07-c06"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u08",
+      "title": "von Neumann Probe Design and Propulsion Mechanics",
+      "source_range": {
+        "start_char": 10388,
+        "end_char": 12869,
+        "start_line": 82,
+        "end_line": 93
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about von Neumann Probe Design and Propulsion Mechanics.",
+      "claims": [
+        {
+          "proposition": "To achieve universal coverage, self-replicating von Neumann probes are propelled toward target galaxies using fixed electromagnetic launch systems (coilguns, quenchguns, or laser/particle beams at 50% efficiency).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10445,
+            "end_char": 10658,
+            "start_line": 84,
+            "end_line": 84
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u08-c01"
+        },
+        {
+          "proposition": "The source gives theoretical lower bound  as Merkle-Freitas molecular assembler ( \\$3.91 \\\\times 10^{-18}\\\\text{ kg}\\$ ).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10751,
+            "end_char": 10893,
+            "start_line": 86,
+            "end_line": 87
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u08-c02"
+        },
+        {
+          "proposition": "Blueprint storage is trivial.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 11123,
+            "end_char": 11181,
+            "start_line": 90,
+            "end_line": 90
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u08-c03"
+        },
+        {
+          "proposition": "Probes must carry onboard fuel to decelerate upon arrival.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 11385,
+            "end_char": 11477,
+            "start_line": 91,
+            "end_line": 91
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u08-c04"
+        },
+        {
+          "proposition": "The source applies the displayed relativistic rocket equation to probe deceleration.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11477,
+            "end_char": 11853,
+            "start_line": 91,
+            "end_line": 91
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u08-c05"
+        },
+        {
+          "proposition": "At \\$0.99c\\$ , collisions with intergalactic dust ( \\$\\>1\\\\text{ }\\\\mu\\\\text{m}\\$ , mass density \\$10^{-35}\\\\text{ g cm}^{-3}\\$ , particle density \\$\\\\rho \\= 2.79 \\\\times 10^{-28}\\\\text{ cm}^{-3}\\$ ) are lethal above \\$800\\\\text{ kJ}\\$ impact energy.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 12282,
+            "end_char": 12576,
+            "start_line": 92,
+            "end_line": 92
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u08-c06"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u08-g01",
+          "area": "Self-replicating systems",
+          "goal": "Recompute the stated propulsion mass, energy, and launch-time quantities from their row inputs.",
+          "prerequisites": [
+            "Systems engineering",
+            "Mass and energy accounting"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u08-c01",
+            "executive-briefing-u08-c02",
+            "executive-briefing-u08-c03",
+            "executive-briefing-u08-c04",
+            "executive-briefing-u08-c05",
+            "executive-briefing-u08-c06"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u09",
+      "title": "Cosmological Reach and Energy Budget Requirements",
+      "source_range": {
+        "start_char": 12869,
+        "end_char": 13572,
+        "start_line": 94,
+        "end_line": 97
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Cosmological Reach and Energy Budget Requirements.",
+      "claims": [
+        {
+          "id": "executive-briefing-u09-c01",
+          "proposition": "The source gives cosmic-horizon reach and reachable-galaxy counts for probes at 0.50c, 0.80c, and 0.99c.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 12869,
+            "end_char": 13572,
+            "start_line": 94,
+            "end_line": 97
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u09-c02",
+          "proposition": "At 0.50c, the table gives 1.24 × 10^9 parsecs and 1.16 × 10^8 reachable galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 13333,
+            "end_char": 13407,
+            "start_line": 96,
+            "end_line": 96
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u09-c03",
+          "proposition": "At 0.80c, the table gives 2.33 × 10^9 parsecs and 7.62 × 10^8 reachable galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 13414,
+            "end_char": 13488,
+            "start_line": 96,
+            "end_line": 96
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u09-c04",
+          "proposition": "At 0.99c, the table gives 4.09 × 10^9 parsecs and 4.13 × 10^9 reachable galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 13495,
+            "end_char": 13572,
+            "start_line": 96,
+            "end_line": 97
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u09-g01",
+          "area": "Cosmological reach",
+          "goal": "Calculate a reach result from the stated cosmological parameters and separate it from galaxy-count assumptions.",
+          "prerequisites": [
+            "Cosmology",
+            "Scientific notation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u09-c01",
+            "executive-briefing-u09-c02",
+            "executive-briefing-u09-c03",
+            "executive-briefing-u09-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "executive-briefing-u10",
+      "title": "*Total Energy and Launch Duration Requirements*",
+      "source_range": {
+        "start_char": 13572,
+        "end_char": 15650,
+        "start_line": 98,
+        "end_line": 128
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Total Energy and Launch Duration Requirements*.",
+      "claims": [
+        {
+          "proposition": "The source gives total energy as \\$1.13 \\\\times 10^{29}\\\\text{ J}\\$",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14289,
+            "end_char": 14343,
+            "start_line": 113,
+            "end_line": 113
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u10-c01"
+        },
+        {
+          "proposition": "The source gives total energy as \\$1.37 \\\\times 10^{30}\\\\text{ J}\\$",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14653,
+            "end_char": 14707,
+            "start_line": 117,
+            "end_line": 117
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u10-c02"
+        },
+        {
+          "proposition": "The source gives total energy as \\$5.27 \\\\times 10^{29}\\\\text{ J}\\$",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15016,
+            "end_char": 15070,
+            "start_line": 121,
+            "end_line": 121
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u10-c03"
+        },
+        {
+          "proposition": "The source gives total energy as \\$9.05 \\\\times 10^{28}\\\\text{ J}\\$",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15391,
+            "end_char": 15445,
+            "start_line": 125,
+            "end_line": 125
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u10-c04"
+        },
+        {
+          "id": "executive-briefing-u10-c05",
+          "proposition": "The fission case gives total energy 1.13 × 10^29 J and a 1,780-second 30-gram launch time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 13900,
+            "end_char": 14509,
+            "start_line": 104,
+            "end_line": 115
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u10-c06",
+          "proposition": "The fusion case gives total energy 1.37 × 10^30 J and a 21,600-second 30-gram launch time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14553,
+            "end_char": 15169,
+            "start_line": 116,
+            "end_line": 122
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u10-c07",
+          "proposition": "The antimatter case gives total energy 5.27 × 10^29 J and an 8,310-second 30-gram launch time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14058,
+            "end_char": 14670,
+            "start_line": 108,
+            "end_line": 117
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u10-c08",
+          "proposition": "The coasting case gives total energy 9.05 × 10^28 J and a 1,430-second 30-gram launch time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15284,
+            "end_char": 15650,
+            "start_line": 124,
+            "end_line": 128
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u10-g01",
+          "area": "Launch-energy accounting",
+          "goal": "Recompute the stated propulsion mass, energy, and launch-time quantities from their row inputs.",
+          "prerequisites": [
+            "Energy units",
+            "Scientific notation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u10-c01",
+            "executive-briefing-u10-c02",
+            "executive-briefing-u10-c03",
+            "executive-briefing-u10-c04",
+            "executive-briefing-u10-c05",
+            "executive-briefing-u10-c06",
+            "executive-briefing-u10-c07",
+            "executive-briefing-u10-c08"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u11",
+      "title": "Sharpening the Fermi Paradox",
+      "source_range": {
+        "start_char": 15650,
+        "end_char": 16740,
+        "start_line": 129,
+        "end_line": 133
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Sharpening the Fermi Paradox.",
+      "claims": [
+        {
+          "proposition": "Reversing the geodesic expansion equations estimates how many external galaxies could have reached Earth by the present day.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15686,
+            "end_char": 16034,
+            "start_line": 131,
+            "end_line": 131
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u11-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u11-g01",
+          "area": "Fermi-paradox reasoning",
+          "goal": "Separate the stated astronomical evidence, expansion assumptions, and Fermi-paradox inference.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u11-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u12",
+      "title": "*Drivers of Universal Expansion*",
+      "source_range": {
+        "start_char": 16740,
+        "end_char": 17204,
+        "start_line": 134,
+        "end_line": 142
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Drivers of Universal Expansion*.",
+      "claims": [
+        {
+          "id": "executive-briefing-u12-c01",
+          "proposition": "The source lists subgroup survival, escape, policing, and risk mitigation as drivers of universal expansion.",
+          "type": "value-judgment",
+          "source_range": {
+            "start_char": 16740,
+            "end_char": 17204,
+            "start_line": 134,
+            "end_line": 142
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u12-g01",
+          "area": "Argument analysis",
+          "goal": "Classify each stated expansion motive as a premise or value judgment, then test whether the conclusion follows.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u12-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "executive-briefing-u13",
+      "title": "*Impact on Traditional Fermi Paradox Explanations*",
+      "source_range": {
+        "start_char": 17204,
+        "end_char": 18062,
+        "start_line": 143,
+        "end_line": 148
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Impact on Traditional Fermi Paradox Explanations*.",
+      "claims": [
+        {
+          "proposition": "Extinction must occur in a narrow window across millions of independent origin sites before a trivial 6-hour energy expenditure is initiated.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 17329,
+            "end_char": 17474,
+            "start_line": 145,
+            "end_line": 145
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u13-c01"
+        },
+        {
+          "proposition": "Requires uniform non-expansionist motives across every subgroup of every civilization across millions of galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 17528,
+            "end_char": 17646,
+            "start_line": 146,
+            "end_line": 146
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u13-c02"
+        },
+        {
+          "proposition": "Probes can quietly occupy systems without creating observable Kardashev-Type III structural noise.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 17961,
+            "end_char": 18060,
+            "start_line": 147,
+            "end_line": 147
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u13-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u13-g01",
+          "area": "Fermi-paradox reasoning",
+          "goal": "Separate the stated astronomical evidence, expansion assumptions, and Fermi-paradox inference.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u13-c01",
+            "executive-briefing-u13-c02",
+            "executive-briefing-u13-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u14",
+      "title": "Section 3: Computational Engineering, Numerical Methods, and Software Paradigms",
+      "source_range": {
+        "start_char": 18062,
+        "end_char": 18705,
+        "start_line": 149,
+        "end_line": 160
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Section 3: Computational Engineering, Numerical Methods, and Software Paradigms.",
+      "claims": [
+        {
+          "id": "executive-briefing-u14-c01",
+          "proposition": "The diagram assigns high-level integration to Fortran and innermost force loops to SIMD assembly.",
+          "type": "software",
+          "source_range": {
+            "start_char": 18062,
+            "end_char": 18705,
+            "start_line": 149,
+            "end_line": 160
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u14-g01",
+          "area": "Scientific software",
+          "goal": "Trace the stated language boundary and test its numerical or performance consequence.",
+          "prerequisites": [
+            "Fortran basics",
+            "Computer architecture"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u14-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "executive-briefing-u15",
+      "title": "High-Performance Computing Kernels in Astrophysics",
+      "source_range": {
+        "start_char": 18705,
+        "end_char": 19328,
+        "start_line": 161,
+        "end_line": 164
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about High-Performance Computing Kernels in Astrophysics.",
+      "claims": [
+        {
+          "proposition": "In large-scale gravitational and fluid astrophysics simulations, global time-step integration is governed by high-level mathematical control logic.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 18763,
+            "end_char": 18910,
+            "start_line": 163,
+            "end_line": 163
+          },
+          "assumptions": [
+            {
+              "text": "The equation uses the variables, units, and boundary conditions stated in the passage.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Derive the displayed relation and test its units and limiting cases."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u15-c01"
+        },
+        {
+          "proposition": "The source claims that more than 95% of execution time occurs in innermost force-evaluation loops.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 18910,
+            "end_char": 19169,
+            "start_line": 163,
+            "end_line": 163
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u15-c02"
+        },
+        {
+          "proposition": "They rely on hand-tuned x86-64 Assembly (SSE, AVX2, AVX-512) and ARM NEON/SVE low-level SIMD kernels to directly saturate CPU Arithmetic Logic Units (ALUs).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19169,
+            "end_char": 19326,
+            "start_line": 163,
+            "end_line": 163
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u15-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u15-g01",
+          "area": "Scientific computing",
+          "goal": "Trace the stated language boundary and test its numerical or performance consequence.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Arrays and data types"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u15-c01",
+            "executive-briefing-u15-c02",
+            "executive-briefing-u15-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u16",
+      "title": "Comparative Architectural Analysis: Assembly vs. Fortran",
+      "source_range": {
+        "start_char": 19328,
+        "end_char": 20945,
+        "start_line": 165,
+        "end_line": 169
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Comparative Architectural Analysis: Assembly vs. Fortran.",
+      "claims": [
+        {
+          "id": "executive-briefing-u16-c01",
+          "proposition": "The comparison lists 51 Assembly instructions and 17 Fortran statements as action words.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19762,
+            "end_char": 19888,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c02",
+          "proposition": "The comparison lists 23 Assembly identifiers and 6 Fortran built-in types as data targets.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19888,
+            "end_char": 20020,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c03",
+          "proposition": "The comparison lists 2 Assembly size modifiers and 15 Fortran attributes as qualifiers.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20020,
+            "end_char": 20141,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c04",
+          "proposition": "The comparison lists one Assembly prefix and one Fortran loop modifier as flow modifiers.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20141,
+            "end_char": 20239,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c05",
+          "proposition": "The comparison lists 7 Assembly service calls and 32 Fortran built-in functions as packaged operations.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20239,
+            "end_char": 20371,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c06",
+          "proposition": "The comparison lists 5 Assembly grammar symbols and 18 Fortran operators.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20371,
+            "end_char": 20507,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c07",
+          "proposition": "The comparison lists 12 Assembly directives and 10 Fortran structure keywords as translator instructions.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20507,
+            "end_char": 20643,
+            "start_line": 167,
+            "end_line": 167
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u16-c08",
+          "proposition": "The source contrasts Assembly’s small vocabulary and longer instruction sequences with Fortran’s stated 598-keyword vocabulary and single-line abstractions.",
+          "type": "software",
+          "source_range": {
+            "start_char": 20646,
+            "end_char": 20943,
+            "start_line": 168,
+            "end_line": 168
+          },
+          "assumptions": [
+            {
+              "text": "The table uses one consistent classification and counting method.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "definition-check",
+              "primary-source"
+            ],
+            "evidence_needed": "Check the counts against the named language specifications and define the counting rules."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u16-g01",
+          "area": "Programming languages",
+          "goal": "Recreate the parts-of-speech comparison from defined counting rules, then explain how vocabulary size changes program structure.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Fortran basics"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u16-c01",
+            "executive-briefing-u16-c02",
+            "executive-briefing-u16-c03",
+            "executive-briefing-u16-c04",
+            "executive-briefing-u16-c05",
+            "executive-briefing-u16-c06",
+            "executive-briefing-u16-c07",
+            "executive-briefing-u16-c08"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "executive-briefing-u17",
+      "title": "Simulating Complex Physics on Constrained Hardware: Apollo Lunar Lander Case Study",
+      "source_range": {
+        "start_char": 20945,
+        "end_char": 21256,
+        "start_line": 170,
+        "end_line": 173
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Simulating Complex Physics on Constrained Hardware: Apollo Lunar Lander Case Study.",
+      "claims": [
+        {
+          "id": "executive-briefing-u17-c01",
+          "proposition": "The source uses an Apollo lunar-lander simulation to frame optimization under 1 MHz and 64 KB constraints.",
+          "type": "software",
+          "source_range": {
+            "start_char": 20945,
+            "end_char": 21256,
+            "start_line": 170,
+            "end_line": 173
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u17-g01",
+          "area": "Constrained simulation",
+          "goal": "Estimate the update budget of a 1 MHz, 64 KB target and identify which model operations exceed it.",
+          "prerequisites": [
+            "Computer architecture",
+            "Numerical methods"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u17-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "executive-briefing-u18",
+      "title": "*Physics Dynamics and Spacecraft Modeling*",
+      "source_range": {
+        "start_char": 21256,
+        "end_char": 22175,
+        "start_line": 174,
+        "end_line": 182
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Physics Dynamics and Spacecraft Modeling*.",
+      "claims": [
+        {
+          "proposition": "Lunar gravity is set to \\$5.33\\\\text{ ft/s}^2\\$ in a vacuum environment.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21607,
+            "end_char": 21708,
+            "start_line": 179,
+            "end_line": 179
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u18-c01"
+        },
+        {
+          "proposition": "Fuel burn continuously reduces spacecraft mass, governing descent stage dry mass ( \\$4,700\\\\text{ lbs}\\$ ) and fuel capacity ( \\$1,500\\\\text{ lbs}\\$ ).",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 21708,
+            "end_char": 21893,
+            "start_line": 180,
+            "end_line": 180
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u18-c02"
+        },
+        {
+          "proposition": "Abort-to-orbit dynamics employ Tsiolkovsky's Rocket Equation:\\$\\$\\\\Delta v \\= V\\_e \\\\ln \\\\left( \\\\frac{m\\_{initial}}{m\\_{final}} \\\\right)\\$\\$where exhaust velocity \\$V\\_e \\= 10,000\\\\text{ ft/s}\\$ and required orbital velocity is \\$5,512\\\\text{ ft/s}\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21893,
+            "end_char": 22173,
+            "start_line": 181,
+            "end_line": 181
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u18-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u18-g01",
+          "area": "Claim analysis",
+          "goal": "Model one lunar-descent step using the stated gravity, fuel mass, thrust, and rocket equation.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u18-c01",
+            "executive-briefing-u18-c02",
+            "executive-briefing-u18-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u19",
+      "title": "*Algorithmic Adaptation: RK4 to Euler Integration*",
+      "source_range": {
+        "start_char": 22175,
+        "end_char": 23071,
+        "start_line": 183,
+        "end_line": 186
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Algorithmic Adaptation: RK4 to Euler Integration*.",
+      "claims": [
+        {
+          "proposition": "The displayed RK4 update uses four derivative evaluations and the weighted combination (k1 + 2k2 + 2k3 + k4)/6.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22234,
+            "end_char": 22763,
+            "start_line": 185,
+            "end_line": 185
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u19-c01"
+        },
+        {
+          "proposition": "The source gives the simulator adapts the physics engine to euler integration as \\$\\$y\\_{new} \\= y \\+ h \\\\cdot f(t, y)\\$\\$This reduction from four function evaluations per timestep to one yields a \\$4\\\\times\\$ speed improvement , enabling real-time execution at 10 frames per second ( \\$0.1\\\\text{ s}\\$ intervals).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22763,
+            "end_char": 23069,
+            "start_line": 185,
+            "end_line": 185
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "executive-briefing-u19-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u19-g01",
+          "area": "Claim analysis",
+          "goal": "Derive the RK4 and Euler updates, then compare their error behavior and function-evaluation cost.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u19-c01",
+            "executive-briefing-u19-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "executive-briefing-u20",
+      "title": "*Mission Control Telemetry and Real-Time Controls*",
+      "source_range": {
+        "start_char": 23071,
+        "end_char": 24730,
+        "start_line": 187,
+        "end_line": 209
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Mission Control Telemetry and Real-Time Controls*.",
+      "claims": [
+        {
+          "id": "executive-briefing-u20-c01",
+          "proposition": "The telemetry delay is 6.6 s: 1.3 s outbound, 4.0 s for ground analysis, and 1.3 s for the return.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23603,
+            "end_char": 23667,
+            "start_line": 202,
+            "end_line": 202
+          },
+          "assumptions": [
+            {
+              "text": "The command follows the displayed telemetry chain.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Add the components and confirm the displayed total."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u20-c02",
+          "proposition": "At descent speeds of at least 400 ft/s, the control mode raises thrust by 10 lbs/s per frame instead of 1 lb/s.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 24000,
+            "end_char": 24208,
+            "start_line": 206,
+            "end_line": 206
+          },
+          "assumptions": [
+            {
+              "text": "The controller uses the stated frame interval and thrust units.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "reproduction"
+            ],
+            "evidence_needed": "Implement the threshold and compare one emergency update with one standard update."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u20-c03",
+          "proposition": "When thrust exceeds 30 lbs/s, the control mode reduces it by 5 lbs/s per frame.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 24209,
+            "end_char": 24365,
+            "start_line": 207,
+            "end_line": 207
+          },
+          "assumptions": [
+            {
+              "text": "The controller interprets the strict greater-than threshold literally.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "reproduction"
+            ],
+            "evidence_needed": "Test the branch immediately below, at, and above the threshold."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u20-c04",
+          "proposition": "The display design overwrites stale figures through zero-page cursor positioning with POKE 211, POKE 214, and SYS 58640.",
+          "type": "software",
+          "source_range": {
+            "start_char": 24366,
+            "end_char": 24728,
+            "start_line": 208,
+            "end_line": 208
+          },
+          "assumptions": [
+            {
+              "text": "The stated hardware map and landing rules apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "reproduction"
+            ],
+            "evidence_needed": "Run the update on the named target and verify that it overwrites the intended cells without a full-screen redraw."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "executive-briefing-u20-c05",
+          "proposition": "A safe touchdown requires both vertical and horizontal velocity to be no more than 5 ft/s.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 24366,
+            "end_char": 24728,
+            "start_line": 208,
+            "end_line": 208
+          },
+          "assumptions": [
+            {
+              "text": "The stated hardware map and landing rules apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "reproduction"
+            ],
+            "evidence_needed": "Test landing outcomes at, below, and above 5 ft/s on both axes."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "executive-briefing-u20-g01",
+          "area": "Lunar flight simulation",
+          "goal": "Calculate the telemetry delay and test both thrust-control thresholds at their boundary values.",
+          "prerequisites": [
+            "Kinematics",
+            "Numerical integration"
+          ],
+          "claim_dependencies": [
+            "executive-briefing-u20-c01",
+            "executive-briefing-u20-c02",
+            "executive-briefing-u20-c03",
+            "executive-briefing-u20-c04",
+            "executive-briefing-u20-c05"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    }
+  ]
+}

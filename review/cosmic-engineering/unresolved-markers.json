@@ -1,0 +1,943 @@
+{
+  "description": "These imported tokens have no local citation target. The source bytes remain unchanged.",
+  "occurrences": 104,
+  "unique_markers": 104,
+  "markers": [
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_31\\](start\\_span)",
+      "start_char": 17165,
+      "end_char": 17190,
+      "start_line": 65,
+      "end_line": 65,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_31\\](end\\_span)",
+      "start_char": 17190,
+      "end_char": 17213,
+      "start_line": 65,
+      "end_line": 65,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_36\\](start\\_span)",
+      "start_char": 17213,
+      "end_char": 17238,
+      "start_line": 65,
+      "end_line": 65,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_36\\](end\\_span)",
+      "start_char": 17238,
+      "end_char": 17261,
+      "start_line": 65,
+      "end_line": 65,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_41\\](start\\_span)",
+      "start_char": 17593,
+      "end_char": 17618,
+      "start_line": 66,
+      "end_line": 66,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_41\\](end\\_span)",
+      "start_char": 17618,
+      "end_char": 17641,
+      "start_line": 66,
+      "end_line": 66,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_43\\](start\\_span)",
+      "start_char": 17641,
+      "end_char": 17666,
+      "start_line": 66,
+      "end_line": 66,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_43\\](end\\_span)",
+      "start_char": 17666,
+      "end_char": 17689,
+      "start_line": 66,
+      "end_line": 66,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_45\\](start\\_span)",
+      "start_char": 17689,
+      "end_char": 17714,
+      "start_line": 66,
+      "end_line": 66,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_45\\](end\\_span)",
+      "start_char": 17714,
+      "end_char": 17737,
+      "start_line": 66,
+      "end_line": 66,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_33\\](start\\_span)",
+      "start_char": 19783,
+      "end_char": 19808,
+      "start_line": 74,
+      "end_line": 74,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_33\\](end\\_span)",
+      "start_char": 19808,
+      "end_char": 19831,
+      "start_line": 74,
+      "end_line": 74,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_38\\](start\\_span)",
+      "start_char": 19831,
+      "end_char": 19856,
+      "start_line": 74,
+      "end_line": 74,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_38\\](end\\_span)",
+      "start_char": 19856,
+      "end_char": 19879,
+      "start_line": 74,
+      "end_line": 74,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_142\\](start\\_span)",
+      "start_char": 23554,
+      "end_char": 23580,
+      "start_line": 88,
+      "end_line": 88,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_142\\](end\\_span)",
+      "start_char": 23580,
+      "end_char": 23604,
+      "start_line": 88,
+      "end_line": 88,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_143\\](start\\_span)",
+      "start_char": 24096,
+      "end_char": 24122,
+      "start_line": 90,
+      "end_line": 90,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_143\\](end\\_span)",
+      "start_char": 24122,
+      "end_char": 24146,
+      "start_line": 90,
+      "end_line": 90,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_188\\](start\\_span)",
+      "start_char": 32051,
+      "end_char": 32077,
+      "start_line": 119,
+      "end_line": 119,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_188\\](end\\_span)",
+      "start_char": 32077,
+      "end_char": 32101,
+      "start_line": 119,
+      "end_line": 119,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_218\\](start\\_span)",
+      "start_char": 42415,
+      "end_char": 42441,
+      "start_line": 146,
+      "end_line": 146,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_218\\](end\\_span)",
+      "start_char": 42441,
+      "end_char": 42465,
+      "start_line": 146,
+      "end_line": 146,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_231\\](start\\_span)",
+      "start_char": 42506,
+      "end_char": 42532,
+      "start_line": 146,
+      "end_line": 146,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_231\\](end\\_span)",
+      "start_char": 42532,
+      "end_char": 42556,
+      "start_line": 146,
+      "end_line": 146,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_235\\](start\\_span)",
+      "start_char": 42556,
+      "end_char": 42582,
+      "start_line": 146,
+      "end_line": 146,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_235\\](end\\_span)",
+      "start_char": 42582,
+      "end_char": 42606,
+      "start_line": 146,
+      "end_line": 146,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_219\\](start\\_span)",
+      "start_char": 42858,
+      "end_char": 42884,
+      "start_line": 147,
+      "end_line": 147,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_219\\](end\\_span)",
+      "start_char": 42884,
+      "end_char": 42908,
+      "start_line": 147,
+      "end_line": 147,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_220\\](start\\_span)",
+      "start_char": 43252,
+      "end_char": 43278,
+      "start_line": 148,
+      "end_line": 148,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_220\\](end\\_span)",
+      "start_char": 43278,
+      "end_char": 43302,
+      "start_line": 148,
+      "end_line": 148,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_247\\](start\\_span)",
+      "start_char": 43650,
+      "end_char": 43676,
+      "start_line": 149,
+      "end_line": 149,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_247\\](end\\_span)",
+      "start_char": 43676,
+      "end_char": 43700,
+      "start_line": 149,
+      "end_line": 149,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_259\\](start\\_span)",
+      "start_char": 48161,
+      "end_char": 48187,
+      "start_line": 170,
+      "end_line": 170,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_259\\](end\\_span)",
+      "start_char": 48187,
+      "end_char": 48211,
+      "start_line": 170,
+      "end_line": 170,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_261\\](start\\_span)",
+      "start_char": 49271,
+      "end_char": 49297,
+      "start_line": 174,
+      "end_line": 174,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_261\\](end\\_span)",
+      "start_char": 49297,
+      "end_char": 49321,
+      "start_line": 174,
+      "end_line": 174,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_269\\](start\\_span)",
+      "start_char": 53341,
+      "end_char": 53367,
+      "start_line": 194,
+      "end_line": 194,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_269\\](end\\_span)",
+      "start_char": 53367,
+      "end_char": 53391,
+      "start_line": 194,
+      "end_line": 194,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_281\\](start\\_span)",
+      "start_char": 57787,
+      "end_char": 57813,
+      "start_line": 218,
+      "end_line": 218,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_281\\](end\\_span)",
+      "start_char": 57813,
+      "end_char": 57837,
+      "start_line": 218,
+      "end_line": 218,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_284\\](start\\_span)",
+      "start_char": 57837,
+      "end_char": 57863,
+      "start_line": 218,
+      "end_line": 218,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_284\\](end\\_span)",
+      "start_char": 57863,
+      "end_char": 57887,
+      "start_line": 218,
+      "end_line": 218,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_287\\](start\\_span)",
+      "start_char": 58350,
+      "end_char": 58376,
+      "start_line": 219,
+      "end_line": 219,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_287\\](end\\_span)",
+      "start_char": 58376,
+      "end_char": 58400,
+      "start_line": 219,
+      "end_line": 219,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_289\\](start\\_span)",
+      "start_char": 58400,
+      "end_char": 58426,
+      "start_line": 219,
+      "end_line": 219,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_289\\](end\\_span)",
+      "start_char": 58426,
+      "end_char": 58450,
+      "start_line": 219,
+      "end_line": 219,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_267\\](start\\_span)",
+      "start_char": 60605,
+      "end_char": 60631,
+      "start_line": 224,
+      "end_line": 224,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_267\\](end\\_span)",
+      "start_char": 60631,
+      "end_char": 60655,
+      "start_line": 224,
+      "end_line": 224,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_268\\](start\\_span)",
+      "start_char": 60932,
+      "end_char": 60958,
+      "start_line": 225,
+      "end_line": 225,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_268\\](end\\_span)",
+      "start_char": 60958,
+      "end_char": 60982,
+      "start_line": 225,
+      "end_line": 225,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_271\\](start\\_span)",
+      "start_char": 62438,
+      "end_char": 62464,
+      "start_line": 233,
+      "end_line": 233,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_271\\](end\\_span)",
+      "start_char": 62464,
+      "end_char": 62488,
+      "start_line": 233,
+      "end_line": 233,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_273\\](start\\_span)",
+      "start_char": 64661,
+      "end_char": 64687,
+      "start_line": 238,
+      "end_line": 238,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_273\\](end\\_span)",
+      "start_char": 64687,
+      "end_char": 64711,
+      "start_line": 238,
+      "end_line": 238,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_315\\](start\\_span)",
+      "start_char": 70127,
+      "end_char": 70153,
+      "start_line": 256,
+      "end_line": 256,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_315\\](end\\_span)",
+      "start_char": 70153,
+      "end_char": 70177,
+      "start_line": 256,
+      "end_line": 256,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_318\\](start\\_span)",
+      "start_char": 70177,
+      "end_char": 70203,
+      "start_line": 256,
+      "end_line": 256,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_318\\](end\\_span)",
+      "start_char": 70203,
+      "end_char": 70227,
+      "start_line": 256,
+      "end_line": 256,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_325\\](start\\_span)",
+      "start_char": 78238,
+      "end_char": 78264,
+      "start_line": 293,
+      "end_line": 293,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_325\\](end\\_span)",
+      "start_char": 78264,
+      "end_char": 78288,
+      "start_line": 293,
+      "end_line": 293,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_326\\](start\\_span)",
+      "start_char": 78488,
+      "end_char": 78514,
+      "start_line": 294,
+      "end_line": 294,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_326\\](end\\_span)",
+      "start_char": 78514,
+      "end_char": 78538,
+      "start_line": 294,
+      "end_line": 294,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_322\\](start\\_span)",
+      "start_char": 78692,
+      "end_char": 78718,
+      "start_line": 295,
+      "end_line": 295,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_322\\](end\\_span)",
+      "start_char": 78718,
+      "end_char": 78742,
+      "start_line": 295,
+      "end_line": 295,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_323\\](start\\_span)",
+      "start_char": 78903,
+      "end_char": 78929,
+      "start_line": 296,
+      "end_line": 296,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_323\\](end\\_span)",
+      "start_char": 78929,
+      "end_char": 78953,
+      "start_line": 296,
+      "end_line": 296,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_336\\](start\\_span)",
+      "start_char": 81129,
+      "end_char": 81155,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_336\\](end\\_span)",
+      "start_char": 81155,
+      "end_char": 81179,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_337\\](start\\_span)",
+      "start_char": 81432,
+      "end_char": 81458,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_337\\](end\\_span)",
+      "start_char": 81458,
+      "end_char": 81482,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_338\\](start\\_span)",
+      "start_char": 81482,
+      "end_char": 81508,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_338\\](end\\_span)",
+      "start_char": 81508,
+      "end_char": 81532,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_339\\](start\\_span)",
+      "start_char": 81532,
+      "end_char": 81558,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_339\\](end\\_span)",
+      "start_char": 81558,
+      "end_char": 81582,
+      "start_line": 303,
+      "end_line": 303,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_342\\](start\\_span)",
+      "start_char": 82798,
+      "end_char": 82824,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_342\\](end\\_span)",
+      "start_char": 82824,
+      "end_char": 82848,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_343\\](start\\_span)",
+      "start_char": 82848,
+      "end_char": 82874,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_343\\](end\\_span)",
+      "start_char": 82874,
+      "end_char": 82898,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_344\\](start\\_span)",
+      "start_char": 82898,
+      "end_char": 82924,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_344\\](end\\_span)",
+      "start_char": 82924,
+      "end_char": 82948,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_345\\](start\\_span)",
+      "start_char": 82948,
+      "end_char": 82974,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_345\\](end\\_span)",
+      "start_char": 82974,
+      "end_char": 82998,
+      "start_line": 311,
+      "end_line": 311,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_349\\](start\\_span)",
+      "start_char": 83819,
+      "end_char": 83845,
+      "start_line": 313,
+      "end_line": 313,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_349\\](end\\_span)",
+      "start_char": 83845,
+      "end_char": 83869,
+      "start_line": 313,
+      "end_line": 313,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_350\\](start\\_span)",
+      "start_char": 83869,
+      "end_char": 83895,
+      "start_line": 313,
+      "end_line": 313,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_350\\](end\\_span)",
+      "start_char": 83895,
+      "end_char": 83919,
+      "start_line": 313,
+      "end_line": 313,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_351\\](start\\_span)",
+      "start_char": 83919,
+      "end_char": 83945,
+      "start_line": 313,
+      "end_line": 313,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_351\\](end\\_span)",
+      "start_char": 83945,
+      "end_char": 83969,
+      "start_line": 313,
+      "end_line": 313,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_34\\](start\\_span)",
+      "start_char": 86241,
+      "end_char": 86266,
+      "start_line": 323,
+      "end_line": 323,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_34\\](end\\_span)",
+      "start_char": 86266,
+      "end_char": 86289,
+      "start_line": 323,
+      "end_line": 323,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_39\\](start\\_span)",
+      "start_char": 86289,
+      "end_char": 86314,
+      "start_line": 323,
+      "end_line": 323,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_39\\](end\\_span)",
+      "start_char": 86314,
+      "end_char": 86337,
+      "start_line": 323,
+      "end_line": 323,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_357\\](start\\_span)",
+      "start_char": 87070,
+      "end_char": 87096,
+      "start_line": 328,
+      "end_line": 328,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_357\\](end\\_span)",
+      "start_char": 87096,
+      "end_char": 87120,
+      "start_line": 328,
+      "end_line": 328,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_358\\](start\\_span)",
+      "start_char": 87120,
+      "end_char": 87146,
+      "start_line": 328,
+      "end_line": 328,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_358\\](end\\_span)",
+      "start_char": 87146,
+      "end_char": 87170,
+      "start_line": 328,
+      "end_line": 328,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_359\\](start\\_span)",
+      "start_char": 87170,
+      "end_char": 87196,
+      "start_line": 328,
+      "end_line": 328,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_359\\](end\\_span)",
+      "start_char": 87196,
+      "end_char": 87220,
+      "start_line": 328,
+      "end_line": 328,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_244\\](start\\_span)",
+      "start_char": 90213,
+      "end_char": 90239,
+      "start_line": 335,
+      "end_line": 335,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_244\\](end\\_span)",
+      "start_char": 90239,
+      "end_char": 90263,
+      "start_line": 335,
+      "end_line": 335,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_232\\](start\\_span)",
+      "start_char": 90618,
+      "end_char": 90644,
+      "start_line": 336,
+      "end_line": 336,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_232\\](end\\_span)",
+      "start_char": 90644,
+      "end_char": 90668,
+      "start_line": 336,
+      "end_line": 336,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_236\\](start\\_span)",
+      "start_char": 90668,
+      "end_char": 90694,
+      "start_line": 336,
+      "end_line": 336,
+      "resolution": "unresolved-opaque-token"
+    },
+    {
+      "source": "sources/astrophysics-kernels.md",
+      "marker": "\\[span\\_236\\](end\\_span)",
+      "start_char": 90694,
+      "end_char": 90718,
+      "start_line": 336,
+      "end_line": 336,
+      "resolution": "unresolved-opaque-token"
+    }
+  ]
+}

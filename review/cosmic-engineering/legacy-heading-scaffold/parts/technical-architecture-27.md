@@ -1,0 +1,4 @@
+##### Telemetry Dynamics and Mission Control Signal Latency
+
+During manual lunar descent, telemetry sent to ground control and returned to the cockpit incurs light-speed propagation and ground analysis delays:\$\$\\text{Earth-to-Moon Signal Time} \= 1.3\\text{ seconds}\$\$   \$\$\\text{Ground Control Analysis Time} \= 4.0\\text{ seconds}\$\$   \$\$\\text{Moon-to-Earth Signal Time} \= 1.3\\text{ seconds}\$\$   \$\$\\mathbf{\\text{Total Telemetry Latency Round-Trip}} \= \\mathbf{6.6\\text{ seconds}}\$\$Because guidance messages arrive 6.6 seconds after telemetry measurement, pilots cannot execute real-time reactive steering based on Mission Control commands. Instead, players must perform predictive piloting—calculating burn vectors seconds in advance to avoid surface impact or fuel starvation.
+

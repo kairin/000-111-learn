@@ -1,0 +1,12 @@
+#### **Relativistic Drag and Kinetic Impact Heating**
+
+The Interstellar Medium in the Local Bubble / Galactic Disk has a rest-frame hydrogen number density n\_0 \\approx 10^5 \- 10^6\\text{ m}^{-3} (0.1 \- 1.0\\text{ cm}^{-3}), corresponding to rest mass density \\rho\_0 \= n\_0 m\_p. In the ship's rest frame, Lorentz length contraction compresses the ISM column along the flight axis by a factor of \\gamma, elevating the apparent ISM number density to n\_{\\text{ship}} \= \\gamma n\_0. Consequently, a forward shield of cross-sectional area A intercepts particles at a proper rate (ship-frame flux \\Phi\_p):  
+\\frac{dN\_p}{d\\tau} \= A \\Phi\_p \= A \\gamma n\_0 v \= A \\gamma \\beta n\_0 c  
+Each intercepted ISM proton has ship-frame relativistic momentum p\_p \= \\gamma m\_p v \= \\gamma \\beta m\_p c and relativistic kinetic energy E\_{k,p} \= (\\gamma \- 1)m\_p c^2. For inelastic absorption into the forward shield, the rate of momentum transfer defines the proper drag force F\_{\\text{drag}} (which is invariant between collinear frames for purely longitudinal forces, F\_{\\text{drag}} \= dp/dt \= dp\_{\\text{ship}}/d\\tau):  
+F\_{\\text{drag}} \= \\Gamma\_{\\text{inel}} \\gamma^2 \\rho\_0 v^2 A \= \\Gamma\_{\\text{inel}} \\gamma^2 \\beta^2 n\_0 m\_p c^2 A  
+where \\Gamma\_{\\text{inel}} \= 1 for inelastic absorption and \\Gamma\_{\\\[span\_269\](start\_span)\[span\_269\](end\_span)text{inel}} \= 2 for elastic specular reflection. The total kinetic thermal power deposited onto the forward shield per unit area in the ship's frame is:  
+q\_{\\text{kin}} \= \\frac{P\_{\\text{kin}}}{A} \= \\Phi\_p E\_{k,p} \= \\gamma(\\gamma \- 1\) n\_0 m\_p c^3 \\beta  
+At \\beta \= 0.1 (\\gamma \= 1.005038), each impacting proton carries E\_{k,p} \= 4.727\\text{ MeV} and penetrates \\sim 0.2\\text{ mm} in beryllium or graphite; at \\beta \= 0.5 (\\gamma \= 1.154701), E\_{k,p} \= 145.15\\text{ MeV} and proton stopping range rises to \\sim 12\\text{ cm}, necessitating thick Bragg-peak stopping shields. Worse still, a single interstellar dust grain of mass m\_{\\text{dust}} \= 10^{-9}\\text{ kg} (1\\text{ }\\mu\\text{g}, radius \\sim 5\\text{ }\\mu\\text{m}) impacting at \\beta \= 0.5 delivers kinetic energy:  
+E\_{k,\\text{dust}} \= (\\gamma \- 1)m\_{\\text{dust}} c^2 \\approx 0.1547 \\times 10^{-9}\\text{ kg} \\times (2.9979 \\times 10^8\\text{ m/s})^2 \\approx 1.390 \\times 10^7\\text{ J}  
+equivalent to detonating 3.32\\text{ kg} of TNT at a microscopic point on the hull, vaporizing a hypervelocity plasma crater.
+

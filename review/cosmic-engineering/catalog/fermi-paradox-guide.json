@@ -1,0 +1,2383 @@
+{
+  "source_id": "fermi-paradox-guide",
+  "source": "sources/fermi-paradox-guide.md",
+  "units": [
+    {
+      "id": "fermi-paradox-guide-u01",
+      "title": "Guide title and scope",
+      "source_range": {
+        "start_char": 0,
+        "end_char": 80,
+        "start_line": 1,
+        "end_line": 1
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Introduction and the classical paradox.",
+      "claims": [],
+      "learning_goals": [],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "fermi-paradox-guide-u02",
+      "title": "Introduction and the classical Fermi paradox",
+      "source_range": {
+        "start_char": 80,
+        "end_char": 3514,
+        "start_line": 1,
+        "end_line": 1
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about 1\\. Introduction &.",
+      "claims": [
+        {
+          "proposition": "The Core Fermi Question \"Where is everybody?\" — Enrico Fermi The core paradox arises from the sharp discrepancy between high probabilistic estimates for the emergence of spacefaring technological species and the absolute lack of empirical evidence for their presence, visitations, or technosignatures anywhere in the cosmos.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 588,
+            "end_char": 918,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c01"
+        },
+        {
+          "proposition": "The Milky Way galaxy contains approximately \\$2.5 \\\\times 10^{11}\\$ stars, while the observable universe encompasses roughly \\$5 \\\\times 10^{22}\\$ stars across billions of host galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 1090,
+            "end_char": 1298,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c02"
+        },
+        {
+          "proposition": "This foundational assumption posits that Earth and its solar system are not unique anomalies, but typical products of standard cosmological and chemical evolution.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 1298,
+            "end_char": 1491,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c03"
+        },
+        {
+          "proposition": "Planet formation is ubiquitous, implying that the biophysical pathways leading to life—and ultimately technological intelligence—should occur regularly across cosmic time.",
+          "type": "value-judgment",
+          "source_range": {
+            "start_char": 1491,
+            "end_char": 1667,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The physical premises and preference assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "logical-analysis"
+            ],
+            "evidence_needed": "State the premises and compare the conclusion with plausible alternative assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c04"
+        },
+        {
+          "proposition": "Terrestrial planets across the cosmos are \\$0.9 \\\\text{ to } 1.8\\$ times older than Earth (with a median age significantly preceding Earth's formation), granting potential extraterrestrial species a developmental head start of hundreds of millions to billions of years.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 1786,
+            "end_char": 2060,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c05"
+        },
+        {
+          "proposition": "This timescale represents less than \\$10\\\\%\\$ of our galaxy's \\$10^{10}\\$ \\-year age.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 2364,
+            "end_char": 2454,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c06"
+        },
+        {
+          "proposition": "To reconcile these numbers, theoretical physics introduces the concept of the \"Great Filter\"—a developmental barrier so formidable that it prevents species from achieving widespread interstellar presence.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 2454,
+            "end_char": 2698,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c07"
+        },
+        {
+          "id": "fermi-paradox-guide-u02-c08",
+          "proposition": "At travel speeds from 0.01c to 0.1c, the source says a civilization could cross and colonize a Milky-Way-sized galaxy in 50 million to 1 billion years, less than 10% of the galaxy’s 10^10-year age.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 2058,
+            "end_char": 2452,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The colonization model and speed range apply across the full stated timescale.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the crossing-time range from distance, speed, and replication assumptions."
+          },
+          "status": "unchecked"
+        },
+        {
+          "proposition": "While classical formulations of the paradox evaluate expansion strictly within the local confines of a single galaxy, modern exploratory engineering demonstrates that intergalactic transit is physically and energetically feasible, expanding the paradox from a regional galactic dilemma into a universal puzzle.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 3202,
+            "end_char": 3514,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u02-c09"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u02-g01",
+          "area": "Fermi-paradox reasoning",
+          "goal": "Recalculate the stated galactic crossing-time range and identify which biological and observational premises remain assumptions.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u02-c01",
+            "fermi-paradox-guide-u02-c02",
+            "fermi-paradox-guide-u02-c03",
+            "fermi-paradox-guide-u02-c04",
+            "fermi-paradox-guide-u02-c05",
+            "fermi-paradox-guide-u02-c06",
+            "fermi-paradox-guide-u02-c07",
+            "fermi-paradox-guide-u02-c08",
+            "fermi-paradox-guide-u02-c09"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u03",
+      "title": "Exploratory engineering and universal replicators",
+      "source_range": {
+        "start_char": 3514,
+        "end_char": 5640,
+        "start_line": 1,
+        "end_line": 1
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about 2\\. Theoretical Tooling: Exploratory Engineering & Universal Replicators.",
+      "claims": [
+        {
+          "proposition": "Any physical or biological phenomenon occurring in nature (such as genetic self-replication, enzymatic chemistry, or human-level intelligence) can eventually be replicated under technological control (e.g., synthetic biology, molecular assemblers, artificial intelligence, or brain emulation).",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 4414,
+            "end_char": 4743,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u03-c01"
+        },
+        {
+          "proposition": "Any performable mechanical or computational task can be fully automated.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 4747,
+            "end_char": 4840,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u03-c02"
+        },
+        {
+          "proposition": "Once a machine system is engineered to execute a physical process, an automated system can be built to manufacture and operate that machine without human oversight.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 4840,
+            "end_char": 5005,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u03-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u03-g01",
+          "area": "Self-replicating systems",
+          "goal": "Separate the automation and replicator premises, then identify evidence that could falsify each universal claim.",
+          "prerequisites": [
+            "Systems engineering",
+            "Mass and energy accounting"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u03-c01",
+            "fermi-paradox-guide-u03-c02",
+            "fermi-paradox-guide-u03-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u04",
+      "title": "Replicator mass tiers and data storage limits",
+      "source_range": {
+        "start_char": 5640,
+        "end_char": 8054,
+        "start_line": 1,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Replicator Mass Tiers & Data Storage Limits A functional replicator requires sufficient internal memory to store its operating intelligence, operating system, and industrial design blueprints. \\* **DNA Storage Density:** Biological systems demonstrate an average data density of \\$9.13 \\\\t.",
+      "claims": [
+        {
+          "proposition": "A functional replicator requires memory for its operating intelligence, operating system, and industrial blueprints.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 5640,
+            "end_char": 5847,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u04-c01"
+        },
+        {
+          "proposition": "At this limit, a single gram of structured diamond could hold \\$50,000 \\\\text{ Exabytes}\\$ —enough to house humanity's total digital data footprint alongside millions of digital mind emulations.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 6243,
+            "end_char": 6438,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u04-c02"
+        },
+        {
+          "id": "fermi-paradox-guide-u04-c03",
+          "proposition": "The source gives DNA storage density as 9.13 × 10^20 bits/g.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 5849,
+            "end_char": 6368,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u04-c04",
+          "proposition": "The source gives carbon-isotope diamond storage density as 5 × 10^22 bits/g.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 6042,
+            "end_char": 6576,
+            "start_line": 1,
+            "end_line": 1
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u04-c05",
+          "proposition": "The source gives a micro replicator mass tier of about 10^-18 kg.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 6752,
+            "end_char": 7269,
+            "start_line": 1,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u04-c06",
+          "proposition": "The source gives a biological replicator range from 1 mg to 30 g.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 7021,
+            "end_char": 7538,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u04-c07",
+          "proposition": "The source gives a macro-engineering replicator mass of about 500 metric tons.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 7463,
+            "end_char": 7980,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u04-g01",
+          "area": "Information storage",
+          "goal": "Compare the storage densities and three payload-mass tiers, then state which assumptions control a minimum viable replicator.",
+          "prerequisites": [
+            "Information units",
+            "Orders of magnitude"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u04-c01",
+            "fermi-paradox-guide-u04-c02",
+            "fermi-paradox-guide-u04-c03",
+            "fermi-paradox-guide-u04-c04",
+            "fermi-paradox-guide-u04-c05",
+            "fermi-paradox-guide-u04-c06",
+            "fermi-paradox-guide-u04-c07"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u05",
+      "title": "Dyson swarms and intergalactic propulsion",
+      "source_range": {
+        "start_char": 8054,
+        "end_char": 8459,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about 3\\. Infrastructure & Propulsion: Dyson Swarms and Rocketry.",
+      "claims": [
+        {
+          "proposition": "The source proposes a Dyson swarm of independent solar collectors and heat engines to supply energy beyond planetary reserves for relativistic probe launches.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 8054,
+            "end_char": 8248,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u05-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u05-g01",
+          "area": "Propulsion analysis",
+          "goal": "Estimate a probe-launch energy budget, then compare it with the stellar power that the proposed Dyson swarm must capture.",
+          "prerequisites": [
+            "Special relativity",
+            "Logarithms"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u05-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u06",
+      "title": "Mercury disassembly feedback loop",
+      "source_range": {
+        "start_char": 8459,
+        "end_char": 9906,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Dismantling Mercury:.",
+      "claims": [
+        {
+          "proposition": "These new collectors immediately harvest additional solar energy, which is beamed back to Mercury to accelerate further mining and processing.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 9058,
+            "end_char": 9205,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u06-c01"
+        },
+        {
+          "proposition": "A complete Dyson swarm around the Sun captures 3.8 × 10^26 W and supplies 1.8 × 10^26 W at 33.3% efficiency.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 9445,
+            "end_char": 9906,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u06-c02"
+        },
+        {
+          "id": "fermi-paradox-guide-u06-c03",
+          "proposition": "The source gives Mercury a mass of 3.3022 × 10^23 kg with 30% silicates and 70% iron or metals.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 8691,
+            "end_char": 9214,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u06-c04",
+          "proposition": "The source uses a 1 km² seed solar array for the Mercury disassembly loop.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 8837,
+            "end_char": 9365,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u06-c05",
+          "proposition": "The source assumes one-third collector efficiency and 10% of captured power for launching.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 9207,
+            "end_char": 9727,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u06-c06",
+          "proposition": "The source claims Mercury can be dismantled in 31 years and 85 days.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 9207,
+            "end_char": 9727,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u06-g01",
+          "area": "Megastructure growth",
+          "goal": "Trace how seed area, efficiency, launch allocation, and replicated collector area produce the stated Mercury-disassembly timeline.",
+          "prerequisites": [
+            "Exponents and logarithms",
+            "Energy and power units"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u06-c01",
+            "fermi-paradox-guide-u06-c02",
+            "fermi-paradox-guide-u06-c03",
+            "fermi-paradox-guide-u06-c04",
+            "fermi-paradox-guide-u06-c05",
+            "fermi-paradox-guide-u06-c06"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u07",
+      "title": "Fixed launch systems and relativistic deceleration",
+      "source_range": {
+        "start_char": 9906,
+        "end_char": 12167,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Fixed Launch Infrastructure & Relativistic Deceleration Rather than burdening probes with massive launch propellant, fixed solar-powered launch architectures—such as superconducting coilguns, quenchguns, laser sails, or particle beams—accelerate probes to relativistic fractions of lightsp.",
+      "claims": [
+        {
+          "proposition": "The source states that probes need reaction mass to decelerate at the target, and that their launch mass follows the relativistic rocket equation.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 10262,
+            "end_char": 10476,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u07-c01"
+        },
+        {
+          "proposition": "The source gives the relativistic rocket equation and relates specific impulse to mass-energy conversion efficiency.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10476,
+            "end_char": 11136,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u07-c02"
+        },
+        {
+          "proposition": "For nuclear fission, the table gives Isp/c = 0.0397, efficiency = 0.000787, target speed = 0.50c, 35 t launch mass, and redundancy factor 2.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11407,
+            "end_char": 11527,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u07-c03"
+        },
+        {
+          "proposition": "Raw conversion efficiencies prior to structural deduction are \\$0.000828\\$ for Nuclear Fission, \\$0.00375\\$ for Nuclear Fusion, and \\$0.185\\$ for Matter-Antimatter reactions.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11978,
+            "end_char": 12167,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u07-c04"
+        },
+        {
+          "id": "fermi-paradox-guide-u07-c05",
+          "proposition": "For nuclear fusion, the table gives Isp/c = 0.0843, efficiency = 0.00356, speed = 0.80c, 15 t launch mass, and redundancy 2.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11529,
+            "end_char": 12043,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u07-c06",
+          "proposition": "For matter-antimatter, the table gives Isp/c = 0.567, efficiency = 0.176, speed = 0.99c, 5 kg launch mass, and redundancy 40.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11647,
+            "end_char": 12164,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u07-c07",
+          "proposition": "For no-rocket coasting, the table gives 0.99c, 1 kg launch mass, and redundancy 40.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11739,
+            "end_char": 12167,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The table inputs, units, and model assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u07-g01",
+          "area": "Claim analysis",
+          "goal": "Use the relativistic rocket equation and each row’s efficiency to check its launch mass and redundancy assumption.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u07-c01",
+            "fermi-paradox-guide-u07-c02",
+            "fermi-paradox-guide-u07-c03",
+            "fermi-paradox-guide-u07-c04",
+            "fermi-paradox-guide-u07-c05",
+            "fermi-paradox-guide-u07-c06",
+            "fermi-paradox-guide-u07-c07"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u08",
+      "title": "Intergalactic dust hazards and launch redundancy",
+      "source_range": {
+        "start_char": 12167,
+        "end_char": 13395,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Intergalactic Space Hazards & Redundancy At relativistic speeds, colliding with intergalactic dust particles poses a lethal kinetic threat. Using the Mathis-Rumpl-Nordsieck dust distribution model, the density of hazardous dust particles ( \\$\\>1 \\\\mu\\\\text{m}\\$ ) in intergalactic space is.",
+      "claims": [
+        {
+          "proposition": "Using the Mathis-Rumpl-Nordsieck dust distribution model, the density of hazardous dust particles ( \\$\\>1 \\\\mu\\\\text{m}\\$ ) in intergalactic space is estimated at \\$\\\\rho \\= 2.79 \\\\times 10^{-28} \\\\text{ particles/cm}^3\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 12317,
+            "end_char": 12541,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u08-c01"
+        },
+        {
+          "proposition": "To guarantee that at least one probe reaches its destination intact, the required launch redundancy factor \\$R\\$ is calculated as: \\$\\$R \\= \\\\exp(d \\\\cdot A \\\\cdot \\\\rho)\\$\\$ Where \\$d\\$ is the comoving transit distance and \\$A\\$ is the frontal cross-sectional area ( \\$1 \\\\text{ cm}^2\\$ for a tightly packed coasting vehicle).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 12541,
+            "end_char": 12869,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u08-c02"
+        },
+        {
+          "proposition": "At \\$99\\\\%c\\$ , over gigaparsec distances, maintaining survival confidence requires launching a redundancy factor of \\$R \\\\approx 40\\$ identical probes per target galaxy.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 12869,
+            "end_char": 13040,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u08-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u08-g01",
+          "area": "Claim analysis",
+          "goal": "Derive the probe redundancy factor from cross-section, dust density, and travel distance, then compare the speed cases.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u08-c01",
+            "fermi-paradox-guide-u08-c02",
+            "fermi-paradox-guide-u08-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u09",
+      "title": "Cosmological reach and the six-hour energy budget",
+      "source_range": {
+        "start_char": 13395,
+        "end_char": 16404,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about 4\\. Cosmological Reach &.",
+      "claims": [
+        {
+          "proposition": "The source sets H0 to 71 km/s/Mpc, ΩΛ to 0.73, and Ωm to 0.27 for its cosmological calculation.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 13701,
+            "end_char": 14110,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u09-c01"
+        },
+        {
+          "proposition": "The source states that accelerating expansion creates a comoving cosmological event horizon.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 14110,
+            "end_char": 14380,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u09-c02"
+        },
+        {
+          "proposition": "The source claims that sending 30-gram payload probes to 4.13 × 10^9 reachable galaxies at 0.99c requires a stated Dyson-swarm energy budget.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14939,
+            "end_char": 15267,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u09-c03"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c04",
+          "proposition": "At 50% c, the source gives reach 1.24 Gpc and 1.16 × 10^8 reachable galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14602,
+            "end_char": 14762,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c05",
+          "proposition": "At 80% c, the source gives reach 2.33 Gpc and 7.62 × 10^8 reachable galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14735,
+            "end_char": 14895,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c06",
+          "proposition": "At 99% c, the source gives reach 4.09 Gpc and 4.13 × 10^9 reachable galaxies.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 14868,
+            "end_char": 15028,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c07",
+          "proposition": "For no-rocket coasting, the source gives a 1,430-second collection time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15542,
+            "end_char": 15702,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c08",
+          "proposition": "For fission probes, the source gives a 1,780-second collection time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15657,
+            "end_char": 15817,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c09",
+          "proposition": "For antimatter probes, the source gives an 8,310-second collection time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15775,
+            "end_char": 15935,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u09-c10",
+          "proposition": "For fusion probes, the source gives a 21,600-second collection time.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15295,
+            "end_char": 15455,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u09-g01",
+          "area": "Cosmological reach",
+          "goal": "Calculate a reach result from the stated cosmological parameters and separate it from galaxy-count assumptions.",
+          "prerequisites": [
+            "Cosmological expansion",
+            "Scientific notation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u09-c01",
+            "fermi-paradox-guide-u09-c02",
+            "fermi-paradox-guide-u09-c03",
+            "fermi-paradox-guide-u09-c04",
+            "fermi-paradox-guide-u09-c05",
+            "fermi-paradox-guide-u09-c06",
+            "fermi-paradox-guide-u09-c07",
+            "fermi-paradox-guide-u09-c08",
+            "fermi-paradox-guide-u09-c09",
+            "fermi-paradox-guide-u09-c10"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u10",
+      "title": "Behavioral dynamics and high-fanout expansion",
+      "source_range": {
+        "start_char": 16404,
+        "end_char": 20229,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about 5\\. Behavioral Dynamics & Game-Theoretic Motivations.",
+      "claims": [
+        {
+          "proposition": "The source describes the uniformity-of-motive assumption as a proposed resolution of the Fermi Paradox.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 16404,
+            "end_char": 16688,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c01"
+        },
+        {
+          "proposition": "However, game theory and evolutionary dynamics demonstrate that uniform non-expansion is a statistically unstable equilibrium.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 16688,
+            "end_char": 16815,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The cited game-theory and evolutionary models apply to interstellar factions.",
+              "basis": "inferred"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "logical-analysis"
+            ],
+            "evidence_needed": "Identify the model and test whether unilateral expansion is unstable under alternative payoff and coordination assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c02"
+        },
+        {
+          "proposition": "The source claims that expansion is an attractor state because one expanding faction can change the cosmic landscape.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 16841,
+            "end_char": 16988,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c03"
+        },
+        {
+          "proposition": "Unlike Robin Hanson’s \"Burning the Cosmic Commons\" model—where wave-front colonization across hundreds of sequential generations inevitably leads to evolutionary drift toward aggressive, resource-devouring behavior—a High-Fanout Strategy reaches the entire accessible universe in just 2 to 3 probe generations.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 17814,
+            "end_char": 18126,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c04"
+        },
+        {
+          "proposition": "This extreme brevity preserves central organizational control and prevents motivational drift across space and time.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 18126,
+            "end_char": 18243,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c05"
+        },
+        {
+          "proposition": "Escape and Exodus Persecuted or dissident factions seeking absolute independence from societal control can launch low-mass probes toward distant galaxies at extreme relativistic speeds.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 18700,
+            "end_char": 18900,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c06"
+        },
+        {
+          "proposition": "Because space expands, escaping probes accelerated to high fractions of \\$c\\$ can never be caught by their origin society once launched.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 18900,
+            "end_char": 19038,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c07"
+        },
+        {
+          "proposition": "Pre-emptive Police Probes To prevent rogue factions or escaping dissidents from building unchecked hostile infrastructure in distant galaxies, a dominant civilization is incentivized to launch its own unobtrusive \"police probes\" to secure all reachable galaxies first, enforcing systemic stability across the universe.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 19042,
+            "end_char": 19376,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c08"
+        },
+        {
+          "proposition": "Spreading self-sustaining probes across intergalactic distances is a rational strategy for long-term species survival.",
+          "type": "value-judgment",
+          "source_range": {
+            "start_char": 19592,
+            "end_char": 19712,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The physical premises and preference assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "logical-analysis"
+            ],
+            "evidence_needed": "State the premises and compare the conclusion with plausible alternative assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c09"
+        },
+        {
+          "proposition": "These behavioral dynamics establish that universal expansion is highly probable for any technological species.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 20028,
+            "end_char": 20139,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u10-c10"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u10-g01",
+          "area": "Fermi-paradox reasoning",
+          "goal": "Model the claimed expansion equilibrium, vary its payoff assumptions, and distinguish physical reach from behavioral inference.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u10-c01",
+            "fermi-paradox-guide-u10-c02",
+            "fermi-paradox-guide-u10-c03",
+            "fermi-paradox-guide-u10-c04",
+            "fermi-paradox-guide-u10-c05",
+            "fermi-paradox-guide-u10-c06",
+            "fermi-paradox-guide-u10-c07",
+            "fermi-paradox-guide-u10-c08",
+            "fermi-paradox-guide-u10-c09",
+            "fermi-paradox-guide-u10-c10"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u11",
+      "title": "Sharpening the paradox and future implications",
+      "source_range": {
+        "start_char": 20229,
+        "end_char": 20612,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about 6\\. Sharpening the Paradox & Implications for the Future.",
+      "claims": [
+        {
+          "proposition": "The source claims that Earth formed late enough for alien civilizations to have emerged billions of years earlier.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20229,
+            "end_char": 20419,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u11-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u11-g01",
+          "area": "Fermi-paradox reasoning",
+          "goal": "Separate the stated astronomical evidence, expansion assumptions, and Fermi-paradox inference.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u11-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u12",
+      "title": "Source galaxies that could reach Earth",
+      "source_range": {
+        "start_char": 20612,
+        "end_char": 21948,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Source Galaxies Able to Reach Earth Today | Time of Civilizational Origin (in Past) | Reachable Galaxies at \\$50\\\\%c\\$ | Reachable Galaxies at \\$80\\\\%c\\$ | Reachable Galaxies at \\$99\\\\%c\\$ | | \\------ | \\------ | \\------ | \\------ | | **1 Billion Years Ago** | \\$2.63 \\\\times 10^5\\$ | \\$1..",
+      "claims": [
+        {
+          "proposition": "For a civilization that began 5 billion years ago and traveled at 0.99c, the source infers that up to 388 million galaxies could reach Earth by the present.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21256,
+            "end_char": 21528,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u12-c01"
+        },
+        {
+          "proposition": "For fission probes traveling at 0.50c from 2 billion years ago, the source infers that 2.57 million galaxies could reach the Solar System.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21528,
+            "end_char": 21734,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u12-c02"
+        },
+        {
+          "id": "fermi-paradox-guide-u12-c03",
+          "proposition": "For an origin 1 billion years ago, the table gives 2.63 × 10^5 galaxies at 0.50c, 1.03 × 10^6 at 0.80c, and 1.89 × 10^6 at 0.99c.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20856,
+            "end_char": 20954,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The speed, elapsed-time, cosmology, and galaxy-density assumptions used by the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the row from the stated cosmology, elapsed time, speed, and galaxy-density model."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u12-c04",
+          "proposition": "For an origin 2 billion years ago, the table gives 2.57 × 10^6 galaxies at 0.50c, 9.63 × 10^6 at 0.80c, and 1.67 × 10^7 at 0.99c.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 20956,
+            "end_char": 21054,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The speed, elapsed-time, cosmology, and galaxy-density assumptions used by the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the row from the stated cosmology, elapsed time, speed, and galaxy-density model."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u12-c05",
+          "proposition": "For an origin 3 billion years ago, the table gives 1.07 × 10^7 galaxies at 0.50c, 3.80 × 10^7 at 0.80c, and 6.46 × 10^7 at 0.99c.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21056,
+            "end_char": 21154,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The speed, elapsed-time, cosmology, and galaxy-density assumptions used by the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the row from the stated cosmology, elapsed time, speed, and galaxy-density model."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u12-c06",
+          "proposition": "For an origin 4 billion years ago, the table gives 3.14 × 10^7 galaxies at 0.50c, 1.06 × 10^8 at 0.80c, and 1.74 × 10^8 at 0.99c.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21156,
+            "end_char": 21254,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The speed, elapsed-time, cosmology, and galaxy-density assumptions used by the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the row from the stated cosmology, elapsed time, speed, and galaxy-density model."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "fermi-paradox-guide-u12-c07",
+          "proposition": "For an origin 5 billion years ago, the table gives 7.69 × 10^7 galaxies at 0.50c, 2.45 × 10^8 at 0.80c, and 3.88 × 10^8 at 0.99c.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21256,
+            "end_char": 21358,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The speed, elapsed-time, cosmology, and galaxy-density assumptions used by the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the row from the stated cosmology, elapsed time, speed, and galaxy-density model."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u12-g01",
+          "area": "Cosmological reach",
+          "goal": "Recalculate each elapsed-time and speed row, then separate the cosmological integral from the galaxy-density estimate.",
+          "prerequisites": [
+            "Cosmological expansion",
+            "Scientific notation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u12-c01",
+            "fermi-paradox-guide-u12-c02",
+            "fermi-paradox-guide-u12-c03",
+            "fermi-paradox-guide-u12-c04",
+            "fermi-paradox-guide-u12-c05",
+            "fermi-paradox-guide-u12-c06",
+            "fermi-paradox-guide-u12-c07"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u13",
+      "title": "Traditional paradox resolutions",
+      "source_range": {
+        "start_char": 21948,
+        "end_char": 23920,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Evaluating Traditional Paradox.",
+      "claims": [
+        {
+          "proposition": "Attributing the Great Silence to non-expansionist choices (e.g., \"aliens choose to live quietly\") requires absolute, unbroken motivational uniformity across millions of independent origin galaxies lacking causal contact.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22163,
+            "end_char": 22446,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u13-c01"
+        },
+        {
+          "proposition": "This degree of universal social convergence is statistically implausible.",
+          "type": "value-judgment",
+          "source_range": {
+            "start_char": 22446,
+            "end_char": 22524,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The physical premises and preference assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis"
+            ],
+            "evidence_needed": "State the premises and compare the conclusion with plausible alternative assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u13-c02"
+        },
+        {
+          "proposition": "Because universal probe deployment requires negligible energy, an early \"first-mover\" civilization emerging billions of years ago could have easily saturated all reachable galaxies with quiet, unobtrusive \"police probes\" or interdiction hardware.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22524,
+            "end_char": 22843,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the result with the stated cosmology and document the galaxy-density assumption."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u13-c03"
+        },
+        {
+          "proposition": "Because intergalactic expansion is physically trivial and energy-cheap for any Dyson-capable species, the absence of extraterrestrial probes in our solar system strongly implies that intelligent life fails to emerge in the first place.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 23128,
+            "end_char": 23420,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u13-c04"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u13-g01",
+          "area": "Fermi-paradox reasoning",
+          "goal": "Separate the stated astronomical evidence, expansion assumptions, and Fermi-paradox inference.",
+          "prerequisites": [
+            "Logic",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u13-c01",
+            "fermi-paradox-guide-u13-c02",
+            "fermi-paradox-guide-u13-c03",
+            "fermi-paradox-guide-u13-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "fermi-paradox-guide-u14",
+      "title": "Existential takeaways for humanity",
+      "source_range": {
+        "start_char": 23920,
+        "end_char": 24495,
+        "start_line": 3,
+        "end_line": 3
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Existential Takeaways for Humanity's Future 1\\. **Astronomical Resource Potential:**.",
+      "claims": [
+        {
+          "proposition": "Because the value of this accessible future is so vast, safeguarding humanity against near-term existential risks (such as technological self-destruction prior to building spacefaring infrastructure) represents the highest moral and strategic priority for our species.",
+          "type": "value-judgment",
+          "source_range": {
+            "start_char": 24192,
+            "end_char": 24495,
+            "start_line": 3,
+            "end_line": 3
+          },
+          "assumptions": [
+            {
+              "text": "The physical premises and preference assumptions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "logical-analysis"
+            ],
+            "evidence_needed": "State the premises and compare the conclusion with plausible alternative assumptions."
+          },
+          "status": "unchecked",
+          "id": "fermi-paradox-guide-u14-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "fermi-paradox-guide-u14-g01",
+          "area": "Claim analysis",
+          "goal": "Separate the resource estimate from the moral priority conclusion and identify their different assumptions.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "fermi-paradox-guide-u14-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    }
+  ]
+}

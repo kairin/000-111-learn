@@ -1,0 +1,8 @@
+#### **Ablation and Shielding Mass Requirements**
+
+When the incident kinetic power flux q\_{\\text{kin}} exceeds the blackbody radiative cooling capacity of the shield (\\sigma\_{\\text{SB}} T\_{\\text{melt}}^4 \\approx 3.7\\text{ MW/m}^2 for graphite at T \\approx 3600\\text{ K}), the shield ablates at a mass-loss rate per unit area \\dot{\\sigma}\_{\\text{abl}} \= \\frac{1}{A}\\frac{dM\_{\\text{shield}}}{d\\tau} governed by the material's effective enthalpy of sublimation/ablation H\_{\\text{sub}} (H\_{\\text{sub}} \\approx 6.0 \\times 10^7\\text{ J/kg} for pyrolytic graphite):  
+\\dot{\\sigma}\_{\\text{abl}} \= \\frac{\\max\\left(0,\\, q\_{\\text{kin}} \- \\epsilon\_{\\text{rad}}\\sigma\_{\\text{SB}}T\_{\\max}^4\\right)}{H\_{\\text{sub}}} \\approx \\frac{\\gamma(\\gamma \- 1)\\rho\_0 c^3 \\beta}{H\_{\\text{sub}}}  
+Integrating over a total interstellar transit distance D\_0 \= \\int \\gamma \\beta c\\,d\\tau at constant cruise speed \\beta gives the minimum sacrificial ablation shield areal mass density \\Sigma\_{\\text{abl}} \= M\_{\\text{abl}} / A:  
+\\Sigma\_{\\text{abl}} \= \\frac{(\\gamma \- 1)\\rho\_0 c^2 D\_0}{H\_{\\text{sub}}}  
+Behind the sacrificial thermal/dust erosion layer, the backing biological/electronics radiation shield must stop primary protons of kinetic energy E\_{k,p} (requiring areal stopping thickness \\Sigma\_{\\text{Bragg}}(\\gamma) \= \\int\_0^{E\_{k,p}} \\left\[-\\frac{1}{\\rho}\\frac{dE}{dx}\\right\]\_{\\text{Bethe-Bloch}}^{-1} dE) plus an exponential attenuation mass \\Sigma\_{\\gamma} \= \\frac{1}{\\mu\_{\\text{mass}}}\\ln\\\!\\left(\\frac{\\Phi\_{\\text{brem}}}{\\Phi\_{\\text{dose,max}}}\\right) to absorb secondary Bremsstrahlung photons and spallation neutrons.
+

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "range_convention": "Unicode code-point offsets are zero-based and half-open. Line numbers are one-based and inclusive.",
+  "documents": [
+    {
+      "id": "technical-architecture",
+      "title": "TECHNICAL ARCHITECTURE SPECIFICATION: HARD-SCI-FI MULTIPLAYER ENGINE AND ACCELERATED LEARNING FRAMEWORK FOR ASSEMBLY AND FORTRAN",
+      "original_filename": "TECHNICAL ARCHITECTURE SPECIFICATION_ HARD-SCI-FI MULTIPLAYER ENGINE AND ACCELERATED LEARNING FRAMEWORK FOR ASSEMBLY AND FORTRAN.md",
+      "portal_path": "/run/user/1000/doc/8bd4ba70/TECHNICAL ARCHITECTURE SPECIFICATION_ HARD-SCI-FI MULTIPLAYER ENGINE AND ACCELERATED LEARNING FRAMEWORK FOR ASSEMBLY AND FORTRAN.md",
+      "imported_file": "sources/technical-architecture.md",
+      "sha256": "edd820a9dd8f0e2d96124b8086aa6114d550a19ae62d35b322f9a68bda108cdc",
+      "bytes": 36940,
+      "characters": 36623,
+      "encoding": "UTF-8"
+    },
+    {
+      "id": "executive-briefing",
+      "title": "Executive Briefing: Cosmic Engineering, Theoretical Physics, and Computational Methods",
+      "original_filename": "Executive Briefing_ Cosmic Engineering, Theoretical Physics, and Computational Methods.md",
+      "portal_path": "/run/user/1000/doc/57dfe3d5/Executive Briefing_ Cosmic Engineering, Theoretical Physics, and Computational Methods.md",
+      "imported_file": "sources/executive-briefing.md",
+      "sha256": "559b0020bee92fdbc8d2877664f086ce43743775d4e7c11ce0ef7d55eeb39dfe",
+      "bytes": 24741,
+      "characters": 24730,
+      "encoding": "UTF-8"
+    },
+    {
+      "id": "fermi-paradox-guide",
+      "title": "Conceptual Guide: How Intergalactic Feasibility Sharpened the Fermi Paradox",
+      "original_filename": "Conceptual Guide_ How Intergalactic Feasibility Sharpened the Fermi Paradox.md",
+      "portal_path": "/run/user/1000/doc/86fabc03/Conceptual Guide_ How Intergalactic Feasibility Sharpened the Fermi Paradox.md",
+      "imported_file": "sources/fermi-paradox-guide.md",
+      "sha256": "bbaaf4caf164e2100ab5319af2bce9057bca085b5b1d9d7caf2e59c4662a8e86",
+      "bytes": 24534,
+      "characters": 24495,
+      "encoding": "UTF-8"
+    },
+    {
+      "id": "adversarial-research-review",
+      "title": "Adversarial Review of Computational Physics Kernels, Numerical Integrators, and Relativistic Mathematical Formulations for Hard-Science Interstellar Simulation",
+      "original_filename": "deep-research-report.md",
+      "portal_path": "/run/user/1000/doc/890b44a7/deep-research-report.md",
+      "imported_file": "sources/adversarial-research-review.md",
+      "sha256": "d34c1a668fbe3badf05b2e63c842db841195b684da41e7e6e4085ef53d19808f",
+      "bytes": 53026,
+      "characters": 52157,
+      "encoding": "UTF-8"
+    },
+    {
+      "id": "astrophysics-kernels",
+      "title": "Computational Physics Kernels, Numerical Integrators, and Relativistic Mathematical Formulations for Hard-Science Interstellar Simulation",
+      "original_filename": "Astrophysics Kernels and Interstellar Math.md",
+      "portal_path": "/run/user/1000/doc/8c2e9aff/Astrophysics Kernels and Interstellar Math.md",
+      "imported_file": "sources/astrophysics-kernels.md",
+      "sha256": "45ad6cc874f8a9682ae364d2f2620bce543086db4eef004a9a88f3b44505910a",
+      "bytes": 938048,
+      "characters": 937968,
+      "encoding": "UTF-8"
+    }
+  ]
+}

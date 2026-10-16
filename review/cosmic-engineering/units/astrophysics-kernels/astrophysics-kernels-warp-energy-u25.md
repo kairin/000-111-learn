@@ -1,0 +1,46 @@
+# Tetrads and energy-condition tests
+
+- Unit: `astrophysics-kernels-warp-energy-u25`
+- Source: [`sources/astrophysics-kernels.md`](../../sources/astrophysics-kernels.md)
+- Characters: `39716:43811`
+- Lines: `139:150`
+- Purposes: claim-review, learning
+- Excerpt SHA-256: `7bf1ee5dc6d4fb4cf14d9bf4b41ef8dab2133910b028cce3d8a88d864dd6bb7e`
+
+Observer projections and Hawking-Ellis energy-condition analysis.
+
+## Claims
+
+### `astrophysics-kernels-u08-c03`
+
+A tetrad projection and Hawking-Ellis classification are sufficient to make the stated all-observer energy-condition conclusions.
+
+Type: `mathematical`. Status: `unchecked`. Priority: `high`.
+
+Review methods: calculation, reproduction.
+
+Evidence needed: Independent tetrad/eigenvalue calculation over the stated observer domain.
+
+## Learning goals
+
+### `astrophysics-kernels-warp-energy-u25-g01`: Computational physics
+
+Project stress-energy into an orthonormal tetrad and test each energy condition for all required observer classes.
+
+Prerequisites: Numerical methods
+
+Claim dependencies: `astrophysics-kernels-u08-c03`
+
+## Exact source excerpt
+
+#### **Orthonormal Tetrad Projection, Hawking-Ellis Classification, and Energy Conditions**
+
+To interpret T\_{\\mu\\nu} physically, the coordinate tensor is projected into a local Lorentz-orthonormal tetrad frame e^\\mu\_{\\hat{\\mu}} satisfying g\_{\\mu\\nu}e^\\mu\_{\\hat{\\alpha}}e^\\nu\_{\\hat{\\beta}} \= \\eta\_{\\hat{\\alpha}\\hat{\\beta}} \= \\operatorname{diag}(-1, 1, 1, 1). Constructed via Gram-Schmidt orthogonalization anchored to the Eulerian normal observer n^\\mu, the tetrad projection T\_{\\hat{\\mu}\\hat{\\nu}} \= e^\\mu\_{\\hat{\\mu}}e^\\nu\_{\\hat{\\nu}}T\_{\\mu\\nu} extracts the Eulerian energy density \\rho \= T\_{\\hat{0}\\hat{0}}, momentum flux p\_i \= T\_{\\hat{0}\\hat{i}}, directional pressures P\_i \= T\_{\\hat{i}\\hat{i}}, and shear stress \\sigma\_{ij} \= T\_{\\hat{i}\\hat{j}} (i \\neq j).  
+However, satisfying energy conditions in the single Eulerian frame n^\\mu does not guarantee physicality across all boosted Lorentz frames. Both WarpFactory and warpax evaluate the four classical pointwise Energy Conditions across arbitrary timelike four-velocities V^{\\hat{\\mu}}(\\zeta, \\theta, \\phi) (parameterized by rapidity \\zeta \\in \[0, \\zeta\_{\\max}\] and sphere angles) and null vectors k^{\\hat{\\mu}}(1, \\sin\\theta\\cos\\phi, \\sin\\theta\\sin\\phi, \\cos\\theta), while warpax additionally performs an exact Hawking-Ellis algebraic classification of the mixed tensor T^a\_b \= g^{ac}T\_{cb}. At every grid point, solving the characteristic polynomial \\det(T^a\_b \- \\lambda \\delta^a\_b) \= 0 classifies matter into Type I (four real eigenvalues \\{-\\rho, p\_1, p\_2, p\_3\\} with a single timelike eigenvector g\_{ab}v^a v^b \< 0), Type II (double null eigenvector, radiation-like), Type III (triple null eigenvector), or Type IV (complex conjugate eigenvalues, strictly violating classical energy conditions). Across standard warp drive benchmarks, Hawking-Ellis Type I points comprise 100\\% of the grid for Rodal, 99.9\\% for Lentz, 99.6\\% for WarpShell, 98.4\\% for Van Den Broeck, 98.0\\% for Alcubierre, and 97.5\\% for Natário. For all Type I points, observer-independent energy condition verification reduces to exact algebraic inequalities in the eigenvalues, whereas non-Type-I points require multi-start numerical optimization over the observer boost space (\\zeta, \\theta, \\phi):
+
+| Energy Condition | Physical Interpretation | General Observer Contraction | Exact Hawking-Ellis Type I Eigenvalue Inequality |
+| :---- | :---- | :---- | :---- |
+| **Null (NEC)** | Light-ray frame energy density is non-negative | \\Xi\_{\\text{NEC}} \= T\_{\\hat{\\mu}\\hat{\\nu}}k^{\\hat{\\mu}}k^{\\hat{\\nu}} \\ge 0 \\quad \\forall\\text{ null } \[span\_218\](start\_span)\[span\_218\](end\_span)k^{\\hat{\\mu}} | \\rho \+ p\_i \\ge 0 \\\[span\_231\](start\_span)\[span\_231\](end\_span)\[span\_235\](start\_span)\[span\_235\](end\_span)quad \\forall i \\in \\{1, 2, 3\\} |
+| **Weak (WEC)** | Timelike observer energy density is non-negative | \\Xi\_{\\text{WEC}} \= T\_{\\hat{\\mu}\\hat{\\nu}}V^{\\hat{\\mu}}V^{\\hat{\\nu}} \\ge 0 \\quad \\forall\\text{ timelike } V^{\\hat{\\mu}} | \\rho\[span\_219\](start\_span)\[span\_219\](end\_span) \\ge 0 \\;\\land\\; \\rho \+ p\_i \\ge 0 \\quad \\forall i \\in \\{1, 2, 3\\} |
+| **Strong (SEC)** | Matter gravitates attractively (non-negative tidal convergence) | \\Xi\_{\\text{SEC}} \= \\left(T\_{\\hat{\\mu}\\hat{\\nu}} \- \\frac{1}{2}T\\eta\_{\\hat{\\mu}\\hat{\\nu}}\\right)V^{\\hat{\\mu}}V^{\\hat{\\nu}} \\ge 0 | \\rho \+ p\_i \\ge 0 \\\[span\_220\](start\_span)\[span\_220\](end\_span);\\land\\; \\rho \+ \\sum\_{i=1}^3 p\_i \\ge 0 |
+| Dominant (DEC) | Energy-momentum flux vector \\Upsilon^{\\hat{\\mu}} is future-directed and causal (\\le c) | \\Upsilon^{\\hat{\\mu}} \= \-T^{\\hat{\\mu}}\_{\\hat{\\nu}}V^{\\hat{\\nu}}, \\quad \\Upsilon^{\\hat{\\mu}}\\Upsilon\_{\\hat{\\mu}} \\le 0, \\; \\Upsilon^{\\hat{0}} \\ge 0 | \\rho \\ge \\v\[span\_247\](start\_span)\[span\_247\](end\_span)ert{}p\_i\\vert{} \\quad (\\iff \\rho \- \\vert{}p\_i\\vert{} \\ge 0\) \\quad \\forall i \\in \\{1, 2, 3\\} |

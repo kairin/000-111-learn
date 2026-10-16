@@ -1,0 +1,4 @@
+## **4\. Hard Mathematical Formulations for Interstellar Transit**
+
+To simulate relativistic starships traversing interstellar space without exotic metric manipulation, the computational physics kernel must integrate special-relativistic rocket kinematics coupled to relativistic magnetohydrodynamic and radiative interactions with the Interstellar Medium (ISM). The governing equations below utilize exact SI physical constants: speed of light c \= 299,792,458\\text{ m/s}, standard gravity g\_0 \= 9.80665\\text{ m/s}^2, proton mass m\_p \= 1.67262192 \\times 10^{-27}\\text{ kg}, electron mass m\_e \= 9.1093837 \\times 10^{-31}\\text{ kg}, elementary charge e \= 1.60217663 \\times 10^{-19}\\text{ C}, classical electron radius r\_e \= 2.81794032 \\times 10^{-15}\\text{ m}, and fine-structure constant \\alpha\_{\\text{fs}} \\approx 1/137.035999.
+

@@ -1,0 +1,4 @@
+###### *Algorithmic Adaptation: RK4 to Euler Integration*
+
+In modern C, Python, or QB64 implementations, descent trajectories use 4th-Order Runge-Kutta (RK4) integration for high accuracy:\$\$k\_1 \= f(t, y)\$\$\$\$k\_2 \= f\\left(t \+ \\frac{h}{2}, y \+ \\frac{h k\_1}{2}\\right)\$\$\$\$k\_3 \= f\\left(t \+ \\frac{h}{2}, y \+ \\frac{h k\_2}{2}\\right)\$\$\$\$k\_4 \= f\\left(t \+ h, y \+ h k\_3\\right)\$\$\$\$y\_{new} \= y \+ \\frac{h(k\_1 \+ 2k\_2 \+ 2k\_3 \+ k\_4)}{6}\$\$Executing RK4 via software floating-point routines on a 1 MHz MOS 6510 processor introduces severe frame drops. The simulator adapts the physics engine to Euler integration:\$\$y\_{new} \= y \+ h \\cdot f(t, y)\$\$This reduction from four function evaluations per timestep to one yields a  **\$4\\times**\$  **speed improvement** , enabling real-time execution at 10 frames per second ( \$0.1\\text{ s}\$  intervals).
+

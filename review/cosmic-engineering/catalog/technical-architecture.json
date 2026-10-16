@@ -1,0 +1,4074 @@
+{
+  "source_id": "technical-architecture",
+  "source": "sources/technical-architecture.md",
+  "units": [
+    {
+      "id": "technical-architecture-u03",
+      "title": "Conceptual Foundation",
+      "source_range": {
+        "start_char": 0,
+        "end_char": 1206,
+        "start_line": 1,
+        "end_line": 8
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Conceptual Foundation.",
+      "claims": [
+        {
+          "proposition": "The core architecture of this multiplayer engine is grounded in uncompromising physical conservation laws and low-level system execution.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 223,
+            "end_char": 360,
+            "start_line": 7,
+            "end_line": 7
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u03-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u03-g01",
+          "area": "Claim analysis",
+          "goal": "Translate conservation laws into explicit gameplay constraints and identify the measurements needed to test each constraint.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u03-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u04",
+      "title": "The Anti-Magic Imperative",
+      "source_range": {
+        "start_char": 1206,
+        "end_char": 2575,
+        "start_line": 9,
+        "end_line": 16
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about The Anti-Magic Imperative.",
+      "claims": [
+        {
+          "proposition": "Every in-game interaction must balance mass, energy, momentum, and computational overhead.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 1444,
+            "end_char": 1535,
+            "start_line": 11,
+            "end_line": 11
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u04-c01"
+        },
+        {
+          "proposition": "Reaction mass is finite.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 1665,
+            "end_char": 1740,
+            "start_line": 13,
+            "end_line": 13
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u04-c02"
+        },
+        {
+          "proposition": "Spacecraft acceleration and terminal velocity are bounded by propellant energy density ( \\$\\\\eta\\$ ), specific impulse ( \\$I\\_{sp}/c\\$ ), and structural dry mass ratios.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 1740,
+            "end_char": 1913,
+            "start_line": 13,
+            "end_line": 13
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u04-c03"
+        },
+        {
+          "proposition": "Work requires raw energy input, and waste heat generation requires explicit thermodynamic radiator structures, surface dissipation calculations, and material thermal limits.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 1913,
+            "end_char": 2119,
+            "start_line": 14,
+            "end_line": 14
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u04-c04"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u04-g01",
+          "area": "Claim analysis",
+          "goal": "Convert each prohibited game shortcut into a mass, energy, momentum, or latency constraint.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u04-c01",
+            "technical-architecture-u04-c02",
+            "technical-architecture-u04-c03",
+            "technical-architecture-u04-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u05",
+      "title": "Macro-Scale Collaboration vs. Micro-Scale Transit Economics",
+      "source_range": {
+        "start_char": 2575,
+        "end_char": 4592,
+        "start_line": 17,
+        "end_line": 20
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Macro-Scale Collaboration vs. Micro-Scale Transit Economics.",
+      "claims": [
+        {
+          "id": "technical-architecture-u05-c01",
+          "proposition": "The specification contrasts instantaneous local transit with energy use based on gravity, drag, and hydrodynamic resistance.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 2945,
+            "end_char": 3384,
+            "start_line": 19,
+            "end_line": 19
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u05-c02",
+          "proposition": "The specification contrasts point-and-click interplanetary travel with numerical orbital integration constrained by mass, thrust, and delta-v.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 3387,
+            "end_char": 3782,
+            "start_line": 19,
+            "end_line": 19
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u05-c03",
+          "proposition": "The specification contrasts FTL travel with relativistic travel constrained by dust, redundancy, and cosmological horizons.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 3785,
+            "end_char": 4229,
+            "start_line": 19,
+            "end_line": 19
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u05-c04",
+          "proposition": "The specification contrasts instant resource nodes with automated planetary disassembly and Dyson-swarm deployment.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 4232,
+            "end_char": 4592,
+            "start_line": 19,
+            "end_line": 20
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u05-g01",
+          "area": "Transit economics",
+          "goal": "Compare the four travel and resource models, and list the physical input required by each one.",
+          "prerequisites": [
+            "Kinematics",
+            "Energy conservation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u05-c01",
+            "technical-architecture-u05-c02",
+            "technical-architecture-u05-c03",
+            "technical-architecture-u05-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u06",
+      "title": "Analytical Transformation: Crowd-Sourced Engineering",
+      "source_range": {
+        "start_char": 4592,
+        "end_char": 5779,
+        "start_line": 21,
+        "end_line": 28
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Analytical Transformation: Crowd-Sourced Engineering.",
+      "claims": [
+        {
+          "proposition": "Because no single player possesses the computational bandwidth, material infrastructure, or energy reserves to manufacture relativistic probes or construct megastructures independently, progress demands crowd-sourced collaboration.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 4748,
+            "end_char": 4980,
+            "start_line": 23,
+            "end_line": 23
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u06-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u06-g01",
+          "area": "Claim analysis",
+          "goal": "Allocate the listed systems, astrophysics, and logistics tasks to a shared engineering workflow.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u06-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u07",
+      "title": "Section Transition",
+      "source_range": {
+        "start_char": 5779,
+        "end_char": 6083,
+        "start_line": 29,
+        "end_line": 32
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Section Transition.",
+      "claims": [],
+      "learning_goals": [],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This transition connects adjacent topics and does not state an independent claim."
+    },
+    {
+      "id": "technical-architecture-u08",
+      "title": "2. DUAL-LANGUAGE ENGINE ARCHITECTURE: BARE-METAL ASSEMBLY & NUMERICAL FORTRAN",
+      "source_range": {
+        "start_char": 6083,
+        "end_char": 6168,
+        "start_line": 33,
+        "end_line": 34
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about 2. DUAL-LANGUAGE ENGINE ARCHITECTURE: BARE-METAL ASSEMBLY & NUMERICAL FORTRAN.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u09",
+      "title": "Technical Necessity of a Hybrid Computing Engine",
+      "source_range": {
+        "start_char": 6168,
+        "end_char": 7814,
+        "start_line": 35,
+        "end_line": 48
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Technical Necessity of a Hybrid Computing Engine.",
+      "claims": [
+        {
+          "proposition": "Computing relativistic astrophysics, multi-body orbital trajectories, and low-latency rendering loops simultaneously requires a hybrid computing engine.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 6224,
+            "end_char": 6376,
+            "start_line": 37,
+            "end_line": 37
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u09-c01"
+        },
+        {
+          "proposition": "Modern managed languages rely on dynamic allocation, heavy runtime abstractions, and garbage collection, introducing frame-pacing latency spikes and memory overhead.",
+          "type": "software",
+          "source_range": {
+            "start_char": 6376,
+            "end_char": 6542,
+            "start_line": 37,
+            "end_line": 37
+          },
+          "assumptions": [
+            {
+              "text": "The described code, hardware, version, and workload conditions apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "code-inspection",
+              "reproduction"
+            ],
+            "evidence_needed": "Inspect a versioned implementation and reproduce the stated behavior with a defined workload and hardware configuration."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u09-c02"
+        },
+        {
+          "proposition": "The proposed engine assigns hardware and rendering work to Assembly and array-based numerical work to Fortran.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 6542,
+            "end_char": 7812,
+            "start_line": 37,
+            "end_line": 47
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u09-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u09-g01",
+          "area": "Scientific computing",
+          "goal": "Trace the stated language boundary and test its numerical or performance consequence.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Arrays and data types"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u09-c01",
+            "technical-architecture-u09-c02",
+            "technical-architecture-u09-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u10",
+      "title": "Architectural Division of Computational Labor",
+      "source_range": {
+        "start_char": 7814,
+        "end_char": 7867,
+        "start_line": 49,
+        "end_line": 50
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Architectural Division of Computational Labor.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u11",
+      "title": "*Assembly Layer (Low-Level Systems & Hardware Vectorization)*",
+      "source_range": {
+        "start_char": 7867,
+        "end_char": 8722,
+        "start_line": 51,
+        "end_line": 56
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Assembly Layer (Low-Level Systems & Hardware Vectorization)*.",
+      "claims": [
+        {
+          "proposition": "Manages low-latency input buffers, system interrupt flags, register usage (AX/EAX/RAX), and memory address mapping.",
+          "type": "software",
+          "source_range": {
+            "start_char": 7937,
+            "end_char": 8105,
+            "start_line": 53,
+            "end_line": 53
+          },
+          "assumptions": [
+            {
+              "text": "The described code, hardware, version, and workload conditions apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "code-inspection",
+              "reproduction"
+            ],
+            "evidence_needed": "Inspect a versioned implementation and reproduce the stated behavior with a defined workload and hardware configuration."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u11-c01"
+        },
+        {
+          "proposition": "Over 95% of execution wall-clock time in gravitational N-body and fluid dynamics codes is consumed inside innermost force-evaluation loops.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 8105,
+            "end_char": 8286,
+            "start_line": 54,
+            "end_line": 54
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u11-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u11-g01",
+          "area": "Scientific computing",
+          "goal": "Trace the stated language boundary and test its numerical or performance consequence.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Arrays and data types"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u11-c01",
+            "technical-architecture-u11-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u12",
+      "title": "*Fortran Layer (High-Performance Numerical Computation)*",
+      "source_range": {
+        "start_char": 8722,
+        "end_char": 9296,
+        "start_line": 57,
+        "end_line": 62
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Fortran Layer (High-Performance Numerical Computation)*.",
+      "claims": [
+        {
+          "proposition": "Executes matrix arithmetic using native operations like MATMUL for coordinate transformations and tensor transformations across stellar grids.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 8787,
+            "end_char": 8969,
+            "start_line": 59,
+            "end_line": 59
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u12-c01"
+        },
+        {
+          "proposition": "Handles high-precision root-finding (SQRT), trajectory propagation, and gravitational potential fields using strong typing (INTEGER, REAL).",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 8969,
+            "end_char": 9143,
+            "start_line": 60,
+            "end_line": 60
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u12-c02"
+        },
+        {
+          "proposition": "Allocates large spatial simulation grids using ALLOCATABLE arrays and strict static constants defined via PARAMETER.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 9143,
+            "end_char": 9294,
+            "start_line": 61,
+            "end_line": 61
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u12-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u12-g01",
+          "area": "Scientific computing",
+          "goal": "Trace the stated language boundary and test its numerical or performance consequence.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Arrays and data types"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u12-c01",
+            "technical-architecture-u12-c02",
+            "technical-architecture-u12-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u13",
+      "title": "*Modern Fortran to Assembly C-Interop Specification*",
+      "source_range": {
+        "start_char": 9296,
+        "end_char": 10535,
+        "start_line": 63,
+        "end_line": 82
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Modern Fortran to Assembly C-Interop Specification*.",
+      "claims": [
+        {
+          "proposition": "The design passes particle mass, position, and acceleration pointers directly from Fortran structures to C-exported Assembly routines.",
+          "type": "software",
+          "source_range": {
+            "start_char": 9548,
+            "end_char": 9782,
+            "start_line": 65,
+            "end_line": 68
+          },
+          "assumptions": [
+            {
+              "text": "The described code, hardware, version, and workload conditions apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "code-inspection",
+              "reproduction"
+            ],
+            "evidence_needed": "Inspect a versioned implementation and reproduce the stated behavior with a defined workload and hardware configuration."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u13-c01"
+        },
+        {
+          "proposition": "In the underlying Assembly implementation, array memory addresses passed into vector registers (e.g., AVX-512 zmm0–zmm7) are processed in contiguous 64-byte chunks, maximizing memory bandwidth and L1 cache utilization.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10315,
+            "end_char": 10533,
+            "start_line": 81,
+            "end_line": 81
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u13-c02"
+        },
+        {
+          "id": "technical-architecture-u13-c03",
+          "proposition": "The source says ISO C Binding connects the Fortran and Assembly layers without call-overhead penalties.",
+          "type": "software",
+          "source_range": {
+            "start_char": 9357,
+            "end_char": 9548,
+            "start_line": 65,
+            "end_line": 65
+          },
+          "assumptions": [
+            {
+              "text": "The shown interoperability interface is the one used by the proposed engine.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "code-inspection",
+              "reproduction"
+            ],
+            "evidence_needed": "Benchmark the interoperation boundary and inspect whether copying or wrapper calls remain."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u13-g01",
+          "area": "Scientific computing",
+          "goal": "Trace the stated language boundary and test its numerical or performance consequence.",
+          "prerequisites": [
+            "Programming fundamentals",
+            "Arrays and data types"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u13-c01",
+            "technical-architecture-u13-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u14",
+      "title": "Numerical Integration Mechanics: RK4 vs. Euler Trade-Offs",
+      "source_range": {
+        "start_char": 10535,
+        "end_char": 10785,
+        "start_line": 83,
+        "end_line": 86
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Numerical Integration Mechanics: RK4 vs. Euler Trade-Offs.",
+      "claims": [
+        {
+          "proposition": "Real-time simulation requires balancing mathematical accuracy against frame execution budgets ( \\$100\\\\text{ ms}\\$ tick target).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10600,
+            "end_char": 10729,
+            "start_line": 85,
+            "end_line": 85
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u14-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u14-g01",
+          "area": "Claim analysis",
+          "goal": "Derive the RK4 and Euler updates, then compare their error behavior and function-evaluation cost.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u14-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u15",
+      "title": "*4th-Order Runge-Kutta (RK4) Integration*",
+      "source_range": {
+        "start_char": 10785,
+        "end_char": 11504,
+        "start_line": 87,
+        "end_line": 90
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *4th-Order Runge-Kutta (RK4) Integration*.",
+      "claims": [
+        {
+          "proposition": "Standard scientific simulations use RK4 to bound global error accumulation.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10835,
+            "end_char": 10910,
+            "start_line": 89,
+            "end_line": 89
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u15-c01"
+        },
+        {
+          "proposition": "RK4 evaluates four derivatives and combines them as y_new = y + h(k1 + 2k2 + 2k3 + k4)/6.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 10910,
+            "end_char": 11502,
+            "start_line": 89,
+            "end_line": 89
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u15-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u15-g01",
+          "area": "Claim analysis",
+          "goal": "Derive the RK4 and Euler updates, then compare their error behavior and function-evaluation cost.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u15-c01",
+            "technical-architecture-u15-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u16",
+      "title": "*Simplified Euler Integration*",
+      "source_range": {
+        "start_char": 11504,
+        "end_char": 12435,
+        "start_line": 91,
+        "end_line": 98
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Simplified Euler Integration*.",
+      "claims": [
+        {
+          "proposition": "Reduces derivative evaluations from 4 to 1 per timestep, yielding an immediate \\$\\\\sim 4\\\\times\\$ processing speedup per entity.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 11811,
+            "end_char": 11977,
+            "start_line": 95,
+            "end_line": 95
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u16-c01"
+        },
+        {
+          "proposition": "While Euler integration introduces position drift over long durations, this is managed by using RK4 periodic corrections on backend Fortran servers for stable long-term planetary orbits while reserving Euler for short-term active craft piloting.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 12153,
+            "end_char": 12433,
+            "start_line": 97,
+            "end_line": 97
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u16-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u16-g01",
+          "area": "Claim analysis",
+          "goal": "Derive the RK4 and Euler updates, then compare their error behavior and function-evaluation cost.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u16-c01",
+            "technical-architecture-u16-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u17",
+      "title": "Pedagogical Learning Progression",
+      "source_range": {
+        "start_char": 12435,
+        "end_char": 13624,
+        "start_line": 99,
+        "end_line": 108
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Pedagogical Learning Progression.",
+      "claims": [
+        {
+          "proposition": "The source gives stage 1 as Assembly Syntax Fundamentals: Learning basic instruction verbs (MOV, ADD, SUB), register manipulation (AX/EAX/RAX), and assembler directives (ORG, DB, %macro).",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 12801,
+            "end_char": 12980,
+            "start_line": 104,
+            "end_line": 104
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u17-c01"
+        },
+        {
+          "proposition": "The source gives stage 2 as Bare-Metal Hardware Control: Direct interaction with memory-mapped display buffers, execution status flags, register clearing, and input buffer management.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 12980,
+            "end_char": 13155,
+            "start_line": 105,
+            "end_line": 105
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u17-c02"
+        },
+        {
+          "proposition": "The source gives stage 3 as Fortran Mathematical Abstractions: Transitioning to high-level numerical syntax, structured data types (INTEGER, REAL), explicit constants (PARAMETER), array slicing, and mathematical built-ins (SQRT).",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 13155,
+            "end_char": 13376,
+            "start_line": 106,
+            "end_line": 106
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u17-c03"
+        },
+        {
+          "proposition": "The source gives stage 4 as Advanced Fortran Automation: Writing modular, parallel infrastructure software utilizing dynamic memory (ALLOCATABLE), matrix routines (MATMUL), and automated C-interop interfaces to control factory networks and orbital launches.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 13376,
+            "end_char": 13622,
+            "start_line": 107,
+            "end_line": 107
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u17-c04"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u17-g01",
+          "area": "Claim analysis",
+          "goal": "Sequence Assembly and Fortran exercises from instruction syntax through parallel factory automation.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u17-c01",
+            "technical-architecture-u17-c02",
+            "technical-architecture-u17-c03",
+            "technical-architecture-u17-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u18",
+      "title": "Section Transition",
+      "source_range": {
+        "start_char": 13624,
+        "end_char": 13838,
+        "start_line": 109,
+        "end_line": 112
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Section Transition.",
+      "claims": [],
+      "learning_goals": [],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This transition connects adjacent topics and does not state an independent claim."
+    },
+    {
+      "id": "technical-architecture-u19",
+      "title": "3. REALISTIC TERRESTRIAL, AQUATIC, AND LUNAR TRAVERSAL MECHANICS",
+      "source_range": {
+        "start_char": 13838,
+        "end_char": 13910,
+        "start_line": 113,
+        "end_line": 114
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about 3. REALISTIC TERRESTRIAL, AQUATIC, AND LUNAR TRAVERSAL MECHANICS.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u20",
+      "title": "Physics of Surface and Medium Traversal",
+      "source_range": {
+        "start_char": 13910,
+        "end_char": 14476,
+        "start_line": 115,
+        "end_line": 118
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Physics of Surface and Medium Traversal.",
+      "claims": [
+        {
+          "proposition": "Traversal across terrestrial landscapes, dense liquid bodies, and airless moons requires navigating distinct atmospheric drag profiles, hydrodynamic resistance coefficients, and surface gravity wells.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 13957,
+            "end_char": 14157,
+            "start_line": 117,
+            "end_line": 117
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u20-c01"
+        },
+        {
+          "proposition": "Moving through dense fluids or ascending from deep planetary gravity wells scales energy costs exponentially relative to velocity, establishing clear performance trade-offs for surface, marine, and orbital craft.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 14261,
+            "end_char": 14474,
+            "start_line": 117,
+            "end_line": 117
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u20-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u20-g01",
+          "area": "Claim analysis",
+          "goal": "Calculate how drag, gravity, and fluid resistance change the energy cost of a vehicle trip.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u20-c01",
+            "technical-architecture-u20-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u21",
+      "title": "Terrestrial & Aquatic Transit vs. Space Flight Economics",
+      "source_range": {
+        "start_char": 14476,
+        "end_char": 15524,
+        "start_line": 119,
+        "end_line": 127
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Terrestrial & Aquatic Transit vs. Space Flight Economics.",
+      "claims": [
+        {
+          "proposition": "Surface friction and low atmospheric speeds keep terrestrial power use relatively low.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 14658,
+            "end_char": 14830,
+            "start_line": 121,
+            "end_line": 121
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u21-c01"
+        },
+        {
+          "proposition": "Achieving escape velocity requires accelerating mass through atmospheric drag before entering an airless ballistic trajectory, consuming orders of magnitude more energy per kilogram than any terrestrial or aquatic transport system.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 14830,
+            "end_char": 15062,
+            "start_line": 121,
+            "end_line": 121
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u21-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u21-g01",
+          "area": "Claim analysis",
+          "goal": "Compare the energy budget of surface transit with escape from a planetary gravity well.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u21-c01",
+            "technical-architecture-u21-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u22",
+      "title": "Lunar Landing Simulation & Manual Override (Apollo Framework)",
+      "source_range": {
+        "start_char": 15524,
+        "end_char": 15833,
+        "start_line": 128,
+        "end_line": 131
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Lunar Landing Simulation & Manual Override (Apollo Framework).",
+      "claims": [
+        {
+          "proposition": "When automated guidance systems fail—such as an Apollo Guidance Computer (AGC) failure at an altitude of 7,500 feet—control reverts to manual pilot overrides.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15593,
+            "end_char": 15751,
+            "start_line": 130,
+            "end_line": 130
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u22-c01"
+        },
+        {
+          "proposition": "The descent dynamics follow strict mass, thrust, and gravitational constraints.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 15751,
+            "end_char": 15831,
+            "start_line": 130,
+            "end_line": 130
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u22-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u22-g01",
+          "area": "Lunar flight simulation",
+          "goal": "Calculate a manual lunar-landing update from altitude, velocity, mass, thrust, and gravity.",
+          "prerequisites": [
+            "Kinematics",
+            "Numerical integration"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u22-c01",
+            "technical-architecture-u22-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u23",
+      "title": "*Initial Boundary Conditions*",
+      "source_range": {
+        "start_char": 15833,
+        "end_char": 16319,
+        "start_line": 132,
+        "end_line": 138
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Initial Boundary Conditions*.",
+      "claims": [
+        {
+          "id": "technical-architecture-u23-c01",
+          "proposition": "The lunar-descent scenario starts at an altitude of 7,500 ft.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15871,
+            "end_char": 15921,
+            "start_line": 134,
+            "end_line": 134
+          },
+          "assumptions": [
+            {
+              "text": "The stated initial boundary conditions are inputs to the lunar-descent model.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Use the stated altitude as the initial vertical position. "
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u23-c02",
+          "proposition": "The initial downward velocity ranges from 200 to 700 ft/s.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 15924,
+            "end_char": 16062,
+            "start_line": 135,
+            "end_line": 135
+          },
+          "assumptions": [
+            {
+              "text": "The stated initial boundary conditions are inputs to the lunar-descent model.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Evaluate the descent model at both velocity bounds."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u23-c03",
+          "proposition": "The initial horizontal velocity ranges from 50 to 200 ft/s.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 16063,
+            "end_char": 16164,
+            "start_line": 136,
+            "end_line": 136
+          },
+          "assumptions": [
+            {
+              "text": "The stated initial boundary conditions are inputs to the lunar-descent model.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Evaluate the lateral trajectory at both velocity bounds."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u23-c04",
+          "proposition": "The model uses lunar gravity of 5.33 ft/s², about one sixth of Earth gravity.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 16165,
+            "end_char": 16317,
+            "start_line": 137,
+            "end_line": 137
+          },
+          "assumptions": [
+            {
+              "text": "The stated initial boundary conditions are inputs to the lunar-descent model.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Check the conversion and use the value in a descent update."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u23-g01",
+          "area": "Claim analysis",
+          "goal": "Use the stated altitude, velocity ranges, and lunar gravity to calculate the first descent update.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u23-c01",
+            "technical-architecture-u23-c02",
+            "technical-architecture-u23-c03",
+            "technical-architecture-u23-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u24",
+      "title": "*Spacecraft Mass and Engine Parameters*",
+      "source_range": {
+        "start_char": 16319,
+        "end_char": 16616,
+        "start_line": 139,
+        "end_line": 145
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Spacecraft Mass and Engine Parameters*.",
+      "claims": [
+        {
+          "proposition": "The source gives descent stage dry mass as 4,700 lbs. Descent Stage Fuel Capacity: 1,500 lbs.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 16367,
+            "end_char": 16460,
+            "start_line": 141,
+            "end_line": 142
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u24-c01"
+        },
+        {
+          "proposition": "The source gives horizontal trim engine thrust as \\$\\\\pm 10\\\\text{ lbs/s}\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 16548,
+            "end_char": 16614,
+            "start_line": 144,
+            "end_line": 144
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u24-c02"
+        },
+        {
+          "id": "technical-architecture-u24-c03",
+          "proposition": "The vertical main-engine thrust is variable from 0 to 250 lbs/s.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 16460,
+            "end_char": 16547,
+            "start_line": 143,
+            "end_line": 143
+          },
+          "assumptions": [
+            {
+              "text": "The source treats pounds per second as its thrust-control unit.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Evaluate the control law at zero and maximum vertical thrust."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u24-g01",
+          "area": "Claim analysis",
+          "goal": "Use the stated dry mass, fuel mass, and vertical and horizontal thrust limits to calculate an engine update.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u24-c01",
+            "technical-architecture-u24-c02",
+            "technical-architecture-u24-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u25",
+      "title": "*Ascent Stage Abort Capability & Tsiolkovsky Derivation*",
+      "source_range": {
+        "start_char": 16616,
+        "end_char": 17625,
+        "start_line": 146,
+        "end_line": 149
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Ascent Stage Abort Capability & Tsiolkovsky Derivation*.",
+      "claims": [
+        {
+          "proposition": "In catastrophic descent scenarios, the pilot can trigger an Ascent Stage Abort.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 16681,
+            "end_char": 16760,
+            "start_line": 148,
+            "end_line": 148
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u25-c01"
+        },
+        {
+          "proposition": "The ascent stage dry mass is 4,850 lbs with 5,187 lbs of fuel, operating at an engine exhaust velocity ( \\$V\\_e\\$ ) of \\$10{,}000\\\\text{ ft/s}\\$ .",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 16760,
+            "end_char": 16908,
+            "start_line": 148,
+            "end_line": 148
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u25-c02"
+        },
+        {
+          "proposition": "To achieve safe lunar orbit, the craft must attain \\$5{,}512\\\\text{ ft/s}\\$ orbital velocity.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 16908,
+            "end_char": 17004,
+            "start_line": 148,
+            "end_line": 148
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u25-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u25-g01",
+          "area": "Claim analysis",
+          "goal": "Calculate the abort delta-v margin with the displayed Tsiolkovsky equation and masses.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u25-c01",
+            "technical-architecture-u25-c02",
+            "technical-architecture-u25-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u26",
+      "title": "*Emergency Control Dynamics & 10 FPS Game Loop State Logic*",
+      "source_range": {
+        "start_char": 17625,
+        "end_char": 19666,
+        "start_line": 150,
+        "end_line": 177
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Emergency Control Dynamics & 10 FPS Game Loop State Logic*.",
+      "claims": [
+        {
+          "proposition": "The real-time game loop operates at 10 FPS ( \\$0.1\\\\text{s}\\$ tick intervals \\$h \\= 0.1\\$ ).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 17693,
+            "end_char": 17787,
+            "start_line": 152,
+            "end_line": 152
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u26-c01"
+        },
+        {
+          "proposition": "When downward velocity \\$v\\_y \\\\ge 400\\\\text{ ft/s}\\$ , vertical engine thrust increases at \\$10\\\\text{ lbs/s}\\$ per \\$0.1\\\\text{s}\\$ tick ( \\$100\\\\text{ lbs/s}^2\\$ ), enabling rapid thrust buildup.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19197,
+            "end_char": 19437,
+            "start_line": 175,
+            "end_line": 175
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u26-c02"
+        },
+        {
+          "proposition": "When vertical thrust exceeds \\$30\\\\text{ lbs/s}\\$ , thrust decreases at \\$5\\\\text{ lbs/s}\\$ per \\$0.1\\\\text{s}\\$ tick ( \\$50\\\\text{ lbs/s}^2\\$ ) to allow power reduction during touchdown.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19437,
+            "end_char": 19664,
+            "start_line": 176,
+            "end_line": 176
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u26-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u26-g01",
+          "area": "Claim analysis",
+          "goal": "Implement the stated high-speed and high-thrust branches in a 10 FPS control loop.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u26-c01",
+            "technical-architecture-u26-c02",
+            "technical-architecture-u26-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u27",
+      "title": "Telemetry Dynamics and Mission Control Signal Latency",
+      "source_range": {
+        "start_char": 19666,
+        "end_char": 20470,
+        "start_line": 178,
+        "end_line": 181
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Telemetry Dynamics and Mission Control Signal Latency.",
+      "claims": [
+        {
+          "id": "technical-architecture-u27-c01",
+          "proposition": "The telemetry model assigns 1.3 s to Earth-to-Moon propagation, 4.0 s to ground analysis, and 1.3 s to the return transmission.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19666,
+            "end_char": 20470,
+            "start_line": 178,
+            "end_line": 181
+          },
+          "assumptions": [
+            {
+              "text": "The fixed propagation and processing delays apply to each command cycle.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Add the three stated delay components and compare the result with 6.6 s."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u27-c02",
+          "proposition": "The three delay components give a total command latency of 6.6 s.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 19666,
+            "end_char": 20470,
+            "start_line": 178,
+            "end_line": 181
+          },
+          "assumptions": [
+            {
+              "text": "The command follows the stated round-trip sequence.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation"
+            ],
+            "evidence_needed": "Verify 1.3 + 4.0 + 1.3 = 6.6 seconds."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u27-c03",
+          "proposition": "The design requires players to calculate burn vectors in advance because guidance arrives after the modeled delay.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 20331,
+            "end_char": 20468,
+            "start_line": 180,
+            "end_line": 180
+          },
+          "assumptions": [
+            {
+              "text": "The telemetry delay is active during manual piloting.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "reproduction"
+            ],
+            "evidence_needed": "Test whether the interface exposes enough state to predict a safe command 6.6 seconds ahead."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u27-g01",
+          "area": "Lunar flight simulation",
+          "goal": "Build a command timeline from the three delay components, then calculate a burn command that accounts for the 6.6-second latency.",
+          "prerequisites": [
+            "Kinematics",
+            "Numerical integration"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u27-c01",
+            "technical-architecture-u27-c02",
+            "technical-architecture-u27-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u28",
+      "title": "Section Transition",
+      "source_range": {
+        "start_char": 20470,
+        "end_char": 20688,
+        "start_line": 182,
+        "end_line": 185
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Section Transition.",
+      "claims": [],
+      "learning_goals": [],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This transition connects adjacent topics and does not state an independent claim."
+    },
+    {
+      "id": "technical-architecture-u29",
+      "title": "4. MACRO-ENGINEERING AND EXPONENTIAL COLLABORATION: THE DYSON SWARM",
+      "source_range": {
+        "start_char": 20688,
+        "end_char": 20763,
+        "start_line": 186,
+        "end_line": 187
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about 4. MACRO-ENGINEERING AND EXPONENTIAL COLLABORATION: THE DYSON SWARM.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u30",
+      "title": "The Prerequisite for Interstellar Traversal",
+      "source_range": {
+        "start_char": 20763,
+        "end_char": 21540,
+        "start_line": 188,
+        "end_line": 201
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about The Prerequisite for Interstellar Traversal.",
+      "claims": [
+        {
+          "proposition": "Transitioning from planetary operations to interstellar exploration requires a massive increase in energy capture.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 20814,
+            "end_char": 20928,
+            "start_line": 190,
+            "end_line": 190
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u30-c01"
+        },
+        {
+          "proposition": "Chemical combustion and nuclear fission are insufficient to accelerate payloads to relativistic velocities.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 20928,
+            "end_char": 21036,
+            "start_line": 190,
+            "end_line": 190
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u30-c02"
+        },
+        {
+          "proposition": "Constructing a Dyson Swarm—a collection of independent solar collectors orbiting a star—is the required industrial milestone to capture stellar output ( \\$3.8 \\\\times 10^{26}\\\\text{ W}\\$ ) and power interstellar launch systems.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21036,
+            "end_char": 21264,
+            "start_line": 190,
+            "end_line": 190
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u30-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u30-g01",
+          "area": "Propulsion analysis",
+          "goal": "Relate the proposed Dyson-swarm power level to the stated need for relativistic launch energy.",
+          "prerequisites": [
+            "Special relativity",
+            "Logarithms"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u30-c01",
+            "technical-architecture-u30-c02",
+            "technical-architecture-u30-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u31",
+      "title": "Automated Mercury Disassembly Timeline & Dynamics",
+      "source_range": {
+        "start_char": 21540,
+        "end_char": 22367,
+        "start_line": 202,
+        "end_line": 211
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Automated Mercury Disassembly Timeline & Dynamics.",
+      "claims": [
+        {
+          "proposition": "The source gives mercury mass as \\$3.3022 \\\\times 10^{23}\\\\text{ kg}\\$ (30% silicates, 70% metals—primarily iron and iron oxides).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21704,
+            "end_char": 21827,
+            "start_line": 206,
+            "end_line": 206
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u31-c01"
+        },
+        {
+          "proposition": "The source gives gravitational binding energy as \\$1.80 \\\\times 10^{30}\\\\text{ J}\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21827,
+            "end_char": 21904,
+            "start_line": 207,
+            "end_line": 207
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u31-c02"
+        },
+        {
+          "proposition": "The source gives initial seed capital as \\$1\\\\text{ km}^2\\$ solar panel array deployed on the surface.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21904,
+            "end_char": 21999,
+            "start_line": 208,
+            "end_line": 208
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u31-c03"
+        },
+        {
+          "proposition": "Escaping Mercury's gravity well requires \\$9\\\\text{ MJ/kg}\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 21999,
+            "end_char": 22107,
+            "start_line": 209,
+            "end_line": 209
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u31-c04"
+        },
+        {
+          "proposition": "The source gives feedback loop parameters as 5-year production/processing cycles; \\$1/3\\$ solar captor efficiency; \\$1/10\\$ available energy dedicated to mass-driver orbital propulsion (the remainder powers material extraction, chemical bond breaking, and refining).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22107,
+            "end_char": 22365,
+            "start_line": 210,
+            "end_line": 210
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u31-c05"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u31-g01",
+          "area": "Megastructure growth",
+          "goal": "Recompute the stated Mercury mass-processing and power-growth values from the declared efficiencies.",
+          "prerequisites": [
+            "Exponents and logarithms",
+            "Energy and power units"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u31-c01",
+            "technical-architecture-u31-c02",
+            "technical-architecture-u31-c03",
+            "technical-architecture-u31-c04",
+            "technical-architecture-u31-c05"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u32",
+      "title": "*Disassembly Timeline Milestones*",
+      "source_range": {
+        "start_char": 22367,
+        "end_char": 23773,
+        "start_line": 212,
+        "end_line": 215
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Disassembly Timeline Milestones*.",
+      "claims": [
+        {
+          "id": "technical-architecture-u32-c01",
+          "proposition": "The table gives Year 0 as 3.3022 × 10^23 kg remaining mass, 1.2 × 10^8 W power, and a 1 km² seed array.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22719,
+            "end_char": 22902,
+            "start_line": 214,
+            "end_line": 214
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u32-c02",
+          "proposition": "The table gives Year 5 as less than 0.01% mined and 4.0 × 10^12 W after the first orbital collectors deploy.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 22905,
+            "end_char": 23073,
+            "start_line": 214,
+            "end_line": 214
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u32-c03",
+          "proposition": "The table gives Year 15 as 0.02% mined and 1.3 × 10^17 W during rapid automated-mining growth.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23076,
+            "end_char": 23249,
+            "start_line": 214,
+            "end_line": 214
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u32-c04",
+          "proposition": "The table gives Year 25 as 1.58% mined and 5.2 × 10^21 W as processing accelerates.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23252,
+            "end_char": 23424,
+            "start_line": 214,
+            "end_line": 214
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u32-c05",
+          "proposition": "The table gives Year 28 as 15.21% mined and 1.7 × 10^24 W during major structural disassembly.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23427,
+            "end_char": 23591,
+            "start_line": 214,
+            "end_line": 214
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u32-c06",
+          "proposition": "The table gives Year 31 Day 85 as complete disassembly and 3.8 × 10^26 W from the final Dyson swarm.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23594,
+            "end_char": 23773,
+            "start_line": 214,
+            "end_line": 215
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u32-g01",
+          "area": "Megastructure growth",
+          "goal": "Recompute the stated Mercury mass-processing and power-growth values from the declared efficiencies.",
+          "prerequisites": [
+            "Exponents and logarithms",
+            "Energy and power units"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u32-c01",
+            "technical-architecture-u32-c02",
+            "technical-architecture-u32-c03",
+            "technical-architecture-u32-c04",
+            "technical-architecture-u32-c05",
+            "technical-architecture-u32-c06"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u33",
+      "title": "Dyson Swarm Architecture & Material Allocations",
+      "source_range": {
+        "start_char": 23773,
+        "end_char": 24387,
+        "start_line": 216,
+        "end_line": 223
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Dyson Swarm Architecture & Material Allocations.",
+      "claims": [
+        {
+          "proposition": "The disassembled material from Mercury is converted into light-reflecting solar collectors deployed at Mercury's semi-major axis ( \\$5.79 \\\\times 10^{10}\\\\text{ m}\\$ ).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23828,
+            "end_char": 23996,
+            "start_line": 218,
+            "end_line": 218
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the quantity from the stated mass, efficiency, geometry, and time assumptions."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u33-c01"
+        },
+        {
+          "proposition": "The source gives total array surface area as \\$4.21 \\\\times 10^{22}\\\\text{ m}^2\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 23998,
+            "end_char": 24073,
+            "start_line": 220,
+            "end_line": 220
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u33-c02"
+        },
+        {
+          "proposition": "The source gives areal mass density as \\$3.92\\\\text{ kg/m}^2\\$ , corresponding to an effective structural thickness of \\$0.5\\\\text{ mm}\\$ ( \\$0.001\\\\text{ mm}\\$ reflective films supported by rigid structural struts).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 24073,
+            "end_char": 24284,
+            "start_line": 221,
+            "end_line": 221
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u33-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u33-g01",
+          "area": "Claim analysis",
+          "goal": "Derive collector area and material mass from the stated areal density and solar-orbit geometry.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u33-c01",
+            "technical-architecture-u33-c02",
+            "technical-architecture-u33-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u34",
+      "title": "Fixed Beamed-Energy Launch Systems",
+      "source_range": {
+        "start_char": 24387,
+        "end_char": 25684,
+        "start_line": 224,
+        "end_line": 241
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Fixed Beamed-Energy Launch Systems.",
+      "claims": [
+        {
+          "id": "technical-architecture-u34-c01",
+          "proposition": "The design proposes 50% efficient electromagnetic and beamed-energy launch systems that accelerate probes without onboard launch fuel.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 24387,
+            "end_char": 25684,
+            "start_line": 224,
+            "end_line": 241
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u34-g01",
+          "area": "Space-launch design",
+          "goal": "Recompute the stated propulsion mass, energy, and launch-time quantities from their row inputs.",
+          "prerequisites": [
+            "Energy conservation",
+            "Electromagnetism"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u34-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u35",
+      "title": "Section Transition",
+      "source_range": {
+        "start_char": 25684,
+        "end_char": 25887,
+        "start_line": 242,
+        "end_line": 245
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Section Transition.",
+      "claims": [],
+      "learning_goals": [],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This transition connects adjacent topics and does not state an independent claim."
+    },
+    {
+      "id": "technical-architecture-u36",
+      "title": "5. INTERSTELLAR AND INTERGALACTIC RELATIVISTIC TRAVEL MECHANICS",
+      "source_range": {
+        "start_char": 25887,
+        "end_char": 25958,
+        "start_line": 246,
+        "end_line": 247
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about 5. INTERSTELLAR AND INTERGALACTIC RELATIVISTIC TRAVEL MECHANICS.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u37",
+      "title": "Relativistic Constraints Across Cosmic Distances",
+      "source_range": {
+        "start_char": 25958,
+        "end_char": 26343,
+        "start_line": 248,
+        "end_line": 251
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Relativistic Constraints Across Cosmic Distances.",
+      "claims": [
+        {
+          "id": "technical-architecture-u37-c01",
+          "proposition": "The source states that relativistic transit couples mass ratio, particle-collision energy, and cosmological reach.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 25958,
+            "end_char": 26343,
+            "start_line": 248,
+            "end_line": 251
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u37-g01",
+          "area": "Relativistic transit",
+          "goal": "Trace how mass ratio, collision energy, and cosmological reach constrain one mission design.",
+          "prerequisites": [
+            "Special relativity",
+            "Scientific notation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u37-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u38",
+      "title": "Relativistic Rocket Equation & Fuel Efficiency Breakdown",
+      "source_range": {
+        "start_char": 26343,
+        "end_char": 26991,
+        "start_line": 252,
+        "end_line": 255
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Relativistic Rocket Equation & Fuel Efficiency Breakdown.",
+      "claims": [
+        {
+          "proposition": "The velocity change ( \\$\\\\Delta v\\$ ) achievable by a spacecraft carrying onboard deceleration fuel is governed by the relativistic rocket equation:\\$\\$\\\\Delta v \\= c \\\\tanh \\\\left( \\\\frac{I\\_{sp}}{c} \\\\ln \\\\frac{m\\_0}{m\\_1} \\\\right)\\$\\$where \\$m\\_0\\$ is initial launch mass, \\$m\\_1\\$ is final payload mass ( \\$30\\\\text{g}\\$ base replicator mass).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 26407,
+            "end_char": 26989,
+            "start_line": 254,
+            "end_line": 254
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u38-c01"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u38-g01",
+          "area": "Propulsion analysis",
+          "goal": "Calculate a mass ratio from specific impulse and target velocity, then state the deceleration assumption.",
+          "prerequisites": [
+            "Special relativity",
+            "Logarithms"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u38-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u39",
+      "title": "*Propulsion Efficiency Comparison Table ( \\$30\\\\text{g}\\$  Base Payload)*",
+      "source_range": {
+        "start_char": 26991,
+        "end_char": 27751,
+        "start_line": 256,
+        "end_line": 262
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Propulsion Efficiency Comparison Table ( \\$30\\\\text{g}\\$  Base Payload)*.",
+      "claims": [
+        {
+          "id": "technical-architecture-u39-c01",
+          "proposition": "The propulsion table assigns efficiency, specific impulse, and launch mass to antimatter, fusion, and fission cases for a 30-gram payload.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 26991,
+            "end_char": 27751,
+            "start_line": 256,
+            "end_line": 262
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u39-c02",
+          "proposition": "The antimatter row gives efficiency 0.176, Isp/c 0.567, and the stated 0.99c launch mass.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 27253,
+            "end_char": 27751,
+            "start_line": 259,
+            "end_line": 262
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u39-c03",
+          "proposition": "The fusion row gives efficiency 0.00356, Isp/c 0.0843, and the stated target-speed masses.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 27402,
+            "end_char": 27751,
+            "start_line": 260,
+            "end_line": 262
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u39-c04",
+          "proposition": "The fission row gives efficiency 0.000787, Isp/c 0.0397, and the stated target-speed masses.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 27568,
+            "end_char": 27751,
+            "start_line": 261,
+            "end_line": 262
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u39-g01",
+          "area": "Propulsion accounting",
+          "goal": "Recompute the stated propulsion mass, energy, and launch-time quantities from their row inputs.",
+          "prerequisites": [
+            "Rocket equations",
+            "Logarithms"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u39-c01",
+            "technical-architecture-u39-c02",
+            "technical-architecture-u39-c03",
+            "technical-architecture-u39-c04"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u40",
+      "title": "Cosmological Geodesics and Reachability Ceilings",
+      "source_range": {
+        "start_char": 27751,
+        "end_char": 29047,
+        "start_line": 263,
+        "end_line": 271
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Cosmological Geodesics and Reachability Ceilings.",
+      "claims": [
+        {
+          "id": "technical-architecture-u40-c01",
+          "proposition": "The source uses stated FLRW parameters to calculate cosmological geodesics and limits on reachable galaxies.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 27751,
+            "end_char": 29047,
+            "start_line": 263,
+            "end_line": 271
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u40-c02",
+          "proposition": "The source sets H0 to 71 km/s/Mpc, ΩΛ to 0.73, Ωm to 0.27, and Ωr to 8.35 × 10^-5.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 28037,
+            "end_char": 28614,
+            "start_line": 267,
+            "end_line": 270
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u40-c03",
+          "proposition": "The 0.50c row gives the stated reach and galaxy count.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 28652,
+            "end_char": 28778,
+            "start_line": 270,
+            "end_line": 270
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u40-c04",
+          "proposition": "The 0.80c row gives the stated reach and galaxy count.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 28785,
+            "end_char": 28911,
+            "start_line": 270,
+            "end_line": 270
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        },
+        {
+          "id": "technical-architecture-u40-c05",
+          "proposition": "The 0.99c row gives the stated reach and galaxy count.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 28918,
+            "end_char": 29047,
+            "start_line": 270,
+            "end_line": 271
+          },
+          "assumptions": [
+            {
+              "text": "The row values and boundary conditions stated in the source apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate this row from its stated inputs and compare it with an independent calculation."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u40-g01",
+          "area": "Cosmological models",
+          "goal": "Calculate a reach result from the stated cosmological parameters and separate it from galaxy-count assumptions.",
+          "prerequisites": [
+            "Differential equations",
+            "Cosmology"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u40-c01",
+            "technical-architecture-u40-c02",
+            "technical-architecture-u40-c03",
+            "technical-architecture-u40-c04",
+            "technical-architecture-u40-c05"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u41",
+      "title": "Interstellar Dust Collision Physics & Launch Redundancy",
+      "source_range": {
+        "start_char": 29047,
+        "end_char": 30594,
+        "start_line": 272,
+        "end_line": 275
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Interstellar Dust Collision Physics & Launch Redundancy.",
+      "claims": [
+        {
+          "proposition": "Assuming an unshielded probe can withstand a maximum impact energy of \\$800\\\\text{ kJ}\\$ before structural failure, the critical particle mass threshold ( \\$M\\_{\\\\text{crit}}\\$ ) at \\$0.99c\\$ ( \\$\\\\gamma \\\\approx 7.09\\$ ) is:\\$\\$E\\_k \\= (\\\\gamma \\- 1\\) M\\_{\\\\text{crit}} c^2 \\\\implies M\\_{\\\\text{crit}} \\= \\\\frac{800 \\\\times 10^3\\\\text{ J}}{(\\\\gamma \\- 1\\).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 29214,
+            "end_char": 29823,
+            "start_line": 274,
+            "end_line": 274
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u41-c01"
+        },
+        {
+          "proposition": "For a target distance \\$d \\= 4.09\\\\text{ Gpc} \\= 4.09 \\\\times 10^9\\\\text{ pc} \\= 1.262 \\\\times 10^{28}\\\\text{ cm}\\$ and probe cross-sectional area \\$A \\= 1\\\\text{ cm}^2\\$ , the required survival launch redundancy ( \\$R\\$ ) is calculated via exponential attenuation:\\$\\$R \\= \\\\exp(d \\\\cdot A \\\\cdot \\\\rho) \\= \\\\exp(4.09\\\\text{ Gpc} \\\\cdot 1\\\\text{ cm}^2 \\\\cdot.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 29823,
+            "end_char": 30592,
+            "start_line": 274,
+            "end_line": 274
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u41-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u41-g01",
+          "area": "Propulsion analysis",
+          "goal": "Derive the probe redundancy factor from cross-section, dust density, and travel distance.",
+          "prerequisites": [
+            "Special relativity",
+            "Logarithms"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u41-c01",
+            "technical-architecture-u41-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u42",
+      "title": "Section Transition",
+      "source_range": {
+        "start_char": 30594,
+        "end_char": 30856,
+        "start_line": 276,
+        "end_line": 279
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about Section Transition.",
+      "claims": [],
+      "learning_goals": [],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This transition introduces the artificial-black-hole topic without an independent testable proposition."
+    },
+    {
+      "id": "technical-architecture-u43",
+      "title": "6. EXOTIC ASTROPHYSICS & KUGELBLITZ ENGINE PROPULSION",
+      "source_range": {
+        "start_char": 30856,
+        "end_char": 30917,
+        "start_line": 280,
+        "end_line": 281
+      },
+      "purposes": [
+        "context"
+      ],
+      "summary": "This unit preserves the complete source passage about 6. EXOTIC ASTROPHYSICS & KUGELBLITZ ENGINE PROPULSION.",
+      "claims": [],
+      "learning_goals": [],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim.",
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u44",
+      "title": "Extreme Energy Density Physics",
+      "source_range": {
+        "start_char": 30917,
+        "end_char": 31889,
+        "start_line": 282,
+        "end_line": 301
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Extreme Energy Density Physics.",
+      "claims": [
+        {
+          "id": "technical-architecture-u44-c01",
+          "proposition": "The source proposes radiation collapse as the transition from nuclear propulsion to a Kugelblitz engine.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 30917,
+            "end_char": 31889,
+            "start_line": 282,
+            "end_line": 301
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "primary-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantities or compare the stated physical premises with primary evidence."
+          },
+          "status": "unchecked"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u44-g01",
+          "area": "Radiation collapse",
+          "goal": "Identify the radiation-density condition that separates conventional propulsion from the proposed Kugelblitz engine.",
+          "prerequisites": [
+            "General relativity",
+            "Energy density"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u44-c01"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ],
+      "context_reason": "This passage gives source structure or transition context without a separately stated testable claim."
+    },
+    {
+      "id": "technical-architecture-u45",
+      "title": "Kugelblitz Creation Physics & Energy Budgets",
+      "source_range": {
+        "start_char": 31889,
+        "end_char": 32375,
+        "start_line": 302,
+        "end_line": 309
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Kugelblitz Creation Physics & Energy Budgets.",
+      "claims": [
+        {
+          "proposition": "Creating a subatomic black hole requires focusing photons until their local energy density exceeds the critical threshold for gravitational collapse:\\$\\$\\\\rho\\_{\\\\text{crit}} \\= \\\\frac{3H^2}{8\\\\pi G}\\$\\$",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 31941,
+            "end_char": 32144,
+            "start_line": 304,
+            "end_line": 304
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u45-c01"
+        },
+        {
+          "proposition": "The proposed black hole has a mass of 10^6 metric tons, an attometer-scale radius, and forms through converging Dyson-powered gamma-ray lasers.",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 32146,
+            "end_char": 32373,
+            "start_line": 306,
+            "end_line": 308
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u45-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u45-g01",
+          "area": "Black-hole models",
+          "goal": "Calculate the energy and focusing requirements for the stated black-hole mass and radius, then test the collapse threshold.",
+          "prerequisites": [
+            "General relativity",
+            "Thermodynamics"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u45-c01",
+            "technical-architecture-u45-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u46",
+      "title": "*Vacuum Polarization vs. Gravitational Collapse*",
+      "source_range": {
+        "start_char": 32375,
+        "end_char": 33177,
+        "start_line": 310,
+        "end_line": 313
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about *Vacuum Polarization vs. Gravitational Collapse*.",
+      "claims": [
+        {
+          "proposition": "However, as demonstrated by Loeb (commenting on Alvarez-Dominguez et al.), when General Relativity and gravitational self-interaction are included, thermal equilibrium in a dense radiation field allows energy density to exceed \\$\\\\rho\\_{\\\\text{crit}} \\= \\\\frac{3H^2}{8\\\\pi G}\\$ .",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 32715,
+            "end_char": 32996,
+            "start_line": 312,
+            "end_line": 312
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u46-c01"
+        },
+        {
+          "proposition": "Under these conditions, the spherical region undergoes gravitational collapse into a Schwarzschild black hole before quantum dissipative scattering can prevent horizon formation.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 32996,
+            "end_char": 33175,
+            "start_line": 312,
+            "end_line": 312
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u46-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u46-g01",
+          "area": "Claim analysis",
+          "goal": "Separate the pair-production argument from the gravitational-collapse condition and test their assumptions.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u46-c01",
+            "technical-architecture-u46-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u47",
+      "title": "Hawking Radiation Power Systems",
+      "source_range": {
+        "start_char": 33177,
+        "end_char": 33763,
+        "start_line": 314,
+        "end_line": 321
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Hawking Radiation Power Systems.",
+      "claims": [
+        {
+          "proposition": "The attometer-scale black hole emits Hawking radiation as thermal high-energy photons and subatomic particles.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 33216,
+            "end_char": 33415,
+            "start_line": 316,
+            "end_line": 318
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "medium",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u47-c01"
+        },
+        {
+          "proposition": "The micro-black hole is suspended at the focal point of a starship's parabolic reflector.",
+          "type": "empirical",
+          "source_range": {
+            "start_char": 33415,
+            "end_char": 33537,
+            "start_line": 319,
+            "end_line": 319
+          },
+          "assumptions": [
+            {
+              "text": "The stated physical setting, measurement conditions, and scope apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "primary-source",
+              "independent-source"
+            ],
+            "evidence_needed": "Find a primary source and an independent source that test the stated physical or historical assertion."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u47-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u47-g01",
+          "area": "Black-hole models",
+          "goal": "Check the stated collapse, mass, radius, or Hawking-emission condition against its governing model.",
+          "prerequisites": [
+            "General relativity",
+            "Thermodynamics"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u47-c01",
+            "technical-architecture-u47-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u48",
+      "title": "Supersymmetry & Theoretical Dependencies",
+      "source_range": {
+        "start_char": 33763,
+        "end_char": 34389,
+        "start_line": 322,
+        "end_line": 328
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Supersymmetry & Theoretical Dependencies.",
+      "claims": [
+        {
+          "proposition": "Players must verify or disprove Supersymmetry (SUSY)—confirming whether every known matter particle has a corresponding force partner.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 33960,
+            "end_char": 34135,
+            "start_line": 326,
+            "end_line": 326
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u48-c01"
+        },
+        {
+          "proposition": "Establishing supersymmetric partner interactions provides the mathematical framework required to accurately model micro-black hole decay rates, preventing catastrophic premature evaporation during starship operation.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 34135,
+            "end_char": 34387,
+            "start_line": 327,
+            "end_line": 327
+          },
+          "assumptions": [
+            {
+              "text": "The equation uses the variables, units, and boundary conditions stated in the passage.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Derive the displayed relation and test its units and limiting cases."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u48-c02"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u48-g01",
+          "area": "Claim analysis",
+          "goal": "Distinguish experimental SUSY evidence from the game’s proposed prerequisite for Hawking-radiation modeling.",
+          "prerequisites": [
+            "Algebra",
+            "Source evaluation"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u48-c01",
+            "technical-architecture-u48-c02"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    },
+    {
+      "id": "technical-architecture-u49",
+      "title": "Relativistic Game Balancing & Anti-Cheat Synthesis",
+      "source_range": {
+        "start_char": 34389,
+        "end_char": 36623,
+        "start_line": 329,
+        "end_line": 354
+      },
+      "purposes": [
+        "claim-review",
+        "learning"
+      ],
+      "summary": "This unit preserves the complete source passage about Relativistic Game Balancing & Anti-Cheat Synthesis.",
+      "claims": [
+        {
+          "proposition": "Because every mechanical system in the game derives from fundamental physics, the engine does not rely on traditional, client-side anti-cheat monitoring.",
+          "type": "design-proposal",
+          "source_range": {
+            "start_char": 34447,
+            "end_char": 34600,
+            "start_line": 331,
+            "end_line": 331
+          },
+          "assumptions": [
+            {
+              "text": "The game rules, resources, and system behavior follow the stated design.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "logical-analysis",
+              "calculation"
+            ],
+            "evidence_needed": "Specify inputs, invariants, and failure conditions, then test the proposed design against them."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u49-c01"
+        },
+        {
+          "proposition": "Backend Fortran servers execute asynchronous 4th-Order Runge-Kutta (RK4) validation checks on incoming player state vectors (which use simplified Euler integration on the client for responsiveness).",
+          "type": "quantitative",
+          "source_range": {
+            "start_char": 35538,
+            "end_char": 35776,
+            "start_line": 351,
+            "end_line": 351
+          },
+          "assumptions": [
+            {
+              "text": "The numerical inputs, units, efficiencies, and boundary conditions stated in the passage apply.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "independent-source"
+            ],
+            "evidence_needed": "Recalculate the stated quantity from declared inputs and compare it with an independent source."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u49-c02"
+        },
+        {
+          "proposition": "Mass loss, propellant consumption, thermal dissipation, and kinetic impact limits are bound by rigid mathematical equations.",
+          "type": "mathematical",
+          "source_range": {
+            "start_char": 36122,
+            "end_char": 36283,
+            "start_line": 353,
+            "end_line": 353
+          },
+          "assumptions": [
+            {
+              "text": "The equation uses the variables, units, and boundary conditions stated in the passage.",
+              "basis": "explicit"
+            }
+          ],
+          "citation_markers": [],
+          "verification": {
+            "priority": "high",
+            "methods": [
+              "calculation",
+              "dimensional-analysis"
+            ],
+            "evidence_needed": "Derive the displayed relation and test its units and limiting cases."
+          },
+          "status": "unchecked",
+          "id": "technical-architecture-u49-c03"
+        }
+      ],
+      "learning_goals": [
+        {
+          "id": "technical-architecture-u49-g01",
+          "area": "Simulation integrity",
+          "goal": "Compare the client Euler state with the server RK4 check, then test mass, propellant, heat, and impact invariants.",
+          "prerequisites": [
+            "State machines",
+            "Numerical integration"
+          ],
+          "claim_dependencies": [
+            "technical-architecture-u49-c01",
+            "technical-architecture-u49-c02",
+            "technical-architecture-u49-c03"
+          ]
+        }
+      ],
+      "notes": [
+        "The unit range is contiguous with adjacent units. Tables and diagrams remain in their source range."
+      ]
+    }
+  ]
+}

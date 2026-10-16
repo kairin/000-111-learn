@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-10-15T23:22:49.356434+00:00",
+  "method": "SHA-256 equality before deletion, Downloads absence and repository hash after deletion",
+  "files": [
+    {
+      "id": "technical-architecture",
+      "downloads_file": "/home/kkk/Downloads/TECHNICAL ARCHITECTURE SPECIFICATION_ HARD-SCI-FI MULTIPLAYER ENGINE AND ACCELERATED LEARNING FRAMEWORK FOR ASSEMBLY AND FORTRAN.md",
+      "repository_file": "/home/kkk/Apps/000-111-learn/review/cosmic-engineering/sources/technical-architecture.md",
+      "sha256": "edd820a9dd8f0e2d96124b8086aa6114d550a19ae62d35b322f9a68bda108cdc",
+      "status": "deleted"
+    },
+    {
+      "id": "executive-briefing",
+      "downloads_file": "/home/kkk/Downloads/Executive Briefing_ Cosmic Engineering, Theoretical Physics, and Computational Methods.md",
+      "repository_file": "/home/kkk/Apps/000-111-learn/review/cosmic-engineering/sources/executive-briefing.md",
+      "sha256": "559b0020bee92fdbc8d2877664f086ce43743775d4e7c11ce0ef7d55eeb39dfe",
+      "status": "deleted"
+    },
+    {
+      "id": "fermi-paradox-guide",
+      "downloads_file": "/home/kkk/Downloads/Conceptual Guide_ How Intergalactic Feasibility Sharpened the Fermi Paradox.md",
+      "repository_file": "/home/kkk/Apps/000-111-learn/review/cosmic-engineering/sources/fermi-paradox-guide.md",
+      "sha256": "bbaaf4caf164e2100ab5319af2bce9057bca085b5b1d9d7caf2e59c4662a8e86",
+      "status": "deleted"
+    },
+    {
+      "id": "adversarial-research-review",
+      "downloads_file": "/home/kkk/Downloads/deep-research-report.md",
+      "repository_file": "/home/kkk/Apps/000-111-learn/review/cosmic-engineering/sources/adversarial-research-review.md",
+      "sha256": "d34c1a668fbe3badf05b2e63c842db841195b684da41e7e6e4085ef53d19808f",
+      "status": "deleted"
+    },
+    {
+      "id": "astrophysics-kernels",
+      "downloads_file": "/home/kkk/Downloads/Astrophysics Kernels and Interstellar Math.md",
+      "repository_file": "/home/kkk/Apps/000-111-learn/review/cosmic-engineering/sources/astrophysics-kernels.md",
+      "sha256": "45ad6cc874f8a9682ae364d2f2620bce543086db4eef004a9a88f3b44505910a",
+      "status": "deleted"
+    }
+  ]
+}

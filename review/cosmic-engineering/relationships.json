@@ -1,0 +1,17 @@
+{
+  "relationships": [
+    {"id":"rel-mercury-mass","type":"agreement","claims":["technical-architecture-u31-c01","fermi-paradox-guide-u06-c03"],"basis":"Both sources use the same Mercury mass and material fractions."},
+    {"id":"rel-mercury-timeline","type":"agreement","claims":["technical-architecture-u32-c06","executive-briefing-u07-c06","fermi-paradox-guide-u06-c06"],"basis":"All three sources give complete disassembly after 31 years and 85 days."},
+    {"id":"rel-dyson-power","type":"agreement","claims":["technical-architecture-u32-c06","executive-briefing-u07-c02","fermi-paradox-guide-u06-c02"],"basis":"The documents repeat a 3.8 × 10^26 W stellar capture value; usable-power assumptions differ and must be checked separately."},
+    {"id":"rel-rocket-deceleration","type":"qualified-overlap","claims":["technical-architecture-u38-c01","executive-briefing-u08-c05","fermi-paradox-guide-u07-c01"],"basis":"Each source applies a relativistic rocket relation to arrival deceleration, with different payload and efficiency context."},
+    {"id":"rel-cosmological-reach","type":"duplicate","claims":["technical-architecture-u40-c05","executive-briefing-u09-c04","fermi-paradox-guide-u09-c06"],"basis":"The three documents repeat the 0.99c reach and galaxy-count row rather than providing independent evidence."},
+    {"id":"rel-five-billion-year-reach","type":"duplicate","claims":["executive-briefing-u02-c04","fermi-paradox-guide-u12-c01"],"basis":"Both state the same 388-million-galaxy inference for a five-billion-year origin."},
+    {"id":"rel-rk4-update","type":"agreement","claims":["technical-architecture-u15-c02","executive-briefing-u19-c01"],"basis":"Both give the four-stage RK4 weighted update."},
+    {"id":"rel-telemetry-delay","type":"agreement","claims":["technical-architecture-u27-c01","technical-architecture-u27-c02","executive-briefing-u20-c01"],"basis":"Both documents decompose the lunar telemetry loop as 1.3 + 4.0 + 1.3 seconds."},
+    {"id":"rel-fat-capability-review","type":"critique","claims":["astrophysics-kernels-u02-c01","adversarial-research-review-u03-c01"],"basis":"The review disputes the unqualified FAT capability inventory and requires a pinned release."},
+    {"id":"rel-dust-size-review","type":"critique","claims":["astrophysics-kernels-u10-c03","adversarial-research-review-u05-c01","adversarial-research-review-u05-c02"],"basis":"The review accepts the impact-energy arithmetic but disputes the grain-size interpretation."},
+    {"id":"rel-clock-sign-review","type":"critique","claims":["astrophysics-kernels-u14-c05","adversarial-research-review-clock-u19-c01"],"basis":"The review identifies a sign error when the potential uses the conventional negative value."},
+    {"id":"rel-laser-sail-review","type":"critique","claims":["astrophysics-kernels-u12-c03","adversarial-research-review-u02-c03"],"basis":"The review reports that the displayed laser-sail equation does not reproduce the table values."},
+    {"id":"rel-black-hole-engine","type":"agreement","claims":["technical-architecture-u45-c02","executive-briefing-u05-c04","executive-briefing-u05-c05"],"basis":"The design documents repeat the attometer-scale, million-ton black-hole engine and Dyson-powered laser infrastructure."}
+  ]
+}
