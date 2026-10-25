@@ -15,7 +15,7 @@
     "@astrojs/starlight": "^0.42.4",
     "astro": "^7.2.10",
     "js-dos": "8.4.1",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.5"
   },
   "allowScripts": {
     "esbuild": true
